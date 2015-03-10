@@ -1,0 +1,26 @@
+####################
+# DHCP server/client
+####################
+
+Start imunes:
+
+# imunes DHCP.imn &
+      Select Experiment -> Execute
+
+Start dhcp server and setup clients:
+# ./start_dhcp
+
+Right-click on pc3 (to start xterm on that host)
+Check IP address:
+pc3# ifconfig -a
+
+Release address:
+pc3# dhclient -r
+
+Request IP address:
+pc# dhclient eth0
+pc# ifconfig -a
+
+To look at the traffic right-click on selected link.
+After a few moments Ethereal will be started!
+

@@ -1,0 +1,49 @@
+
+The purpose of this example is to show how DHCP server works. 
+
+Start the simulation.
+
+Go to the console of the main machine (right-click on the background and select xterm).
+From the DHCP directory (where this file is) start the script "start_dhcp":
+
+# ./start_dhcp
+
+This script sets up the clients and the server.
+
+Go back to the Imunes GUI and start shell on the host pc3. Start the Ethereal (Wireshark) on pc3 and start capturing, with the "Update traffic in real time" option checked.
+
+In the pc3 shell check the pc3 IP address:
+
+pc3# ifconfig -a
+
+Request IP address for the eth0 interface:
+
+pc3# dhclient eth0
+
+Now, check the address:
+
+pc3# ifconfig -a
+
+Stop capturing traffic. Check the packet trace.
+
+First, check the DHCP release trace. What messages are transmitted?
+
+Now, check how the client gets the IP address from the DHCP server. Identify those packets!
+
+1. DHCP Discover 
+ 
+- sent by pc3 with the source IP 0.0.0.0 (remember, pc3 want's new address, so uses 0.0.0.0 as the source, destination address is broadcast - pc3 has no idea who the DHCP server is
+
+2. DHCP Offer
+
+- DHCP server sends its offer, offering IP address, DNS servers, router, subnet mask
+
+3. DHCP Request
+
+- pc3 sends broadcast requesting the offered address
+
+4. DHCP ACK
+
+- DHCPserver approves the request for the address, defines the lease time (10 minutes in this example) and sends default router and DNS servers.
+
+

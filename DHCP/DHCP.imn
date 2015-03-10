@@ -1,0 +1,318 @@
+node n0 {
+    type pc
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname FIX
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    iconcoords {96.0 312.0}
+    labelcoords {137.0 324.0}
+    interface-peer {eth0 n6}
+    canvas c0
+}
+
+node n1 {
+    type pc
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname PC1
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    iconcoords {216.0 384.0}
+    labelcoords {180.0 387.0}
+    interface-peer {eth0 n6}
+    canvas c0
+}
+
+node n2 {
+    type pc
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname PC2
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    iconcoords {360.0 384.0}
+    labelcoords {403.0 387.0}
+    interface-peer {eth0 n6}
+    canvas c0
+}
+
+node n3 {
+    type pc
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname PC3
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    iconcoords {432.0 288.0}
+    labelcoords {470.0 297.0}
+    interface-peer {eth0 n6}
+    canvas c0
+}
+
+node n4 {
+    type host
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname DHCPserver
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	interface eth0
+	 ip address 10.0.0.1/24
+	!
+	ip route 0.0.0.0/0 10.0.0.7
+	!
+    }
+    iconcoords {240.0 72.0}
+    labelcoords {179.0 72.0}
+    interface-peer {eth0 n6}
+    canvas c0
+}
+
+node n6 {
+    type lanswitch
+    network-config {
+	hostname SW
+	!
+    }
+    iconcoords {264.0 192.0}
+    labelcoords {209.0 181.0}
+    interface-peer {e0 n4}
+    interface-peer {e2 n0}
+    interface-peer {e3 n1}
+    interface-peer {e4 n2}
+    interface-peer {e5 n3}
+    interface-peer {e6 n7}
+    canvas c0
+}
+
+node n7 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname R1
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	interface eth1
+	 ip address 10.0.1.1/24
+	!
+	interface eth0
+	 ip address 10.0.0.7/24
+	!
+	router rip
+	 redistribute static
+	 network 0.0.0.0/0
+	!
+    }
+    iconcoords {432.0 120.0}
+    labelcoords {451.0 92.0}
+    interface-peer {eth0 n6}
+    interface-peer {eth1 n8}
+    canvas c0
+}
+
+node n8 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname R2
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	interface eth1
+	 ip address 10.0.3.1/24
+	!
+	interface eth0
+	 ip address 10.0.2.1/24
+	!
+	interface eth2
+	 ip address 10.0.1.2/24
+	!
+	router rip
+	 redistribute static
+	 network 0.0.0.0/0
+	!
+    }
+    iconcoords {624.0 264.0}
+    labelcoords {674.0 264.0}
+    interface-peer {eth2 n7}
+    interface-peer {eth0 n9}
+    interface-peer {eth1 n10}
+    canvas c0
+}
+
+node n9 {
+    type host
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname S1
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	interface eth0
+	 ip address 10.0.2.2/24
+	!
+	ip route 0.0.0.0/0 10.0.2.1
+	!
+    }
+    iconcoords {624.0 72.0}
+    labelcoords {583.0 73.0}
+    interface-peer {eth0 n8}
+    canvas c0
+}
+
+node n10 {
+    type host
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname S2
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	interface eth0
+	 ip address 10.0.3.2/24
+	!
+	ip route 0.0.0.0/0 10.0.3.1
+	!
+    }
+    iconcoords {624.0 408.0}
+    labelcoords {576.0 413.0}
+    interface-peer {eth0 n8}
+    canvas c0
+}
+
+link l0 {
+    nodes {n4 n6}
+}
+
+link l2 {
+    nodes {n6 n0}
+}
+
+link l3 {
+    nodes {n6 n1}
+}
+
+link l4 {
+    nodes {n6 n2}
+}
+
+link l5 {
+    nodes {n6 n3}
+}
+
+link l6 {
+    nodes {n6 n7}
+}
+
+link l7 {
+    nodes {n7 n8}
+    bandwidth 2048000
+    delay 2500
+}
+
+link l8 {
+    nodes {n8 n9}
+}
+
+link l9 {
+    nodes {n8 n10}
+}
+
+annotation a0 {
+    iconcoords {129.0 15.0 300.0 117.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #fff3a8
+    width 1
+    canvas c0
+}
+
+annotation a1 {
+    iconcoords {50.0 233.0 507.0 454.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #e19e6b
+    width 1
+    canvas c0
+}
+
+annotation a2 {
+    iconcoords {72.0 432.0}
+    type text
+    label {DHCP clients}
+    labelcolor #0038d9
+    fontfamily {Arial}
+    fontsize {12}
+    canvas c0
+}
+
+annotation a3 {
+    type text
+    iconcoords {397.0 442.0}
+    label {}
+    canvas c0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names no
+    ip_addresses no
+    ipv6_addresses no
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+

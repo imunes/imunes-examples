@@ -1,0 +1,45 @@
+#! /bin/sh 
+
+error() {
+    echo $*
+    exit 2
+}
+
+dhcp_server="DHCPserver"
+hosts="FIX PC1 PC2"
+
+if test $# -eq 1
+then
+    eid=$1
+else
+    eid=`himage -e $dhcp_server` \
+        || error "Cannot find node $dhcp_server. Is simulation started? Try: Experiment->Execute"
+fi 
+
+himage ${dhcp_server}@${eid} pkg_info \
+  | grep "^isc-dhcp.*-server" > /dev/null 2>&1
+if test $? -ne 0 ;then
+    echo '*** Package isc-dhcp*-server is required by DHCP'
+    exit 1
+fi
+
+echo "Configuring server:"
+
+# Stop dhcpd on DHCP server
+himage ${dhcp_server}@${eid} killall -9 dhcpd 2> /dev/null
+# and start it ...
+
+hcp DHCPserver.dhcpd.conf ${dhcp_server}@${eid}:/tmp
+himage ${dhcp_server}@${eid} touch /var/db/imunes-dhcpd.leases
+himage ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf >/dev/null 2>&1 &
+
+echo
+echo Configuring clients:
+for i in $hosts
+do
+    himage ${i}@${eid} hostname \
+        || error "Cannot find node $i. Is simulation started? Try: Experiment->Execute"
+    himage ${i}@${eid} dhclient eth0
+    himage ${i}@${eid} ifconfig eth0 | grep inet
+done
+
