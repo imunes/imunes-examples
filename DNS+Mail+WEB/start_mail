@@ -1,0 +1,56 @@
+#! /bin/sh
+
+. ../common/start_functions.sh
+
+mail_servers="www zpmMail"
+zzt_clients="dnsTel www mm"
+zpm_clients="dnsZpm pc zpmMail"
+
+if test $# -eq 1; then
+    eid=$1
+    isEidRunning $eid
+else
+    eid=`isNodeRunning www`
+fi
+
+hasPackage www $eid '^postfix-'
+hasPackage www $eid '^akpop3d-'
+hasPackage www $eid '^cone-'
+
+for i in $mail_servers
+do
+    h=$i@$eid
+    # Stop postfix and akpop3d on all mail servers
+    himage $h postfix stop > /dev/null 2>&1
+    himage $h killall -9 akpop3d > /dev/null 2>&1
+    himage $h mkdir -p /var/db/postfix
+    himage $h chown postfix:wheel /var/db/postfix
+    himage $h chmod 700 /var/db/postfix
+    # Prepare postfix configuration and spool dirs
+    cd Mail_files/postfix.$i
+    hcp -r * $h:/usr/local/etc/postfix/
+    cd -
+    himage $h touch /var/log/maillog
+    himage $h chown -R root /usr/local/etc/postfix/
+    himage $h postalias hash:/usr/local/etc/postfix/aliases
+    himage $h syslogd
+    himage $h postfix start
+    # Start POP3 
+    himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
+    himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
+done
+
+for i in $zzt_clients
+do
+    h=$i@$eid
+    himage $h mkdir -p /root/.cone
+    hcp -r cone.tel/* $h:/root/.cone 
+done
+
+for i in $zpm_clients
+do
+    h=$i@$eid
+    himage $h mkdir -p /root/.cone
+    hcp -r cone.zpm/* $h:/root/.cone 
+done
+

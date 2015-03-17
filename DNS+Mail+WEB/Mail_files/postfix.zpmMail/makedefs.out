@@ -1,0 +1,15 @@
+# Do not edit -- this file documents how Postfix was built for your machine.
+SYSTYPE	= FREEBSD4
+AR	= ar
+ARFL	= rv
+RANLIB	= ranlib
+SYSLIBS	= -L/usr/local/lib -lpcre 
+CC	= cc -DHAS_PCRE -I/usr/local/include -DSNAPSHOT
+OPT	= -O -pipe 
+DEBUG	= 
+AWK	= awk
+STRCASE = 
+EXPORT	= AUXLIBS='-L/usr/local/lib -lpcre' CCARGS='-DHAS_PCRE -I/usr/local/include -DSNAPSHOT' OPT='-O -pipe ' DEBUG=''
+WARN	= -W -Wformat -Wimplicit -Wmissing-prototypes \
+	-Wparentheses -Wstrict-prototypes -Wswitch -Wuninitialized \
+	-Wunused

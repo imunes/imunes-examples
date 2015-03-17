@@ -1,0 +1,13 @@
+; localhost.rev
+;
+$TTL	86400
+@	IN	SOA	localhost. root.localhost (
+	20041128 ; Serial
+	28800	 ; Refresh
+	7200	 ; Retry
+	3600000	 ; Expire
+	86400 	 ; Minimum
+)
+	IN	NS	localhost.
+1	IN	PTR	localhost.
+
