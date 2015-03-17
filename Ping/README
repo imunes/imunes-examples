@@ -1,0 +1,31 @@
+
+The purpose of this example is to demonstrate how ping works.
+
+Start the simulation.
+
+Start Ethereal on eth0 of pc1. 
+
+Open capture, and check "Update list of packets in real time".
+
+Start capturing.
+
+Open shell window on pc1.
+
+Check the availability of the server (10.0.8.10). What is the response of the ping command? Stop the ping after several probes (Ctrl-C). 
+
+Stop capturing.
+
+Analyse the traffic from the ping:
+
+- how many packets were recorded?
+- what are the first two packets?
+- what packets are involved with each probe?
+- what is Echo request?
+- what is Echo reply?
+
+Open the content of the ICMP header. Analyse it.
+
+Further work:
+
+Repeat the same procedure with  the increased packet size (1000 bytes, 2000 bytes). Check 'man ping' for the info on how to use ping.  What happens? Does the fragmentation occur? Analyse it.
+
