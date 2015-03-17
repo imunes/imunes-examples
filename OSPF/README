@@ -1,0 +1,25 @@
+
+*******************
+* OSPF.imn
+*******************
+
+The purpose of the example is to show what happens in the "quiet" network - how routers exchange information about their neighbours.
+
+Follow the same steps as in RIP.imn. 
+
+Analyse the packets which are transmitted.
+
+*******************
+*  OSPF1.imn
+*******************
+
+The purpose of the example is to show what happens after the router goes down, and then goes back up.
+
+Follow the same steps as in RIP1.imn, using the following router commands:
+
+show ip route - shows all routes
+show ip ospf route - shows ospf routes
+show ip ospf interface - show info about router's interfaces
+show ip ospf neighbor - show info about router's neighbours
+
+Notice the dead time in "show ip ospf neighbor" and check what happens after the router7 is shut down. Look at how the dead time changes.

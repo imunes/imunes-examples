@@ -1,0 +1,324 @@
+node n0 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname router1
+	!
+	interface eth1
+	 ip address 10.0.3.1/24
+	!
+	interface eth0
+	 ip address 10.0.0.1/24
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0 area 0
+	!
+    }
+    canvas c0
+    iconcoords {144.0 48.0}
+    labelcoords {106.0 32.0}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n4}
+}
+
+node n1 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname router2
+	!
+	interface eth2
+	 ip address 10.0.7.1/24
+	!
+	interface eth1
+	 ip address 10.0.1.1/24
+	!
+	interface eth0
+	 ip address 10.0.0.2/24
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0 area 0  
+	!
+    }
+    canvas c0
+    iconcoords {264.0 144.0}
+    labelcoords {264.0 168.0}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 n2}
+    interface-peer {eth2 n6}
+}
+
+node n2 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname router3
+	!
+	interface eth1
+	 ip address 10.0.2.1/24
+	!
+	interface eth0
+	 ip address 10.0.1.2/24
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0 area 0
+	!
+	ip route 0.0.0.0/0 10.0.1.1
+	!
+    }
+    canvas c0
+    iconcoords {384.0 48.0}
+    labelcoords {346.0 31.0}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n9}
+}
+
+node n3 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname router6
+	!
+	interface eth0
+	 ip address 10.0.6.2/24
+	!
+	interface eth1
+	 ip address 10.0.4.1/24
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0 area 0
+	!
+	ip route 0.0.0.0/0 10.0.4.1
+	!
+    }
+    canvas c0
+    iconcoords {672.0 144.0}
+    labelcoords {687.0 121.0}
+    interface-peer {eth1 n5}
+    interface-peer {eth0 n10}
+}
+
+node n4 {
+    type lanswitch
+    network-config {
+	hostname sw1
+	!
+    }
+    canvas c0
+    iconcoords {72.0 216.0}
+    labelcoords {54.0 187.0}
+    interface-peer {e0 n0}
+    interface-peer {e1 n7}
+}
+
+node n5 {
+    type lanswitch
+    network-config {
+	hostname sw2
+	!
+    }
+    canvas c0
+    iconcoords {696.0 288.0}
+    labelcoords {715.0 261.0}
+    interface-peer {e0 n3}
+    interface-peer {e1 n8}
+    interface-peer {e2 n6}
+}
+
+node n6 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname router7
+	!
+	interface eth0
+	 ip address 10.0.7.2/24
+	!
+	interface eth1
+	 ip address 10.0.4.2/24
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0 area 0
+	!
+	ip route 0.0.0.0/0 10.0.4.1
+	!
+    }
+    canvas c0
+    iconcoords {432.0 288.0}
+    labelcoords {432.0 262.0}
+    interface-peer {eth1 n5}
+    interface-peer {eth0 n1}
+}
+
+node n7 {
+    type pc
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname pc
+	!
+	interface eth0
+	 ip address 10.0.3.20/24
+	!
+	ip route 0.0.0.0/0 10.0.3.1
+	!
+	!
+    }
+    canvas c0
+    iconcoords {72.0 360.0}
+    labelcoords {72.0 392.0}
+    interface-peer {eth0 n4}
+}
+
+node n8 {
+    type host
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname server
+	!
+	interface eth0
+	 ip address 10.0.4.10/24
+	!
+	ip route 0.0.0.0/0 10.0.4.1
+	!
+	!
+    }
+    canvas c0
+    iconcoords {696.0 384.0}
+    labelcoords {696.0 416.0}
+    interface-peer {eth0 n5}
+}
+
+node n9 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname router4
+	!
+	interface eth1
+	 ip address 10.0.2.2/24
+	!
+	interface eth0
+	 ip address 10.0.5.1/24
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0 area 0
+	!
+    }
+    canvas c0
+    iconcoords {480.0 144.0}
+    labelcoords {480.0 168.0}
+    interface-peer {eth0 n10}
+    interface-peer {eth1 n2}
+}
+
+node n10 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname router5
+	!
+	interface eth1
+	 ip address 10.0.6.1/24
+	!
+	interface eth0
+	 ip address 10.0.5.2/24
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0 area 0
+	!
+    }
+    canvas c0
+    iconcoords {576.0 48.0}
+    labelcoords {620.0 33.0}
+    interface-peer {eth0 n9}
+    interface-peer {eth1 n3}
+}
+
+link l0 {
+    nodes {n0 n1}
+    bandwidth 100000000
+}
+
+link l1 {
+    nodes {n1 n2}
+    bandwidth 100000000
+}
+
+link l3 {
+    nodes {n0 n4}
+    bandwidth 100000000
+}
+
+link l4 {
+    nodes {n3 n5}
+    bandwidth 100000000
+}
+
+link l5 {
+    nodes {n5 n8}
+    bandwidth 100000000
+}
+
+link l6 {
+    nodes {n4 n7}
+    bandwidth 100000000
+}
+
+link l8 {
+    nodes {n6 n5}
+    bandwidth 100000000
+}
+
+link l7 {
+    nodes {n9 n10}
+    bandwidth 100000000
+}
+
+link l2 {
+    nodes {n2 n9}
+    bandwidth 100000000
+}
+
+link l9 {
+    nodes {n10 n3}
+    bandwidth 100000000
+}
+
+link l10 {
+    nodes {n1 n6}
+    bandwidth 100000000
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels no
+}
+
