@@ -1,0 +1,30 @@
+
+The purpose of this example is to demonstrate how traceroute works.
+
+Start the simulation.
+
+Start Ethereal on eth0 of pc1. 
+
+Open capture, and check "Update list of packets in real time".
+
+Start capturing.
+
+Open shell window on pc1.
+
+Check the route to the server (10.0.8.10). Analyse the response from the traceroute and compare it with the network. Check the IP addresses of router interfaces involved in traffic routing.
+
+Open shell window on the server.
+
+Check the route back to the pc1 (10.0.0.21). Analyse the response from the traceroute and compare it with the network. Check the IP addresses of router interfaces involved in traffic routing. Compare it with the IP address in the last traceroute.
+
+Stop capturing after approx. 10 seconds.
+
+Analyse the traffic from both traceroutes.
+
+The first trace should show all datagrams sent from pc1.
+
+The second trace should show only the datagrams that actually reached pc1. Where are the others? Explain! 
+
+Further work:
+
+Start the capture on one of the router's interfaces along the path. What traffic does that router "see" on the selected interface? Why?

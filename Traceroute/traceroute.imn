@@ -1,0 +1,367 @@
+node n0 {
+    type router
+    model quagga
+    network-config {
+	hostname router0
+	!
+	interface eth1
+	 ip address 10.0.1.2/24
+	 ipv6 address a:1::2/64
+	!
+	interface eth0
+	 ip address 10.0.0.1/24
+	 ipv6 address a:0::1/64
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 network ::/0
+	!
+    }
+    canvas c0
+    iconcoords {96.0 360.0}
+    labelcoords {92.0 337.0}
+    interface-peer {eth0 n8}
+    interface-peer {eth1 n1}
+}
+
+node n1 {
+    type router
+    model quagga
+    network-config {
+	hostname router1
+	!
+	interface eth2
+	 ip address 10.0.4.2/24
+	 ipv6 address a:4::2/64
+	!
+	interface eth1
+	 ip address 10.0.2.1/24
+	 ipv6 address a:2::1/64
+	!
+	interface eth0
+	 ip address 10.0.1.1/24
+	 ipv6 address a:1::1/64
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 network ::/0
+	!
+	ip route 0.0.0.0/0 10.0.2.2
+	!
+    }
+    canvas c0
+    iconcoords {360.0 360.0}
+    labelcoords {360.0 384.0}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 n2}
+    interface-peer {eth2 n5}
+}
+
+node n2 {
+    type router
+    model quagga
+    network-config {
+	hostname router2
+	!
+	interface eth1
+	 ip address 10.0.3.2/24
+	 ipv6 address a:3::2/64
+	!
+	interface eth0
+	 ip address 10.0.2.2/24
+	 ipv6 address a:2::2/64
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 network ::/0
+	!
+	ip route 0.0.0.0/0 10.0.2.1
+	!
+    }
+    canvas c0
+    iconcoords {600.0 360.0}
+    labelcoords {600.0 384.0}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n6}
+}
+
+node n5 {
+    type router
+    model quagga
+    network-config {
+	hostname router5
+	!
+	interface eth0
+	 ip address 10.0.4.1/24
+	 ipv6 address a:4::1/64
+	!
+	interface eth1
+	 ip address 10.0.6.1/24
+	 ipv6 address a:6::1/64
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 network ::/0
+	!
+	ip route 0.0.0.0/0 10.0.6.2
+	!
+    }
+    canvas c0
+    iconcoords {600.0 216.0}
+    labelcoords {601.0 193.0}
+    interface-peer {eth1 n6}
+    interface-peer {eth0 n1}
+}
+
+node n6 {
+    type router
+    model quagga
+    network-config {
+	hostname router6
+	!
+	interface eth2
+	 ip address 10.0.3.1/24
+	 ipv6 address a:3::1/64
+	!
+	interface eth1
+	 ip address 10.0.7.1/24
+	 ipv6 address a:7::1/64
+	!
+	interface eth0
+	 ip address 10.0.6.2/24
+	 ipv6 address a:6::2/64
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 network ::/0
+	!
+	ip route 0.0.0.0/0 10.0.7.2
+	!
+    }
+    canvas c0
+    iconcoords {360.0 216.0}
+    labelcoords {359.0 194.0}
+    interface-peer {eth0 n5}
+    interface-peer {eth1 n7}
+    interface-peer {eth2 n2}
+}
+
+node n7 {
+    type router
+    model quagga
+    network-config {
+	hostname router7
+	!
+	interface eth1
+	 ip address 10.0.8.1/24
+	 ipv6 address a:8::1/64
+	!
+	interface eth0
+	 ip address 10.0.7.2/24
+	 ipv6 address a:7::2/64
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 network ::/0
+	!
+    }
+    canvas c0
+    iconcoords {96.0 216.0}
+    labelcoords {96.0 240.0}
+    interface-peer {eth0 n6}
+    interface-peer {eth1 n9}
+}
+
+node n8 {
+    type lanswitch
+    network-config {
+	hostname lanswitch8
+	!
+    }
+    canvas c0
+    iconcoords {96.0 504.0}
+    labelcoords {74.0 532.0}
+    interface-peer {e2 n0}
+    interface-peer {e0 n10}
+    interface-peer {e1 n11}
+}
+
+node n9 {
+    type lanswitch
+    network-config {
+	hostname lanswitch9
+	!
+    }
+    canvas c0
+    iconcoords {96.0 72.0}
+    labelcoords {63.0 48.0}
+    interface-peer {e0 n7}
+    interface-peer {e1 n12}
+}
+
+node n12 {
+    type host
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname server
+	!
+	interface eth0
+	 ip address 10.0.8.10/24
+	 ipv6 address a:8::10/64
+	!
+	ip route 0.0.0.0/0 10.0.8.1
+	!
+	ipv6 route ::/0 a:8::1
+	!
+    }
+    canvas c0
+    iconcoords {360.0 72.0}
+    labelcoords {360.0 104.0}
+    interface-peer {eth0 n9}
+}
+
+node n10 {
+    type pc
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname pc2
+	!
+	interface eth0
+	 ip address 10.0.0.20/24
+	 ipv6 address a:0::20/64
+	!
+	ip route 0.0.0.0/0 10.0.0.1
+	!
+	ipv6 route ::/0 a:0::1
+	!
+    }
+    canvas c0
+    iconcoords {360.0 456.0}
+    labelcoords {360.0 488.0}
+    interface-peer {eth0 n8}
+}
+
+node n11 {
+    type pc
+    cpu {{min 0} {max 100} {weight 1}}
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 ip address 10.0.0.21/24
+	 ipv6 address a:0::21/64
+	!
+	ip route 0.0.0.0/0 10.0.0.1
+	!
+	ipv6 route ::/0 a:0::1
+	!
+    }
+    canvas c0
+    iconcoords {360.0 576.0}
+    labelcoords {360.0 608.0}
+    interface-peer {eth0 n8}
+}
+
+link l2 {
+    nodes {n8 n0}
+    bandwidth 100000000
+}
+
+link l3 {
+    nodes {n1 n0}
+    bandwidth 100000000
+}
+
+link l4 {
+    nodes {n1 n2}
+    bandwidth 100000000
+}
+
+link l8 {
+    nodes {n5 n6}
+    bandwidth 100000000
+}
+
+link l9 {
+    nodes {n6 n7}
+    bandwidth 100000000
+}
+
+link l10 {
+    nodes {n7 n9}
+    bandwidth 100000000
+}
+
+link l11 {
+    nodes {n9 n12}
+    bandwidth 100000000
+}
+
+link l0 {
+    nodes {n8 n10}
+    bandwidth 100000000
+}
+
+link l1 {
+    nodes {n11 n8}
+    bandwidth 100000000
+}
+
+link l5 {
+    nodes {n6 n2}
+    bandwidth 100000000
+}
+
+link l6 {
+    nodes {n5 n1}
+    bandwidth 100000000
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels no
+}
+
