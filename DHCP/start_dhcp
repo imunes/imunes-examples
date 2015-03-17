@@ -1,27 +1,18 @@
 #! /bin/sh 
 
-error() {
-    echo $*
-    exit 2
-}
+. ../common/start_functions.sh
 
 dhcp_server="DHCPserver"
 hosts="FIX PC1 PC2"
 
-if test $# -eq 1
-then
+if [ $# -eq 1 ]; then
     eid=$1
+    isEidRunning $eid
 else
-    eid=`himage -e $dhcp_server` \
-        || error "Cannot find node $dhcp_server. Is simulation started? Try: Experiment->Execute"
-fi 
-
-himage ${dhcp_server}@${eid} pkg_info \
-  | grep "^isc-dhcp.*-server" > /dev/null 2>&1
-if test $? -ne 0 ;then
-    echo '*** Package isc-dhcp*-server is required by DHCP'
-    exit 1
+    eid=`isNodeRunning $dhcp_server`
 fi
+
+hasPackage "$dhcp_server" "$eid" '^isc-dhcp.*-server'
 
 echo "Configuring server:"
 
@@ -37,9 +28,7 @@ echo
 echo Configuring clients:
 for i in $hosts
 do
-    himage ${i}@${eid} hostname \
-        || error "Cannot find node $i. Is simulation started? Try: Experiment->Execute"
+    isNodeRunning $i $eid
     himage ${i}@${eid} dhclient eth0
     himage ${i}@${eid} ifconfig eth0 | grep inet
 done
-
