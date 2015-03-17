@@ -1,0 +1,54 @@
+*******************
+*  RIP.imn
+*******************
+
+The purpose of the example is to show what happens in the "quiet" network - how routers exchange information about their neighbours.
+
+Start the simulation.
+
+Open Ethereal on port eth3 on router3.
+
+Open capture dialog. Check "Update list of packets in real time" option.
+
+Start capturing.
+
+After 30 seconds, you should have at least 2 UDP datagrams.
+
+Stop capturing after approx. 1 min.
+
+In the Ethereal, open one package. 
+
+- what are the source and destination address?
+- how often are the RIP packets transmitted?
+ 
+Show the contents of the first package and check the RIP data.
+
+Each datagram containes routes collected by the sending router, with the associate metric. Comment on the metric (number of hops).
+
+Further work:
+
+- during the simulation, open the router3 console and shut down the eth1 interface, simultaneously monitoring traffic on eg. eth2 router2. Watch what happens with the routes. 
+
+- what happens after 180 seconds?
+
+- bring the route back to life, while still monitoring the traffic on router2. what happens?
+
+*******************
+*  RIP1.imn
+*******************
+
+The purpose of the example is to show what happens after the router goes down, and then goes back up.
+
+Start the simulation.
+
+Open Ethereal on eth2 on router2 and start capturing the traffic with the "Update list of packets in real time" checked.
+
+Open router console on router2 (right-click, shell window, vtysh) and type "show ip rip". This shows the routes that router2 has. Analyse the routing table - available networks, next hops and metrics, as well as the time in the rightmost column.
+
+Now, stop router7 (right-click, stop). 
+
+In router2 console watch what is happening, using "show ip rip" and "show ip rip status". Look at the time of last updates. When Last Update reaches 3 minutes, the "show ip rip" should show metric 16 wor the network 10.0.4.10. Meanwhile, try to ping or traceroute the server (10.0.4.10).
+
+Watch what happens after 3 minutes. The network reconfigures and routing tables are refreshed when the new update packets arrive. Try traceroute from pc to the server. Which path do the packets take?
+
+Next, start the router7 again (right-click, start). Show what happens with the routes. Try traceroute from pc to the server and comment on the route.
