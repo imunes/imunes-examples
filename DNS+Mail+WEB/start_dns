@@ -26,7 +26,7 @@ do
     hcp $i/* $i@$eid:/var/named/etc/namedb
     # Start named on all DNS servers
     echo Starting named on $i...
-    himage $i@$eid named 
+    himage $i@$eid named -c /var/named/etc/namedb/named.conf
 done
 
 echo
