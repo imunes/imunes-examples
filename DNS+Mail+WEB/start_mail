@@ -15,7 +15,6 @@ fi
 
 hasPackage www $eid '^postfix-'
 hasPackage www $eid '^akpop3d-'
-hasPackage www $eid '^cone-'
 
 for i in $mail_servers
 do
@@ -45,6 +44,10 @@ do
     h=$i@$eid
     himage $h mkdir -p /root/.cone
     hcp -r cone.tel/* $h:/root/.cone 
+    himage $h grep imunes /etc/passwd > /dev/null 2>&1
+    if [ $? -eq 1 ]; then
+	echo "Warning: no user named imunes on $h."
+    fi
 done
 
 for i in $zpm_clients
@@ -52,5 +55,9 @@ do
     h=$i@$eid
     himage $h mkdir -p /root/.cone
     hcp -r cone.zpm/* $h:/root/.cone 
+    himage $h grep imunes /etc/passwd > /dev/null 2>&1
+    if [ $? -eq 1 ]; then
+	echo "Warning: no user named imunes on $h."
+    fi
 done
 

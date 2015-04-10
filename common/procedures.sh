@@ -181,10 +181,9 @@ sendMail () {
 getMail () {
     echo ""
     echo "########## Reading mail on $1 $2"
-    mes=`himage $1 mailtool -index INBOX $2`
-    echo "$mes"
-    echo "$mes" | grep -q "Total: 1 messages."
-    if [ $? -ne 0 ]; then
+    #mes=`himage $1 mailtool -index INBOX $2`
+    mes=`himage $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
+    if [ $mes -lt 7 ]; then
 	echo "********** RECEIVE MAIL ERROR **********"
 	return 1
     else

@@ -31,7 +31,7 @@ else
     done
 fi
 
-himage www@$eid grep imunes /etc/passwd
+himage www@$eid grep imunes /etc/passwd > /dev/null 2>&1
 if [ $? -eq 1 ]; then
     echo imunes | chroot /var/imunes/vroot pw useradd imunes -d /home/imunes -g wheel -k /usr/share/skel -s /usr/local/bin/bash -m -h 0 
 fi
@@ -47,7 +47,7 @@ else
     else
         echo Wait 5 sec before reading e-mail...
 	sleep 5
-	getMail pc@$eid pop3://imunes:imunes@www.zpm.fer.hr
+	getMail pc@$eid 10.0.10.4
 	if [ $? -ne 0 ]; then
 	    err=2
 	fi
