@@ -5,9 +5,15 @@ node n0 {
 	hostname aRootServer
 	!
 	interface eth0
-	 ip address 10.0.0.1/24
+	 ip address 1.0.0.2/24
+	 mac address 42:00:aa:00:00:00
 	!
-	ip route 0.0.0.0/0 10.0.0.2
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 1.0.0.1
 	!
     }
     iconcoords {96.0 48.0}
@@ -23,9 +29,15 @@ node n1 {
 	hostname bRootServer
 	!
 	interface eth0
-	 ip address 10.0.1.1/24
+	 ip address 2.0.0.2/24
+	 mac address 42:00:aa:00:00:01
 	!
-	ip route 0.0.0.0/0 10.0.1.2
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 2.0.0.1
 	!
     }
     iconcoords {648.0 48.0}
@@ -43,18 +55,28 @@ node n3 {
 	!
 	interface eth4
 	 ip address 10.0.4.1/24
+	 mac address 42:00:aa:00:00:06
 	!
 	interface eth3
-	 ip address 10.0.3.1/24
+	 ip address 5.0.0.1/24
+	 mac address 42:00:aa:00:00:05
 	!
 	interface eth2
-	 ip address 10.0.2.2/24
+	 ip address 4.0.0.1/24
+	 mac address 42:00:aa:00:00:04
 	!
 	interface eth1
-	 ip address 10.0.1.2/24
+	 ip address 2.0.0.1/24
+	 mac address 42:00:aa:00:00:03
 	!
 	interface eth0
-	 ip address 10.0.0.2/24
+	 ip address 1.0.0.1/24
+	 mac address 42:00:aa:00:00:02
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router rip
 	 redistribute static
@@ -62,7 +84,7 @@ node n3 {
 	!
     }
     iconcoords {360.0 48.0}
-    labelcoords {372.0 32.0}
+    labelcoords {361.0 22.0}
     interface-peer {eth0 n0}
     interface-peer {eth1 n1}
     interface-peer {eth2 n2}
@@ -78,13 +100,19 @@ node n2 {
 	hostname hr2
 	!
 	interface eth0
-	 ip address 10.0.2.1/24
+	 ip address 4.0.0.2/24
+	 mac address 42:00:aa:00:00:07
 	!
-	ip route 0.0.0.0/0 10.0.2.2
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 4.0.0.1 
 	!
     }
-    iconcoords {192.0 144.0}
-    labelcoords {194.0 186.0}
+    iconcoords {216.0 144.0}
+    labelcoords {218.0 186.0}
     interface-peer {eth0 n3}
     canvas c0
 }
@@ -96,13 +124,19 @@ node n4 {
 	hostname dnsCom
 	!
 	interface eth0
-	 ip address 10.0.3.2/24
+	 ip address 5.0.0.2/24
+	 mac address 42:00:aa:00:00:08
 	!
-	ip route 0.0.0.0/0 10.0.3.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 5.0.0.1
 	!
     }
-    iconcoords {336.0 168.0}
-    labelcoords {337.0 205.0}
+    iconcoords {360.0 192.0}
+    labelcoords {361.0 229.0}
     interface-peer {eth0 n3}
     canvas c0
 }
@@ -114,13 +148,19 @@ node n5 {
 	hostname dnsHr
 	!
 	interface eth0
-	 ip address 10.0.6.2/24
+	 ip address 7.0.0.2/24
+	 mac address 42:00:aa:00:00:09
 	!
-	ip route 0.0.0.0/0 10.0.6.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 7.0.0.1
 	!
     }
-    iconcoords {384.0 264.0}
-    labelcoords {383.0 303.0}
+    iconcoords {360.0 288.0}
+    labelcoords {359.0 327.0}
     interface-peer {eth0 n8}
     canvas c0
 }
@@ -132,13 +172,19 @@ node n6 {
 	hostname dnsFer
 	!
 	interface eth0
-	 ip address 10.0.8.2/24
+	 ip address 8.0.0.2/24
+	 mac address 42:00:aa:00:00:0a
 	!
-	ip route 0.0.0.0/0 10.0.8.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 8.0.0.1
 	!
     }
-    iconcoords {720.0 336.0}
-    labelcoords {733.0 376.0}
+    iconcoords {696.0 432.0}
+    labelcoords {709.0 472.0}
     interface-peer {eth0 n9}
     canvas c0
 }
@@ -151,13 +197,21 @@ node n7 {
 	hostname R7
 	!
 	interface eth0
-	 ip address 10.0.14.1/24
+	 ip address 6.0.0.1/24
+	 mac address 42:00:aa:00:00:0d
 	!
 	interface eth2
 	 ip address 10.0.5.1/24
+	 mac address 42:00:aa:00:00:0c
 	!
 	interface eth1
 	 ip address 10.0.4.2/24
+	 mac address 42:00:aa:00:00:0b
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router rip
 	 redistribute static
@@ -165,7 +219,7 @@ node n7 {
 	!
     }
     iconcoords {504.0 120.0}
-    labelcoords {518.0 103.0}
+    labelcoords {511.0 96.0}
     interface-peer {eth1 n3}
     interface-peer {eth2 n8}
     interface-peer {eth0 n15}
@@ -180,24 +234,33 @@ node n8 {
 	hostname R8
 	!
 	interface eth1
-	 ip address 10.0.13.1/24
+	 ip address 3.0.0.1/24
+	 mac address 42:00:aa:00:00:11
 	!
 	interface eth3
 	 ip address 10.0.7.1/24
+	 mac address 42:00:aa:00:00:10
 	!
 	interface eth0
-	 ip address 10.0.6.1/24
+	 ip address 7.0.0.1/24
+	 mac address 42:00:aa:00:00:0f
 	!
 	interface eth2
 	 ip address 10.0.5.2/24
+	 mac address 42:00:aa:00:00:0e
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router rip
 	 redistribute static
 	 network 0.0.0.0/0
 	!
     }
-    iconcoords {504.0 216.0}
-    labelcoords {534.0 208.0}
+    iconcoords {504.0 240.0}
+    labelcoords {532.0 221.0}
     interface-peer {eth2 n7}
     interface-peer {eth0 n5}
     interface-peer {eth3 n9}
@@ -213,16 +276,25 @@ node n9 {
 	hostname R9
 	!
 	interface eth2
-	 ip address 10.0.10.1/24
+	 ip address 30.0.0.1/24
+	 mac address 42:00:aa:00:00:15
 	!
 	interface eth1
-	 ip address 10.0.9.1/24
+	 ip address 20.0.0.1/24
+	 mac address 42:00:aa:00:00:14
 	!
 	interface eth0
-	 ip address 10.0.8.1/24
+	 ip address 8.0.0.1/24
+	 mac address 42:00:aa:00:00:13
 	!
 	interface eth4
 	 ip address 10.0.7.2/24
+	 mac address 42:00:aa:00:00:12
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router rip
 	 redistribute static
@@ -230,8 +302,8 @@ node n9 {
 	!
 	!
     }
-    iconcoords {528.0 312.0}
-    labelcoords {553.0 303.0}
+    iconcoords {528.0 360.0}
+    labelcoords {553.0 340.0}
     interface-peer {eth4 n8}
     interface-peer {eth0 n6}
     interface-peer {eth1 n10}
@@ -246,13 +318,19 @@ node n11 {
 	hostname dnsTel
 	!
 	interface eth0
-	 ip address 10.0.9.2/24
+	 ip address 20.0.0.2/24
+	 mac address 42:00:aa:00:00:16
 	!
-	ip route 0.0.0.0/0 10.0.9.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 20.0.0.1
 	!
     }
-    iconcoords {168.0 288.0}
-    labelcoords {167.0 328.0}
+    iconcoords {144.0 288.0}
+    labelcoords {191.0 272.0}
     interface-peer {eth0 n10}
     canvas c0
 }
@@ -264,21 +342,21 @@ node n12 {
 	hostname www
 	!
 	interface eth0
-	 ip address 10.0.9.3/24
+	 ip address 20.0.0.3/24
+	 mac address 42:00:aa:00:00:17
 	!
-	ip route 0.0.0.0/0 10.0.9.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 20.0.0.1
 	!
     }
-    iconcoords {120.0 384.0}
-    labelcoords {120.0 425.0}
+    iconcoords {96.0 384.0}
+    labelcoords {127.0 410.0}
     interface-peer {eth0 n10}
     canvas c0
-    custom-enabled true
-    custom-config {
-	custom-config-id generic
-	custom-command /bin/sh
-	config {{ifconfig eth0 inet 10.0.9.3/24} {} {route -q add -inet 0.0.0.0/0 10.0.9.1} {rm -f /var/run/inetd.pid} {rm -f /var/run/rpcbind.lock} rpcbind inetd {rm -f /var/run/inetd.pid} {rm -f /var/run/rpcbind.lock} {/usr/local/sbin/lighttpd -f /root/Examples/DNS+Mail+WEB/zzt.lighttpd.conf}}
-    }
 }
 
 node n13 {
@@ -288,13 +366,19 @@ node n13 {
 	hostname mm
 	!
 	interface eth0
-	 ip address 10.0.9.4/24
+	 ip address 20.0.0.4/24
+	 mac address 42:00:aa:00:00:18
 	!
-	ip route 0.0.0.0/0 10.0.9.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 20.0.0.1
 	!
     }
-    iconcoords {144.0 480.0}
-    labelcoords {142.0 517.0}
+    iconcoords {120.0 480.0}
+    labelcoords {118.0 517.0}
     interface-peer {eth0 n10}
     canvas c0
 }
@@ -306,13 +390,19 @@ node n14 {
 	hostname cRootServer
 	!
 	interface eth0
-	 ip address 10.0.13.2/24
+	 ip address 3.0.0.2/24
+	 mac address 42:00:aa:00:00:19
 	!
-	ip route 0.0.0.0/0 10.0.13.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 3.0.0.1
 	!
     }
-    iconcoords {696.0 240.0}
-    labelcoords {706.0 278.0}
+    iconcoords {672.0 312.0}
+    labelcoords {682.0 350.0}
     interface-peer {eth0 n8}
     canvas c0
 }
@@ -324,13 +414,19 @@ node n15 {
 	hostname dnsOrg
 	!
 	interface eth0
-	 ip address 10.0.14.2/24
+	 ip address 6.0.0.2/24
+	 mac address 42:00:aa:00:00:1a
 	!
-	ip route 0.0.0.0/0 10.0.14.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 6.0.0.1
 	!
     }
-    iconcoords {696.0 144.0}
-    labelcoords {700.0 184.0}
+    iconcoords {672.0 192.0}
+    labelcoords {676.0 232.0}
     interface-peer {eth0 n7}
     canvas c0
 }
@@ -342,13 +438,19 @@ node n17 {
 	hostname dnsZpm
 	!
 	interface eth0
-	 ip address 10.0.10.2/24
+	 ip address 30.0.0.2/24
+	 mac address 42:00:aa:00:00:1b
 	!
-	ip route 0.0.0.0/0 10.0.10.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 30.0.0.1
 	!
     }
-    iconcoords {432.0 528.0}
-    labelcoords {435.0 568.0}
+    iconcoords {336.0 552.0}
+    labelcoords {339.0 592.0}
     interface-peer {eth0 n16}
     canvas c0
 }
@@ -360,13 +462,19 @@ node n18 {
 	hostname pc
 	!
 	interface eth0
-	 ip address 10.0.10.3/24
+	 ip address 30.0.0.3/24
+	 mac address 42:00:aa:00:00:1c
 	!
-	ip route 0.0.0.0/0 10.0.10.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 30.0.0.1
 	!
     }
-    iconcoords {552.0 504.0}
-    labelcoords {554.0 541.0}
+    iconcoords {456.0 552.0}
+    labelcoords {458.0 589.0}
     interface-peer {eth0 n16}
     canvas c0
 }
@@ -378,7 +486,7 @@ node n10 {
 	!
     }
     iconcoords {288.0 384.0}
-    labelcoords {317.0 407.0}
+    labelcoords {294.0 362.0}
     interface-peer {e0 n9}
     interface-peer {e1 n11}
     interface-peer {e2 n12}
@@ -392,8 +500,8 @@ node n16 {
 	hostname sw2
 	!
     }
-    iconcoords {528.0 408.0}
-    labelcoords {504.0 393.0}
+    iconcoords {456.0 432.0}
+    labelcoords {417.0 423.0}
     interface-peer {e0 n9}
     interface-peer {e1 n17}
     interface-peer {e2 n18}
@@ -408,21 +516,21 @@ node n19 {
 	hostname zpmMail
 	!
 	interface eth0
-	 ip address 10.0.10.4/24
+	 ip address 30.0.0.4/24
+	 mac address 42:00:aa:00:00:1d
 	!
-	ip route 0.0.0.0/0 10.0.10.1
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 30.0.0.1
 	!
     }
-    iconcoords {672.0 456.0}
-    labelcoords {676.0 496.0}
+    iconcoords {576.0 528.0}
+    labelcoords {580.0 568.0}
     interface-peer {eth0 n16}
     canvas c0
-    custom-enabled true
-    custom-config {
-	custom-config-id generic
-	custom-command /bin/sh
-	config {{ifconfig eth0 inet 10.0.10.4/24} {} {route -q add -inet 0.0.0.0/0 10.0.10.1} {rm -f /var/run/inetd.pid} {rm -f /var/run/rpcbind.lock} rpcbind inetd {rm -f /var/run/inetd.pid} {rm -f /var/run/rpcbind.lock} {/usr/local/sbin/lighttpd -f /root/Examples/DNS+Mail+WEB/zpm.lighttpd.conf}}
-    }
 }
 
 link l0 {
@@ -524,7 +632,7 @@ link l18 {
 }
 
 annotation a0 {
-    iconcoords {43.0 14.0 197.0 116.0}
+    iconcoords {43.0 14.0 151.0 116.0}
     type rectangle
     label {}
     labelcolor black
@@ -535,7 +643,7 @@ annotation a0 {
 }
 
 annotation a1 {
-    iconcoords {104.0 439.0 238.0 530.0}
+    iconcoords {77.0 443.0 160.0 534.0}
     type rectangle
     label {}
     labelcolor black
@@ -546,7 +654,7 @@ annotation a1 {
 }
 
 annotation a2 {
-    iconcoords {58.0 248.0 283.0 553.0}
+    iconcoords {41.0 248.0 266.0 553.0}
     type rectangle
     label {}
     labelcolor black
@@ -557,7 +665,7 @@ annotation a2 {
 }
 
 annotation a4 {
-    iconcoords {72.0 264.0}
+    iconcoords {55.0 264.0}
     type text
     label {ZZT}
     labelcolor #008000
@@ -568,7 +676,7 @@ annotation a4 {
 }
 
 annotation a6 {
-    iconcoords {386.0 406.0 707.0 579.0}
+    iconcoords {305.0 434.0 634.0 607.0}
     type rectangle
     label {}
     labelcolor black
@@ -579,7 +687,7 @@ annotation a6 {
 }
 
 annotation a7 {
-    iconcoords {408.0 432.0}
+    iconcoords {329.0 457.0}
     type text
     label {ZPM}
     labelcolor #007300
@@ -590,7 +698,7 @@ annotation a7 {
 }
 
 annotation a9 {
-    iconcoords {608.0 8.0 689.0 103.0}
+    iconcoords {605.0 8.0 693.0 103.0}
     type rectangle
     label {}
     labelcolor black
@@ -601,7 +709,7 @@ annotation a9 {
 }
 
 annotation a10 {
-    iconcoords {653.0 198.0 747.0 290.0}
+    iconcoords {632.0 269.0 732.0 361.0}
     type rectangle
     label {}
     labelcolor black
@@ -612,7 +720,7 @@ annotation a10 {
 }
 
 annotation a11 {
-    iconcoords {75.0 345.0}
+    iconcoords {58.0 345.0}
     type text
     label {www.tel.fer.hr}
     labelcolor black
@@ -623,7 +731,7 @@ annotation a11 {
 }
 
 annotation a14 {
-    iconcoords {624.0 420.0}
+    iconcoords {533.0 474.0}
     type text
     label {www.zpm.fer.hr}
     labelcolor black
@@ -643,9 +751,10 @@ option show {
     ipv6_addresses no
     node_labels yes
     link_labels no
-    ipsec_configs yes
     background_images no
     annotations yes
     grid yes
+    iconSize normal
+    zoom 1.0
 }
 
