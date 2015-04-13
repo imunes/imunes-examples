@@ -3,11 +3,11 @@
 ; Vidi original u named.root.pravi
 ;
 .                 3600000  IN  NS    aRootServer.
-aRootServer.      3600000      A     10.0.0.1
+aRootServer.      3600000      A     1.0.0.2
 ;
 .                 3600000  IN  NS    bRootServer.
-bRootServer.      3600000      A     10.0.1.1
+bRootServer.      3600000      A     2.0.0.2
 ;
 .                 3600000  IN  NS    cRootServer.
-cRootServer.      3600000      A     10.0.13.2
+cRootServer.      3600000      A     3.0.0.2
 

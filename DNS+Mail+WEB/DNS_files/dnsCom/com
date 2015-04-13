@@ -10,13 +10,13 @@ $TTL 60000
 )
 
 @                   IN  NS   dnsCom.com.
-dnsCom.com.         IN  A    10.0.3.2
+dnsCom.com.         IN  A    5.0.0.2
 
-hr2                 IN  A    10.0.2.1
+hr2.com.            IN  A    4.0.0.2
 
 nesto.com.          IN  NS   dnsNesto.nesto.com.
-dnsNesto.nesto.com. IN  A    10.10.6.2
+dnsNesto.nesto.com. IN  A    11.12.13.14
 
 mm.com.             IN  NS   dnsMM.mm.com.
-dnsMM.mm.com.       IN  A    10.1.1.1
+dnsMM.mm.com.       IN  A    15.16.17.18
 

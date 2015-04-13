@@ -1,0 +1,15 @@
+$TTL   60000
+@               IN      SOA     aRootServer. root.aRootServer (
+         2002102801 ; serial
+         28800 ; refresh
+         14400 ; retry
+         3600000 ; expire
+         0 ; default_ttl
+)
+
+@			IN 	NS	dnsTel.tel.fer.hr.
+dnsTel.tel.fer.hr.	IN	A	20.0.0.2
+2.0.0.20.in-addr.arpa.	IN 	PTR	dnsTel.tel.fer.hr.
+3.0.0.20.in-addr.arpa.	IN 	PTR	www.tel.fer.hr.
+4.0.0.20.in-addr.arpa.	IN 	PTR	mm.tel.fer.hr.
+

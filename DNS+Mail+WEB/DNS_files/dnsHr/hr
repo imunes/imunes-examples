@@ -11,9 +11,9 @@ $TTL 60000
 
 @                   IN  NS   dnsHr.hr.
 @                   IN  NS   hr2.com.
-dnsHr.hr.           IN  A    10.0.6.2
-hr2.com.            IN  A    10.0.2.1
+dnsHr.hr.           IN  A    7.0.0.2
+hr2.com.            IN  A    4.0.0.2
 
 fer.hr.             IN  NS   dnsFer.fer.hr.
-dnsFer.fer.hr.      IN  A    10.0.8.2
+dnsFer.fer.hr.      IN  A    8.0.0.2
 

@@ -1,0 +1,33 @@
+$TTL   60000
+@               IN      SOA     aRootServer. root.aRootServer (
+         2002102801 ; serial
+         28800 ; refresh
+         14400 ; retry
+         3600000 ; expire
+         0 ; default_ttl
+)
+
+@               IN      NS      aRootServer.
+@               IN      NS      bRootServer.
+@               IN      NS      cRootServer.
+
+20.in-addr.arpa.		IN 	NS	dnsTel.tel.fer.hr.
+dnsTel.tel.fer.hr.		IN	A	20.0.0.2
+
+30.in-addr.arpa.		IN 	NS	dnsZpm.zpm.fer.hr.
+dnsZpm.zpm.fer.hr.		IN	A	30.0.0.2
+
+2.0.0.1.in-addr.arpa.		IN	PTR	aRootServer.
+2.0.0.2.in-addr.arpa.		IN	PTR	bRootServer.
+2.0.0.3.in-addr.arpa.		IN	PTR	cRootServer.
+
+2.0.0.4.in-addr.arpa.		IN	PTR	hr2.com.
+2.0.0.5.in-addr.arpa.		IN	PTR	dnsCom.com.
+2.0.0.6.in-addr.arpa.		IN	PTR	dnsOrg.Org.
+2.0.0.7.in-addr.arpa.		IN	PTR	dnsHr.hr.
+
+14.13.12.11.in-addr.arpa.	IN	PTR	dnsNesto.nesto.com.
+18.17.16.15.in-addr.arpa.	IN	PTR	dnsMM.mm.com.
+2.0.0.8.in-addr.arpa.		IN	PTR	dnsFer.fer.hr.
+114.113.112.111.in-addr.arpa.	IN	PTR	dnsBlaBla.blabla.org.
+

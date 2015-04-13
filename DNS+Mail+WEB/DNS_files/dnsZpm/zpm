@@ -10,10 +10,10 @@ $TTL 60000
 )
 
 @         IN  NS   dnsZpm.zpm.fer.hr.
-dnsZpm    IN  A    10.0.10.2
+dnsZpm    IN  A    30.0.0.2
 
-pc        IN  A    10.0.10.3
-zpmMail   IN  A    10.0.10.4
+pc        IN  A    30.0.0.3
+zpmMail   IN  A    30.0.0.4
 www       IN  CNAME zpmMail.zpm.fer.hr.
 
 @        IN  MX  10  zpmMail.zpm.fer.hr.

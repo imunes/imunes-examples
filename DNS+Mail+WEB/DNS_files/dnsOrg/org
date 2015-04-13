@@ -8,8 +8,8 @@ $TTL 60000
 )
 
 @                        IN  NS    dnsOrg.org.
-dnsOrg.Org.              IN  A     10.0.14.2
+dnsOrg.Org.              IN  A     6.0.0.2
 
 blabla.org.              IN  NS    dnsBlaBla.blabla.org.
-dnsBlaBla.blabla.org.    IN  A     10.10.7.2
+dnsBlaBla.blabla.org.    IN  A     111.112.113.114
 

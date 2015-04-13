@@ -10,10 +10,10 @@ $TTL 60000
 )
 
 @         IN  NS   dnsTel.tel.fer.hr.
-dnsTel    IN  A    10.0.9.2
+dnsTel    IN  A    20.0.0.2
 
-www       IN  A    10.0.9.3
-mm        IN  A    10.0.9.4
+www       IN  A    20.0.0.3
+mm        IN  A    20.0.0.4
 
 @      IN MX 10  www.tel.fer.hr.
 mm     IN MX 10  www.tel.fer.hr.
