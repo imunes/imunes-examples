@@ -26,10 +26,15 @@ isNodeRunning() {
 
 # hasPackage node eid pkgName
 hasPackage() {
-    himage $1@$2 pkg info | grep "$3" > /dev/null 2>&1
-    err=$?
-    himage $1@$2 pkg_info | grep "$3" > /dev/null 2>&1
-    if [ $? -ne 0 ] && [ $err -ne 0 ]; then
+    pkg info > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+	himage $1@$2 pkg info | grep "$3" > /dev/null 2>&1
+	err=$?
+    else
+	himage $1@$2 pkg_info | grep "$3" > /dev/null 2>&1
+	err=$?
+    fi
+    if [ $err -ne 0 ]; then
 	error "*** Package $3 is not installed on $1@$2"
     fi
 }

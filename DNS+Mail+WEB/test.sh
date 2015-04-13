@@ -13,21 +13,21 @@ eid=`imunes -b NETWORK.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 ./start_dns $eid
-sleep 20
 if [ $? -ne 0 ]; then
     echo "********** START_DNS ERROR **********"
     err=1
 else
+    sleep 20
     for h in $dns_servers $hosts; do 
-	    dnsCheck $h@$eid zpmMail.zpm.fer.hr
-	    if [ $? -eq 0 ]; then
-		dnsCheck $h@$eid mm.tel.fer.hr
-		if [ $? -ne 0 ]; then
-		    err=1
-		fi
-	    else
+	dnsCheck $h@$eid zpmMail.zpm.fer.hr
+	if [ $? -eq 0 ]; then
+	    dnsCheck $h@$eid mm.tel.fer.hr
+	    if [ $? -ne 0 ]; then
 		err=1
 	    fi
+	else
+	    err=1
+	fi
     done
 fi
 
@@ -47,7 +47,7 @@ else
     else
         echo Wait 5 sec before reading e-mail...
 	sleep 5
-	getMail pc@$eid 10.0.10.4
+	getMail pc@$eid 30.0.0.4
 	if [ $? -ne 0 ]; then
 	    err=2
 	fi
@@ -55,11 +55,11 @@ else
 fi
 
 ./start_http $eid
-sleep 1
 if [ $? -ne 0 ]; then
     echo "********** START_HTTP ERROR **********"
     err=3
 else
+    sleep 1
     webCheck mm@$eid http://www.tel.fer.hr
     if [ $? -ne 0 ]; then
 	err=3
