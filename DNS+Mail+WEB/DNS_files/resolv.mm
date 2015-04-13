@@ -1,2 +1,2 @@
 domain tel.fer.hr
-nameserver 10.0.9.2
+nameserver 20.0.0.2
