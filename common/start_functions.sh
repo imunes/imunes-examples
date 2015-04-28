@@ -8,7 +8,7 @@ error() {
 
 # isEidRunning eid
 isEidRunning() {
-    err=`himage -l | grep -x $1` \
+    err=`himage -l | awk '{print $1}' | grep -x $1` \
 	    || error "Cannot find experiment $1. Is simulation started? Try: Experiment->Execute"
 }
 
