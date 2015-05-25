@@ -1,6 +1,5 @@
 node n0 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname aRootServer
 	!
@@ -24,7 +23,6 @@ node n0 {
 
 node n1 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname bRootServer
 	!
@@ -48,7 +46,6 @@ node n1 {
 
 node n3 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R3
@@ -95,7 +92,6 @@ node n3 {
 
 node n2 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname hr2
 	!
@@ -119,7 +115,6 @@ node n2 {
 
 node n4 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsCom
 	!
@@ -143,7 +138,6 @@ node n4 {
 
 node n5 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsHr
 	!
@@ -167,7 +161,6 @@ node n5 {
 
 node n6 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsFer
 	!
@@ -191,7 +184,6 @@ node n6 {
 
 node n7 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R7
@@ -228,7 +220,6 @@ node n7 {
 
 node n8 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R8
@@ -270,7 +261,6 @@ node n8 {
 
 node n9 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R9
@@ -313,7 +303,6 @@ node n9 {
 
 node n11 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsTel
 	!
@@ -337,7 +326,6 @@ node n11 {
 
 node n12 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname www
 	!
@@ -361,7 +349,6 @@ node n12 {
 
 node n13 {
     type pc
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname mm
 	!
@@ -385,7 +372,6 @@ node n13 {
 
 node n14 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname cRootServer
 	!
@@ -409,7 +395,6 @@ node n14 {
 
 node n15 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsOrg
 	!
@@ -433,7 +418,6 @@ node n15 {
 
 node n17 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsZpm
 	!
@@ -457,7 +441,6 @@ node n17 {
 
 node n18 {
     type pc
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname pc
 	!
@@ -511,7 +494,6 @@ node n16 {
 
 node n19 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname zpmMail
 	!
