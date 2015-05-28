@@ -45,13 +45,13 @@ __END__
 		echo "########## router2@$eid routes after 3 minutes"
 		himage router2@$eid vtysh << __END__ 
 		show ip rip
+		show ipv6 ripng
 		exit
 __END__
 
 		startNode router7@$eid
 		if [ $? -eq 0 ]; then
 		    sleep 10
-
 		    pingCheck pc@$eid 10.0.4.10
 		    if [ $? -eq 0 ]; then
 			sleep 4

@@ -5,16 +5,30 @@ node n0 {
     network-config {
 	hostname router1
 	!
-	interface eth1
-	 ip address 10.0.3.1/24
-	!
 	interface eth0
 	 ip address 10.0.0.1/24
+	 ipv6 address fc00:2::1/64
+	!
+	interface eth1
+	 ip address 10.0.3.1/24
+	 ipv6 address fc00::1/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router ospf
 	 redistribute static
 	 redistribute connected
-	 network 0.0.0.0/0 area 0
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+	router ospf6
+	 router-id 0.0.0.0
+	 redistribute static
+	 redistribute connected
+	 redistribute ripng
 	!
     }
     canvas c0
@@ -33,17 +47,32 @@ node n1 {
 	!
 	interface eth2
 	 ip address 10.0.7.1/24
+	 ipv6 address fc00:4::1/64
 	!
 	interface eth1
 	 ip address 10.0.1.1/24
+	 ipv6 address fc00:3::1/64
 	!
 	interface eth0
 	 ip address 10.0.0.2/24
+	 ipv6 address fc00:2::2/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router ospf
 	 redistribute static
 	 redistribute connected
-	 network 0.0.0.0/0 area 0  
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+	router ospf6
+	 router-id 0.0.0.1
+	 redistribute static
+	 redistribute connected
+	 redistribute ripng
 	!
     }
     canvas c0
@@ -63,16 +92,30 @@ node n2 {
 	!
 	interface eth1
 	 ip address 10.0.2.1/24
+	 ipv6 address fc00:5::1/64
 	!
 	interface eth0
 	 ip address 10.0.1.2/24
+	 ipv6 address fc00:3::2/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 10.0.1.1
 	!
 	router ospf
 	 redistribute static
 	 redistribute connected
-	 network 0.0.0.0/0 area 0
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
-	ip route 0.0.0.0/0 10.0.1.1
+	router ospf6
+	 router-id 0.0.0.2
+	 redistribute static
+	 redistribute connected
+	 redistribute ripng
 	!
     }
     canvas c0
@@ -91,16 +134,30 @@ node n3 {
 	!
 	interface eth0
 	 ip address 10.0.6.2/24
+	 ipv6 address fc00:6::1/64
 	!
 	interface eth1
 	 ip address 10.0.4.1/24
+	 ipv6 address fc00:1::1/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 10.0.4.1
 	!
 	router ospf
 	 redistribute static
 	 redistribute connected
-	 network 0.0.0.0/0 area 0
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
-	ip route 0.0.0.0/0 10.0.4.1
+	router ospf6
+	 router-id 0.0.0.3
+	 redistribute static
+	 redistribute connected
+	 redistribute ripng
 	!
     }
     canvas c0
@@ -146,16 +203,30 @@ node n6 {
 	!
 	interface eth0
 	 ip address 10.0.7.2/24
+	 ipv6 address fc00:4::2/64
 	!
 	interface eth1
 	 ip address 10.0.4.2/24
+	 ipv6 address fc00:1::2/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 10.0.4.1
 	!
 	router ospf
 	 redistribute static
 	 redistribute connected
-	 network 0.0.0.0/0 area 0
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
-	ip route 0.0.0.0/0 10.0.4.1
+	router ospf6
+	 router-id 0.0.0.6
+	 redistribute static
+	 redistribute connected
+	 redistribute ripng
 	!
     }
     canvas c0
@@ -173,9 +244,17 @@ node n7 {
 	!
 	interface eth0
 	 ip address 10.0.3.20/24
+	 ipv6 address fc00::20/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 10.0.3.1
 	!
+	!
+	ipv6 route ::/0 fc00::1
 	!
     }
     canvas c0
@@ -192,9 +271,17 @@ node n8 {
 	!
 	interface eth0
 	 ip address 10.0.4.10/24
+	 ipv6 address fc00:1::10/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 10.0.4.1
 	!
+	!
+	ipv6 route ::/0 fc00:1::1
 	!
     }
     canvas c0
@@ -212,14 +299,28 @@ node n9 {
 	!
 	interface eth1
 	 ip address 10.0.2.2/24
+	 ipv6 address fc00:5::2/64
 	!
 	interface eth0
 	 ip address 10.0.5.1/24
+	 ipv6 address fc00:7::1/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router ospf
 	 redistribute static
 	 redistribute connected
-	 network 0.0.0.0/0 area 0
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+	router ospf6
+	 router-id 0.0.0.9
+	 redistribute static
+	 redistribute connected
+	 redistribute ripng
 	!
     }
     canvas c0
@@ -238,14 +339,28 @@ node n10 {
 	!
 	interface eth1
 	 ip address 10.0.6.1/24
+	 ipv6 address fc00:6::2/64
 	!
 	interface eth0
 	 ip address 10.0.5.2/24
+	 ipv6 address fc00:7::2/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
 	!
 	router ospf
 	 redistribute static
 	 redistribute connected
-	 network 0.0.0.0/0 area 0
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+	router ospf6
+	 router-id 0.0.0.10
+	 redistribute static
+	 redistribute connected
+	 redistribute ripng
 	!
     }
     canvas c0
@@ -320,5 +435,10 @@ option show {
     ipv6_addresses yes
     node_labels yes
     link_labels no
+    background_images no
+    annotations yes
+    grid yes
+    iconSize normal
+    zoom 1.0
 }
 
