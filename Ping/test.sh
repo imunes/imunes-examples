@@ -9,7 +9,7 @@ startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
 if [ $? -eq 0 ]; then
-    sleep 4
+    sleep 8
     pingCheck pc1@$eid 10.0.8.10 2
     if [ $? -eq 0 ]; then
 	sleep 2
