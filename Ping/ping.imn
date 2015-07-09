@@ -273,7 +273,6 @@ node n9 {
 
 node n12 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname server
 	!
@@ -300,7 +299,6 @@ node n12 {
 
 node n10 {
     type pc
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname pc2
 	!
@@ -327,7 +325,6 @@ node n10 {
 
 node n11 {
     type pc
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname pc1
 	!
@@ -354,57 +351,46 @@ node n11 {
 
 link l2 {
     nodes {n8 n0}
-    bandwidth 100000000
 }
 
 link l3 {
     nodes {n1 n0}
-    bandwidth 100000000
 }
 
 link l4 {
     nodes {n1 n2}
-    bandwidth 100000000
 }
 
 link l8 {
     nodes {n5 n6}
-    bandwidth 100000000
 }
 
 link l9 {
     nodes {n6 n7}
-    bandwidth 100000000
 }
 
 link l10 {
     nodes {n7 n9}
-    bandwidth 100000000
 }
 
 link l11 {
     nodes {n9 n12}
-    bandwidth 100000000
 }
 
 link l0 {
     nodes {n8 n10}
-    bandwidth 100000000
 }
 
 link l1 {
     nodes {n11 n8}
-    bandwidth 100000000
 }
 
 link l5 {
     nodes {n6 n2}
-    bandwidth 100000000
 }
 
 link l6 {
     nodes {n5 n1}
-    bandwidth 100000000
 }
 
 canvas c0 {
