@@ -1,9 +1,9 @@
 #!/bin/sh
 
-os=`uname -s`
+set -e
 
-if test "$os" != "FreeBSD" && test "$os" != "Linux"; then
-    echo "OS not supported."
+if [ `id -u` -ne  0 ]; then
+    echo "You must be root to run this script."
     exit 1
 fi
 
@@ -37,6 +37,7 @@ termTopo() {
 }
 
 #argument parsing
+os=`uname -s`
 count=10
 wait_before_termination=10
 
@@ -46,6 +47,19 @@ if test "$1" = "-c"; then
 fi
 
 tests="$*"
+
+# print system info
+if test "$os" = "FreeBSD"; then
+    imunes -i
+    echo "CPU:`sysctl hw.model | cut -d: -f2`"
+    echo "Cores:`sysctl hw.ncpu | cut -d: -f2`"
+    mem_gb=$(echo "scale=2; `sysctl hw.realmem | cut -d: -f2`/1024/1024/1024" | bc -l)
+    echo "RAM: $mem_gb GB"
+elif test "$os" = "Linux"; then
+else
+    echo "OS not supported."
+    exit 1
+fi
 
 echo "Benchmarking topologies: $tests"
 echo "Number of iterations: $count"
