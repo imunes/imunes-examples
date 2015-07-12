@@ -54,13 +54,16 @@ if test "$os" = "FreeBSD"; then
     echo "CPU:`sysctl hw.model | cut -d: -f2`"
     echo "Cores:`sysctl hw.ncpu | cut -d: -f2`"
     mem_gb=$(echo "scale=2; `sysctl hw.realmem | cut -d: -f2`/1024/1024/1024" | bc -l)
-    echo "RAM: $mem_gb GB"
 elif test "$os" = "Linux"; then
+    echo "CPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`"
+    echo "Cores: `cat /proc/cpuinfo | grep processor | wc -l`"
+    mem_gb=$(echo "scale=2; `cat /proc/meminfo | grep MemTotal | awk '{print $2}'`/1024/1024" | bc -l)
 else
     echo "OS not supported."
     exit 1
 fi
 
+echo "RAM: $mem_gb GB"
 echo "Benchmarking topologies: $tests"
 echo "Number of iterations: $count"
 
