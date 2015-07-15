@@ -46,18 +46,18 @@ printDockerInfo() {
 
 printLinuxHardwareInfo() {
     echo "Hardware info:"
-    echo "CPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`" | sed -e 's/^/\t/'
-    echo "Cores: `cat /proc/cpuinfo | grep processor | wc -l`" | sed -e 's/^/\t/'
+    echo -e "\tCPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`"
+    echo -e "\tCores: `cat /proc/cpuinfo | grep processor | wc -l`"
     mem_gb=$(echo "scale=2; `cat /proc/meminfo | grep MemTotal | awk '{print $2}'`/1024/1024" | bc -l)
-    echo "RAM: $mem_gb GB" | sed -e 's/^/\t/'
+    echo -e "\tRAM: $mem_gb GB"
 }
 
 printFreebsdHardwareInfo() {
     echo "Hardware info:"
-    echo "CPU:`sysctl hw.model | cut -d: -f2`" | sed -e 's/^/\t/'
-    echo "Cores:`sysctl hw.ncpu | cut -d: -f2`" | sed -e 's/^/\t/'
+    echo -e "\tCPU:`sysctl hw.model | cut -d: -f2`"
+    echo -e "\tCores:`sysctl hw.ncpu | cut -d: -f2`"
     mem_gb=$(echo "scale=2; `sysctl hw.realmem | cut -d: -f2`/1024/1024/1024" | bc -l)
-    echo "RAM: $mem_gb GB" | sed -e 's/^/\t/'
+    echo -e "\tRAM: $mem_gb GB"
 }
 
 #argument parsing
