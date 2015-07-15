@@ -46,10 +46,10 @@ printDockerInfo() {
 
 printLinuxHardwareInfo() {
     echo "Hardware info:"
-    echo -e "\tCPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`"
-    echo -e "\tCores: `cat /proc/cpuinfo | grep processor | wc -l`"
+    echo "\tCPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`"
+    echo "\tCores: `cat /proc/cpuinfo | grep processor | wc -l`"
     mem_gb=$(echo "scale=2; `cat /proc/meminfo | grep MemTotal | awk '{print $2}'`/1024/1024" | bc -l)
-    echo -e "\tRAM: $mem_gb GB"
+    echo "\tRAM: $mem_gb GB"
 }
 
 printFreebsdHardwareInfo() {
@@ -66,9 +66,10 @@ count=10
 wait_before_termination=10
 do_sleep=1;
 
-while getopts ":c:i" opt; do
+while getopts ":c:w:i" opt; do
     case $opt in
 	c) count=$OPTARG;;
+	w) wait_before_termination=$OPTARG;;
 	i) do_sleep=0;;
 	\?) echo "Invalid option: -$OPTARG" >&2;;
     esac
@@ -98,6 +99,7 @@ fi
 
 echo "Benchmarking topologies: $tests"
 echo "Number of iterations: $count"
+echo "Wait time before termination: $wait_before_termination"
 
 for t in $tests; do
     echo "Running topology: $t"
@@ -121,12 +123,8 @@ for t in $tests; do
 	fi
 	# calculate memusage
 	freem_after=`mfree`
-	if test $i -eq 1; then
-	    memusage=0
-	else
-	    memusage=$(($freem_before-$freem_after))
-	    echo -n "memusage: $memusage "
-	fi
+	memusage=$(($freem_before-$freem_after))
+	echo -n "memusage: $memusage "
 	# terminate topology
 	term_time=`termTopo $eid`
 	echo "term: $term_time "
