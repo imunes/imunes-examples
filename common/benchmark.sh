@@ -80,11 +80,13 @@ shift $((OPTIND-1))
 tests="$*"
 
 # print system info
-uname -srvm
 if test "$os" = "FreeBSD"; then
+    uname -srm
+    uname -v
     imunes -i
     printFreebsdHardwareInfo
 elif test "$os" = "Linux"; then
+    uname -srvm
     printDockerInfo 
     printLinuxHardwareInfo
 else
