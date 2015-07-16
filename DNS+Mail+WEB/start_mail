@@ -54,11 +54,13 @@ do
     fi
 done
 
-for i in $zpm_clients $zzt_clients $mail_servers; do
-    h=$i@$eid
-    echo "Adding user imunes on $h."
-    himage $h useradd imunes -p "$6$ZXVm.gfS$w4Qq8.yujUx8UoXbUoyw2zs9dZRUj1ykHtbz996WYo8d8bs9jXbI88YkSMZqMBom3G/EqISKcMyv2/ehAHk5q1" -m -g staff 
-done
+if test `uname -s` == "Linux"; then
+    for i in $zpm_clients $zzt_clients; do
+        h=$i@$eid
+        echo "Adding user imunes on $h."
+        himage $h useradd imunes -p "$6$ZXVm.gfS$w4Qq8.yujUx8UoXbUoyw2zs9dZRUj1ykHtbz996WYo8d8bs9jXbI88YkSMZqMBom3G/EqISKcMyv2/ehAHk5q1" -m -g staff 
+    done
+fi
 
 for i in $zzt_clients
 do
