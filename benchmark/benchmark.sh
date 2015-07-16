@@ -29,6 +29,12 @@ startTopo() {
     egrep -o "[0-9]+\.[0-9]+ " start_$1.log
 }
 
+# get node and link count from start log created by startTopo
+# $1 - eid
+getTopoStats() {
+    egrep -o "[0-9]+ nodes .* [0-9]+ links" start_$1.log
+}
+
 # terminate topology with IMUNES
 # $1 - eid
 termTopo() {
@@ -155,6 +161,7 @@ for t in $tests; do
 	echo "---------------- Summary for $t: -----------------"
     fi
     freem_after_bench=`mfree`
+    echo "Topology stats: `getTopoStats $eid`"
     avg_start=`echo "scale=3; $sum_start/$count" | bc -l`
     avg_term=`echo "scale=3; $sum_term/$count" | bc -l`
     avg_memusage=`echo "scale=0; $sum_memusage/$count" | bc -l`
