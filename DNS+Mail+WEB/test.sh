@@ -9,7 +9,7 @@ dns_servers="aRootServer bRootServer cRootServer \
 hosts="mm www pc zpmMail"
 err=0
 
-eid=`imunes -b NETWORK.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes -b NETWORK.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 ./start_dns $eid
@@ -33,7 +33,12 @@ fi
 
 himage www@$eid grep imunes /etc/passwd > /dev/null 2>&1
 if [ $? -eq 1 ]; then
-    echo imunes | chroot /var/imunes/vroot pw useradd imunes -d /home/imunes -g wheel -k /usr/share/skel -s /usr/local/bin/bash -m -h 0 
+    if test `uname -s` == "Linux"; then
+        echo "User imunes must be created in virtual nodes."
+        err=2
+    else
+        echo imunes | chroot /var/imunes/vroot pw useradd imunes -d /home/imunes -g wheel -k /usr/share/skel -s /usr/local/bin/bash -m -h 0 
+    fi
 fi
 
 ./start_mail $eid

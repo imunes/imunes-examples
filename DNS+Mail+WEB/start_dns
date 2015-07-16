@@ -21,7 +21,7 @@ cd DNS_files
 for i in $dns_servers
 do
     # Stop named on all DNS servers
-    himage ${i}@${eid} killall -9 named 2> /dev/null
+    himage ${i}@${eid} killall -9 named > /dev/null 2>&1
     himage $i@$eid mkdir -p /var/named/etc/namedb
     hcp $i/* $i@$eid:/var/named/etc/namedb
     # Start named on all DNS servers
@@ -35,3 +35,11 @@ for i in $hosts
 do
     hcp resolv.$i $i@$eid:/etc/resolv.conf 
 done
+
+echo
+echo Create empty resolv.conf on DNS servers:
+for i in $dns_servers
+do
+    himage $i cp /dev/null /etc/resolv.conf
+done
+< 

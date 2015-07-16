@@ -182,7 +182,11 @@ getMail () {
     echo ""
     echo "########## Reading mail on $1 $2"
     #mes=`himage $1 mailtool -index INBOX $2`
-    mes=`himage $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
+    if test `uname -s` == "Linux"; then
+        mes=`himage -b $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
+    else
+        mes=`himage $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
+    fi
     if [ $mes -lt 7 ]; then
 	echo "********** RECEIVE MAIL ERROR **********"
 	return 1
@@ -195,7 +199,11 @@ getMail () {
 webCheck () {
     echo ""
     echo "########## Fetching file from $2 to $1"
-    himage $1 fetch -o - $2
+    fetch=fetch
+    if test `uname -s` == "Linux"; then
+        fetch=curl
+    fi
+    himage $1 $fetch -o - $2
     if [ $? -ne 0 ]; then
 	echo "********** WEB (FETCH) ERROR **********"
 	return 1

@@ -32,11 +32,20 @@ do
     h=${serv}@${eid}
     himage $h mkdir -p /usr/local/etc/lighttpd
     himage $h mkdir -p /var/log/lighttpd
-    himage $h chown -R www:www /var/log/lighttpd
+    if test `uname -s` == "Linux"; then
+        himage $h chown -R www-data:www-data /var/log/lighttpd
+    else
+        himage $h chown -R www:www /var/log/lighttpd
+    fi
 
     hcp ${serv}.lighttpd.conf $h:/usr/local/etc/lighttpd/lighttpd.conf
     himage $h chmod 755 /usr/local/etc/lighttpd/lighttpd.conf
-    hcp -r www.${serv} $h:/root
-    himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    if test `uname -s` == "Linux"; then
+        hcp www.${serv} $h:/root
+        himage -b $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    else
+        hcp -r www.${serv} $h:/root
+        himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    fi
 done
 

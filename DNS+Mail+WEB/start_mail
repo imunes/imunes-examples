@@ -13,8 +13,10 @@ else
     eid=`isNodeRunning www`
 fi
 
-hasPackage www $eid '^postfix-'
-hasPackage www $eid '^akpop3d-'
+if test `uname -s` == "FreeBSD"; then
+    hasPackage www $eid '^postfix-'
+    hasPackage www $eid '^akpop3d-'
+fi
 
 for i in $mail_servers
 do
@@ -23,11 +25,20 @@ do
     himage $h postfix stop > /dev/null 2>&1
     himage $h killall -9 akpop3d > /dev/null 2>&1
     himage $h mkdir -p /var/db/postfix
-    himage $h chown postfix:wheel /var/db/postfix
+    if test `uname -s` == "Linux"; then
+        himage $h chown postfix:postfix /var/db/postfix
+    else
+        himage $h chown postfix:wheel /var/db/postfix
+    fi
     himage $h chmod 700 /var/db/postfix
     # Prepare postfix configuration and spool dirs
     cd Mail_files/postfix.$i
-    hcp -r * $h:/usr/local/etc/postfix/
+    if test `uname -s` == "Linux"; then
+        himage $h mkdir -p /usr/local/etc/postfix
+        hcp * $h:/usr/local/etc/postfix/
+    else
+        hcp -r * $h:/usr/local/etc/postfix/
+    fi
     cd -
     himage $h touch /var/log/maillog
     himage $h chown -R root /usr/local/etc/postfix/
@@ -35,18 +46,32 @@ do
     himage $h syslogd
     himage $h postfix start
     # Start POP3 
-    himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
-    himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
+    if test `uname -s` == "Linux"; then
+        himage -b $h dovecot
+    else
+        himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
+        himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
+    fi
+done
+
+for i in $zpm_clients $zzt_clients $mail_servers; do
+    h=$i@$eid
+    echo "Adding user imunes on $h."
+    himage $h useradd imunes -p "$6$ZXVm.gfS$w4Qq8.yujUx8UoXbUoyw2zs9dZRUj1ykHtbz996WYo8d8bs9jXbI88YkSMZqMBom3G/EqISKcMyv2/ehAHk5q1" -m -g staff 
 done
 
 for i in $zzt_clients
 do
     h=$i@$eid
     himage $h mkdir -p /root/.cone
-    hcp -r cone.tel/* $h:/root/.cone 
+    if test `uname -s` == "Linux"; then
+        hcp cone.tel/ $h:/root/.cone 
+    else
+        hcp -r cone.tel/* $h:/root/.cone 
+    fi
     himage $h grep imunes /etc/passwd > /dev/null 2>&1
     if [ $? -eq 1 ]; then
-	echo "Warning: no user named imunes on $h."
+	    echo "Warning: no user named imunes on $h."
     fi
 done
 
@@ -54,7 +79,11 @@ for i in $zpm_clients
 do
     h=$i@$eid
     himage $h mkdir -p /root/.cone
-    hcp -r cone.zpm/* $h:/root/.cone 
+    if test `uname -s` == "Linux"; then
+        hcp cone.zpm/ $h:/root/.cone 
+    else
+        hcp -r cone.zpm/* $h:/root/.cone 
+    fi
     himage $h grep imunes /etc/passwd > /dev/null 2>&1
     if [ $? -eq 1 ]; then
 	echo "Warning: no user named imunes on $h."
