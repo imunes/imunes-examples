@@ -63,7 +63,7 @@ printFreebsdHardwareInfo() {
 #argument parsing
 os=`uname -s`
 count=10
-wait_before_termination=10
+wait_before_termination=5
 do_sleep=1;
 
 while getopts ":c:w:i" opt; do
@@ -151,4 +151,4 @@ for t in $tests; do
 done
 
 #cleanup logs
-rm -f *log
+rm -f start*log term*log
