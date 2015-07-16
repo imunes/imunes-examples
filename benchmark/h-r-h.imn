@@ -1,0 +1,120 @@
+node n0 {
+    type host
+    network-config {
+	hostname host1
+	!
+	interface eth0
+	 ip address 10.0.0.10/24
+	 ipv6 address fc00::10/64
+	 mac address 42:00:aa:00:00:01
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 10.0.0.1
+	!
+	ipv6 route ::/0 fc00::1
+	!
+    }
+    canvas c0
+    iconcoords {192.0 168.0}
+    labelcoords {192.0 209.0}
+    interface-peer {eth0 n1}
+}
+
+node n1 {
+    type router
+    model quagga
+    network-config {
+	hostname router1
+	!
+	interface eth1
+	 ip address 10.0.1.1/24
+	 ipv6 address fc00:1::1/64
+	 mac address 42:00:aa:00:00:02
+	!
+	interface eth0
+	 ip address 10.0.0.1/24
+	 ipv6 address fc00::1/64
+	 mac address 42:00:aa:00:00:00
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf6
+	 network ::/0
+	!
+    }
+    canvas c0
+    iconcoords {456.0 168.0}
+    labelcoords {456.0 198.0}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 n2}
+}
+
+node n2 {
+    type host
+    network-config {
+	hostname host2
+	!
+	interface eth0
+	 ip address 10.0.1.10/24
+	 ipv6 address fc00:1::10/64
+	 mac address 42:00:aa:00:00:03
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 0.0.0.0/0 10.0.1.1
+	!
+	ipv6 route ::/0 fc00:1::1
+	!
+    }
+    canvas c0
+    iconcoords {744.0 168.0}
+    labelcoords {744.0 209.0}
+    interface-peer {eth0 n1}
+}
+
+link l0 {
+    nodes {n0 n1}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n1 n2}
+    bandwidth 0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+

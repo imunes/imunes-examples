@@ -1,0 +1,49 @@
+node n0 {
+    type pc
+    network-config {
+	hostname pc1
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {216.0 264.0}
+    labelcoords {216.0 300.0}
+}
+
+node n1 {
+    type pc
+    network-config {
+	hostname pc2
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {648.0 264.0}
+    labelcoords {648.0 300.0}
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+
