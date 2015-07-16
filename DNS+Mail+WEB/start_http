@@ -24,7 +24,9 @@ else
     eid=`isNodeRunning www`
 fi
 
-hasPackage www $eid '^lighttpd-'
+if test `uname -s` == "FreeBSD"; then
+    hasPackage www $eid '^lighttpd-'
+fi
 
 for serv in $http_servers
 do
