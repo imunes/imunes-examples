@@ -41,15 +41,15 @@ printDockerInfo() {
     apiver=`docker version | grep "Server API version:"| cut -d: -f2`
     gitver=`docker version | grep "Git commit (server):"| cut -d: -f2`
     echo "Docker version$srvver (API:$apiver, git:$gitver)"
-    docker info 2> /dev/null | grep -A 2 Storage | sed -e 's/^ */\t/'
+    docker info 2> /dev/null | grep -A 1 Storage | sed -e 's/^ */\t/'
 }
 
 printLinuxHardwareInfo() {
     echo "Hardware info:"
-    echo "\tCPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`"
-    echo "\tCores: `cat /proc/cpuinfo | grep processor | wc -l`"
+    echo -e "\tCPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`"
+    echo -e "\tCores: `cat /proc/cpuinfo | grep processor | wc -l`"
     mem_gb=$(echo "scale=2; `cat /proc/meminfo | grep MemTotal | awk '{print $2}'`/1024/1024" | bc -l)
-    echo "\tRAM: $mem_gb GB"
+    echo -e "\tRAM: $mem_gb GB"
 }
 
 printFreebsdHardwareInfo() {
@@ -65,12 +65,14 @@ os=`uname -s`
 count=10
 wait_before_termination=5
 do_sleep=1;
+verbose=0;
 
-while getopts ":c:w:i" opt; do
+while getopts ":c:w:iv" opt; do
     case $opt in
 	c) count=$OPTARG;;
-	w) wait_before_termination=$OPTARG;;
 	i) do_sleep=0;;
+	v) verbose=1;;
+	w) wait_before_termination=$OPTARG;;
 	\?) echo "Invalid option: -$OPTARG" >&2;;
     esac
 done
@@ -87,7 +89,7 @@ if test "$os" = "FreeBSD"; then
     printFreebsdHardwareInfo
 elif test "$os" = "Linux"; then
     uname -srvm
-    printDockerInfo 
+    printDockerInfo
     printLinuxHardwareInfo
 else
     echo "OS not supported."
@@ -104,7 +106,7 @@ echo "Number of iterations: $count"
 echo "Wait time before termination: $wait_before_termination"
 
 for t in $tests; do
-    echo "Running topology: $t"
+    echo "------------------ Topology: $t ------------------"
     freem_before_bench=`mfree`
     sum_start=0
     sum_term=0
@@ -113,10 +115,12 @@ for t in $tests; do
 	eid=`genEid`
 	# measure free memory before
 	freem_before=`mfree`
-	echo -n "$i. eid: $eid "
+	echo -n "$i. "
+	if test $verbose -eq 1; then
+	    echo -n "eid: $eid "
+	fi
 	# start topology
 	start_time=`startTopo $eid $t`
-	echo -n "start: $start_time "
 	if test $do_sleep -eq 1; then
 	    # wait for topology stabilization
 	    sleep $start_time
@@ -126,10 +130,15 @@ for t in $tests; do
 	# calculate memusage
 	freem_after=`mfree`
 	memusage=$(($freem_before-$freem_after))
-	echo -n "memusage: $memusage "
+	if test $verbose -eq 1; then
+	    echo -n "start: $start_time"
+	    echo -n "memusage: $memusage "
+	fi
 	# terminate topology
 	term_time=`termTopo $eid`
-	echo "term: $term_time "
+	if test $verbose -eq 1; then
+	    echo "term: $term_time "
+	fi
 	if test $do_sleep -eq 1; then
 	    # wait for system stabilization
 	    sleep $term_time
@@ -140,6 +149,11 @@ for t in $tests; do
 	sum_term=`echo $sum_term+$term_time | bc -l`
 	sum_memusage=`echo $sum_memusage+$memusage | bc -l`
     done
+    if test $verbose -eq 0; then
+	echo -en "\r"
+    else
+	echo "---------------- Summary for $t: -----------------"
+    fi
     freem_after_bench=`mfree`
     avg_start=`echo "scale=3; $sum_start/$count" | bc -l`
     avg_term=`echo "scale=3; $sum_term/$count" | bc -l`
@@ -147,7 +161,9 @@ for t in $tests; do
     echo "Average startup time: $avg_start s"
     echo "Average termination time: $avg_term s"
     echo "Average memory usage: $avg_memusage KB"
-    echo "Total memory leak: $(($freem_before_bench-$freem_after_bench)) KB"
+    if test $verbose -eq 1; then
+	echo "Total memory leak: $(($freem_before_bench-$freem_after_bench)) KB"
+    fi
 done
 
 #cleanup logs
