@@ -35,12 +35,7 @@ if [ $err -eq 0 ]; then
     netDump PC3@$eid eth0 'port 67 and not arp or port 68 and not arp'
     if [ $? -eq 0 ]; then
         sleep 2
-        if test `uname -s` == "Linux"; then
-            himage -b PC3@$eid dhclient eth0
-            sleep 3
-        else
-            himage PC3@$eid dhclient eth0
-        fi
+        himage PC3@$eid dhclient eth0
         if [ $? -eq 0 ]; then
             sleep 2
             readDump PC3@$eid eth0

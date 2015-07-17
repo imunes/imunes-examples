@@ -36,11 +36,6 @@ echo Configuring clients:
 for i in $hosts
 do
     isNodeRunning $i $eid
-    if test `uname -s` == "Linux"; then
-        himage -b ${i}@${eid} dhclient eth0
-        sleep 3
-    else
-        himage ${i}@${eid} dhclient eth0
-    fi
+    himage ${i}@${eid} dhclient eth0
     himage ${i}@${eid} ifconfig eth0 | grep inet
 done
