@@ -52,7 +52,7 @@ pingCheck () {
 
 # Usage: getNodeIP node interface
 getNodeIP () {
-    ip_addr=`himage $1 ifconfig $2 | grep "inet " | cut -d' ' -f2`
+    ip_addr=`himage $1 ifconfig $2 | awk '/inet /{print $2}'`
 
     if [ "$ip_addr" == "" ]; then
 	echo ""
