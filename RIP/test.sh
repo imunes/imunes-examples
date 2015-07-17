@@ -5,7 +5,7 @@
 err=0
 slow=0
 
-eid=`imunes -b RIP1.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes -b RIP1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 sleep 10
