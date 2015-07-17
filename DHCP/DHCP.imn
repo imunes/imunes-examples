@@ -4,6 +4,9 @@ node n0 {
     network-config {
 	hostname FIX
 	!
+	interface eth0
+	 mac address 42:00:aa:11:11:11
+	!
 	interface lo0
 	 type lo
 	 ip address 127.0.0.1/24

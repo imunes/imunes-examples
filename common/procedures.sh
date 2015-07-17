@@ -76,7 +76,11 @@ netDump () {
 	fi
 	i=$(($i+1))
     done
-    himage $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
+    if test `uname -s` == "Linux"; then
+        himage -b $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
+    else
+        himage $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
+    fi
     sleep 1
     himage $1 cat tcplog_err_$2 | grep -q "error\|failed"
     if [ $? -eq 0 ]; then
