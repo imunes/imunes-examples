@@ -52,10 +52,10 @@ printDockerInfo() {
 
 printLinuxHardwareInfo() {
     echo "Hardware info:"
-    echo -e "\tCPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`"
-    echo -e "\tCores: `cat /proc/cpuinfo | grep processor | wc -l`"
+    printf "\tCPU:`cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2`\n"
+    printf "\tCores: `cat /proc/cpuinfo | grep processor | wc -l`\n"
     mem_gb=$(echo "scale=2; `cat /proc/meminfo | grep MemTotal | awk '{print $2}'`/1024/1024" | bc -l)
-    echo -e "\tRAM: $mem_gb GB"
+    printf "\tRAM: $mem_gb GB\n"
 }
 
 printFreebsdHardwareInfo() {
