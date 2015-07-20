@@ -5,7 +5,7 @@
 err=0
 slow=1
 
-eid=`imunes -b OSPF1.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes -b OSPF1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 sleep 60
@@ -14,7 +14,7 @@ if [ $? -eq 0 ]; then
     pingCheck pc@$eid 10.0.4.10
     if [ $? -eq 0 ]; then
 	echo "########## router2@$eid routes"
-	himage router2@$eid vtysh << __END__
+	himage -nt router2@$eid vtysh << __END__
 	show ip ospf route
 	show ipv6 ospf route
 	exit
@@ -43,7 +43,7 @@ __END__
 
 		echo ""
 		echo "########## router2@$eid routes after 45 seconds"
-		himage router2@$eid vtysh << __END__ 
+		himage -nt router2@$eid vtysh << __END__ 
 		show ip ospf route
 		show ipv6 ospf route
 		exit
@@ -51,7 +51,7 @@ __END__
 
 		startNode router7@$eid
 		if [ $? -eq 0 ]; then
-		    sleep 5
+		    sleep 15
 		    pingCheck pc@$eid 10.0.4.10
 		    if [ $? -eq 0 ]; then
 			sleep 4

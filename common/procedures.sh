@@ -13,10 +13,10 @@ ping6Check () {
     echo ""
     echo "########## $1 pinging $2"
     if [ "$3" == "" ]; then
-	himage $1 ping6 -c1 $2
+	himage $1 ping6 -n -c1 $2
 	ert=$?
     else
-	himage $1 ping6 -c $3 $2
+	himage $1 ping6 -n -c $3 $2
 	ert=$?
     fi
 
@@ -136,7 +136,7 @@ traceCheck () {
 stopNode () {
 #    himage $1 kill -9 -1 2> /dev/null
 #    himage $1 tcpdrop -a 2> /dev/null
-    for ifc in `himage $1 ifconfig -l`; do
+    for ifc in `himage $1 netstat -i | tail -n +3 | cut -d' ' -f1`; do
 	if [ "$ifc" != "lo0" ]; then
 	    himage $1 ifconfig $ifc down
 	fi
@@ -148,7 +148,7 @@ stopNode () {
 startNode () {
 #    himage $1 kill -9 -1 2> /dev/null
 #    himage $1 tcpdrop -a 2> /dev/null
-    for ifc in `himage $1 ifconfig -l`; do
+    for ifc in `himage $1 netstat -i | tail -n +3 | cut -d' ' -f1`; do
 	if [ "$ifc" != "lo0" ]; then
 	    himage $1 ifconfig $ifc up
 	fi

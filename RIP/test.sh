@@ -14,12 +14,12 @@ if [ $? -eq 0 ]; then
     pingCheck pc@$eid 10.0.4.10
     if [ $? -eq 0 ]; then
 	echo "########## router2@$eid routes"
-	himage router2@$eid vtysh << __END__
+	himage -nt router2@$eid vtysh << __END__
 	show ip rip
 	show ipv6 ripng
 	exit
 __END__
-	sleep 2
+	sleep 30
 	if [ $? -eq 0 ]; then
 	    ping6Check pc@$eid fc00:1::10
 	    if [ $? -eq 0 ]; then
@@ -43,7 +43,7 @@ __END__
 
 		echo ""
 		echo "########## router2@$eid routes after 3 minutes"
-		himage router2@$eid vtysh << __END__ 
+		himage -nt router2@$eid vtysh << __END__ 
 		show ip rip
 		show ipv6 ripng
 		exit
