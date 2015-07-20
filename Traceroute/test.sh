@@ -4,7 +4,7 @@
 
 err=0
 
-eid=`imunes -b traceroute.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes -b traceroute.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 netDump pc1@$eid eth0

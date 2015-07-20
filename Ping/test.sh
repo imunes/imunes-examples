@@ -4,7 +4,7 @@
 
 err=0
 
-eid=`imunes -b ping.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes -b ping.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
