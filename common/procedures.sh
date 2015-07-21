@@ -34,10 +34,10 @@ pingCheck () {
     echo ""
     echo "########## $1 pinging $2"
     if [ "$3" == "" ]; then
-	himage $1 ping -c1 $2
+	himage $1 ping -W 2 -c1 $2
 	ert=$?
     else
-	himage $1 ping -c $3 $2
+	himage $1 ping -W 2 -c $3 $2
 	ert=$?
     fi
 
@@ -122,7 +122,7 @@ readDump () {
 traceCheck () {
     echo ""
     echo "########## Traceroute check $1 $2"
-    strVal=`himage $1 traceroute $2 | grep "$2"`
+    strVal=`himage $1 traceroute $2 | grep -v traceroute | grep "$2"`
     if [ "$strVal" == "" ]; then
 	echo "********** TRACEROUTE ERROR **********"
 	return 1
