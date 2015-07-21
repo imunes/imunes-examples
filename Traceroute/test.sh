@@ -12,6 +12,7 @@ if [ $? -eq 0 ]; then
     n=1
     traceStat=1
     while [ $n -le 20 ] && [ $traceStat -ne 0 ]; do
+        sleep 1
         echo "Traceroute test $n / 20 ..."
         traceCheck pc1@$eid 10.0.8.10
         traceStat=$?
