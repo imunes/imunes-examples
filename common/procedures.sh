@@ -172,7 +172,7 @@ dnsCheck () {
 sendMail () {
     echo ""
     echo "########## Sending mail from $1 to $2"
-    himage $1 Mail -s TEST $2 < $0
+    himage -nt $1 mail -s TEST $2 < $0
     if [ $? -ne 0 ]; then
 	echo "********** SEND MAIL ERROR **********"
 	return 1
