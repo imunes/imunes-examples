@@ -40,6 +40,6 @@ echo
 echo Create empty resolv.conf on DNS servers:
 for i in $dns_servers
 do
-    himage $i cp /dev/null /etc/resolv.conf
+    himage $i@$eid cp /dev/null /etc/resolv.conf
 done
  
