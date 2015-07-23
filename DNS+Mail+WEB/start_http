@@ -40,13 +40,13 @@ do
         himage $h chown -R www:www /var/log/lighttpd
     fi
 
-    hcp ${serv}.lighttpd.conf $h:/usr/local/etc/lighttpd/lighttpd.conf
+    hcp WEB_files/${serv}.lighttpd.conf $h:/usr/local/etc/lighttpd/lighttpd.conf
     himage $h chmod 755 /usr/local/etc/lighttpd/lighttpd.conf
     if test `uname -s` == "Linux"; then
-        hcp www.${serv} $h:/root
+        hcp WEB_files/www.${serv} $h:/root
         himage -b $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
     else
-        hcp -r www.${serv} $h:/root
+        hcp -r WEB_files/www.${serv} $h:/root
         himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
     fi
 done
