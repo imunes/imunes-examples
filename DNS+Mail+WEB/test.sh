@@ -31,21 +31,16 @@ else
     done
 fi
 
-himage www@$eid grep imunes /etc/passwd > /dev/null 2>&1
-if [ $? -eq 1 ]; then
-    if test `uname -s` == "Linux"; then
-        echo "User imunes must be created in virtual nodes."
-        err=2
-    else
-        echo imunes | chroot /var/imunes/vroot pw useradd imunes -d /home/imunes -g wheel -k /usr/share/skel -s /usr/local/bin/bash -m -h 0 
-    fi
-fi
-
 ./start_mail $eid
 if [ $? -ne 0 ]; then
     echo "********** START_MAIL ERROR **********"
     err=2
 else
+    himage www@$eid grep imunes /etc/passwd > /dev/null 2>&1
+    if [ $? -eq 1 ]; then
+        echo "User imunes should be created in virtual nodes."
+        err=2
+    fi
     sendMail www@$eid imunes@zpm.fer.hr
     if [ $? -ne 0 ]; then
 	err=2

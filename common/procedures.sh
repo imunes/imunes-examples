@@ -187,7 +187,7 @@ getMail () {
     echo "########## Reading mail on $1 $2"
     #mes=`himage $1 mailtool -index INBOX $2`
     if test `uname -s` == "Linux"; then
-        mes=`himage -b $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
+        mes=`himage -nt $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
     else
         mes=`himage $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
     fi
