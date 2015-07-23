@@ -8,11 +8,19 @@ slow=1
 eid=`imunes -b OSPF1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
-sleep 60
+echo "Wait 40 sec ..."
+sleep 40
 netDump router2@$eid eth2
 if [ $? -eq 0 ]; then
-    pingCheck pc@$eid 10.0.4.10
-    if [ $? -eq 0 ]; then
+    n=1
+    pingStatus=1
+    while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+        echo "Ping test $n / 20 ..."
+        pingCheck pc@$eid 10.0.4.10 2
+        pingStatus=$?
+        n=`expr $n + 1`
+    done
+    if [ $pingStatus -eq 0 ]; then
 	echo "########## router2@$eid routes"
 	himage -nt router2@$eid vtysh << __END__
 	show ip ospf route
@@ -21,8 +29,15 @@ if [ $? -eq 0 ]; then
 __END__
 	sleep 2
 	if [ $? -eq 0 ]; then
-	    ping6Check pc@$eid fc00:1::10
-	    if [ $? -eq 0 ]; then
+            n=1
+            pingStatus=1
+            while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+                echo "Ping6 test $n / 20 ..."
+                ping6Check pc@$eid fc00:1::10 2
+                pingStatus=$?
+                n=`expr $n + 1`
+            done
+            if [ $pingStatus -eq 0 ]; then
 		sleep 2
 		echo ""
 		readDump router2@$eid eth2
@@ -52,15 +67,30 @@ __END__
 		startNode router7@$eid
 		if [ $? -eq 0 ]; then
 		    sleep 15
-		    pingCheck pc@$eid 10.0.4.10
-		    if [ $? -eq 0 ]; then
+                    n=1
+                    pingStatus=1
+                    while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+                        echo "Ping test2 $n / 20 ..."
+                        pingCheck pc@$eid 10.0.4.10 2
+                        pingStatus=$?
+                        n=`expr $n + 1`
+                    done
+                    if [ $pingStatus -eq 0 ]; then
 			sleep 4
 			readDump router2@$eid eth2
 		    else
 			err=1
 		    fi
 		    ping6Check pc@$eid fc00:1::10
-		    if [ $? -eq 0 ]; then
+                    n=1
+                    pingStatus=1
+                    while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+                        echo "Ping6 test2 $n / 20 ..."
+                        ping6Check pc@$eid fc00:1::10 2
+                        pingStatus=$?
+                        n=`expr $n + 1`
+                    done
+                    if [ $pingStatus -eq 0 ]; then
 			sleep 4
 			readDump router2@$eid eth2
 		    else
