@@ -40,5 +40,6 @@ imunes -b -e $eid
 
 ngctl msg test0: shutdown
 ngctl msg test1: shutdown
+ngctl msg testlink: shutdown
 
 thereWereErrors $err
