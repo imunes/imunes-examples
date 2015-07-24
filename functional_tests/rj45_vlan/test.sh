@@ -2,6 +2,12 @@
 
 . ../../common/procedures.sh
 
+if test `uname -s` == "Linux"; then
+    echo "This example currently runs only on FreeBSD"
+    thereWereErrors 1
+    exit 0
+fi
+
 err=0
 
 test0=`printf "mkpeer eiface ether ether \n show .ether" | ngctl -f - | head -n1 | awk '{print $2}'`
