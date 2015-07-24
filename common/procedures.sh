@@ -1,7 +1,29 @@
 #!/bin/sh
 
+#
+# PREAMBLE with checks and general output
+#
+
+# Before doing anything check for root rights.
+if [ `id -u` -ne  0 ]; then
+    echo "You must be root to run this script."
+    exit 1
+fi
+
+# Start time measurement.
+start_time=$(date +"%s")
+echo "Starting experiment..."
+
+#
+# FUNCTIONS
+#
+
 # Usage: thereWereErrors status
 thereWereErrors () {
+# End time measurment and output result.
+    end_time=$(date +"%s")
+    diff=$(($end_time-$start_time))
+    echo "Test took $diff seconds."
     if [ $1 -ne 0 ]; then
 	echo ""
 	echo "There were errors."
