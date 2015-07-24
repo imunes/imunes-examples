@@ -64,15 +64,17 @@ __END__
             echo imunes | chroot /var/imunes/vroot pw useradd imunes -d /home/imunes -g wheel -k /usr/share/skel -s /usr/local/bin/bash -m -h 0 
         fi
     fi
+    himage $h touch /var/mail/imunes
+    himage $h chown imunes /var/mail/imunes
 done
 
 for i in $zzt_clients
 do
     h=$i@$eid
-    himage $h mkdir -p /root/.cone
     if test `uname -s` == "Linux"; then
-        hcp Mail_files/cone/cone.tel/ $h:/root/.cone 
+        hcp Mail_files/cone/linux-cone.tel/ $h:/root/.cone
     else
+        himage $h mkdir -p /root/.cone
         hcp -r Mail_files/cone/cone.tel/* $h:/root/.cone 
     fi
     himage $h grep imunes /etc/passwd > /dev/null 2>&1
@@ -84,10 +86,10 @@ done
 for i in $zpm_clients
 do
     h=$i@$eid
-    himage $h mkdir -p /root/.cone
     if test `uname -s` == "Linux"; then
-        hcp Mail_files/cone/cone.zpm/ $h:/root/.cone 
+        hcp Mail_files/cone/linux-cone.zpm/ $h:/root/.cone
     else
+        himage $h mkdir -p /root/.cone
         hcp -r Mail_files/cone/cone.zpm/* $h:/root/.cone 
     fi
     himage $h grep imunes /etc/passwd > /dev/null 2>&1
