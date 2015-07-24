@@ -39,7 +39,7 @@ do
     running=0
     for p in $pids
     do
-        procstat $p > /dev/null 2>&1
+        ps $p > /dev/null 2>&1
         if test $? -eq 0; then
             running=1
             sleep 3
