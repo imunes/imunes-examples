@@ -87,6 +87,9 @@ shift $((OPTIND-1))
 
 tests="$*"
 
+imunes -v | tr '\n' ' '
+echo ""
+
 # print system info
 if test "$os" = "FreeBSD"; then
     uname -srm
@@ -156,7 +159,7 @@ for t in $tests; do
 	sum_memusage=`echo $sum_memusage+$memusage | bc -l`
     done
     if test $verbose -eq 0; then
-	echo -en "\r"
+	printf "\r"
     else
 	echo "---------------- Summary for $t: -----------------"
     fi
