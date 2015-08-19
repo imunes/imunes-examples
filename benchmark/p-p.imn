@@ -4,9 +4,9 @@ node n0 {
 	hostname pc1
 	!
 	interface eth0
-	 ip address 10.0.0.21/24
-	 ipv6 address fc00::21/64
-	 mac address 42:00:aa:00:00:01
+	 ip address 10.0.0.20/24
+	 ipv6 address fc00::20/64
+	 mac address 42:00:aa:00:00:00
 	!
 	interface lo0
 	 type lo
@@ -26,9 +26,9 @@ node n1 {
 	hostname pc2
 	!
 	interface eth0
-	 ip address 10.0.0.20/24
-	 ipv6 address fc00::20/64
-	 mac address 42:00:aa:00:00:00
+	 ip address 10.0.0.21/24
+	 ipv6 address fc00::21/64
+	 mac address 42:00:aa:00:00:01
 	!
 	interface lo0
 	 type lo
