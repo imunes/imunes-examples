@@ -1,4 +1,3 @@
-
 all:
 	sh testAll.sh
 
@@ -10,3 +9,9 @@ showtimes:
 
 showerrors:
 	grep "^There were errors" */TESTRESULTS* */*/TESTRESULTS*
+
+benchmark:
+	cd benchmark && ./benchmark.sh -w 1 *.imn
+
+benchmark_all:
+	benchmark/benchmark.sh */*.imn
