@@ -18,7 +18,7 @@ mfree() {
 
 # generate a random experiment ID used for starting experiments
 genEid() {
-    echo i`openssl rand -hex 3`
+    echo i`openssl rand -hex 3 | head -c 5`
 }
 
 # start topology with IMUNES
