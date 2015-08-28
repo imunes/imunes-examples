@@ -2,7 +2,7 @@ all:
 	sh testAll.sh
 
 clean:
-	@rm -f */TESTRESULTS* */*/TESTRESULTS* */tcplog_err 
+	@rm -f */TESTRESULTS* */*/TESTRESULTS* */tcplog_err benchmark/start*log benchmark/term*log
 
 showtimes:
 	grep "^Test took" */TESTRESULTS* */*/TESTRESULTS*
@@ -10,8 +10,8 @@ showtimes:
 showerrors:
 	grep "^There were errors" */TESTRESULTS* */*/TESTRESULTS*
 
-benchmark:
+bench:
 	cd benchmark && ./benchmark.sh -w 1 *.imn
 
-benchmark_all:
-	benchmark/benchmark.sh */*.imn
+bench_all:
+	cd benchmark && ./benchmark.sh ../*/*.imn
