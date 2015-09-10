@@ -34,7 +34,7 @@ thereWereErrors () {
 ping6Check () {
     echo ""
     echo "########## $1 pinging $2"
-    if [ "$3" == "" ]; then
+    if test -z "$3"; then
 	himage $1 ping6 -n -c1 $2
 	ert=$?
     else
@@ -55,7 +55,7 @@ ping6Check () {
 pingCheck () {
     echo ""
     echo "########## $1 pinging $2"
-    if [ "$3" == "" ]; then
+    if test -z "$3"; then
 	himage $1 ping -W 2 -c1 $2
 	ert=$?
     else
@@ -76,7 +76,7 @@ pingCheck () {
 getNodeIP () {
     ip_addr=`himage $1 ifconfig $2 | awk '/inet /{print $2}'`
 
-    if [ "$ip_addr" == "" ]; then
+    if test -z "$ip_addr"; then
 	echo ""
 	echo "********** IFCONFIG ERROR **********"
 	return 1
@@ -98,7 +98,7 @@ netDump () {
 	fi
 	i=$(($i+1))
     done
-    if test `uname -s` == "Linux"; then
+    if test "`uname -s`" = "Linux"; then
         himage -b $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
     else
         himage $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
@@ -116,7 +116,7 @@ netDump () {
 
 # Usage: startCheck experiment_id
 startCheck () {
-    if [ "$1" == "" ]; then
+    if test -z "$1"; then
 	echo ""
 	echo "********** START ERROR **********"
 	thereWereErrors 1
@@ -145,7 +145,7 @@ traceCheck () {
     echo ""
     echo "########## Traceroute check $1 $2"
     strVal=`himage $1 traceroute $2 | grep -v traceroute | grep "$2"`
-    if [ "$strVal" == "" ]; then
+    if test -z "$strVal"; then
 	echo "********** TRACEROUTE ERROR **********"
 	return 1
     else
@@ -208,7 +208,7 @@ getMail () {
     echo ""
     echo "########## Reading mail on $1 $2"
     #mes=`himage $1 mailtool -index INBOX $2`
-    if test `uname -s` == "Linux"; then
+    if test "`uname -s`" = "Linux"; then
         mes=`himage -nt $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
     else
         mes=`himage $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
@@ -226,7 +226,7 @@ webCheck () {
     echo ""
     echo "########## Fetching file from $2 to $1"
     fetch=fetch
-    if test `uname -s` == "Linux"; then
+    if test "`uname -s`" = "Linux"; then
         fetch=curl
     fi
     himage $1 $fetch -o - $2
