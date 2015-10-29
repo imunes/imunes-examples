@@ -7,12 +7,12 @@ node n0 {
 	interface eth1
 	 ip address 10.0.1.2/24
 	 ipv6 address a:1::2/64
-	 mac address 42:00:aa:00:00:01
+	 mac address c8:4c:75:00:00:01
 	!
 	interface eth0
 	 ip address 10.0.0.1/24
 	 ipv6 address a:0::1/64
-	 mac address 42:00:aa:00:00:00
+	 mac address c8:4c:75:00:00:00
 	!
 	interface lo0
 	 type lo
@@ -46,17 +46,17 @@ node n1 {
 	interface eth2
 	 ip address 10.0.4.2/24
 	 ipv6 address a:4::2/64
-	 mac address 42:00:aa:00:00:04
+	 mac address c8:4c:75:00:00:04
 	!
 	interface eth1
 	 ip address 10.0.2.1/24
 	 ipv6 address a:2::1/64
-	 mac address 42:00:aa:00:00:03
+	 mac address c8:4c:75:00:00:03
 	!
 	interface eth0
 	 ip address 10.0.1.1/24
 	 ipv6 address a:1::1/64
-	 mac address 42:00:aa:00:00:02
+	 mac address c8:4c:75:00:00:02
 	!
 	interface lo0
 	 type lo
@@ -91,12 +91,12 @@ node n2 {
 	interface eth1
 	 ip address 10.0.3.2/24
 	 ipv6 address a:3::2/64
-	 mac address 42:00:aa:00:00:06
+	 mac address c8:4c:75:00:00:06
 	!
 	interface eth0
 	 ip address 10.0.2.2/24
 	 ipv6 address a:2::2/64
-	 mac address 42:00:aa:00:00:05
+	 mac address c8:4c:75:00:00:05
 	!
 	interface lo0
 	 type lo
@@ -130,12 +130,12 @@ node n5 {
 	interface eth0
 	 ip address 10.0.4.1/24
 	 ipv6 address a:4::1/64
-	 mac address 42:00:aa:00:00:08
+	 mac address c8:4c:75:00:00:08
 	!
 	interface eth1
 	 ip address 10.0.6.1/24
 	 ipv6 address a:6::1/64
-	 mac address 42:00:aa:00:00:07
+	 mac address c8:4c:75:00:00:07
 	!
 	interface lo0
 	 type lo
@@ -169,17 +169,17 @@ node n6 {
 	interface eth2
 	 ip address 10.0.3.1/24
 	 ipv6 address a:3::1/64
-	 mac address 42:00:aa:00:00:0b
+	 mac address c8:4c:75:00:00:0b
 	!
 	interface eth1
 	 ip address 10.0.7.1/24
 	 ipv6 address a:7::1/64
-	 mac address 42:00:aa:00:00:0a
+	 mac address c8:4c:75:00:00:0a
 	!
 	interface eth0
 	 ip address 10.0.6.2/24
 	 ipv6 address a:6::2/64
-	 mac address 42:00:aa:00:00:09
+	 mac address c8:4c:75:00:00:09
 	!
 	interface lo0
 	 type lo
@@ -214,12 +214,12 @@ node n7 {
 	interface eth1
 	 ip address 10.0.8.1/24
 	 ipv6 address a:8::1/64
-	 mac address 42:00:aa:00:00:0d
+	 mac address c8:4c:75:00:00:0d
 	!
 	interface eth0
 	 ip address 10.0.7.2/24
 	 ipv6 address a:7::2/64
-	 mac address 42:00:aa:00:00:0c
+	 mac address c8:4c:75:00:00:0c
 	!
 	interface lo0
 	 type lo
@@ -279,7 +279,7 @@ node n12 {
 	interface eth0
 	 ip address 10.0.8.10/24
 	 ipv6 address a:8::10/64
-	 mac address 42:00:aa:00:00:0e
+	 mac address 68:05:ca:00:00:0e
 	!
 	interface lo0
 	 type lo
@@ -305,7 +305,7 @@ node n10 {
 	interface eth0
 	 ip address 10.0.0.20/24
 	 ipv6 address a:0::20/64
-	 mac address 42:00:aa:00:00:0f
+	 mac address 6c:3b:e5:00:00:0f
 	!
 	interface lo0
 	 type lo
@@ -331,7 +331,7 @@ node n11 {
 	interface eth0
 	 ip address 10.0.0.21/24
 	 ipv6 address a:0::21/64
-	 mac address 42:00:aa:00:00:10
+	 mac address 52:54:ab:00:00:10
 	!
 	interface lo0
 	 type lo
