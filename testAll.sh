@@ -77,6 +77,7 @@ then
     echo ""
     echo "Please look at the logs:"
     grep "^There were errors." */TESTRESULTS* */*/TESTRESULTS*
+    exit 1
 else
     echo "OK."
 fi
