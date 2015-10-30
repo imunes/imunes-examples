@@ -26,7 +26,7 @@ himage ${dhcp_server}@${eid} killall -9 dhcpd > /dev/null 2>&1
 hcp DHCPserver.dhcpd.conf ${dhcp_server}@${eid}:/tmp
 himage ${dhcp_server}@${eid} mkdir -p /var/db/
 himage ${dhcp_server}@${eid} touch /var/db/imunes-dhcpd.leases
-if test isOSlinux; then
+if isOSlinux; then
     himage -b ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf &
 else
     himage ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf >/dev/null 2>&1 &
@@ -37,7 +37,7 @@ echo Configuring clients:
 for i in $hosts
 do
     isNodeRunning $i $eid
-    if test isOSlinux; then
+    if isOSlinux; then
 	himage ${i}@${eid} dhclient -v -1 eth0
     else
 	himage ${i}@${eid} dhclient eth0
