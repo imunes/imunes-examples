@@ -12,7 +12,8 @@ else
     eid=`isNodeRunning $dhcp_server`
 fi
 
-if test `uname -s` == "FreeBSD"; then
+
+if isOSfreebsd; then
     hasPackage "$dhcp_server" "$eid" '^isc-dhcp.*-server'
 fi
 
@@ -25,7 +26,7 @@ himage ${dhcp_server}@${eid} killall -9 dhcpd > /dev/null 2>&1
 hcp DHCPserver.dhcpd.conf ${dhcp_server}@${eid}:/tmp
 himage ${dhcp_server}@${eid} mkdir -p /var/db/
 himage ${dhcp_server}@${eid} touch /var/db/imunes-dhcpd.leases
-if test `uname -s` == "Linux"; then
+if test isOSlinux; then
     himage -b ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf &
 else
     himage ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf >/dev/null 2>&1 &
@@ -36,6 +37,10 @@ echo Configuring clients:
 for i in $hosts
 do
     isNodeRunning $i $eid
-    himage ${i}@${eid} dhclient eth0
-    himage ${i}@${eid} ifconfig eth0 | grep inet
+    if test isOSlinux; then
+	himage ${i}@${eid} dhclient -v -1 eth0
+    else
+	himage ${i}@${eid} dhclient eth0
+    fi
+    himage ${i}@${eid} ifconfig eth0 | grep "inet "
 done

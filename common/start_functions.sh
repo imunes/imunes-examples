@@ -1,5 +1,23 @@
 #!/bin/sh
 
+os=`uname -s`;
+
+isOSlinux() {
+    if test $os = "Linux"; then
+	true;
+    else
+	false;
+    fi
+}
+
+isOSfreebsd() {
+    if test $os = "FreeBSD"; then
+	true;
+    else
+	false;
+    fi
+}
+
 # Error check
 error() {
     echo $*
