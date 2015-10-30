@@ -13,18 +13,21 @@ err=0
 eid=`imunes -b gif.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
-netDump pc1@$eid eth0 icmp
+./start_gif.sh $eid
+echo "Waiting for 20 seconds..."
+sleep 20
+
+netDump pc1@$eid eth0 icmp6
 if [ $? -eq 0 ]; then
     n=1
     pingStatus=1
     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
         echo "Ping test $n / 20 ..."
-        pingCheck pc1@$eid 10.0.8.10 2
+        ping6Check pc1@$eid fc00:4::20 2
         pingStatus=$?
         n=`expr $n + 1`
     done
     if [ $pingStatus -eq 0 ]; then
-
 	sleep 2
 	readDump pc1@$eid eth0
 	err=$?
