@@ -8,21 +8,21 @@ eid=`imunes -b services.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 # ftp
-himage FTP netstat -an | grep LISTEN | grep -q ":21 "
+himage FTP@$eid netstat -an | grep LISTEN | grep -q "21"
 if [ $? -ne 0 ]; then
     echo "FTP error"
     err=1
 fi
 
 # ssh
-himage SSH netstat -an | grep LISTEN | grep -q ":22 "
+himage SSH@$eid netstat -an | grep LISTEN | grep -q "22"
 if [ $? -ne 0 ]; then
     echo "SSH error"
     err=1
 fi
 
 # telnet
-himage TELNET netstat -an | grep LISTEN | grep -q ":23 "
+himage TELNET@$eid netstat -an | grep LISTEN | grep -q "23"
 if [ $? -ne 0 ]; then
     echo "TELNET error"
     err=1
