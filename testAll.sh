@@ -16,7 +16,7 @@ imunes -i
 tests="DHCP DNS+Mail+WEB OSPF Ping RIP Traceroute services"
 
 if test `uname -s` = "FreeBSD"; then
-    tests="$tests functional_tests/rj44_vlan gif"
+    tests="$tests functional_tests/rj45_vlan gif"
 fi
 
 echo "#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*"
@@ -42,7 +42,7 @@ for dir in $tests; do
 	    pids="$pids $!"
 	fi
     fi
-    cd ..
+    cd -
 done
 
 if test ! -z "$pids" ; then
