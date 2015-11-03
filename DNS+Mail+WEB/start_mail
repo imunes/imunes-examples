@@ -13,7 +13,7 @@ else
     eid=`isNodeRunning www`
 fi
 
-if test `uname -s` == "FreeBSD"; then
+if isOSfreebsd; then
     hasPackage www $eid '^postfix-'
     hasPackage www $eid '^akpop3d-'
 fi
@@ -27,7 +27,7 @@ do
     himage $h killall -9 dovecot > /dev/null 2>&1
     # Prepare postfix configuration and spool dirs
     cd Mail_files/postfix.$i
-    if test `uname -s` == "Linux"; then
+    if isOSlinux; then
         hcp * $h:/etc/postfix/
         himage $h mv /etc/postfix/linux-main.cf /etc/postfix/main.cf
         himage $h postalias hash:/etc/postfix/aliases
@@ -40,7 +40,7 @@ do
     himage $h syslogd
     himage $h postfix start
     # Start POP3 
-    if test `uname -s` == "Linux"; then
+    if isOSlinux; then
         hcp Mail_files/dovecot/10-auth.conf $h:/etc/dovecot/conf.d/10-auth.conf 
         himage -b $h dovecot
     else
@@ -54,7 +54,7 @@ for i in $zpm_clients $zzt_clients; do
     himage -nt $h cat /etc/passwd | grep imunes > /dev/null
     if [ $? -eq 1 ]; then
         echo "Adding user imunes on $h."
-        if test `uname -s` == "Linux"; then
+        if isOSlinux; then
             himage $h useradd imunes -m -g staff 
             himage -nt $h passwd imunes <<__END__ > /dev/null 2>&1
 imunes
@@ -71,7 +71,7 @@ done
 for i in $zzt_clients
 do
     h=$i@$eid
-    if test `uname -s` == "Linux"; then
+    if isOSlinux; then
         hcp Mail_files/cone/linux-cone.tel/ $h:/root/.cone
     else
         himage $h mkdir -p /root/.cone
@@ -86,7 +86,7 @@ done
 for i in $zpm_clients
 do
     h=$i@$eid
-    if test `uname -s` == "Linux"; then
+    if isOSlinux; then
         hcp Mail_files/cone/linux-cone.zpm/ $h:/root/.cone
     else
         himage $h mkdir -p /root/.cone
@@ -97,4 +97,3 @@ do
 	echo "Warning: no user named imunes on $h."
     fi
 done
-

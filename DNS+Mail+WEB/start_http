@@ -24,7 +24,7 @@ else
     eid=`isNodeRunning www`
 fi
 
-if test `uname -s` == "FreeBSD"; then
+if isOSfreebsd; then
     hasPackage www $eid '^lighttpd-'
 fi
 
@@ -34,7 +34,7 @@ do
     h=${serv}@${eid}
     himage $h mkdir -p /usr/local/etc/lighttpd
     himage $h mkdir -p /var/log/lighttpd
-    if test `uname -s` == "Linux"; then
+    if isOSlinux; then
         himage $h chown -R www-data:www-data /var/log/lighttpd
     else
         himage $h chown -R www:www /var/log/lighttpd
@@ -42,7 +42,7 @@ do
 
     hcp WEB_files/${serv}.lighttpd.conf $h:/usr/local/etc/lighttpd/lighttpd.conf
     himage $h chmod 755 /usr/local/etc/lighttpd/lighttpd.conf
-    if test `uname -s` == "Linux"; then
+    if isOSlinux; then
         hcp WEB_files/www.${serv} $h:/root
         himage -b $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
     else

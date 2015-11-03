@@ -18,6 +18,24 @@ echo "Starting experiment..."
 # FUNCTIONS
 #
 
+os=`uname -s`;
+
+isOSlinux() {
+    if test $os = "Linux"; then
+	true;
+    else
+	false;
+    fi
+}
+
+isOSfreebsd() {
+    if test $os = "FreeBSD"; then
+	true;
+    else
+	false;
+    fi
+}
+
 # Usage: thereWereErrors status
 thereWereErrors () {
 # End time measurment and output result.
@@ -98,7 +116,7 @@ netDump () {
 	fi
 	i=$(($i+1))
     done
-    if test "`uname -s`" = "Linux"; then
+    if isOSlinux; then
         himage -b $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
     else
         himage $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
@@ -208,7 +226,7 @@ getMail () {
     echo ""
     echo "########## Reading mail on $1 $2"
     #mes=`himage $1 mailtool -index INBOX $2`
-    if test "`uname -s`" = "Linux"; then
+    if isOSlinux; then
         mes=`himage -nt $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
     else
         mes=`himage $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
@@ -226,7 +244,7 @@ webCheck () {
     echo ""
     echo "########## Fetching file from $2 to $1"
     fetch=fetch
-    if test "`uname -s`" = "Linux"; then
+    if isOSlinux; then
         fetch=curl
     fi
     himage $1 $fetch -o - $2

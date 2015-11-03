@@ -2,7 +2,7 @@
 
 . ../../common/procedures.sh
 
-if test `uname -s` == "Linux"; then
+if isOSlinux; then
     echo "This example currently runs only on FreeBSD"
     thereWereErrors 1
     exit 0

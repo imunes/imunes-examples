@@ -6,6 +6,8 @@ if [ "`whoami`" != "root" ]; then
     exit 1
 fi
 
+. common/start_functions.sh
+
 sequential=0
 if test "$1" = "seq"; then
     sequential=1
@@ -15,7 +17,7 @@ imunes -i
 
 tests="DHCP DNS+Mail+WEB OSPF Ping RIP Traceroute services"
 
-if test `uname -s` = "FreeBSD"; then
+if isOSfreebsd; then
     tests="$tests functional_tests/rj45_vlan gif"
 fi
 
