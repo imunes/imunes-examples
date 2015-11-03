@@ -42,7 +42,7 @@ for dir in $tests; do
 	    pids="$pids $!"
 	fi
     fi
-    cd -
+    cd - > /dev/null
 done
 
 if test ! -z "$pids" ; then
