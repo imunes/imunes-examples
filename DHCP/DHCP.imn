@@ -169,8 +169,8 @@ node n8 {
 	 network 0.0.0.0/0
 	!
     }
-    iconcoords {624.0 264.0}
-    labelcoords {674.0 264.0}
+    iconcoords {744.0 264.0}
+    labelcoords {794.0 264.0}
     interface-peer {eth2 n7}
     interface-peer {eth0 n9}
     interface-peer {eth1 n10}
@@ -194,8 +194,8 @@ node n9 {
 	ip route 0.0.0.0/0 10.0.2.1
 	!
     }
-    iconcoords {624.0 72.0}
-    labelcoords {583.0 73.0}
+    iconcoords {744.0 72.0}
+    labelcoords {703.0 73.0}
     interface-peer {eth0 n8}
     canvas c0
 }
@@ -217,8 +217,8 @@ node n10 {
 	ip route 0.0.0.0/0 10.0.3.1
 	!
     }
-    iconcoords {624.0 408.0}
-    labelcoords {576.0 413.0}
+    iconcoords {744.0 408.0}
+    labelcoords {696.0 413.0}
     interface-peer {eth0 n8}
     canvas c0
 }
@@ -308,8 +308,8 @@ canvas c0 {
 
 option show {
     interface_names no
-    ip_addresses no
-    ipv6_addresses no
+    ip_addresses yes
+    ipv6_addresses yes
     node_labels yes
     link_labels yes
     background_images no
