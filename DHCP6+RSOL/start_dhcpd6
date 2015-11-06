@@ -1,0 +1,44 @@
+#!/bin/sh
+
+. ../common/start_functions.sh
+
+dhcp_server="DHCP6server"
+hosts="FIX PC1 PC2"
+
+if [ $# -eq 1 ]; then
+    eid=$1
+    isEidRunning $eid
+else
+    eid=`isNodeRunning $dhcp_server`
+fi
+
+if isOSfreebsd; then
+    hasPackage "$dhcp_server" "$eid" '^isc-dhcp.*-server'
+    hasPackage "$dhcp_server" "$eid" '^isc-dhcp.*-client'
+fi
+
+echo "Configuring server:"
+
+himage ${dhcp_server}@${eid} mkdir -p /var/db
+himage ${dhcp_server}@${eid} touch /var/db/dhcpd6.leases
+himage ${dhcp_server}@${eid} killall dhcpd
+
+if isOSfreebsd; then
+    hcp dhcpd6.conf ${dhcp_server}@${eid}:/usr/local/etc/dhcpd6.conf
+    himage ${dhcp_server}@${eid} service isc-dhcpd6 onerestart
+else
+    hcp dhcpd6.conf ${dhcp_server}@${eid}:/etc/dhcp/dhcpd.conf
+    himage ${dhcp_server}@${eid} touch /var/lib/dhcp/dhcpd6.leases
+    himage ${dhcp_server}@${eid} dhcpd -6
+fi
+
+sleep 1
+echo "Configuring clients:"
+for pc in PC1 PC2 FIX; do
+	echo "++++++ $pc ++++++"
+	himage ${pc}@${eid} killall dhclient
+	if isOSfreebsd; then
+	    pre="/usr/local/sbin/"
+	fi
+	himage ${pc}@${eid} ${pre}dhclient -6 -v eth0
+done

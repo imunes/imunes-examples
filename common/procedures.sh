@@ -92,7 +92,33 @@ pingCheck () {
 
 # Usage: getNodeIP node interface
 getNodeIP () {
-    ip_addr=`himage $1 ifconfig $2 | awk '/inet /{print $2}'`
+    echo "*******************"
+    if isOSfreebsd; then
+	ip_addr=`himage $1 ifconfig $2 | awk '/inet /{print $2}'`
+    else
+	ip_addr=`himage $1 ip addr show $2 | awk '/inet /{print $2}'`
+    fi
+
+    if test -z "$ip_addr"; then
+	echo ""
+	echo "********** IFCONFIG ERROR **********"
+	return 1
+    else
+	echo $ip_addr
+	return 0
+    fi
+}
+
+# Usage: getNodeIP6 node interface
+getNodeIP6 () {
+    echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    if isOSfreebsd; then
+	ip_addr=`himage $1 ifconfig $2 | awk '/inet6 /{print $2}' | grep -v $2`
+	echo $ip_addr
+	echo "BBBBBBBBBBBBBBBBBBBBBBBB"
+    else
+	ip_addr=`himage $1 ip -6 addr show $2 | awk '/inet6 .*global/{print $2}'`
+    fi
 
     if test -z "$ip_addr"; then
 	echo ""

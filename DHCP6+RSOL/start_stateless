@@ -1,0 +1,39 @@
+#! /bin/sh
+
+. ../common/start_functions.sh
+
+router="R1"
+dhcp_server="DHCP6server"
+hosts="FIX PC1 PC2"
+
+if [ $# -eq 1 ]; then
+    eid=$1
+    isEidRunning $eid
+else
+    eid=`isNodeRunning $dhcp_server`
+fi
+
+if isOSfreebsd; then
+    comm="rtadvd"
+    hasPackage "$router" "$eid" '^isc-dhcp.*-server'
+    hasPackage "$router" "$eid" '^isc-dhcp.*-client'
+else
+    comm="radvd"
+fi
+
+echo "Configuring server:"
+hcp $comm.conf ${router}@${eid}:/etc
+himage ${router}@${eid} killall $comm
+himage ${router}@${eid} $comm eth1
+
+sleep 1
+echo "Configuring clients:"
+for pc in PC1 PC2 FIX; do
+	echo "++++++ $pc ++++++"
+	if isOSfreebsd; then
+	    himage ${pc}@${eid} ifconfig eth0 inet6 accept_rtadv
+	    himage ${pc}@${eid} rtsol -D eth0
+	else
+	    himage ${pc}@${eid} rdisc6 eth0
+	fi
+done
