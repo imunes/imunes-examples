@@ -112,7 +112,6 @@ getNodeIP () {
 getNodeIP6 () {
     if isOSfreebsd; then
 	ip_addr=`himage $1 ifconfig $2 | awk '/inet6 /{print $2}' | grep -v $2`
-	echo $ip_addr
     else
 	ip_addr=`himage $1 ip -6 addr show $2 | awk '/inet6 .*global/{print $2}'`
     fi

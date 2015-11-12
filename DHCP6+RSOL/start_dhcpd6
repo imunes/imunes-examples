@@ -32,7 +32,7 @@ else
     himage ${dhcp_server}@${eid} dhcpd -6
 fi
 
-sleep 1
+sleep 3
 echo "Configuring clients:"
 for pc in PC1 PC2 FIX; do
 	echo "++++++ $pc ++++++"

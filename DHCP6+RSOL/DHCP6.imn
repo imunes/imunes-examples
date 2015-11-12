@@ -191,7 +191,6 @@ node n6 {
 	 ip address 127.0.0.1/24
 	 ipv6 address ::1/128
 	!
-	ipv6 route ::/0 fc00:3::1
 	!
     }
     canvas c0
@@ -213,7 +212,6 @@ node n7 {
 	 ip address 127.0.0.1/24
 	 ipv6 address ::1/128
 	!
-	ipv6 route ::/0 fc00:3::1
 	!
     }
     canvas c0
@@ -235,7 +233,6 @@ node n8 {
 	 ip address 127.0.0.1/24
 	 ipv6 address ::1/128
 	!
-	ipv6 route ::/0 fc00:3::1
 	!
     }
     canvas c0
@@ -257,7 +254,6 @@ node n9 {
 	 ip address 127.0.0.1/24
 	 ipv6 address ::1/128
 	!
-	ipv6 route ::/0 fc00:3::1
 	!
     }
     canvas c0
