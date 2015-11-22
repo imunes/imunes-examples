@@ -28,7 +28,12 @@ do
     # Start named on all DNS servers
     echo Starting named on $i...
     himage $i@$eid named -c /var/named/etc/namedb/named.conf
-    himage $i@$eid mv /var/named/etc/namedb/rndc.conf /usr/local/etc/namedb/rndc.conf 
+    if test -d /usr/local/etc/namedb; then
+        himage $i@$eid cp /var/named/etc/namedb/rndc.conf /usr/local/etc/namedb
+    fi
+    if test -d /etc/namedb; then
+        himage $i@$eid cp /var/named/etc/namedb/rndc.conf /etc/namedb/rndc.conf
+    fi
 done
 
 echo
