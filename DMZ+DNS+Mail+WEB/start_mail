@@ -1,0 +1,131 @@
+#! /bin/sh
+
+. ../common/start_functions.sh
+
+mail_servers="www zpmMail smtpMM LAN-SMTP"
+zzt_clients="dnsTel www mm"
+zpm_clients="dnsZpm pc zpmMail"
+mm_clients="dnsMM smtpMM wwwMM"
+lan_client="pc1 pc2 pc3"
+
+if test $# -eq 1; then
+    eid=$1
+    isEidRunning $eid
+else
+    eid=`isNodeRunning www`
+fi
+
+if isOSfreebsd; then
+    hasPackage www $eid '^postfix-'
+    hasPackage www $eid '^akpop3d-'
+fi
+
+for i in $mail_servers
+do
+    h=$i@$eid
+    # Stop postfix and akpop3d on all mail servers
+    himage $h postfix stop > /dev/null 2>&1
+    himage $h killall -9 akpop3d > /dev/null 2>&1
+    himage $h killall -9 dovecot > /dev/null 2>&1
+    # Prepare postfix configuration and spool dirs
+    cd Mail_files/postfix.$i
+    if isOSlinux; then
+        hcp * $h:/etc/postfix/
+        himage $h mv /etc/postfix/linux-main.cf /etc/postfix/main.cf
+        himage $h postalias hash:/etc/postfix/aliases
+    else
+        hcp * $h:/usr/local/etc/postfix/
+        himage $h postalias hash:/usr/local/etc/postfix/aliases
+    fi
+    cd -
+    himage $h touch /var/log/maillog
+    himage $h syslogd
+    himage $h postfix start
+    # Start POP3 
+    if isOSlinux; then
+        hcp Mail_files/dovecot/10-auth.conf $h:/etc/dovecot/conf.d/10-auth.conf 
+        himage -b $h dovecot
+    else
+        himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
+        himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
+    fi
+done
+
+for i in $zpm_clients $zzt_clients; do
+    h=$i@$eid
+    himage -nt $h cat /etc/passwd | grep imunes > /dev/null
+    if [ $? -eq 1 ]; then
+        echo "Adding user imunes on $h."
+        if isOSlinux; then
+            himage $h useradd imunes -m -g staff 
+            himage -nt $h passwd imunes <<__END__ > /dev/null 2>&1
+imunes
+imunes
+__END__
+        else
+            echo imunes | chroot /var/imunes/vroot pw useradd imunes -d /home/imunes -g wheel -k /usr/share/skel -s /usr/local/bin/bash -m -h 0 
+        fi
+    fi
+    himage $h touch /var/mail/imunes
+    himage $h chown imunes /var/mail/imunes
+done
+
+for i in $zzt_clients
+do
+    h=$i@$eid
+    if isOSlinux; then
+        hcp Mail_files/cone/linux-cone.tel/ $h:/root/.cone
+    else
+        himage $h mkdir -p /root/.cone
+        hcp -r Mail_files/cone/cone.tel/* $h:/root/.cone 
+    fi
+    himage $h grep imunes /etc/passwd > /dev/null 2>&1
+    if [ $? -eq 1 ]; then
+	    echo "Warning: no user named imunes on $h."
+    fi
+done
+
+for i in $zpm_clients
+do
+    h=$i@$eid
+    if isOSlinux; then
+        hcp Mail_files/cone/linux-cone.zpm/ $h:/root/.cone
+    else
+        himage $h mkdir -p /root/.cone
+        hcp -r Mail_files/cone/cone.zpm/* $h:/root/.cone 
+    fi
+    himage $h grep imunes /etc/passwd > /dev/null 2>&1
+    if [ $? -eq 1 ]; then
+	echo "Warning: no user named imunes on $h."
+    fi
+done
+
+for i in $mm_clients
+do
+    h=$i@$eid
+    if isOSlinux; then
+        hcp Mail_files/cone/linux-cone.mm/ $h:/root/.cone
+    else
+        himage $h mkdir -p /root/.cone
+        hcp -r Mail_files/cone/cone.mm/* $h:/root/.cone 
+    fi
+    himage $h grep imunes /etc/passwd > /dev/null 2>&1
+    if [ $? -eq 1 ]; then
+	echo "Warning: no user named imunes on $h."
+    fi
+done
+
+for i in $lan_clients
+do
+    h=$i@$eid
+    if isOSlinux; then
+        hcp Mail_files/cone/linux-cone.lan/ $h:/root/.cone
+    else
+        himage $h mkdir -p /root/.cone
+        hcp -r Mail_files/cone/cone.lan/* $h:/root/.cone 
+    fi
+    himage $h grep imunes /etc/passwd > /dev/null 2>&1
+    if [ $? -eq 1 ]; then
+	echo "Warning: no user named imunes on $h."
+    fi
+done

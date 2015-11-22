@@ -1,0 +1,2 @@
+domain zpm.fer.hr
+nameserver 30.0.0.2

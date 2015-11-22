@@ -1,0 +1,1149 @@
+node n0 {
+    type host
+    network-config {
+	hostname aRootServer
+	!
+	interface eth0
+	 ip address 1.0.0.2/24
+	 mac address 42:00:aa:00:00:00
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 1.0.0.1
+	!
+    }
+    iconcoords {96.0 48.0}
+    labelcoords {103.0 90.0}
+    interface-peer {eth0 n3}
+    canvas c0
+}
+
+node n1 {
+    type host
+    network-config {
+	hostname bRootServer
+	!
+	interface eth0
+	 ip address 2.0.0.2/24
+	 mac address 42:00:aa:00:00:01
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 2.0.0.1
+	!
+    }
+    iconcoords {648.0 48.0}
+    labelcoords {647.0 85.0}
+    interface-peer {eth0 n3}
+    canvas c0
+}
+
+node n3 {
+    type router
+    model quagga
+    network-config {
+	hostname R3
+	!
+	interface eth4
+	 ip address 10.0.4.1/24
+	 mac address 42:00:aa:00:00:06
+	!
+	interface eth3
+	 ip address 5.0.0.1/24
+	 mac address 42:00:aa:00:00:05
+	!
+	interface eth2
+	 ip address 4.0.0.1/24
+	 mac address 42:00:aa:00:00:04
+	!
+	interface eth1
+	 ip address 2.0.0.1/24
+	 mac address 42:00:aa:00:00:03
+	!
+	interface eth0
+	 ip address 1.0.0.1/24
+	 mac address 42:00:aa:00:00:02
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	router rip
+	 redistribute static
+	 network 0.0.0.0/0
+	!
+    }
+    iconcoords {360.0 48.0}
+    labelcoords {361.0 22.0}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 n1}
+    interface-peer {eth2 n2}
+    interface-peer {eth3 n4}
+    interface-peer {eth4 n7}
+    canvas c0
+}
+
+node n2 {
+    type host
+    network-config {
+	hostname hr2
+	!
+	interface eth0
+	 ip address 4.0.0.2/24
+	 mac address 42:00:aa:00:00:07
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 4.0.0.1 
+	!
+    }
+    iconcoords {216.0 144.0}
+    labelcoords {218.0 186.0}
+    interface-peer {eth0 n3}
+    canvas c0
+}
+
+node n4 {
+    type host
+    network-config {
+	hostname dnsCom
+	!
+	interface eth0
+	 ip address 5.0.0.2/24
+	 mac address 42:00:aa:00:00:08
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 5.0.0.1
+	!
+    }
+    iconcoords {360.0 192.0}
+    labelcoords {361.0 229.0}
+    interface-peer {eth0 n3}
+    canvas c0
+}
+
+node n5 {
+    type host
+    network-config {
+	hostname dnsHr
+	!
+	interface eth0
+	 ip address 7.0.0.2/24
+	 mac address 42:00:aa:00:00:09
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 7.0.0.1
+	!
+    }
+    iconcoords {360.0 288.0}
+    labelcoords {359.0 327.0}
+    interface-peer {eth0 n8}
+    canvas c0
+}
+
+node n6 {
+    type host
+    network-config {
+	hostname dnsFer
+	!
+	interface eth0
+	 ip address 8.0.0.2/24
+	 mac address 42:00:aa:00:00:0a
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 8.0.0.1
+	!
+    }
+    iconcoords {720.0 408.0}
+    labelcoords {733.0 448.0}
+    interface-peer {eth0 n9}
+    canvas c0
+}
+
+node n7 {
+    type router
+    model quagga
+    network-config {
+	hostname R7
+	!
+	interface eth0
+	 ip address 6.0.0.1/24
+	 mac address 42:00:aa:00:00:0d
+	!
+	interface eth2
+	 ip address 10.0.5.1/24
+	 mac address 42:00:aa:00:00:0c
+	!
+	interface eth1
+	 ip address 10.0.4.2/24
+	 mac address 42:00:aa:00:00:0b
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	router rip
+	 redistribute static
+	 network 0.0.0.0/0
+	!
+    }
+    iconcoords {504.0 120.0}
+    labelcoords {511.0 96.0}
+    interface-peer {eth1 n3}
+    interface-peer {eth2 n8}
+    interface-peer {eth0 n15}
+    canvas c0
+}
+
+node n8 {
+    type router
+    model quagga
+    network-config {
+	hostname R8
+	!
+	interface eth1
+	 ip address 3.0.0.1/24
+	 mac address 42:00:aa:00:00:11
+	!
+	interface eth3
+	 ip address 10.0.7.1/24
+	 mac address 42:00:aa:00:00:10
+	!
+	interface eth0
+	 ip address 7.0.0.1/24
+	 mac address 42:00:aa:00:00:0f
+	!
+	interface eth2
+	 ip address 10.0.5.2/24
+	 mac address 42:00:aa:00:00:0e
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	router rip
+	 redistribute static
+	 network 0.0.0.0/0
+	!
+    }
+    iconcoords {504.0 240.0}
+    labelcoords {532.0 221.0}
+    interface-peer {eth2 n7}
+    interface-peer {eth0 n5}
+    interface-peer {eth3 n9}
+    interface-peer {eth1 n14}
+    canvas c0
+}
+
+node n9 {
+    type router
+    model quagga
+    network-config {
+	hostname R9
+	!
+	interface eth3
+	 mac address 42:00:aa:00:00:1f
+	 ip address 10.0.1.1/24
+	!
+	interface eth2
+	 ip address 30.0.0.1/24
+	 mac address 42:00:aa:00:00:15
+	!
+	interface eth1
+	 ip address 20.0.0.1/24
+	 mac address 42:00:aa:00:00:14
+	!
+	interface eth0
+	 ip address 8.0.0.1/24
+	 mac address 42:00:aa:00:00:13
+	!
+	interface eth4
+	 ip address 10.0.7.2/24
+	 mac address 42:00:aa:00:00:12
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 network 0.0.0.0/0
+	!
+    }
+    iconcoords {528.0 360.0}
+    labelcoords {553.0 340.0}
+    interface-peer {eth4 n8}
+    interface-peer {eth0 n6}
+    interface-peer {eth1 n10}
+    interface-peer {eth2 n16}
+    canvas c0
+    interface-peer {eth3 n22}
+}
+
+node n11 {
+    type host
+    network-config {
+	hostname dnsTel
+	!
+	interface eth0
+	 ip address 20.0.0.2/24
+	 mac address 42:00:aa:00:00:16
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 20.0.0.1
+	!
+    }
+    iconcoords {144.0 288.0}
+    labelcoords {191.0 272.0}
+    interface-peer {eth0 n10}
+    canvas c0
+}
+
+node n12 {
+    type host
+    network-config {
+	hostname www
+	!
+	interface eth0
+	 ip address 20.0.0.3/24
+	 mac address 42:00:aa:00:00:17
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 20.0.0.1
+	!
+    }
+    iconcoords {96.0 384.0}
+    labelcoords {127.0 410.0}
+    interface-peer {eth0 n10}
+    canvas c0
+}
+
+node n13 {
+    type pc
+    network-config {
+	hostname mm
+	!
+	interface eth0
+	 ip address 20.0.0.4/24
+	 mac address 42:00:aa:00:00:18
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 20.0.0.1
+	!
+    }
+    iconcoords {120.0 480.0}
+    labelcoords {118.0 517.0}
+    interface-peer {eth0 n10}
+    canvas c0
+}
+
+node n14 {
+    type host
+    network-config {
+	hostname cRootServer
+	!
+	interface eth0
+	 ip address 3.0.0.2/24
+	 mac address 42:00:aa:00:00:19
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 3.0.0.1
+	!
+    }
+    iconcoords {672.0 288.0}
+    labelcoords {682.0 326.0}
+    interface-peer {eth0 n8}
+    canvas c0
+}
+
+node n15 {
+    type host
+    network-config {
+	hostname dnsOrg
+	!
+	interface eth0
+	 ip address 6.0.0.2/24
+	 mac address 42:00:aa:00:00:1a
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 6.0.0.1
+	!
+    }
+    iconcoords {672.0 168.0}
+    labelcoords {676.0 208.0}
+    interface-peer {eth0 n7}
+    canvas c0
+}
+
+node n17 {
+    type host
+    network-config {
+	hostname dnsZpm
+	!
+	interface eth0
+	 ip address 30.0.0.2/24
+	 mac address 42:00:aa:00:00:1b
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 30.0.0.1
+	!
+    }
+    iconcoords {312.0 552.0}
+    labelcoords {315.0 592.0}
+    interface-peer {eth0 n16}
+    canvas c0
+}
+
+node n18 {
+    type pc
+    network-config {
+	hostname pc
+	!
+	interface eth0
+	 ip address 30.0.0.3/24
+	 mac address 42:00:aa:00:00:1c
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 30.0.0.1
+	!
+    }
+    iconcoords {432.0 552.0}
+    labelcoords {434.0 589.0}
+    interface-peer {eth0 n16}
+    canvas c0
+}
+
+node n10 {
+    type lanswitch
+    network-config {
+	hostname sw1
+	!
+    }
+    iconcoords {288.0 384.0}
+    labelcoords {294.0 362.0}
+    interface-peer {e0 n9}
+    interface-peer {e1 n11}
+    interface-peer {e2 n12}
+    interface-peer {e3 n13}
+    canvas c0
+}
+
+node n16 {
+    type lanswitch
+    network-config {
+	hostname sw2
+	!
+    }
+    iconcoords {432.0 432.0}
+    labelcoords {393.0 423.0}
+    interface-peer {e0 n9}
+    interface-peer {e1 n17}
+    interface-peer {e2 n18}
+    interface-peer {e3 n19}
+    canvas c0
+}
+
+node n19 {
+    type host
+    network-config {
+	hostname zpmMail
+	!
+	interface eth0
+	 ip address 30.0.0.4/24
+	 mac address 42:00:aa:00:00:1d
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 30.0.0.1
+	!
+    }
+    iconcoords {552.0 528.0}
+    labelcoords {556.0 568.0}
+    interface-peer {eth0 n16}
+    canvas c0
+}
+
+node n20 {
+    type router
+    model quagga
+    network-config {
+	hostname FW
+	!
+	interface eth2
+	 mac address 42:00:aa:00:00:21
+	 ip address 15.16.17.1/24
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:1e
+	 ip address 10.0.1.2/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 network 0.0.0.0/0
+	!
+    }
+    canvas c1
+    iconcoords {120.0 192.0}
+    labelcoords {150.0 171.0}
+    interface-peer {eth0 n21}
+    interface-peer {eth2 n24}
+}
+
+node n21 {
+    network-config {
+	hostname n9
+	!
+    }
+    type pseudo
+    canvas c1
+    iconcoords {72.0 96.0}
+    labelcoords {72.0 96.0}
+    interface-peer {0 n20}
+    mirror n22
+}
+
+node n22 {
+    network-config {
+	hostname n20
+	!
+    }
+    type pseudo
+    canvas c0
+    iconcoords {696.0 552.0}
+    labelcoords {696.0 552.0}
+    interface-peer {0 n9}
+    mirror n21
+}
+
+node n23 {
+    type lanswitch
+    network-config {
+	hostname sw4
+	!
+    }
+    canvas c1
+    iconcoords {624.0 192.0}
+    labelcoords {602.0 215.0}
+    interface-peer {e1 n27}
+    interface-peer {e2 n28}
+    interface-peer {e3 n29}
+    interface-peer {e4 n30}
+    interface-peer {e0 n32}
+}
+
+node n24 {
+    type lanswitch
+    network-config {
+	hostname sw3
+	!
+    }
+    canvas c1
+    iconcoords {288.0 192.0}
+    labelcoords {262.0 213.0}
+    interface-peer {e0 n20}
+    interface-peer {e1 n25}
+    interface-peer {e2 n26}
+    interface-peer {e3 n31}
+    interface-peer {e4 n32}
+}
+
+node n25 {
+    type host
+    network-config {
+	hostname smtpMM
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:22
+	 ip address 15.16.17.25/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 15.16.17.1
+	ip route 192.168.1.0/24 15.16.17.2
+	!
+    }
+    canvas c1
+    iconcoords {408.0 384.0}
+    labelcoords {408.0 425.0}
+    interface-peer {eth0 n24}
+    services {ssh ftp telnet}
+}
+
+node n26 {
+    type host
+    network-config {
+	hostname wwwMM
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:23
+	 ip address 15.16.17.80/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 15.16.17.1
+	ip route 192.168.1.0/24 15.16.17.2
+	!
+    }
+    canvas c1
+    iconcoords {240.0 360.0}
+    labelcoords {240.0 401.0}
+    interface-peer {eth0 n24}
+    services {ssh ftp telnet}
+}
+
+node n27 {
+    type host
+    network-config {
+	hostname LAN-SMTP
+	!
+	interface eth0
+	 ip address 192.168.1.10/24
+	 mac address 42:00:aa:00:00:24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 192.168.1.1
+	!
+    }
+    canvas c1
+    iconcoords {576.0 384.0}
+    labelcoords {576.0 425.0}
+    interface-peer {eth0 n23}
+    services {ssh ftp telnet}
+}
+
+node n28 {
+    type pc
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 ip address 192.168.1.20/24
+	 mac address 42:00:aa:00:00:25
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 192.168.1.1
+	!
+    }
+    canvas c1
+    iconcoords {744.0 336.0}
+    labelcoords {744.0 372.0}
+    interface-peer {eth0 n23}
+}
+
+node n29 {
+    type pc
+    network-config {
+	hostname pc2
+	!
+	interface eth0
+	 ip address 192.168.1.21/24
+	 mac address 42:00:aa:00:00:26
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 192.168.1.1
+	!
+    }
+    canvas c1
+    iconcoords {792.0 192.0}
+    labelcoords {792.0 228.0}
+    interface-peer {eth0 n23}
+}
+
+node n30 {
+    type pc
+    network-config {
+	hostname pc3
+	!
+	interface eth0
+	 ip address 192.168.1.22/24
+	 mac address 42:00:aa:00:00:27
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 192.168.1.1
+	!
+    }
+    canvas c1
+    iconcoords {696.0 96.0}
+    labelcoords {696.0 132.0}
+    interface-peer {eth0 n23}
+}
+
+node n31 {
+    type host
+    network-config {
+	hostname dnsMM
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:28
+	 ip address 15.16.17.18/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 15.16.17.1
+	ip route 192.168.1.0/24 15.16.17.2
+	!
+    }
+    canvas c1
+    iconcoords {288.0 96.0}
+    labelcoords {288.0 137.0}
+    interface-peer {eth0 n24}
+    services {ssh ftp telnet}
+}
+
+node n32 {
+    type router
+    model quagga
+    network-config {
+	hostname FWint
+	!
+	interface eth1
+	 ip address 192.168.1.1/24
+	 mac address 42:00:aa:00:00:29
+	!
+	interface eth0
+	 ip address 15.16.17.2/24
+	 mac address 42:00:aa:00:00:20
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 15.16.17.1
+	!
+    }
+    canvas c1
+    iconcoords {456.0 192.0}
+    labelcoords {431.0 163.0}
+    interface-peer {eth0 n24}
+    interface-peer {eth1 n23}
+    services {ssh}
+}
+
+link l0 {
+    nodes {n0 n3}
+    bandwidth 100000000
+}
+
+link l1 {
+    nodes {n1 n3}
+    bandwidth 100000000
+}
+
+link l2 {
+    nodes {n2 n3}
+    bandwidth 100000000
+}
+
+link l3 {
+    nodes {n3 n4}
+    bandwidth 100000000
+}
+
+link l4 {
+    nodes {n3 n7}
+    bandwidth 2048000
+    delay 2500
+}
+
+link l5 {
+    nodes {n7 n8}
+    bandwidth 2048000
+    delay 2500
+}
+
+link l6 {
+    nodes {n8 n5}
+    bandwidth 100000000
+}
+
+link l7 {
+    nodes {n8 n9}
+    bandwidth 2048000
+    delay 2500
+}
+
+link l8 {
+    nodes {n9 n6}
+    bandwidth 100000000
+}
+
+link l13 {
+    nodes {n8 n14}
+    bandwidth 100000000
+}
+
+link l14 {
+    nodes {n7 n15}
+    bandwidth 100000000
+}
+
+link l9 {
+    nodes {n10 n9}
+    bandwidth 100000000
+}
+
+link l10 {
+    nodes {n11 n10}
+    bandwidth 100000000
+}
+
+link l11 {
+    nodes {n12 n10}
+    bandwidth 100000000
+}
+
+link l12 {
+    nodes {n13 n10}
+    bandwidth 100000000
+}
+
+link l15 {
+    nodes {n9 n16}
+    bandwidth 100000000
+}
+
+link l16 {
+    nodes {n17 n16}
+    bandwidth 100000000
+}
+
+link l17 {
+    nodes {n16 n18}
+    bandwidth 100000000
+}
+
+link l18 {
+    nodes {n16 n19}
+    bandwidth 100000000
+}
+
+link l20 {
+    mirror l21
+    nodes {n20 n21}
+}
+
+link l21 {
+    mirror l20
+    nodes {n9 n22}
+}
+
+link l22 {
+    nodes {n20 n24}
+    bandwidth 0
+}
+
+link l23 {
+    nodes {n25 n24}
+    bandwidth 0
+}
+
+link l24 {
+    nodes {n26 n24}
+    bandwidth 0
+}
+
+link l25 {
+    nodes {n27 n23}
+    bandwidth 0
+}
+
+link l26 {
+    nodes {n28 n23}
+    bandwidth 0
+}
+
+link l27 {
+    nodes {n29 n23}
+    bandwidth 0
+}
+
+link l28 {
+    nodes {n30 n23}
+    bandwidth 0
+}
+
+link l29 {
+    nodes {n31 n24}
+    bandwidth 0
+}
+
+link l19 {
+    nodes {n24 n32}
+    bandwidth 0
+}
+
+link l30 {
+    nodes {n32 n23}
+    bandwidth 0
+}
+
+annotation a0 {
+    iconcoords {43.0 14.0 151.0 116.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #e4e9ec
+    canvas c0
+}
+
+annotation a1 {
+    iconcoords {77.0 443.0 160.0 534.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #dfb961
+    canvas c0
+}
+
+annotation a2 {
+    iconcoords {41.0 248.0 266.0 553.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #fffee9
+    canvas c0
+}
+
+annotation a4 {
+    iconcoords {55.0 264.0}
+    type text
+    label {ZZT}
+    labelcolor #008000
+    fontfamily {Arial}
+    fontsize {16}
+    effects {bold}
+    canvas c0
+}
+
+annotation a6 {
+    iconcoords {283.0 435.0 612.0 608.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #fffee9
+    canvas c0
+}
+
+annotation a7 {
+    iconcoords {307.0 458.0}
+    type text
+    label {ZPM}
+    labelcolor #007300
+    fontfamily {Arial}
+    fontsize {14}
+    effects {bold}
+    canvas c0
+}
+
+annotation a9 {
+    iconcoords {605.0 8.0 693.0 103.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #e4e9ec
+    canvas c0
+}
+
+annotation a10 {
+    iconcoords {632.0 269.0 732.0 361.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #e4e9ec
+    canvas c0
+}
+
+annotation a11 {
+    iconcoords {58.0 345.0}
+    type text
+    label {www.tel.fer.hr}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {14}
+    effects {bold}
+    canvas c0
+}
+
+annotation a14 {
+    iconcoords {511.0 475.0}
+    type text
+    label {www.zpm.fer.hr}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {14}
+    effects {bold}
+    canvas c0
+}
+
+annotation a3 {
+    type rectangle
+    iconcoords {120.0 57.0 456.0 446.0}
+    color #ffffff
+    bordercolor #2c80cc
+    width 3
+    canvas c1
+}
+
+annotation a5 {
+    type text
+    iconcoords {184.0 95.0}
+    label {DMZ}
+    labelcolor #3000e3
+    font {-family {DejaVu Sans} -size 14 -weight normal -slant roman -underline 0 -overstrike 0}
+    canvas c1
+}
+
+annotation a8 {
+    type rectangle
+    iconcoords {468.0 55.0 844.0 446.0}
+    color #ffffff
+    bordercolor #f0eb19
+    width 3
+    canvas c1
+}
+
+annotation a12 {
+    type text
+    iconcoords {516.0 81.0}
+    label {LAN}
+    labelcolor #0000c8
+    font {-family {DejaVu Sans} -size 14 -weight normal -slant roman -underline 0 -overstrike 0}
+    canvas c1
+}
+
+annotation a13 {
+    type text
+    iconcoords {394.0 243.0}
+    label {+ NAT}
+    labelcolor #fe0000
+    font {-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0}
+    canvas c1
+}
+
+annotation a15 {
+    type text
+    iconcoords {167.0 421.0}
+    label {mm.com}
+    labelcolor #007300
+    fontfamily {Arial}
+    fontsize {14}
+    canvas c1
+}
+
+annotation a16 {
+    type text
+    iconcoords {50.0 224.0}
+    label {Firewall}
+    labelcolor #fe0000
+    font {-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0}
+    canvas c1
+}
+
+annotation a17 {
+    type text
+    iconcoords {392.0 220.0}
+    label {Firewall}
+    labelcolor #fe0000
+    font {-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0}
+    canvas c1
+}
+
+canvas c1 {
+    name {mm.com}
+}
+
+canvas c0 {
+    name {Internet}
+}
+
+option show {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels no
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+

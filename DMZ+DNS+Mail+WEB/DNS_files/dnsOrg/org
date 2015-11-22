@@ -1,0 +1,15 @@
+$TTL 60000
+@ IN SOA dnsOrg.org. root.dnsOrg.org (
+        2002102801 ; serial
+        28 ; refresh
+        14 ; retry
+        3600000 ; expire
+        0 ; default_ttl
+)
+
+@                        IN  NS    dnsOrg.org.
+dnsOrg.Org.              IN  A     6.0.0.2
+
+blabla.org.              IN  NS    dnsBlaBla.blabla.org.
+dnsBlaBla.blabla.org.    IN  A     111.112.113.114
+

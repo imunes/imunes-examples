@@ -1,0 +1,105 @@
+####################
+# DNS / Mail / WWW 
+####################
+
+Start imunes:
+
+# imunes NETWORK.imn &
+
+In GUI select: Experiment -> Execute
+Cleanup the picture: select View -> Show -> 
+  - de-select "Interface Names"
+  - de-select "Link Lables"
+
+#####
+# DNS
+##
+
+Start DNS servers: 
+# ./start_dns
+
+#####
+# DNS configuration files (in DNS_files directory)
+##
+Top level, root servers are:
+- aRootServer: master (primary)
+- bRootServer, cRootServer: slaves
+
+Other DNS servers:
+- dnsCom: master for .com.
+- dnsOrg: master for .org.
+- dnsHr:  master for .hr.
+- hr2:    slave for .hr.
+- dnsFer: master for .fer.hr.
+- dnsTel: master for .tel.fer.hr.
+- dnsZpm: master for .zpm.fer.hr.
+
+#####
+# Test DNS
+##
+Right-click on PC named "mm" (in lower left corner)
+to start xterm on that host and test DNS:
+
+mm# nslookup zpmMail.zpm.fer.hr
+mm# dig zpmMail.zpm.fer.hr
+
+#####
+# DNS
+##
+Start e-mail servers:
+# ./start_mail
+
+#####
+# E-mail (Postfix) configuration files (in Mail_files directory)
+##
+Mail servers:
+- www: mail server for tel.fer.hr, www.tel.fer.hr, mm.tel.fer.hr
+- zpmMail: mail server for zpm.fer.hr, zpmMail.zpm.fer.hr, pc.zpm.fer.hr
+
+#####
+# Test e-mail
+##
+You can send e-mail from host www or zpmMail to user imunes@tel.fer.hr, 
+imunes@zpmMail.zpm.fer.hr, imunes@mm.tel.fer.hr, ...
+
+www# Mail imunes@zpm.fer.hr
+Subject: test
+Some text ...
+Ctrl-D
+
+You can read and send messages using "cone" (COnsole Newsreader And Emailer)
+- from hosts in tel.fer.hr domain (mm, dnsTel and www) using:
+mm# cone -c cone.tel   (Username is "imunes" and password is "imunes")
+
+- from hosts in zpm.fer.hr domain (pc, zpmMail, dnsZpm) using:
+pc# cone -c cone.zpm   (Username is "imunes" and password is "imunes")
+
+#####
+# WEB configuration files
+##
+Web servers:
+- www
+- zpmMail
+
+Web servers are started through custom startup configuration 
+on hosts www (www.tel.fer.hr) and zpmMail (www.zpm.fer.hr)  
+lighttpd conf files are: 
+    zzt.lighttpd.conf
+    zpm.lighttpd.conf
+server.document-root: 
+    www.zzt
+    www.zpm
+
+Right-click on PC named "mm" (in lower left corner)
+to start xterm on that host and test web servers:
+
+mm# elinks zpmMail.zpm.fer.hr
+or
+mm# elinks www.tel.fer.hr
+
+You can also start Opera browser through right-click menu on PC or Host.
+(You can start only ONE INSTANCE of Opera at any time)
+
+To look at the traffic right-click on selected link.
+After a few moments Wireshark (Ethereal) will be started!
+

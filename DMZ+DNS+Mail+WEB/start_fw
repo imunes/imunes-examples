@@ -1,0 +1,40 @@
+#! /bin/sh
+
+. ../common/start_functions.sh
+
+if test $# -eq 1; then
+    eid=$1
+    isEidRunning $eid
+else
+    eid=`isNodeRunning aRootServer`
+fi
+
+kldstat -q -m ipfw
+if test $? -ne 0
+then
+    kldload ipfw
+    ipfw add 65534 allow ip from any to any
+fi
+kldload -n ipdivert
+
+svi="aRootServer bRootServer R3 hr2 dnsCom dnsHr dnsFer R7 R8 R9 \
+     dnsTel www mm cRootServer dnsOrg dnsZpm pc zpmMail FW FWint \
+     smtpMM wwwMM dnsMM LAN-SMTP pc1 pc2 pc3"
+
+for h in $svi
+do
+    himage $h ipfw -q flush
+    himage $h ipfw -q add 65534 allow ip from any to any
+done
+
+hcp FW.sh FW:/
+echo Pokrecem Firewall na FW:
+himage FW /FW.sh
+
+himage FWint killall -q -9 natd
+himage FWint natd -interface eth0 -redirect_port tcp 192.168.1.10:25 25
+
+hcp FWint.sh FWint:/
+echo Pokrecem Firewall na FWint:
+himage FWint /FWint.sh
+

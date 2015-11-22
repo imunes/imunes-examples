@@ -1,0 +1,22 @@
+; Tu cu ubaciti SOA
+;
+$TTL 60000
+@ IN SOA dnsCom.com. root.dnsCom.com. (
+        2002102801 ; serial
+        28 ; refresh
+        14 ; retry
+        3600000 ; expire
+        0 ; default_ttl
+)
+
+@                   IN  NS   dnsCom.com.
+dnsCom.com.         IN  A    5.0.0.2
+
+hr2.com.            IN  A    4.0.0.2
+
+nesto.com.          IN  NS   dnsNesto.nesto.com.
+dnsNesto.nesto.com. IN  A    11.12.13.14
+
+mm.com.             IN  NS   dnsMM.mm.com.
+dnsMM.mm.com.       IN  A    15.16.17.18
+

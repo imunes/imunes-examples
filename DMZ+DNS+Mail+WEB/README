@@ -1,0 +1,35 @@
+########################
+# DMZ + DNS / Mail / WWW 
+########################
+
+This example is an extension of imunes-examples/DNS+Mail+WEB.
+
+A new domain, mm.com is created on canvas mm.com and the appropriate
+configuration files are modified or added to DNS, Mail and Web servers.
+
+The whole mm.com network is behind firewall FW.
+There are 3 servers in DMZ that can be accessed from Internet:
+dnsMM - DNS server for mm.com (and relay for local hosts)
+smtpMM - Mail server for mm.com
+wwwMM - Web server for mm.com
+
+Hosts in LAN part of mm.com are behind another firewall, FWint
+that also performs NAT.
+Hosts from LAN can access anything on Internet (and on DMZ).
+
+Firewall rules are defined in FW.sh and FWint.sh.
+-------------------------
+
+The experiment can be started using instructions from the DNS+Mail+WEB
+example (README_DNS+Mail+WEB). Firewalls are started (at the begining 
+or at the end) using script ./start_fw.
+
+Script start_all can be used to (re)start everything:
+
+# imunes -b NETWORK.imn
+# ./start_all
+
+Script test_fw starts network scans from LAN, DMZ and Internet:
+
+# ./test_fw
+

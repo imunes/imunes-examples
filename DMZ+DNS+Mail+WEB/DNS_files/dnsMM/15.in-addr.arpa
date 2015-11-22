@@ -1,0 +1,16 @@
+$TTL   60000
+@               IN      SOA     mm.com. root.mm.com (
+         2002102801 ; serial
+         28800 ; refresh
+         14400 ; retry
+         3600000 ; expire
+         0 ; default_ttl
+)
+
+@			IN 	NS	dnsMM.mm.com.
+dnsMM.mm.com.	IN	A	15.16.17.18
+
+18.17.16.15.in-addr.arpa.	IN 	PTR	dnsMM.mm.com.
+80.17.16.15.in-addr.arpa.	IN 	PTR	wwwMM.mm.com.
+25.17.16.15.in-addr.arpa.	IN 	PTR	smtpMM.mm.com.
+

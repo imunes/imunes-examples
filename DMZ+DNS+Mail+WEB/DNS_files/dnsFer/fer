@@ -1,0 +1,20 @@
+; Tu cu ubaciti SOA
+;
+$TTL 60000
+@ IN SOA dnsFer.fer.hr. root.dnsFer.fer.hr (
+        2002102801 ; serial
+        28 ; refresh
+        14 ; retry
+        3600000 ; expire
+        0 ; default_ttl
+)
+
+@                   IN  NS   dnsFer.fer.hr.
+dnsFer.fer.hr.      IN  A    8.0.0.2
+
+tel.fer.hr.         IN  NS   dnsTel.tel.fer.hr.
+dnsTel.tel.fer.hr.  IN  A    20.0.0.2
+
+zpm.fer.hr.         IN  NS   dnsZpm.zpm.fer.hr.
+dnsZpm.zpm.fer.hr.  IN  A    30.0.0.2
+

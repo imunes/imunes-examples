@@ -1,0 +1,54 @@
+#! /bin/sh
+
+. ../common/start_functions.sh
+
+http_servers="www zpmMail wwwMM"
+
+if test $# -eq 1; then
+    eid=$1
+else
+    for i in $http_servers
+    do
+        eid=`himage -e $i`
+        if test $? -ne 0 ;then
+            echo "Cannot find node $i"
+            exit 2
+        fi
+    done
+fi
+
+if test $# -eq 1; then
+    eid=$1
+    isEidRunning $eid
+else
+    eid=`isNodeRunning www`
+fi
+
+if isOSfreebsd; then
+    hasPackage www $eid '^lighttpd-'
+fi
+
+for serv in $http_servers
+do
+    echo "Starting http server on $serv..."
+    h=${serv}@${eid}
+    himage $h killall -q -9 lighttpd
+    himage $h mkdir -p /usr/local/etc/lighttpd
+    himage $h mkdir -p /var/log/lighttpd
+    if isOSlinux; then
+        himage $h chown -R www-data:www-data /var/log/lighttpd
+    else
+        himage $h chown -R www:www /var/log/lighttpd
+    fi
+
+    hcp WEB_files/${serv}.lighttpd.conf $h:/usr/local/etc/lighttpd/lighttpd.conf
+    himage $h chmod 755 /usr/local/etc/lighttpd/lighttpd.conf
+    if isOSlinux; then
+        hcp WEB_files/www.${serv} $h:/root
+        himage -b $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    else
+        hcp -r WEB_files/www.${serv} $h:/root
+        himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    fi
+done
+

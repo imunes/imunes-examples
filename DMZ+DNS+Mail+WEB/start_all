@@ -1,0 +1,7 @@
+#! /bin/sh
+
+./start_fw
+./start_dns
+./start_http
+./start_mail
+

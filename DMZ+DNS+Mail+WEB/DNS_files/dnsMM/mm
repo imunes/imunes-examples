@@ -1,0 +1,25 @@
+; Tu cu ubaciti SOA
+;
+$TTL 60000
+@ IN SOA dnsMM.mm.com. root.mm.com (
+        2002102801 ; serial
+        28 ; refresh
+        14 ; retry
+        3600000 ; expire
+        0 ; default_ttl
+)
+
+@        IN  NS   dnsMM.mm.com.
+@        IN  MX 10  mail.mm.com.
+
+dnsMM    IN  A    15.16.17.18
+wwwMM    IN  A    15.16.17.80
+smtpMM   IN  A    15.16.17.25
+
+dns      IN  CNAME dnsMM.mm.com.
+www      IN  CNAME wwwMM.mm.com.
+mail     IN  CNAME smtpMM.mm.com.
+
+dnsMM.mm.com.  IN MX 10 smtpMM.mm.com.
+wwwMM.mm.com.  IN MX 10 smtpMM.mm.com.
+

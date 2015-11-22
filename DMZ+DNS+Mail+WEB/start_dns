@@ -1,0 +1,54 @@
+#! /bin/sh
+
+. ../common/start_functions.sh
+
+dns_servers="aRootServer bRootServer cRootServer \
+             dnsCom dnsOrg dnsHr hr2 \
+             dnsFer \
+             dnsTel dnsZpm dnsMM"
+
+hosts="mm www pc zpmMail smtpMM wwwMM"
+dmzhosts="pc1 pc2 pc3 LAN-SMTP"
+
+if test $# -eq 1; then
+    eid=$1
+    isEidRunning $eid
+else
+    eid=`isNodeRunning aRootServer`
+fi
+
+cd DNS_files
+
+for i in $dns_servers
+do
+    # Stop named on all DNS servers
+    himage ${i}@${eid} killall -9 named > /dev/null 2>&1
+    himage $i@$eid mkdir -p /var/named/etc/namedb
+    hcp $i/* $i@$eid:/var/named/etc/namedb
+    # Start named on all DNS servers
+    echo Starting named on $i...
+    himage $i@$eid named -c /var/named/etc/namedb/named.conf
+    himage $i@$eid mv /var/named/etc/namedb/rndc.conf /usr/local/etc/namedb/rndc.conf 
+done
+
+echo
+echo Copy/Create resolv.conf on clients:
+for i in $hosts
+do
+    hcp resolv.$i $i@$eid:/etc/resolv.conf 
+done
+
+echo
+echo Copy/Create resolv.conf on clients in DMZ:
+for i in $dmzhosts
+do
+    hcp resolv.dmzhosts $i@$eid:/etc/resolv.conf 
+done
+
+echo
+echo Create empty resolv.conf on DNS servers:
+for i in $dns_servers
+do
+    himage $i@$eid cp /dev/null /etc/resolv.conf
+done
+ 

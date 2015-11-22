@@ -1,0 +1,13 @@
+; 
+; Samo 2 root servera 
+; Vidi original u named.root.pravi
+;
+.                 3600000  IN  NS    aRootServer.
+aRootServer.      3600000      A     1.0.0.2
+;
+.                 3600000  IN  NS    bRootServer.
+bRootServer.      3600000      A     2.0.0.2
+;
+.                 3600000  IN  NS    cRootServer.
+cRootServer.      3600000      A     3.0.0.2
+

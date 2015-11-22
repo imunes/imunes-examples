@@ -1,0 +1,21 @@
+; Tu cu ubaciti SOA
+;
+$TTL 60000
+@ IN SOA dnsZpm.zpm.fer.hr. root.dnsZpm.zpm.fer.hr (
+        2002102801 ; serial
+        28 ; refresh
+        14 ; retry
+        3600000 ; expire
+        0 ; default_ttl
+)
+
+@         IN  NS   dnsZpm.zpm.fer.hr.
+dnsZpm    IN  A    30.0.0.2
+
+pc        IN  A    30.0.0.3
+zpmMail   IN  A    30.0.0.4
+www       IN  CNAME zpmMail.zpm.fer.hr.
+
+@        IN  MX  10  zpmMail.zpm.fer.hr.
+pc       IN  MX  10  zpmMail.zpm.fer.hr.
+

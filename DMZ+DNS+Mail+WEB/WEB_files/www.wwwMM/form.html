@@ -1,0 +1,46 @@
+<HTML>
+  <HEAD>
+    <TITLE>HTML Form Example</TITLE>
+    <LINK rel="stylesheet" href="../css/perlcgi.css" type="text/css">
+  </HEAD>
+  <BODY>
+    <FORM method="GET" action="./lesson2.pl">
+      <h3>Your First Name:</h3>
+
+      <p><INPUT type="text" name="FirstName"></p>
+      <h3>Your Last Name:</h3>
+      <p><INPUT type="text" name="LastName"></p>
+      <h3>Check if you are a student:</h3>
+      <p><INPUT type="checkbox" name="isStudent"></p>
+      <h3>What is your gender?</h3>
+      <p>
+
+        <INPUT type="radio" name="Gender" value="isMale">Male
+        <INPUT type="radio" name="Gender" value="isFemale">Female
+      </p>
+      <h3>How many moons are there on your planet?</h3>
+      <p>
+        <SELECT name="numMoons" size="5">
+           <OPTION value="1" selected>Only One Moon
+           <OPTION value="2" selected>Two Nice Moons
+           <OPTION value="3" selected>A Fine Triplet
+           <OPTION value="4" selected>Four Celestial Bodies
+           <OPTION value="5-8" selected>Between Five and Eight
+           <OPTION value="9-12" selected>We Have Between Nine and Twelve
+           <OPTION value="lots" selected>Too Many To Count!
+        </SELECT>
+
+      </p>
+      <h3>Comments:</h3>
+      <p><TEXTAREA rows="10" cols="80">Type Comments Here</TEXTAREA></p>
+      <h3>Hidden Data!</h3>
+      <p><INPUT type="hidden" name="Secret" value="Invisible"></p>
+      <h3>Submit this Form</h3>
+      <p><INPUT type="submit" value="Send Data Now!"></p>
+
+      <h3>Reset this Form</h3>
+      <p><INPUT type="reset" value="Clear all my input now"></p>
+    </FORM>
+  </BODY>
+</HTML>
+
