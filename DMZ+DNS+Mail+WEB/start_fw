@@ -2,6 +2,14 @@
 
 . ../common/start_functions.sh
 
+if ! isOSfreebsd; then
+    echo "*****"
+    echo "* Firewall part of this example is based on ipfw "
+    echo "* and currently runs only on FreeBSD."
+    echo "*****"
+    exit 2
+fi
+
 if test $# -eq 1; then
     eid=$1
     isEidRunning $eid

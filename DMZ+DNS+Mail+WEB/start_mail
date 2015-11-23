@@ -6,7 +6,7 @@ mail_servers="www zpmMail smtpMM LAN-SMTP"
 zzt_clients="dnsTel www mm"
 zpm_clients="dnsZpm pc zpmMail"
 mm_clients="dnsMM smtpMM wwwMM"
-lan_client="pc1 pc2 pc3"
+lan_clients="pc1 pc2 pc3"
 
 if test $# -eq 1; then
     eid=$1
@@ -51,7 +51,7 @@ do
     fi
 done
 
-for i in $zpm_clients $zzt_clients; do
+for i in $zpm_clients $zzt_clients $mm_clients $lan_clients; do
     h=$i@$eid
     himage -nt $h cat /etc/passwd | grep imunes > /dev/null
     if [ $? -eq 1 ]; then

@@ -14,7 +14,7 @@ startCheck "$eid"
 
 echo "********"
 echo "* Tested without firewall! "
-echo "* (ipfw can effect other tests that are running in parallel) "
+echo "* (ipfw can affect other tests that are running in parallel) "
 echo "********"
 # ./start_fw
 
