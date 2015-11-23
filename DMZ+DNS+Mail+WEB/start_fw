@@ -35,9 +35,9 @@ do
     himage $h ipfw -q add 65534 allow ip from any to any
 done
 
-hcp FW.sh FW:/
+hcp FW.fw FW:/
 echo Pokrecem Firewall na FW:
-himage FW /FW.sh
+himage FW /FW.fw
 
 himage FWint killall -q -9 natd
 himage FWint natd -interface eth0 -redirect_port tcp 192.168.1.10:25 25
