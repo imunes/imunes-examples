@@ -12,7 +12,11 @@ err=0
 eid=`imunes -b NETWORK.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
-./start_fw
+echo "********"
+echo "* Tested without firewall! "
+echo "* (ipfw can effect other tests that are running in parallel) "
+echo "********"
+# ./start_fw
 
 ./start_dns $eid
 if [ $? -ne 0 ]; then
