@@ -435,7 +435,12 @@
       <Interval id="id3C63479E" days_of_week="0" from_day="-1" from_hour="0" from_minute="0" from_month="-1" from_weekday="0" from_year="-1" to_day="-1" to_hour="23" to_minute="59" to_month="-1" to_weekday="0" to_year="-1" name="Sun" comment="" ro="False"/>
     </IntervalGroup>
   </Library>
-  <Library id="sysid99" name="Deleted Objects" comment="" ro="False"/>
+  <Library id="sysid99" name="Deleted Objects" comment="" ro="False">
+    <Interface id="id4103X26054" dedicated_failover="False" dyn="False" label="loopback" mgmt="False" security_level="100" unnum="False" unprotected="False" name="lo0" comment="" ro="False">
+      <IPv4 id="id4104X26054" name="FW:lo0:ip" comment="" ro="False" address="127.0.0.1" netmask="255.0.0.0"/>
+      <InterfaceOptions/>
+    </Interface>
+  </Library>
   <Library id="id1582X26054" color="#d2ffd0" name="User" comment="" ro="False">
     <ObjectGroup id="id1583X26054" name="Objects" comment="" ro="False">
       <ObjectGroup id="id1584X26054" name="Addresses" comment="" ro="False"/>
@@ -539,7 +544,7 @@
       <ServiceGroup id="id1599X26054" name="TagServices" comment="" ro="False"/>
     </ServiceGroup>
     <ObjectGroup id="id1600X26054" name="Firewalls" comment="" ro="False">
-      <Firewall id="id4090X26054" host_OS="freebsd" inactive="False" lastCompiled="1448281206" lastInstalled="0" lastModified="1448281198" platform="ipfw" version="" name="FW" comment="This firewall has two interfaces. Eth0 faces outside and has a dynamic address; eth1 faces inside.&#10;Policy includes basic rules to permit unrestricted outbound access and anti-spoofing rules. Access to the firewall is permitted only from internal network and only using SSH. The firewall uses one of the machines on internal network for DNS. Internal network is configured with address 192.168.1.0/255.255.255.0" ro="False">
+      <Firewall id="id4090X26054" host_OS="freebsd" inactive="False" lastCompiled="1448286721" lastInstalled="0" lastModified="1448286715" platform="ipfw" version="" name="FW" comment="This firewall has two interfaces. Eth0 faces outside and has a dynamic address; eth1 faces inside.&#10;Policy includes basic rules to permit unrestricted outbound access and anti-spoofing rules. Access to the firewall is permitted only from internal network and only using SSH. The firewall uses one of the machines on internal network for DNS. Internal network is configured with address 192.168.1.0/255.255.255.0" ro="False">
         <NAT id="id4111X26054" name="NAT" comment="" ro="False" ipv4_rule_set="False" ipv6_rule_set="False" top_rule_set="True">
           <RuleSetOptions/>
         </NAT>
@@ -590,25 +595,7 @@
               <Option name="ulog_nlgroup">1</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id4188X26054" disabled="False" group="" log="False" position="1" action="Accept" direction="Both" comment="">
-            <Src neg="False">
-              <ObjectRef ref="sysid0"/>
-            </Src>
-            <Dst neg="False">
-              <ObjectRef ref="sysid0"/>
-            </Dst>
-            <Srv neg="False">
-              <ServiceRef ref="sysid1"/>
-            </Srv>
-            <Itf neg="False">
-              <ObjectRef ref="id4103X26054"/>
-            </Itf>
-            <When neg="False">
-              <IntervalRef ref="sysid2"/>
-            </When>
-            <PolicyRuleOptions/>
-          </PolicyRule>
-          <PolicyRule id="id4216X26054" disabled="False" group="" log="False" position="2" action="Accept" direction="Both" comment="SSH Access to firewall is permitted&#10;only from private internal LAN (NAT address)">
+          <PolicyRule id="id4216X26054" disabled="False" group="" log="False" position="1" action="Accept" direction="Both" comment="SSH Access to firewall is permitted&#10;only from private internal LAN (NAT address)">
             <Src neg="False">
               <ObjectRef ref="id4656X26054"/>
             </Src>
@@ -626,7 +613,7 @@
             </When>
             <PolicyRuleOptions/>
           </PolicyRule>
-          <PolicyRule id="id4730X26054" disabled="False" group="" log="False" position="3" action="Accept" direction="Both" comment="RIP between FW and R9 (unicast)">
+          <PolicyRule id="id4730X26054" disabled="False" group="" log="False" position="2" action="Accept" direction="Both" comment="RIP between FW and R9 (unicast)">
             <Src neg="False">
               <ObjectRef ref="id4360X26054"/>
             </Src>
@@ -646,7 +633,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id4742X26054" disabled="False" group="" log="False" position="4" action="Accept" direction="Both" comment="">
+          <PolicyRule id="id4742X26054" disabled="False" group="" log="False" position="3" action="Accept" direction="Both" comment="">
             <Src neg="False">
               <ObjectRef ref="id4360X26054"/>
             </Src>
@@ -666,7 +653,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id4718X26054" disabled="False" group="" log="False" position="5" action="Accept" direction="Both" comment="">
+          <PolicyRule id="id4718X26054" disabled="False" group="" log="False" position="4" action="Accept" direction="Both" comment="">
             <Src neg="False">
               <ObjectRef ref="id4773X26054"/>
             </Src>
@@ -686,7 +673,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id4810X26054" disabled="False" group="" log="False" position="6" action="Accept" direction="Both" comment="RIP between FW and R9 (multicast)">
+          <PolicyRule id="id4810X26054" disabled="False" group="" log="False" position="5" action="Accept" direction="Both" comment="RIP between FW and R9 (multicast)">
             <Src neg="False">
               <ObjectRef ref="id4773X26054"/>
             </Src>
@@ -706,7 +693,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id5065X26054" disabled="False" group="" log="False" position="7" action="Accept" direction="Both" comment="">
+          <PolicyRule id="id5065X26054" disabled="False" group="" log="False" position="6" action="Accept" direction="Both" comment="">
             <Src neg="False">
               <ObjectRef ref="id4656X26054"/>
             </Src>
@@ -726,7 +713,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id5133X26054" disabled="False" group="" log="False" position="8" action="Accept" direction="Both" comment="Mail server receives (and sends) e-mails.">
+          <PolicyRule id="id5133X26054" disabled="False" group="" log="False" position="7" action="Accept" direction="Both" comment="Mail server receives (and sends) e-mails.">
             <Src neg="False">
               <ObjectRef ref="sysid0"/>
             </Src>
@@ -746,7 +733,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id5210X26054" disabled="False" group="" log="False" position="9" action="Accept" direction="Both" comment="Mail server (receives and) sends e-mails.">
+          <PolicyRule id="id5210X26054" disabled="False" group="" log="False" position="8" action="Accept" direction="Both" comment="Mail server (receives and) sends e-mails.">
             <Src neg="False">
               <ObjectRef ref="id5148X26054"/>
             </Src>
@@ -766,7 +753,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id5250X26054" disabled="False" group="" log="False" position="10" action="Accept" direction="Both" comment="dnsMM resolves DNS for internal hosts&#9;">
+          <PolicyRule id="id5250X26054" disabled="False" group="" log="False" position="9" action="Accept" direction="Both" comment="dnsMM resolves DNS for internal hosts&#9;">
             <Src neg="False">
               <ObjectRef ref="sysid0"/>
             </Src>
@@ -786,7 +773,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id3249X26110" disabled="False" group="" log="False" position="11" action="Accept" direction="Both" comment="Secondary DNS server for mm.com is dnsTel (20.0.0.2)">
+          <PolicyRule id="id3249X26110" disabled="False" group="" log="False" position="10" action="Accept" direction="Both" comment="Secondary DNS server for mm.com is dnsTel (20.0.0.2)">
             <Src neg="False">
               <ObjectRef ref="id3196X26110"/>
             </Src>
@@ -806,7 +793,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id5392X26054" disabled="False" group="" log="False" position="12" action="Accept" direction="Both" comment="dnsMM is DNS server for mm.com">
+          <PolicyRule id="id5392X26054" disabled="False" group="" log="False" position="11" action="Accept" direction="Both" comment="dnsMM is DNS server for mm.com">
             <Src neg="False">
               <ObjectRef ref="id5282X26054"/>
             </Src>
@@ -826,7 +813,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id5238X26054" disabled="False" group="" log="False" position="13" action="Accept" direction="Both" comment="Web server for mm.com">
+          <PolicyRule id="id5238X26054" disabled="False" group="" log="False" position="12" action="Accept" direction="Both" comment="Web server for mm.com">
             <Src neg="False">
               <ObjectRef ref="sysid0"/>
             </Src>
@@ -847,7 +834,7 @@
               <Option name="stateless">False</Option>
             </PolicyRuleOptions>
           </PolicyRule>
-          <PolicyRule id="id4328X26054" disabled="False" group="" log="True" position="14" action="Deny" direction="Both" comment="">
+          <PolicyRule id="id4328X26054" disabled="False" group="" log="True" position="13" action="Deny" direction="Both" comment="">
             <Src neg="False">
               <ObjectRef ref="sysid0"/>
             </Src>
@@ -913,10 +900,6 @@
             <Option name="vlan_id">0</Option>
           </InterfaceOptions>
         </Interface>
-        <Interface id="id4103X26054" dedicated_failover="False" dyn="False" label="loopback" mgmt="False" security_level="100" unnum="False" unprotected="False" name="lo0" comment="" ro="False">
-          <IPv4 id="id4104X26054" name="FW:lo0:ip" comment="" ro="False" address="127.0.0.1" netmask="255.0.0.0"/>
-          <InterfaceOptions/>
-        </Interface>
         <Management address="0.0.0.0">
           <SNMPManagement enabled="False" snmp_read_community="" snmp_write_community=""/>
           <FWBDManagement enabled="False" identity="" port="-1"/>
@@ -926,13 +909,13 @@
           <Option name="accept_established">true</Option>
           <Option name="accept_new_tcp_with_no_syn">true</Option>
           <Option name="activationCmd"/>
-          <Option name="add_check_state_rule">True</Option>
+          <Option name="add_check_state_rule">true</Option>
           <Option name="admUser"/>
           <Option name="altAddress"/>
-          <Option name="check_shading">True</Option>
+          <Option name="check_shading">true</Option>
           <Option name="cmdline"/>
           <Option name="compiler"/>
-          <Option name="configure_interfaces">True</Option>
+          <Option name="configure_interfaces">true</Option>
           <Option name="debug">False</Option>
           <Option name="eliminate_duplicates">true</Option>
           <Option name="epilog_script"/>
@@ -948,9 +931,9 @@
           <Option name="local_nat">false</Option>
           <Option name="log_level">info</Option>
           <Option name="log_prefix">RULE %N -- %A </Option>
-          <Option name="loopback_interface">lo</Option>
+          <Option name="loopback_interface">lo0</Option>
           <Option name="macosx_ip_forward">1</Option>
-          <Option name="manage_virtual_addr">False</Option>
+          <Option name="manage_virtual_addr">true</Option>
           <Option name="mgmt_addr"/>
           <Option name="mgmt_ssh">False</Option>
           <Option name="modules_dir">/lib/modules/`uname -r`/kernel/net/</Option>
