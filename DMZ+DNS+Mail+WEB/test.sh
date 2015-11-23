@@ -22,6 +22,9 @@ echo "********"
 if [ $? -ne 0 ]; then
     echo "********** START_DNS ERROR **********"
     err=1
+    imunes -b -e $eid
+    thereWereErrors $err
+    exit $err
 else
     echo Wait 30 sec ...
     sleep 30
