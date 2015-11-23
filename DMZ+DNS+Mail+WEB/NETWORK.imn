@@ -510,7 +510,7 @@ node n20 {
     network-config {
 	hostname FW
 	!
-	interface eth2
+	interface eth1
 	 mac address 42:00:aa:00:00:21
 	 ip address 15.16.17.1/24
 	!
@@ -533,7 +533,7 @@ node n20 {
     iconcoords {120.0 192.0}
     labelcoords {150.0 171.0}
     interface-peer {eth0 n21}
-    interface-peer {eth2 n24}
+    interface-peer {eth1 n24}
 }
 
 node n21 {
