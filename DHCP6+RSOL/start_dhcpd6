@@ -10,6 +10,9 @@ if [ $# -eq 1 ]; then
     isEidRunning $eid
 else
     eid=`isNodeRunning $dhcp_server`
+    if [ $? -ne 0 ]; then
+	exit 1
+    fi
 fi
 
 if isOSfreebsd; then

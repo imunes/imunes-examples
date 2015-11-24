@@ -7,6 +7,9 @@ if [ $# -eq 1 ]; then
     isEidRunning $eid
 else
     eid=`isNodeRunning router1`
+    if [ $? -ne 0 ]; then
+	exit 1
+    fi
 fi
 
 echo "Configuring gif tunnel on router1..."
