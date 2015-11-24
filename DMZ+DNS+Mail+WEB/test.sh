@@ -14,9 +14,10 @@ startCheck "$eid"
 
 echo "********"
 echo "* Tested without firewall! "
+echo "* (to test with firewall uncomment ./start_fw in line 20)"
 echo "* (ipfw can affect other tests that are running in parallel) "
 echo "********"
-# ./start_fw
+#./start_fw
 
 ./start_dns $eid
 if [ $? -ne 0 ]; then

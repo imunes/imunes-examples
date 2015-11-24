@@ -2,14 +2,6 @@
 
 . ../common/start_functions.sh
 
-if ! isOSfreebsd; then
-    echo "*****"
-    echo "* Firewall part of this example is based on ipfw "
-    echo "* and currently runs only on FreeBSD."
-    echo "*****"
-    exit 2
-fi
-
 if test $# -eq 1; then
     eid=$1
     isEidRunning $eid
@@ -17,32 +9,44 @@ else
     eid=`isNodeRunning aRootServer`
 fi
 
-kldstat -q -m ipfw
-if test $? -ne 0
-then
-    kldload ipfw
-    ipfw add 65534 allow ip from any to any
-fi
-kldload -n ipdivert
+if isOSfreebsd; then
+    kldstat -q -m ipfw
+    if test $? -ne 0
+    then
+        kldload ipfw
+        ipfw add 65534 allow ip from any to any
+    fi
+    kldload -n ipdivert
+    
+    svi="aRootServer bRootServer R3 hr2 dnsCom dnsHr dnsFer R7 R8 R9 \
+         dnsTel www mm cRootServer dnsOrg dnsZpm pc zpmMail FW FWint \
+         smtpMM wwwMM dnsMM LAN-SMTP pc1 pc2 pc3"
+    
+    for h in $svi
+    do
+        himage $h ipfw -q flush
+        himage $h ipfw -q add 65534 allow ip from any to any
+    done
+    
+    hcp FW_files/FW-FreeBSD.fw FW:/
+    echo Pokrecem Firewall na FW:
+    himage FW /FW-FreeBSD.fw
+    
+    himage FWint killall -q -9 natd
+    himage FWint natd -interface eth0 -redirect_port tcp 192.168.1.10:25 25
+    
+    hcp FW_files/FWint-FreeBSD.sh FWint:/
+    echo Pokrecem Firewall na FWint:
+    himage FWint /FWint-FreeBSD.sh
+fi 
 
-svi="aRootServer bRootServer R3 hr2 dnsCom dnsHr dnsFer R7 R8 R9 \
-     dnsTel www mm cRootServer dnsOrg dnsZpm pc zpmMail FW FWint \
-     smtpMM wwwMM dnsMM LAN-SMTP pc1 pc2 pc3"
-
-for h in $svi
-do
-    himage $h ipfw -q flush
-    himage $h ipfw -q add 65534 allow ip from any to any
-done
-
-hcp FW.fw FW:/
-echo Pokrecem Firewall na FW:
-himage FW /FW.fw
-
-himage FWint killall -q -9 natd
-himage FWint natd -interface eth0 -redirect_port tcp 192.168.1.10:25 25
-
-hcp FWint.sh FWint:/
-echo Pokrecem Firewall na FWint:
-himage FWint /FWint.sh
+if isOSlinux; then
+    hcp FW_files/FW-Linux.fw FW:/
+    echo Pokrecem Firewall na FW:
+    himage FW /FW-Linux.fw
+    
+    hcp FW_files/FWint-Linux.fw FWint:/
+    echo Pokrecem Firewall na FWint:
+    himage FWint /FWint-Linux.fw
+fi 
 

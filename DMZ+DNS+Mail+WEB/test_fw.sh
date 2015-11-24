@@ -13,13 +13,13 @@ himage pc nmap -Pn -p20-25,53,80 192.168.1.10
 echo ""
 echo "Scan outside address of LAN-SMTP in LAN from smtpMM in DMZ"
 echo "NAT redirects 15.16.17.2:25 to 192.168.1.10:25"
-echo "Only smtp tcp port should be open"
+echo "Only smtp should be open"
 himage smtpMM nmap -Pn -p20-25,53,80 15.16.17.2
 
 echo ""
 echo "Scan outside address of LAN-SMTP in LAN from outside network"
 echo "(internal smtp server for LAN)"
-echo "Everything should be closed"
+echo "Everything should be filtered"
 himage pc nmap -Pn -p20-25,53,80 15.16.17.2
 
 echo ""
@@ -29,7 +29,8 @@ himage pc nmap -Pn -p20-25,53,80 15.16.17.80
 
 echo ""
 echo "Scan dnsMM.mm.com from outside network"
-echo "Domain is closed. Access is allowed only from secondary server dnsTel"
+echo "Everything should be filtered"
+echo "Access to domain/tcp is allowed only from secondary server dnsTel"
 himage pc nmap -Pn -p20-25,53,80 15.16.17.18
 
 echo ""
@@ -53,7 +54,7 @@ echo "Open: smtp,http"
 himage pc1 nmap -Pn -p20-25,53,80 20.0.0.3
 
 echo ""
-echo "Scan UDP prots on dnsMM.mm.com from outside network"
+echo "Scan UDP ports on dnsMM.mm.com from outside network"
 echo "Open: domain (63 open|filtered)"
 himage pc nmap -Pn -p7-70 -sU 15.16.17.18
 
