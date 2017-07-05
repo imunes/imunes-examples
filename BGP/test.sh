@@ -9,8 +9,7 @@ slow=1
 eid=`imunes -b BGP-Anycast.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
-echo "Wait 40 sec ..."
-sleep 40
+Wait 40
 netDump DC1@$eid eth1
 if [ $? -eq 0 ]; then
     n=1
@@ -30,8 +29,7 @@ __END__
 	if [ $slow -eq 1 ]; then
 	    stopNode DC2@$eid 
 	    if [ $? -eq 0 ]; then
-        echo "Wait 20 sec ..."
-		sleep 20
+		Wait 20
 
 		echo ""
 		echo "########## Backbone1@$eid routes after 45 seconds"
@@ -42,8 +40,7 @@ __END__
 
 		startNode DC2@$eid
 		if [ $? -eq 0 ]; then
-            echo "Wait 30 sec ..."
-		    sleep 30
+		    Wait 30
                     n=1
                     pingStatus=1
                     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
@@ -53,7 +50,7 @@ __END__
                         n=`expr $n + 1`
                     done
                     if [ $pingStatus -eq 0 ]; then
-			sleep 4
+			Wait 4
 			readDump DC1@$eid eth1
 		    else
 			err=1
