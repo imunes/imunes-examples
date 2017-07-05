@@ -198,8 +198,9 @@ traceCheck () {
 stopNode () {
 #    himage $1 kill -9 -1 2> /dev/null
 #    himage $1 tcpdrop -a 2> /dev/null
-    for ifc in `himage $1 netstat -i | tail -n +3 | cut -d' ' -f1`; do
+    for ifc in `himage $1 netstat -i | fgrep '<Link' | cut -d' ' -f1`; do
 	if [ "$ifc" != "lo0" ]; then
+	    echo ifconfig $ifc down
 	    himage $1 ifconfig $ifc down
 	fi
     done
@@ -210,8 +211,9 @@ stopNode () {
 startNode () {
 #    himage $1 kill -9 -1 2> /dev/null
 #    himage $1 tcpdrop -a 2> /dev/null
-    for ifc in `himage $1 netstat -i | tail -n +3 | cut -d' ' -f1`; do
+    for ifc in `himage $1 netstat -ai | fgrep '<Link' | cut -d' ' -f1 | tr -d '*'`; do
 	if [ "$ifc" != "lo0" ]; then
+	    echo ifconfig $ifc up
 	    himage $1 ifconfig $ifc up
 	fi
     done
@@ -277,3 +279,19 @@ webCheck () {
 	return 0
     fi
 }
+
+# Usage: sleep n
+# - countdown every 5 sec
+Wait () {
+    n=$1
+    echo -n "Wait $n sec.."
+    while test $n -gt 5
+    do
+        sleep 5
+        n=$((n - 5))
+        echo -n "$n.."
+    done
+    sleep $n
+    echo ""
+}
+
