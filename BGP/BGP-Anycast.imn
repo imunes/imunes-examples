@@ -1,0 +1,620 @@
+node n0 {
+    type router
+    model quagga
+    network-config {
+	hostname DC1
+	!
+	interface eth2
+	 ipv6 address fc00:8::1/64
+	 mac address 42:00:aa:00:00:0f
+	 ip address 9.1.1.1/24
+	!
+	interface eth1
+	 ipv6 address fc00:7::1/64
+	 mac address 42:00:aa:00:00:0e
+	 ip address 8.8.8.1/24
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:00
+	 ipv6 address fc00::1/64
+	 ip address 10.10.10.1/30
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router bgp
+	router bgp 10000
+	 no synchronization
+	 no auto-summary
+	 network 8.8.8.0 mask 255.255.255.0
+	 network 9.1.1.0 mask 255.255.255.0
+	 network 10.10.10.0 mask 255.255.255.252
+	 neighbor 10.10.10.2 remote-as 22222
+	!
+    }
+    canvas c0
+    iconcoords {240 408}
+    labelcoords {220 367}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n10}
+    interface-peer {eth2 n11}
+}
+
+node n1 {
+    type router
+    model quagga
+    network-config {
+	hostname Backbone2
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:02
+	 ipv6 address fc00:1::1/64
+	 ip address 10.10.10.9/30
+	!
+	interface eth2
+	 mac address 42:00:aa:00:00:03
+	 ipv6 address fc00:2::1/64
+	 ip address 10.10.10.6/30
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:01
+	 ipv6 address fc00::2/64
+	 ip address 10.10.10.2/30
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	!
+	router bgp
+	router bgp 22222
+	 no synchronization
+	 no auto-summary
+	 network 10.10.10.0 mask 255.255.255.252
+	 network 10.10.10.4 mask 255.255.255.252
+	 network 10.10.10.8 mask 255.255.255.252
+	 neighbor 10.10.10.1 remote-as 10000
+	 neighbor 10.10.10.5 remote-as 100
+	 neighbor 10.10.10.10 remote-as 11111
+	!
+    }
+    canvas c0
+    iconcoords {240.0 240.0}
+    labelcoords {172.0 240.0}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 n2}
+    interface-peer {eth2 n4}
+}
+
+node n2 {
+    type router
+    model quagga
+    network-config {
+	hostname Backbone1
+	!
+	interface eth2
+	 mac address 42:00:aa:00:00:06
+	 ipv6 address fc00:4::1/64
+	 ip address 10.10.10.17/30
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:05
+	 ipv6 address fc00:3::1/64
+	 ip address 10.10.10.13/30
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:04
+	 ipv6 address fc00:1::2/64
+	 ip address 10.10.10.10/30
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	!
+	router bgp
+	router bgp 11111
+	 no synchronization
+	 no auto-summary
+	 network 10.10.10.16 mask 255.255.255.252
+	 network 10.10.10.12 mask 255.255.255.252
+	 network 10.10.10.8 mask 255.255.255.252
+	 neighbor 10.10.10.14 remote-as 10000
+	 neighbor 10.10.10.9 remote-as 22222
+	 neighbor 10.10.10.18 remote-as 200
+	!
+    }
+    canvas c0
+    iconcoords {600.0 240.0}
+    labelcoords {677.0 240.0}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n3}
+    interface-peer {eth2 n5}
+}
+
+node n3 {
+    type router
+    model quagga
+    network-config {
+	hostname DC2
+	!
+	interface eth2
+	 ipv6 address fc00:a::1/64
+	 mac address 42:00:aa:00:00:13
+	 ip address 9.0.0.1/24
+	!
+	interface eth1
+	 ipv6 address fc00:9::1/64
+	 mac address 42:00:aa:00:00:12
+	 ip address 8.8.8.1/24
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:07
+	 ipv6 address fc00:3::2/64
+	 ip address 10.10.10.14/30
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	!
+	router bgp
+	router bgp 10000
+	 no synchronization
+	 no auto-summary
+	 network 8.8.8.0 mask 255.255.255.0
+	 network 9.0.0.0 mask 255.255.255.0
+	 network 10.10.10.12 mask 255.255.255.252
+	 neighbor 10.10.10.13 remote-as 11111
+	!
+    }
+    canvas c0
+    iconcoords {600 384}
+    labelcoords {575 346}
+    interface-peer {eth0 n2}
+    interface-peer {eth1 n13}
+    interface-peer {eth2 n12}
+}
+
+node n4 {
+    type router
+    model quagga
+    network-config {
+	hostname ISP1
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:09
+	 ipv6 address fc00:5::1/64
+	 ip address 172.32.1.1/24
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:08
+	 ipv6 address fc00:2::2/64
+	 ip address 10.10.10.5/30
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	!
+	router bgp
+	router bgp 100
+	 no synchronization
+	 no auto-summary
+	 network 172.32.1.0 mask 255.255.255.0
+	 network 10.10.10.4 mask 255.255.255.252
+	 neighbor 10.10.10.6 remote-as 22222
+	!
+    }
+    canvas c0
+    iconcoords {336.0 96.0}
+    labelcoords {388.0 92.0}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n6}
+}
+
+node n5 {
+    type router
+    model quagga
+    network-config {
+	hostname ISP2
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:0b
+	 ipv6 address fc00:6::1/64
+	 ip address 172.16.1.1/24
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:0a
+	 ipv6 address fc00:4::2/64
+	 ip address 10.10.10.18/30
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	!
+	!
+	router bgp
+	router bgp 200
+	 no synchronization
+	 no auto-summary
+	 network 172.16.1.0 mask 255.255.255.0
+	 network 10.10.10.16 mask 255.255.255.252
+	 neighbor 10.10.10.17 remote-as 11111
+	!
+    }
+    canvas c0
+    iconcoords {504.0 96.0}
+    labelcoords {458.0 94.0}
+    interface-peer {eth0 n2}
+    interface-peer {eth1 n7}
+}
+
+node n6 {
+    type pc
+    network-config {
+	hostname Client1
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:0c
+	 ipv6 address fc00:5::20/64
+	 ip address 172.32.1.2/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	ipv6 route ::/0 fc00:5::1
+	!
+	!
+	ip route 0.0.0.0/0 172.32.1.1
+	!
+    }
+    canvas c0
+    iconcoords {48.0 96.0}
+    labelcoords {48.0 132.0}
+    interface-peer {eth0 n4}
+}
+
+node n7 {
+    type pc
+    network-config {
+	hostname Client2
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:0d
+	 ipv6 address fc00:6::20/64
+	 ip address 172.16.1.2/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	ipv6 route ::/0 fc00:6::1
+	!
+	!
+	ip route 0.0.0.0/0 172.16.1.1
+	!
+    }
+    canvas c0
+    iconcoords {792.0 96.0}
+    labelcoords {792.0 132.0}
+    interface-peer {eth0 n5}
+}
+
+node n8 {
+    type host
+    network-config {
+	hostname WEB1
+	!
+	interface eth1
+	 ipv6 address fc00:8::10/64
+	 mac address 42:00:aa:00:00:11
+	 ip address 9.1.1.2/24
+	!
+	interface eth0
+	 ipv6 address fc00:7::10/64
+	 mac address 42:00:aa:00:00:10
+	 ip address 8.8.8.8/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ipv6 route ::/0 fc00:8::1
+	!
+	!
+	ip route 0.0.0.0/0 9.1.1.1
+	!
+    }
+    canvas c0
+    iconcoords {72.0 552.0}
+    labelcoords {72.0 593.0}
+    interface-peer {eth0 n10}
+    interface-peer {eth1 n11}
+}
+
+node n9 {
+    type host
+    network-config {
+	hostname WEB2
+	!
+	interface eth1
+	 ipv6 address fc00:a::10/64
+	 mac address 42:00:aa:00:00:15
+	 ip address 9.0.0.2/24
+	!
+	interface eth0
+	 ipv6 address fc00:9::10/64
+	 mac address 42:00:aa:00:00:14
+	 ip address 8.8.8.8/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ipv6 route ::/0 fc00:a::1
+	!
+	!
+	ip route 0.0.0.0/0 9.0.0.1
+	!
+    }
+    canvas c0
+    iconcoords {768.0 552.0}
+    labelcoords {768.0 593.0}
+    interface-peer {eth0 n13}
+    interface-peer {eth1 n12}
+}
+
+node n10 {
+    type lanswitch
+    network-config {
+	hostname sw1
+	!
+    }
+    canvas c0
+    iconcoords {72 408}
+    labelcoords {75 387}
+    interface-peer {e0 n0}
+    interface-peer {e1 n8}
+}
+
+node n11 {
+    type lanswitch
+    network-config {
+	hostname sw2
+	!
+    }
+    canvas c0
+    iconcoords {240.0 552.0}
+    labelcoords {240.0 578.0}
+    interface-peer {e0 n0}
+    interface-peer {e1 n8}
+}
+
+node n12 {
+    type lanswitch
+    network-config {
+	hostname sw4
+	!
+    }
+    canvas c0
+    iconcoords {600 552}
+    labelcoords {596 576}
+    interface-peer {e0 n3}
+    interface-peer {e1 n9}
+}
+
+node n13 {
+    type lanswitch
+    network-config {
+	hostname sw3
+	!
+    }
+    canvas c0
+    iconcoords {768 384}
+    labelcoords {770 363}
+    interface-peer {e0 n3}
+    interface-peer {e1 n9}
+}
+
+link l0 {
+    nodes {n0 n1}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n1 n2}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n1 n4}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n2 n3}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n2 n5}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n4 n6}
+    bandwidth 0
+}
+
+link l6 {
+    nodes {n5 n7}
+    bandwidth 0
+}
+
+link l7 {
+    nodes {n0 n10}
+    bandwidth 0
+}
+
+link l8 {
+    nodes {n0 n11}
+    bandwidth 0
+}
+
+link l9 {
+    nodes {n10 n8}
+    bandwidth 0
+}
+
+link l10 {
+    nodes {n11 n8}
+    bandwidth 0
+}
+
+link l11 {
+    nodes {n3 n13}
+    bandwidth 0
+}
+
+link l12 {
+    nodes {n3 n12}
+    bandwidth 0
+}
+
+link l13 {
+    nodes {n13 n9}
+    bandwidth 0
+}
+
+link l14 {
+    nodes {n12 n9}
+    bandwidth 0
+}
+
+annotation a0 {
+    type rectangle
+    iconcoords {25.0 315.0 275.0 606.0}
+    color #cccccc
+    width 1
+    canvas c0
+}
+
+annotation a1 {
+    type rectangle
+    iconcoords {545.0 310.0 818.0 602.0}
+    color #cccccc
+    width 1
+    canvas c0
+}
+
+annotation a2 {
+    type text
+    iconcoords {56.0 334.0}
+    label {AS10000}
+    labelcolor #ff0000
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a3 {
+    type text
+    iconcoords {728.0 331.0}
+    label {AS10000}
+    labelcolor #f80000
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a4 {
+    type text
+    iconcoords {645.0 207.0}
+    label {AS11111}
+    labelcolor #ff0000
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a5 {
+    type text
+    iconcoords {170.0 207.0}
+    label {AS22222}
+    labelcolor #ff0000
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a6 {
+    type text
+    iconcoords {312.0 66.0}
+    label {AS100}
+    labelcolor #ff0000
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a7 {
+    type text
+    iconcoords {481.0 67.0}
+    label {AS200}
+    labelcolor #ff0000
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a8 {
+    type oval
+    iconcoords {25 499 113 534}
+    color #ffffbb
+    bordercolor #042bff
+    width 1
+    canvas c0
+}
+
+annotation a9 {
+    type oval
+    iconcoords {728 497 803 532}
+    color #ffffbb
+    bordercolor #042bff
+    width 1
+    canvas c0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+
