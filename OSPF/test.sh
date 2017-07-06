@@ -8,8 +8,7 @@ slow=1
 eid=`imunes -b OSPF1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
-echo "Wait 40 sec ..."
-sleep 40
+Wait 40
 netDump router2@$eid eth2
 if [ $? -eq 0 ]; then
     n=1
@@ -52,21 +51,25 @@ __END__
 	fi
 
 	if [ $slow -eq 1 ]; then
-	    stopNode router7@$eid 
+	    # stopNode router7@$eid 
+            echo "Drop all packets between router2 and router7 (BER=1)"
+            vlink -BER 1 router2-router7
 	    if [ $? -eq 0 ]; then
-		sleep 45
+		Wait 5
 
 		echo ""
-		echo "########## router2@$eid routes after 45 seconds"
+		echo "########## router2@$eid routes after 5 seconds"
 		himage -nt router2@$eid vtysh << __END__ 
 		show ip ospf route
 		show ipv6 ospf route
 		exit
 __END__
 
-		startNode router7@$eid
+		#startNode router7@$eid
+                echo "Restore link between router2 and router7 (BER=0)"
+                vlink -BER 0 router2-router7
 		if [ $? -eq 0 ]; then
-		    sleep 15
+		    Wait 40
                     n=1
                     pingStatus=1
                     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
@@ -81,7 +84,7 @@ __END__
 		    else
 			err=1
 		    fi
-		    ping6Check pc@$eid fc00:1::10
+                    ping6Check pc@$eid fc00:1::10 2
                     n=1
                     pingStatus=1
                     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
