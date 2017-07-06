@@ -23,3 +23,12 @@ show ip ospf interface - show info about router's interfaces
 show ip ospf neighbor - show info about router's neighbours
 
 Notice the dead time in "show ip ospf neighbor" and check what happens after the router7 is shut down. Look at how the dead time changes.
+
+
+*******************
+*  OSPF_RFC.imn
+*******************
+
+Network and configuration example from RFC 2328, "OSPF Version 2", figure 2, page 19.
+http://www.ietf.org/rfc/rfc2328.txt
+

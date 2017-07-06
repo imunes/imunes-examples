@@ -1,0 +1,1416 @@
+node n1 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT1
+	!
+	interface eth1
+	 ip address 10.1.1.1/24
+	 ip ospf cost 3
+	 mac address 42:00:aa:00:00:01
+	!
+	interface eth0
+	 ip address 10.1.3.2/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:00
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {192 72}
+    labelcoords {224 51}
+    interface-peer {eth0 n13}
+    interface-peer {eth1 n15}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.1.3.2/24 
+                 ip ospf cost 1 
+                ! 
+                interface eth1 
+                 ip address 10.1.1.1/24 
+                 ip ospf cost 3 
+                ! 
+                router ospf
+                 router-id 1.1.1.1 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.1.1.0/24 area 1.1.1.1 
+                 network 10.1.3.0/24 area 1.1.1.1 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n2 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT2
+	!
+	interface eth1
+	 ip address 10.1.3.1/24
+	 ip ospf cost 1
+	 ip ospf priority 5
+	 mac address 42:00:aa:00:00:03
+	!
+	interface eth0
+	 ip address 10.1.2.1/24
+	 ip ospf cost 3
+	 mac address 42:00:aa:00:00:02
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {192 192}
+    labelcoords {222 219}
+    interface-peer {eth0 n14}
+    interface-peer {eth1 n13}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.1.2.1/24 
+                 ip ospf cost 3 
+                ! 
+                interface eth1 
+                 ip address 10.1.3.1/24 
+                 ip ospf cost 1 
+                 ip ospf priority 5 
+                ! 
+                router ospf
+                 router-id 2.2.2.2 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.1.3.0/24 area 1.1.1.1 
+                 network 10.1.2.0/24 area 1.1.1.1 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n3 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT3
+	!
+	interface eth2
+	 ip address 10.1.3.4/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:06
+	!
+	interface eth1
+	 ip address 10.1.4.1/24
+	 ip ospf cost 2
+	 mac address 42:00:aa:00:00:05
+	!
+	interface eth0
+	 ip address 10.0.36.1/24
+	 ip ospf cost 8
+	 mac address 42:00:aa:00:00:04
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {432.0 192.0}
+    labelcoords {434.0 226.0}
+    interface-peer {eth0 n6}
+    interface-peer {eth1 n16}
+    interface-peer {eth2 n13}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0
+                 ip address 10.0.36.1/24 
+                 ip ospf cost 8 
+                ! 
+                interface eth1 
+                 ip address 10.1.4.1/24 
+                 ip ospf cost 2 
+                ! 
+                interface eth2 
+                 ip address 10.1.3.4/24 
+                 ip ospf cost 1 
+                ! 
+                router ospf
+                 router-id 3.3.3.3 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.1.3.0/24 area 1.1.1.1 
+                 network 10.1.4.0/24 area 1.1.1.1 
+                 network 10.0.36.0/24 area 0.0.0.0 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n4 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT4
+	!
+	interface eth1
+	 ip address 10.0.45.1/24
+	 ip ospf cost 8
+	 mac address 42:00:aa:00:00:08
+	!
+	interface eth0
+	 ip address 10.1.3.3/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:07
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {432.0 120.0}
+    labelcoords {434.0 101.0}
+    interface-peer {eth0 n13}
+    interface-peer {eth1 n5}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.1.3.3/24 
+                 ip ospf cost 1 
+                ! 
+                interface eth1 
+                 ip address 10.0.45.1/24 
+                 ip ospf cost 8 
+                ! 
+                router ospf
+                 router-id 4.4.4.4 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.1.3.0/24 area 1.1.1.1 
+                 network 10.0.45.0/24 area 0.0.0.0 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n5 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT5
+	!
+	interface eth2
+	 ip address 10.0.57.1/24
+	 ip ospf cost 6
+	 mac address 42:00:aa:00:00:0b
+	!
+	interface eth1
+	 ip address 10.0.56.1/24
+	 ip ospf cost 7
+	 mac address 42:00:aa:00:00:0a
+	!
+	interface eth0
+	 ip address 10.0.45.2/24
+	 ip ospf cost 8
+	 mac address 42:00:aa:00:00:09
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 192.168.1.0/24 10.0.57.2
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {672 48}
+    labelcoords {716 43}
+    interface-peer {eth0 n4}
+    interface-peer {eth1 n6}
+    interface-peer {eth2 n7}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.0.45.2/24 
+                 ip ospf cost 8 
+                ! 
+                interface eth1 
+                 ip address 10.0.56.1/24 
+                 ip ospf cost 7 
+                ! 
+                interface eth2 
+                 ip address 10.0.57.1/24 
+                 ip ospf cost 6 
+                ! 
+                router ospf
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.0.56.0/24 area 0.0.0.0 
+                 network 10.0.57.0/24 area 0.0.0.0 
+                 network 10.0.45.0/24 area 0.0.0.0 
+                ! 
+                ip route 192.168.1.0/24 10.0.57.2
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n6 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT6
+	!
+	interface eth2
+	 ip address 10.0.60.1/24
+	 ip ospf cost 7
+	 mac address 42:00:aa:00:00:0e
+	!
+	interface eth1
+	 ip address 10.0.56.2/24
+	 ip ospf cost 6
+	 mac address 42:00:aa:00:00:0d
+	!
+	interface eth0
+	 ip address 10.0.36.2/24
+	 ip ospf cost 6
+	 mac address 42:00:aa:00:00:0c
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {600 264}
+    labelcoords {647 273}
+    interface-peer {eth0 n3}
+    interface-peer {eth1 n5}
+    interface-peer {eth2 n10}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.0.36.2/24 
+                 ip ospf cost 6 
+                ! 
+                interface eth1 
+                 ip address 10.0.56.2/24 
+                 ip ospf cost 6 
+                ! 
+                interface eth2 
+                 ip address 10.0.60.1/24 
+                 ip ospf cost 7 
+                ! 
+                router ospf
+                 router-id 6.6.6.6 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.0.36.0/24 area 0.0.0.0 
+                 network 10.0.56.0/24 area 0.0.0.0 
+                 network 10.0.60.0/24 area 0.0.0.0 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n7 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT7
+	!
+	interface eth1
+	 ip address 10.0.57.2/24
+	 ip ospf cost 6
+	 mac address 42:00:aa:00:00:10
+	!
+	interface eth0
+	 ip address 10.2.6.2/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:0f
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {816 384}
+    labelcoords {845 372}
+    interface-peer {eth0 n21}
+    interface-peer {eth1 n5}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.2.6.2/24 
+                 ip ospf cost 1 
+                ! 
+                interface eth1 
+                 ip address 10.0.57.2/24 
+                 ip ospf cost 6 
+                ! 
+                router ospf
+                 router-id 7.7.7.7 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.0.57.0/24 area 0.0.0.0 
+                 network 10.2.6.0/24 area 2.2.2.2 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n8 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT8
+	!
+	interface eth1
+	 ip address 10.2.7.1/24
+	 ip ospf cost 4
+	 mac address 42:00:aa:00:00:12
+	!
+	interface eth0
+	 ip address 10.2.6.3/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:11
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {768 552}
+    labelcoords {814 557}
+    interface-peer {eth0 n21}
+    interface-peer {eth1 n22}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.2.6.3/24 
+                 ip ospf cost 1 
+                ! 
+                interface eth1 
+                 ip address 10.2.7.1/24 
+                 ip ospf cost 4 
+                ! 
+                router ospf
+                 router-id 8.8.8.8 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.2.6.0/24 area 2.2.2.2 
+                 network 10.2.7.0/24 area 2.2.2.2 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n9 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT9
+	!
+	interface eth1
+	 ip address 10.3.11.1/24
+	 ip ospf cost 3
+	 mac address 42:00:aa:00:00:14
+	!
+	interface eth0
+	 ip address 10.3.9.1/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:13
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {72.0 408.0}
+    labelcoords {60.0 439.0}
+    interface-peer {eth0 n18}
+    interface-peer {eth1 n17}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.3.9.1/24 
+                 ip ospf cost 1 
+                ! 
+                interface eth1 
+                 ip address 10.3.11.1/24 
+                 ip ospf cost 3 
+                ! 
+                router ospf
+                 router-id 9.9.9.9 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.3.11.0/24 area 3.3.3.3 
+                 network 10.3.9.0/24 area 3.3.3.3 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n10 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT10
+	!
+	interface eth2
+	 ip address 10.2.6.1/24
+	 ip ospf cost 1
+	 ip ospf priority 0
+	 mac address 42:00:aa:00:00:17
+	!
+	interface eth1
+	 ip address 10.2.8.1/24
+	 ip ospf cost 3
+	 mac address 42:00:aa:00:00:16
+	!
+	interface eth0
+	 ip address 10.0.60.2/24
+	 ip ospf cost 5
+	 mac address 42:00:aa:00:00:15
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {600 384}
+    labelcoords {553 378}
+    interface-peer {eth0 n6}
+    interface-peer {eth1 n20}
+    interface-peer {eth2 n21}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.0.60.2/24 
+                 ip ospf cost 5 
+                ! 
+                interface eth1 
+                 ip address 10.2.8.1/24 
+                 ip ospf cost 3 
+                ! 
+                interface eth2 
+                 ip address 10.2.6.1/24 
+                 ip ospf cost 1 
+                 ip ospf priority 0 
+                ! 
+                router ospf
+                 router-id 10.10.10.10 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.0.60.0/24 area 0.0.0.0 
+                 network 10.2.6.0/24 area 2.2.2.2 
+                 network 10.2.8.0/24 area 2.2.2.2 
+                 area 2.2.2.2 virtual-link 11.11.11.11 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n11 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT11
+	!
+	interface eth1
+	 ip address 10.3.9.3/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:19
+	!
+	interface eth0
+	 ip address 10.2.8.2/24
+	 ip ospf cost 2
+	 mac address 42:00:aa:00:00:18
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {360.0 408.0}
+    labelcoords {367.0 390.0}
+    interface-peer {eth0 n20}
+    interface-peer {eth1 n18}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.2.8.2/24 
+                 ip ospf cost 2 
+                ! 
+                interface eth1 
+                 ip address 10.3.9.3/24 
+                 ip ospf cost 1 
+                ! 
+                router ospf
+                 router-id 11.11.11.11 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.2.8.0/24 area 2.2.2.2 
+                 network 10.3.9.0/24 area 3.3.3.3 
+                 area 2.2.2.2 virtual-link 10.10.10.10 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n12 {
+    type router
+    cpu {{min 0} {max 100} {weight 1}}
+    model quagga
+    network-config {
+	hostname RT12
+	!
+	interface eth1
+	 ip address 10.3.10.1/24
+	 ip ospf cost 2
+	 mac address 42:00:aa:00:00:1b
+	!
+	interface eth0
+	 ip address 10.3.9.2/24
+	 ip ospf cost 1
+	 mac address 42:00:aa:00:00:1a
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router ospf
+	 redistribute static
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
+	!
+    }
+    canvas c0
+    iconcoords {216.0 504.0}
+    labelcoords {265.0 513.0}
+    interface-peer {eth0 n18}
+    interface-peer {eth1 n19}
+    custom-configs {
+        custom-config-id generic {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface eth0 
+                 ip address 10.3.9.2/24 
+                 ip ospf cost 1 
+                ! 
+                interface eth1 
+                 ip address 10.3.10.1/24 
+                 ip ospf cost 2 
+                ! 
+                router ospf
+                 router-id 12.12.12.12 
+                 redistribute static 
+                 redistribute connected 
+                 redistribute rip 
+                 network 10.3.9.0/24 area 3.3.3.3 
+                 network 10.3.10.0/24 area 3.3.3.3 
+                !
+            }
+        }
+    }
+    custom-enabled true
+    custom-selected generic
+}
+
+node n13 {
+    type lanswitch
+    network-config {
+	hostname N3
+	!
+    }
+    canvas c0
+    iconcoords {312 120}
+    labelcoords {323 150}
+    interface-peer {e1 n1}
+    interface-peer {e2 n4}
+    interface-peer {e3 n3}
+    interface-peer {e0 n2}
+}
+
+node n14 {
+    type lanswitch
+    network-config {
+	hostname N2
+	!
+    }
+    canvas c0
+    iconcoords {48.0 192.0}
+    labelcoords {76.0 175.0}
+    interface-peer {e0 n2}
+}
+
+node n15 {
+    type lanswitch
+    network-config {
+	hostname N1
+	!
+    }
+    canvas c0
+    iconcoords {48.0 72.0}
+    labelcoords {82.0 57.0}
+    interface-peer {e0 n1}
+}
+
+node n16 {
+    type lanswitch
+    network-config {
+	hostname N4
+	!
+    }
+    canvas c0
+    iconcoords {312 240}
+    labelcoords {312 219}
+    interface-peer {e0 n3}
+}
+
+node n17 {
+    type lanswitch
+    network-config {
+	hostname N11
+	!
+    }
+    canvas c0
+    iconcoords {72.0 336.0}
+    labelcoords {68.0 320.0}
+    interface-peer {e0 n9}
+}
+
+node n18 {
+    type lanswitch
+    network-config {
+	hostname N9
+	!
+    }
+    canvas c0
+    iconcoords {216.0 408.0}
+    labelcoords {232.0 392.0}
+    interface-peer {e0 n9}
+    interface-peer {e1 n12}
+    interface-peer {e2 n11}
+}
+
+node n19 {
+    type lanswitch
+    network-config {
+	hostname N10
+	!
+    }
+    canvas c0
+    iconcoords {72 576}
+    labelcoords {67 554}
+    interface-peer {e0 n12}
+}
+
+node n20 {
+    type lanswitch
+    network-config {
+	hostname N8
+	!
+    }
+    canvas c0
+    iconcoords {528 456}
+    labelcoords {525 489}
+    interface-peer {e0 n10}
+    interface-peer {e1 n11}
+}
+
+node n21 {
+    type lanswitch
+    network-config {
+	hostname N6
+	!
+    }
+    canvas c0
+    iconcoords {768 480}
+    labelcoords {727 506}
+    interface-peer {e0 n10}
+    interface-peer {e1 n7}
+    interface-peer {e2 n8}
+}
+
+node n22 {
+    type lanswitch
+    network-config {
+	hostname N7
+	!
+    }
+    canvas c0
+    iconcoords {624 552}
+    labelcoords {606 534}
+    interface-peer {e0 n8}
+}
+
+link l2 {
+    nodes {n1 n13}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n4 n13}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n1 n15}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n4 n5}
+    bandwidth 0
+}
+
+link l6 {
+    nodes {n3 n6}
+    bandwidth 0
+}
+
+link l7 {
+    nodes {n5 n6}
+    bandwidth 0
+}
+
+link l8 {
+    nodes {n6 n10}
+    bandwidth 0
+}
+
+link l9 {
+    nodes {n10 n20}
+    bandwidth 0
+}
+
+link l10 {
+    nodes {n10 n21}
+    bandwidth 0
+}
+
+link l11 {
+    nodes {n21 n7}
+    bandwidth 0
+}
+
+link l12 {
+    nodes {n21 n8}
+    bandwidth 0
+}
+
+link l13 {
+    nodes {n8 n22}
+    bandwidth 0
+}
+
+link l14 {
+    nodes {n11 n20}
+    bandwidth 0
+}
+
+link l15 {
+    nodes {n9 n18}
+    bandwidth 0
+}
+
+link l16 {
+    nodes {n18 n12}
+    bandwidth 0
+}
+
+link l17 {
+    nodes {n11 n18}
+    bandwidth 0
+}
+
+link l18 {
+    nodes {n12 n19}
+    bandwidth 0
+}
+
+link l19 {
+    nodes {n9 n17}
+    bandwidth 0
+}
+
+link l20 {
+    nodes {n3 n16}
+    bandwidth 0
+}
+
+link l21 {
+    nodes {n3 n13}
+    bandwidth 0
+}
+
+link l0 {
+    nodes {n14 n2}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n2 n13}
+    bandwidth 0
+}
+
+link l22 {
+    nodes {n5 n7}
+    bandwidth 0
+}
+
+annotation a0 {
+    iconcoords {10.0 18.0 429.0 270.0}
+    type rectangle
+    label {}
+    labelcolor #040000
+    fontfamily {Arial}
+    fontsize {12}
+    color #bebea0
+    canvas c0
+}
+
+annotation a1 {
+    iconcoords {21.0 294.0 329.0 608.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #bedebe
+    canvas c0
+}
+
+annotation a2 {
+    iconcoords {458 386 880 599}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #bed4d6
+    canvas c0
+}
+
+annotation a3 {
+    iconcoords {479 585}
+    type text
+    label {Area 2}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    canvas c0
+}
+
+annotation a4 {
+    iconcoords {264.0 576.0}
+    type text
+    label {Area 3}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    canvas c0
+}
+
+annotation a6 {
+    iconcoords {72.0 240.0}
+    type text
+    label {Area 1}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    canvas c0
+}
+
+annotation a8 {
+    iconcoords {248 77}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a9 {
+    iconcoords {192.0 48.0}
+    type text
+    label {3}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a10 {
+    iconcoords {83 370}
+    type text
+    label {3}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a11 {
+    iconcoords {388 193}
+    type text
+    label {2}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a12 {
+    iconcoords {467 129}
+    type text
+    label {8}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a13 {
+    iconcoords {696 73}
+    type text
+    label {6}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a14 {
+    iconcoords {467 196}
+    type text
+    label {8}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a15 {
+    iconcoords {554 259}
+    type text
+    label {6}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a16 {
+    iconcoords {566 401}
+    type text
+    label {3}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a17 {
+    iconcoords {613 409}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a18 {
+    iconcoords {198 530}
+    type text
+    label {2}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a19 {
+    iconcoords {806 330}
+    type text
+    label {6}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a20 {
+    iconcoords {586 342}
+    type text
+    label {5}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a21 {
+    iconcoords {578 285}
+    type text
+    label {7}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a22 {
+    iconcoords {408.0 96.0}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a23 {
+    iconcoords {657 104}
+    type text
+    label {7}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a24 {
+    iconcoords {588 221}
+    type text
+    label {6}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a25 {
+    iconcoords {802 435}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a26 {
+    iconcoords {735 571}
+    type text
+    label {4}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a27 {
+    iconcoords {781 513}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a28 {
+    iconcoords {237 151}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a29 {
+    iconcoords {401 167}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a30 {
+    iconcoords {633 41}
+    type text
+    label {8}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a31 {
+    iconcoords {315 393}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a32 {
+    iconcoords {441 419}
+    type text
+    label {2}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a33 {
+    iconcoords {99 423}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a34 {
+    iconcoords {220 482}
+    type text
+    label {1}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+annotation a35 {
+    iconcoords {192.0 168.0}
+    type text
+    label {3}
+    labelcolor #fe0000
+    fontfamily {courier}
+    fontsize {10}
+    effects {bold}
+    canvas c0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid no
+    iconSize normal
+    zoom 1.0
+}
+
