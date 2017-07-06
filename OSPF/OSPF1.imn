@@ -76,8 +76,8 @@ node n1 {
 	!
     }
     canvas c0
-    iconcoords {264.0 144.0}
-    labelcoords {264.0 168.0}
+    iconcoords {264 192}
+    labelcoords {264 216}
     interface-peer {eth0 n0}
     interface-peer {eth1 n2}
     interface-peer {eth2 n6}
@@ -161,8 +161,8 @@ node n3 {
 	!
     }
     canvas c0
-    iconcoords {672.0 144.0}
-    labelcoords {687.0 121.0}
+    iconcoords {720 192}
+    labelcoords {735 169}
     interface-peer {eth1 n5}
     interface-peer {eth0 n10}
 }
@@ -187,8 +187,8 @@ node n5 {
 	!
     }
     canvas c0
-    iconcoords {696.0 288.0}
-    labelcoords {715.0 261.0}
+    iconcoords {720 288}
+    labelcoords {739 261}
     interface-peer {e0 n3}
     interface-peer {e1 n8}
     interface-peer {e2 n6}
@@ -230,8 +230,8 @@ node n6 {
 	!
     }
     canvas c0
-    iconcoords {432.0 288.0}
-    labelcoords {432.0 262.0}
+    iconcoords {528 288}
+    labelcoords {528 262}
     interface-peer {eth1 n5}
     interface-peer {eth0 n1}
 }
@@ -285,8 +285,8 @@ node n8 {
 	!
     }
     canvas c0
-    iconcoords {696.0 384.0}
-    labelcoords {696.0 416.0}
+    iconcoords {720 384}
+    labelcoords {720 416}
     interface-peer {eth0 n5}
 }
 
@@ -324,8 +324,8 @@ node n9 {
 	!
     }
     canvas c0
-    iconcoords {480.0 144.0}
-    labelcoords {480.0 168.0}
+    iconcoords {504 192}
+    labelcoords {504 216}
     interface-peer {eth0 n10}
     interface-peer {eth1 n2}
 }
@@ -364,8 +364,8 @@ node n10 {
 	!
     }
     canvas c0
-    iconcoords {576.0 48.0}
-    labelcoords {620.0 33.0}
+    iconcoords {624 48}
+    labelcoords {668 33}
     interface-peer {eth0 n9}
     interface-peer {eth1 n3}
 }
@@ -437,6 +437,7 @@ option show {
     link_labels no
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0
