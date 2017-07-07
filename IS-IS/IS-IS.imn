@@ -1,0 +1,340 @@
+node n0 {
+    type router
+    model quagga
+    network-config {
+	hostname R1
+	!
+	interface eth1
+	 ip address 172.16.1.1/24
+	 mac address 42:00:aa:00:00:04
+	!
+	interface eth0
+	 ip address 172.16.12.1/24
+	 mac address 42:00:aa:00:00:02
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+    }
+    canvas c0
+    iconcoords {96 312}
+    labelcoords {56 316}
+    interface-peer {eth0 n3}
+    interface-peer {eth1 n4}
+    custom-configs {
+        custom-config-id conf1 {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface lo0
+                 ip address 127.0.0.1/24
+                !
+                interface eth0
+                 ip address 172.16.12.1/24
+                     ip router isis 1
+                !
+                interface eth1
+                 ip address 172.16.1.1/24
+                     ip router isis 1
+                 isis passive
+                !
+                    router isis 1
+                     net 49.0001.1720.1600.1001.00
+                    !
+            }
+        }
+    }
+    custom-selected conf1
+    custom-enabled true
+}
+
+node n1 {
+    type router
+    model quagga
+    network-config {
+	hostname R2
+	!
+	interface eth2
+	 ip address 172.16.2.2/24
+	 mac address 42:00:aa:00:00:05
+	!
+	interface eth1
+	 ip address 172.16.12.2/24
+	 mac address 42:00:aa:00:00:03
+	!
+	interface eth0
+	 ip address 172.16.23.1/24
+	 mac address 42:00:aa:00:00:00
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+    }
+    canvas c0
+    iconcoords {336 312}
+    labelcoords {294 313}
+    interface-peer {eth0 n2}
+    interface-peer {eth1 n3}
+    interface-peer {eth2 n5}
+    custom-configs {
+        custom-config-id conf1 {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface lo0
+                 ip address 127.0.0.1/24
+                !
+                interface eth0
+                 ip address 172.16.23.1/24
+                     ip router isis 1
+                !
+                interface eth1
+                 ip address 172.16.12.2/24
+                     ip router isis 1
+                !
+                interface eth2
+                 ip address 172.16.2.2/24
+                     ip router isis 1
+                 isis passive
+                !
+                    router isis 1
+                     net 49.0001.1720.1600.2002.00
+                    !
+            }
+        }
+    }
+    custom-selected conf1
+    custom-enabled true
+}
+
+node n2 {
+    type router
+    model quagga
+    network-config {
+	hostname R3
+	!
+	interface eth1
+	 ip address 172.16.3.3/24
+	 mac address 42:00:aa:00:00:06
+	!
+	interface eth0
+	 ip address 172.16.23.2/24
+	 mac address 42:00:aa:00:00:01
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+    }
+    canvas c0
+    iconcoords {720 312}
+    labelcoords {764 312}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n6}
+    custom-configs {
+        custom-config-id conf1 {
+            custom-command /usr/local/bin/quaggaboot.sh
+            config {
+                interface lo0
+                 ip address 127.0.0.1/24
+                !
+                interface eth0
+                 ip address 172.16.23.2/24
+                     ip router isis 1
+                !
+                interface eth1
+                 ip address 172.16.3.3/24
+                     ip router isis 1
+                 isis passive
+                !
+                    router isis 1
+                     net 49.0001.1234.1600.2231.00
+                    !
+            }
+        }
+    }
+    custom-selected conf1
+    custom-enabled true
+}
+
+node n3 {
+    type lanswitch
+    network-config {
+	hostname sw1
+	!
+    }
+    canvas c0
+    iconcoords {216 432}
+    labelcoords {263 432}
+    interface-peer {e0 n0}
+    interface-peer {e1 n1}
+}
+
+node n4 {
+    type lanswitch
+    network-config {
+	hostname sw2
+	!
+    }
+    canvas c0
+    iconcoords {96 192}
+    labelcoords {143 193}
+    interface-peer {e0 n0}
+    interface-peer {e1 n7}
+}
+
+node n5 {
+    type lanswitch
+    network-config {
+	hostname sw3
+	!
+    }
+    canvas c0
+    iconcoords {336 192}
+    labelcoords {381 192}
+    interface-peer {e0 n1}
+    interface-peer {e1 n8}
+}
+
+node n6 {
+    type lanswitch
+    network-config {
+	hostname sw4
+	!
+    }
+    canvas c0
+    iconcoords {720 192}
+    labelcoords {769 191}
+    interface-peer {e0 n2}
+    interface-peer {e1 n9}
+}
+
+node n7 {
+    type pc
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 ip address 172.16.1.20/24
+	 mac address 42:00:aa:00:00:07
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 172.16.1.1
+	!
+    }
+    canvas c0
+    iconcoords {96 72}
+    labelcoords {137 66}
+    interface-peer {eth0 n4}
+}
+
+node n8 {
+    type pc
+    network-config {
+	hostname pc2
+	!
+	interface eth0
+	 ip address 172.16.2.20/24
+	 mac address 42:00:aa:00:00:08
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 172.16.2.2
+	!
+    }
+    canvas c0
+    iconcoords {336 72}
+    labelcoords {378 70}
+    interface-peer {eth0 n5}
+}
+
+node n9 {
+    type pc
+    network-config {
+	hostname pc3
+	!
+	interface eth0
+	 ip address 172.16.3.20/24
+	 mac address 42:00:aa:00:00:09
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	!
+	ip route 0.0.0.0/0 172.16.3.3
+	!
+    }
+    canvas c0
+    iconcoords {720 72}
+    labelcoords {762 72}
+    interface-peer {eth0 n6}
+}
+
+link l0 {
+    nodes {n1 n2}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n0 n3}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n3 n1}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n4 n0}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n5 n1}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n6 n2}
+    bandwidth 0
+}
+
+link l6 {
+    nodes {n7 n4}
+    bandwidth 0
+}
+
+link l7 {
+    nodes {n8 n5}
+    bandwidth 0
+}
+
+link l8 {
+    nodes {n9 n6}
+    bandwidth 0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels no
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+
