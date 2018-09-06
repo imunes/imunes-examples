@@ -5,6 +5,18 @@
 err=0
 slow=1
 
+if isOSlinux; then
+    # Reverse-Path Filtering should be disabled
+    default_rp_filter=$(sysctl net.ipv4.conf.default.rp_filter | awk '{print $3}')
+    all_rp_filter=$(sysctl net.ipv4.conf.all.rp_filter | awk '{print $3}')
+
+    if test $default_rp_filter -ne 0 -o $all_rp_filter -ne 0; then
+        echo "Disabling Reverse-Path Filtering during the test."
+        sysctl -w net.ipv4.conf.default.rp_filter=0
+        sysctl -w net.ipv4.conf.all.rp_filter=0
+    fi
+fi
+
 # BGP_custom-config.imn
 eid=`imunes -b BGP-Anycast.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
@@ -71,5 +83,11 @@ fi
 
 readDump DC1@$eid eth1
 imunes -b -e $eid
+
+if isOSlinux; then
+    echo "Restoring Reverse-Path Filter settings."
+    sysctl -w net.ipv4.conf.default.rp_filter=$default_rp_filter
+    sysctl -w net.ipv4.conf.all.rp_filter=$all_rp_filter
+fi
 
 thereWereErrors $err
