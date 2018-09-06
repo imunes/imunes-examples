@@ -139,7 +139,7 @@ netDump () {
 	i=$(($i+1))
     done
     if isOSlinux; then
-        himage -b $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
+        himage $1 nohup sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
     else
         himage $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
     fi
