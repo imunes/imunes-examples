@@ -1,0 +1,274 @@
+node n0 {
+    type pc
+    snapshot vroot/vroot@clean
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:01
+	 ipv6 address aaaa::20/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ipv6 route ::/0 aaaa::1
+	!
+	!
+    }
+    canvas c0
+    iconcoords {120.0 48.0}
+    labelcoords {83.0 61.0}
+    interface-peer {eth0 n1}
+}
+
+node n1 {
+    type router
+    snapshot vroot/vroot@clean
+    model static
+    network-config {
+	hostname moon
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:07
+	 ipv6 address cccc::1/64
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:00
+	 ipv6 address aaaa::1/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	!
+	!
+	ipv6 route dddd::0/64 cccc::2
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 redistribute kernel
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf6
+	 redistribute kernel
+	 network ::/0
+	!
+    }
+    canvas c0
+    iconcoords {120.0 240.0}
+    labelcoords {118.0 285.0}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 n4}
+}
+
+node n2 {
+    type router
+    snapshot vroot/vroot@clean
+    model static
+    network-config {
+	hostname sun
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:0a
+	 ipv6 address dddd::1/64
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:04
+	 ipv6 address bbbb::1/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	!
+	!
+	ipv6 route cccc::0/64 dddd::2
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 redistribute kernel
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf6
+	 redistribute kernel
+	 network ::/0
+	!
+    }
+    canvas c0
+    iconcoords {432.0 240.0}
+    labelcoords {432.0 286.0}
+    interface-peer {eth1 n3}
+    interface-peer {eth0 n4}
+}
+
+node n3 {
+    type pc
+    snapshot vroot/vroot@clean
+    network-config {
+	hostname pc2
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:05
+	 ipv6 address bbbb::20/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ipv6 route ::/0 bbbb::1
+	!
+	!
+    }
+    canvas c0
+    iconcoords {432.0 48.0}
+    labelcoords {396.0 62.0}
+    interface-peer {eth0 n2}
+}
+
+node n4 {
+    type router
+    model static
+    network-config {
+	hostname routerX
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:09
+	 ipv6 address dddd::2/64
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:08
+	 ipv6 address cccc::2/64
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 redistribute kernel
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf6
+	 redistribute kernel
+	 network ::/0
+	!
+    }
+    canvas c0
+    iconcoords {288.0 408.0}
+    labelcoords {288.0 442.0}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n2}
+}
+
+link l0 {
+    nodes {n0 n1}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n2 n3}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n1 n4}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n4 n2}
+    bandwidth 0
+}
+
+annotation annotation_list {
+    annotation_list
+    a0
+    a1
+    a2
+    a3
+    a4
+}
+
+annotation a0 {
+    iconcoords {74.0 222.0 473.0 454.0}
+    type rectangle
+    label {Untrusted outer IPv4 network}
+    labelcolor #db0000
+    font {-family {Bitstream Vera Sans} -size -12 -weight bold -slant roman -underline 0 -overstrike 0}
+    color #beecbe
+    canvas c0
+}
+
+annotation a1 {
+    iconcoords {168.0 240.0}
+    type text
+    label {SEGW1}
+    labelcolor #c80000
+    font {-family {Bitstream Vera Sans} -size 10 -weight bold -slant roman -underline 0 -overstrike 0}
+    canvas c0
+}
+
+annotation a2 {
+    type text
+    iconcoords {36.0 237.0}
+    label {}
+    canvas c0
+}
+
+annotation a3 {
+    type text
+    iconcoords {13.0 220.0}
+    label {}
+    canvas c0
+}
+
+annotation a4 {
+    iconcoords {336.0 240.0}
+    type text
+    label {SEGW2}
+    labelcolor #cc0000
+    font {-family {Bitstream Vera Sans} -size 10 -weight bold -slant roman -underline 0 -overstrike 0}
+    canvas c0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+

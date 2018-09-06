@@ -1,0 +1,55 @@
+# openssl.cnf -  OpenSSL configuration file
+# :set tabstop=8
+
+[ ca ]
+default_ca	= root_ca		# The default ca section
+
+[ root_ca ]				
+certs		= ./certs		  # Where the issued certs are kept
+database	= ./index.txt             # database index file.
+new_certs_dir   = ./newcerts              # default place for new certs.
+certificate     = ./strongswanCert.pem    # The CA certificate
+serial          = ./serial                # The current serial number
+private_key     = ./strongswanKey.pem     # The private key
+RANDFILE        = ./.randi		  # private random number file
+x509_extensions = host_ext		  # The extensions to add to the cert
+default_md      = sha256                  # which md to use.
+policy          = policy_match		  # how similar the request must look
+
+[ policy_match ]
+countryName		= match
+stateOrProvinceName	= optional
+localityName            = optional
+organizationName	= match
+organizationalUnitName	= optional
+userId			= optional
+serialNumber		= optional
+commonName		= supplied
+emailAddress		= optional
+
+[ req ]
+default_bits		= 1024
+default_keyfile 	= privkey.pem
+distinguished_name	= req_distinguished_name
+attributes		= req_attributes
+x509_extensions		= ca_ext  # The ext to add to the self signed cert
+string_mask 		= nombstr
+
+[ req_distinguished_name ]
+[ req_attributes ]
+
+[ host_ext ]
+basicConstraints	= CA:FALSE
+keyUsage 		= digitalSignature, keyEncipherment, keyAgreement
+subjectKeyIdentifier    = hash
+authorityKeyIdentifier  = keyid, issuer:always
+subjectAltName		= DNS:$ENV::SubjectAltName
+extendedKeyUsage	= serverAuth
+crlDistributionPoints   = URI:http://crl.strongswan.org/strongswan.crl
+
+[ ca_ext ]
+basicConstraints        = critical, CA:TRUE , pathlen:1
+keyUsage                = cRLSign, keyCertSign
+subjectKeyIdentifier	= hash
+authorityKeyIdentifier	= keyid, issuer:always
+
