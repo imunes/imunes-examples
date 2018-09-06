@@ -38,6 +38,6 @@ else
     err=1
 fi
 
-#imunes -b -e $eid
+imunes -b -e $eid
 
 thereWereErrors $err
