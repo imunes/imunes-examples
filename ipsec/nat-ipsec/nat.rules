@@ -1,0 +1,8 @@
+#!/bin/sh
+cmd="ipfw -q add"
+pif=eth1
+
+ipfw -q -f flush
+
+$cmd divert natd log all from any to any via $pif
+$cmd allow log all from any to any 
