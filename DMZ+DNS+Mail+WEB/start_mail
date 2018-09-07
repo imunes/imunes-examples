@@ -42,12 +42,11 @@ do
     fi
     cd -
     himage $h touch /var/log/maillog
-    himage $h syslogd
     himage $h postfix start
     # Start POP3 
     if isOSlinux; then
         hcp Mail_files/dovecot/10-auth.conf $h:/etc/dovecot/conf.d/10-auth.conf 
-        himage -b $h dovecot
+        himage $h nohup dovecot
     else
         himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
         himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
