@@ -6,11 +6,7 @@ err=0
 eid=`imunes -b nat-ipsec64.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
-if isOSlinux; then
-    himage nat@$eid iptables-restore < nat.rules.linux
-else
-    ./start_nat.sh $eid > /dev/null
-fi
+./start_nat.sh $eid > /dev/null
 
 if [ $? -eq 0 ]; then
     sleep 4
