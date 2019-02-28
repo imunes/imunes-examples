@@ -53,7 +53,7 @@ __END__
 	if [ $slow -eq 1 ]; then
 	    # stopNode router7@$eid 
             echo "Drop all packets between router2 and router7 (BER=1)"
-            vlink -BER 1 router2-router7
+            vlink -BER 1 -e $eid router2-router7
 	    if [ $? -eq 0 ]; then
 		Wait 5
 
@@ -67,7 +67,7 @@ __END__
 
 		#startNode router7@$eid
                 echo "Restore link between router2 and router7 (BER=0)"
-                vlink -BER 0 router2-router7
+                vlink -BER 0 -e $eid router2-router7
 		if [ $? -eq 0 ]; then
 		    Wait 40
                     n=1
