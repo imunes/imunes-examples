@@ -8,6 +8,30 @@ err=0
 eid=`imunes -b DHCP6.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
+./start_stateless $eid
+if [ $? -ne 0 ]; then
+    echo "********** START_STATELESS ERROR **********"
+    pcs=""
+    err=1
+fi
+
+for pc in $pcs; do
+    n=1
+    pingStatus=1
+    while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+        echo "Ping6 test $n / 20 ..."
+	ping6Check $pc@$eid fc00:2::10
+        pingStatus=$?
+        n=`expr $n + 1`
+	sleep 1
+    done
+
+    if [ $pingStatus -ne 0 ]; then
+	err=$pingStatus
+        break
+    fi
+done
+
 ./start_dhcpd6 $eid
 if [ $? -ne 0 ]; then
     echo "********** START_DHCP6 ERROR **********"
@@ -50,7 +74,7 @@ if [ $err -eq 0 ]; then
 	if isOSfreebsd; then
 	    pre="/usr/local/sbin/"
 	fi
-	himage PC3@${eid} ${pre}dhclient -6 eth0
+	himage PC3@${eid} ${pre}dhclient -6 -cf /dev/null eth0
         if [ $? -eq 0 ]; then
             sleep 2
             readDump PC3@$eid eth0
@@ -63,30 +87,6 @@ if [ $err -eq 0 ]; then
         err=1
     fi
 fi
-
-./start_stateless $eid
-if [ $? -ne 0 ]; then
-    echo "********** START_STATELESS ERROR **********"
-    pcs=""
-    err=1
-fi
-
-for pc in $pcs; do
-    n=1
-    pingStatus=1
-    while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
-        echo "Ping6 test $n / 20 ..."
-	ping6Check $pc@$eid fc00:2::10
-        pingStatus=$?
-        n=`expr $n + 1`
-	sleep 1
-    done
-
-    if [ $pingStatus -ne 0 ]; then
-	err=$pingStatus
-        break
-    fi
-done
 
 imunes -b -e $eid
 
