@@ -13,6 +13,10 @@ if test "$1" = "seq"; then
     sequential=1
 fi
 
+if isOSlinux; then
+    sequential=1
+fi
+
 imunes -i
 
 tests="DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP BGP Traceroute services"
