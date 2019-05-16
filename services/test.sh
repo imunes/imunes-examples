@@ -32,7 +32,7 @@ imunes -b -e $eid
 
 # tcpdump
 # testing after termination because that's when the file is saved in /tmp/$eid
-file /tmp/$eid/TCPDUMP_n3_eth0.pcap | grep -q "tcpdump capture file"
+file /tmp/$eid/TCPDUMP_n3_eth0.pcap | grep -q "capture file"
 if [ $? -ne 0 ]; then
     echo "TCPDUMP error"
     err=1
