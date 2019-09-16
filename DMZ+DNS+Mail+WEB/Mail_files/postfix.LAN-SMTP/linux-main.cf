@@ -38,7 +38,7 @@ command_directory = /usr/sbin
 # daemon programs (i.e. programs listed in the master.cf file). This
 # directory must be owned by root.
 #
-daemon_directory = /usr/lib/postfix
+daemon_directory = /usr/lib/postfix/sbin
 
 # QUEUE AND PROCESS OWNERSHIP
 #
