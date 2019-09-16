@@ -634,4 +634,5 @@ manpage_directory = /usr/man
 # readme_directory: The location of the Postfix README files.
 #
 readme_directory = no
+compatibility_level = 2
 
