@@ -32,7 +32,7 @@ if isOSfreebsd; then
 else
     hcp dhcpd6.conf ${dhcp_server}@${eid}:/etc/dhcp/dhcpd.conf
     himage ${dhcp_server}@${eid} touch /var/lib/dhcp/dhcpd6.leases
-    himage ${dhcp_server}@${eid} dhcpd -6
+    himage -b ${dhcp_server}@${eid} dhcpd -6
 fi
 
 sleep 3

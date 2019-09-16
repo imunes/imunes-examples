@@ -27,7 +27,7 @@ fi
 echo "Configuring server:"
 hcp $comm.conf ${router}@${eid}:/etc
 himage ${router}@${eid} killall $comm
-himage ${router}@${eid} $comm eth1
+himage -b ${router}@${eid} $comm eth1
 
 sleep 1
 echo "Configuring clients:"
