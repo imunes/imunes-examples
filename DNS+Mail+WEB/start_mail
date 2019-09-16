@@ -40,7 +40,7 @@ do
     fi
     cd -
     himage $h touch /var/log/maillog
-    himage $h syslogd
+    #himage $h syslogd
     himage $h postfix start
     # Start POP3 
     if isOSlinux; then
