@@ -26,6 +26,7 @@ node n0 {
 	!
 	router bgp
 	router bgp 10000
+	 no bgp ebgp-requires-policy
 	 no synchronization
 	 no auto-summary
 	 network 8.8.8.0 mask 255.255.255.0
@@ -72,6 +73,7 @@ node n1 {
 	!
 	router bgp
 	router bgp 22222
+	 no bgp ebgp-requires-policy
 	 no synchronization
 	 no auto-summary
 	 network 10.10.10.0 mask 255.255.255.252
@@ -120,6 +122,7 @@ node n2 {
 	!
 	router bgp
 	router bgp 11111
+	 no bgp ebgp-requires-policy
 	 no synchronization
 	 no auto-summary
 	 network 10.10.10.16 mask 255.255.255.252
@@ -168,6 +171,7 @@ node n3 {
 	!
 	router bgp
 	router bgp 10000
+	 no bgp ebgp-requires-policy
 	 no synchronization
 	 no auto-summary
 	 network 8.8.8.0 mask 255.255.255.0
@@ -209,6 +213,7 @@ node n4 {
 	!
 	router bgp
 	router bgp 100
+	 no bgp ebgp-requires-policy
 	 no synchronization
 	 no auto-summary
 	 network 172.32.1.0 mask 255.255.255.0
@@ -249,6 +254,7 @@ node n5 {
 	!
 	router bgp
 	router bgp 200
+	 no bgp ebgp-requires-policy
 	 no synchronization
 	 no auto-summary
 	 network 172.16.1.0 mask 255.255.255.0
