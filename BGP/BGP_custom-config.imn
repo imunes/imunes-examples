@@ -47,6 +47,7 @@ node n0 {
                  ip address 192.168.200.1/24
                 !
                 router bgp 65003
+                 no bgp ebgp-requires-policy
                  bgp router-id 192.168.200.1
                  network 192.168.200.0/24
                  neighbor 172.16.101.2 remote-as 65004
@@ -118,6 +119,7 @@ node n1 {
                  ip address 172.16.103.1/24
                 !
                 router bgp 65002
+                 no bgp ebgp-requires-policy
                  bgp router-id 10.1.2.8
                  network 172.16.100.0/24
                  network 172.16.102.0/24
@@ -175,6 +177,7 @@ node n2 {
                  ip address 192.168.100.1/24
                 !
                 router bgp 65001
+                 no bgp ebgp-requires-policy
                  bgp router-id 10.1.2.4
                  network 192.168.100.0/24
                  network 10.1.2.0/24
@@ -228,6 +231,7 @@ node n3 {
                  ip address 172.16.101.2/24
                 !
                 router bgp 65004
+                 no bgp ebgp-requires-policy
                  bgp router-id 172.16.103.2
                  network 172.16.101.0/24
                  neighbor 172.16.103.1 remote-as 65002
