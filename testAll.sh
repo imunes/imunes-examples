@@ -19,7 +19,7 @@ fi
 
 imunes -i
 
-tests="DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP BGP Traceroute services"
+tests="DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP BGP Traceroute services ipsec"
 
 if isOSfreebsd; then
     tests="$tests functional_tests/rj45_vlan gif"
@@ -31,7 +31,7 @@ echo -n "# "
 for dir in $tests; do
     echo -n "$dir "
     cd $dir
-    if test "$dir" = "ipsec/"; then
+    if test "$dir" = "ipsec"; then
 	for i in 44 46 64 66; do
 	    if [ $sequential -eq 1 ]; then
 		sh "test${i}.sh" > TESTRESULTS_$i 2>&1
