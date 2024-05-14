@@ -1,6 +1,6 @@
 node n0 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router1
 	!
@@ -39,7 +39,7 @@ node n0 {
 
 node n1 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router2
 	!
@@ -70,15 +70,15 @@ node n1 {
 	!
     }
     canvas c0
-    iconcoords {696.0 552.0}
-    labelcoords {696.0 582.0}
+    iconcoords {696 552}
+    labelcoords {696 582}
     interface-peer {eth1 n2}
     interface-peer {eth0 n10}
 }
 
 node n2 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router3
 	!
@@ -95,6 +95,7 @@ node n2 {
 	 ip address 127.0.0.1/24
 	 ipv6 address ::1/128
 	!
+	!
 	router rip
 	 redistribute static
 	 redistribute connected
@@ -107,7 +108,6 @@ node n2 {
 	 redistribute ospf6
 	 network ::/0
 	!
-	!
     }
     canvas c0
     iconcoords {696.0 312.0}
@@ -118,7 +118,7 @@ node n2 {
 
 node n3 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router4
 	!
@@ -135,6 +135,7 @@ node n3 {
 	 ip address 127.0.0.1/24
 	 ipv6 address ::1/128
 	!
+	!
 	router rip
 	 redistribute static
 	 redistribute connected
@@ -146,7 +147,6 @@ node n3 {
 	 redistribute connected
 	 redistribute ospf6
 	 network ::/0
-	!
 	!
     }
     canvas c0
@@ -296,7 +296,7 @@ node n9 {
 
 node n10 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router5
 	!
@@ -434,6 +434,7 @@ option show {
     link_labels yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

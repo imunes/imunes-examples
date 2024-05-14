@@ -1,6 +1,6 @@
 node n0 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router1
 	!
@@ -41,7 +41,7 @@ node n0 {
 
 node n1 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router2
 	!
@@ -82,7 +82,7 @@ node n1 {
 
 node n2 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router3
 	!
@@ -205,6 +205,7 @@ option show {
     link_labels yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

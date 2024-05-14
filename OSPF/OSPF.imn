@@ -1,8 +1,13 @@
 node n0 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router0
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth1
 	 ip address 10.0.1.1/24
@@ -14,7 +19,9 @@ node n0 {
 	!
 	router ospf
 	 redistribute static
-	 network 0.0.0.0/0 area 0
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
     }
     interface-peer {eth0 n1}
@@ -26,9 +33,14 @@ node n0 {
 
 node n1 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router1
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth3
 	 ip address 10.0.4.1/24
@@ -48,7 +60,9 @@ node n1 {
 	!
 	router ospf
 	 redistribute static
-	 network 0.0.0.0/0 area 0
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
     }
     interface-peer {eth0 n0}
@@ -62,9 +76,14 @@ node n1 {
 
 node n2 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router2
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth0
 	 ip address 10.0.7.1/24
@@ -84,7 +103,9 @@ node n2 {
 	!
 	router ospf
 	 redistribute static
-	 network 0.0.0.0/0 area 0
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
     }
     interface-peer {eth3 n0}
@@ -98,9 +119,14 @@ node n2 {
 
 node n3 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router3
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth0
 	 ip address 10.0.8.1/24
@@ -120,7 +146,9 @@ node n3 {
 	!
 	router ospf
 	 redistribute static
-	 network 0.0.0.0/0 area 0
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
     }
     interface-peer {eth3 n1}
@@ -134,9 +162,14 @@ node n3 {
 
 node n4 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router4
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth0
 	 ip address 10.0.9.2/24
@@ -152,7 +185,9 @@ node n4 {
 	!
 	router ospf
 	 redistribute static
-	 network 0.0.0.0/0 area 0
+	 redistribute connected
+	 redistribute rip
+	 network 0.0.0.0/0 area 0.0.0.0
 	!
     }
     interface-peer {eth3 n1}
@@ -167,6 +202,11 @@ node n5 {
     type host
     network-config {
 	hostname host5
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth0
 	 ip address 10.0.7.2/24
@@ -186,6 +226,11 @@ node n6 {
     network-config {
 	hostname host6
 	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
+	!
 	interface eth0
 	 ip address 10.0.8.2/24
 	 mac address 40:00:aa:00:00:12
@@ -203,6 +248,11 @@ node n7 {
     type pc
     network-config {
 	hostname pc7
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth0
 	 ip address 10.0.9.1/24
@@ -284,9 +334,9 @@ option show {
     ipv6_addresses no
     node_labels yes
     link_labels yes
-    ipsec_configs yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

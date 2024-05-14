@@ -1,6 +1,6 @@
 node n0 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router0
 	!
@@ -22,11 +22,13 @@ node n0 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -39,7 +41,7 @@ node n0 {
 
 node n1 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router1
 	!
@@ -66,11 +68,13 @@ node n1 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -84,7 +88,7 @@ node n1 {
 
 node n2 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router2
 	!
@@ -106,11 +110,13 @@ node n2 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -123,7 +129,7 @@ node n2 {
 
 node n5 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router5
 	!
@@ -145,11 +151,13 @@ node n5 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -162,7 +170,7 @@ node n5 {
 
 node n6 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router6
 	!
@@ -189,11 +197,13 @@ node n6 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -207,7 +217,7 @@ node n6 {
 
 node n7 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router7
 	!
@@ -229,11 +239,13 @@ node n7 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -405,6 +417,7 @@ option show {
     link_labels no
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

@@ -116,7 +116,7 @@ node n6 {
 node n7 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname R1
 	!
@@ -133,6 +133,8 @@ node n7 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
@@ -146,7 +148,7 @@ node n7 {
 node n8 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname R2
 	!
@@ -166,6 +168,8 @@ node n8 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
@@ -314,6 +318,7 @@ option show {
     link_labels yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

@@ -46,7 +46,7 @@ node n1 {
 
 node n3 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R3
 	!
@@ -77,6 +77,8 @@ node n3 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
@@ -107,8 +109,8 @@ node n2 {
 	ip route 0.0.0.0/0 4.0.0.1 
 	!
     }
-    iconcoords {216.0 144.0}
-    labelcoords {218.0 186.0}
+    iconcoords {168 168}
+    labelcoords {170 210}
     interface-peer {eth0 n3}
     canvas c0
 }
@@ -176,15 +178,15 @@ node n6 {
 	ip route 0.0.0.0/0 8.0.0.1
 	!
     }
-    iconcoords {696.0 432.0}
-    labelcoords {709.0 472.0}
+    iconcoords {816 432}
+    labelcoords {829 472}
     interface-peer {eth0 n9}
     canvas c0
 }
 
 node n7 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R7
 	!
@@ -207,11 +209,13 @@ node n7 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
-    iconcoords {504.0 120.0}
-    labelcoords {511.0 96.0}
+    iconcoords {576 144}
+    labelcoords {583 120}
     interface-peer {eth1 n3}
     interface-peer {eth2 n8}
     interface-peer {eth0 n15}
@@ -220,7 +224,7 @@ node n7 {
 
 node n8 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R8
 	!
@@ -247,11 +251,13 @@ node n8 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
-    iconcoords {504.0 240.0}
-    labelcoords {532.0 221.0}
+    iconcoords {552 240}
+    labelcoords {592 231}
     interface-peer {eth2 n7}
     interface-peer {eth0 n5}
     interface-peer {eth3 n9}
@@ -261,7 +267,7 @@ node n8 {
 
 node n9 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R9
 	!
@@ -286,14 +292,16 @@ node n9 {
 	 ip address 127.0.0.1/24
 	 ipv6 address ::1/128
 	!
+	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
-	!
     }
-    iconcoords {528.0 360.0}
-    labelcoords {553.0 340.0}
+    iconcoords {528 360}
+    labelcoords {566 355}
     interface-peer {eth4 n8}
     interface-peer {eth0 n6}
     interface-peer {eth1 n10}
@@ -387,8 +395,8 @@ node n14 {
 	ip route 0.0.0.0/0 3.0.0.1
 	!
     }
-    iconcoords {672.0 312.0}
-    labelcoords {682.0 350.0}
+    iconcoords {768 312}
+    labelcoords {778 350}
     interface-peer {eth0 n8}
     canvas c0
 }
@@ -410,8 +418,8 @@ node n15 {
 	ip route 0.0.0.0/0 6.0.0.1
 	!
     }
-    iconcoords {672.0 192.0}
-    labelcoords {676.0 232.0}
+    iconcoords {792 192}
+    labelcoords {796 232}
     interface-peer {eth0 n7}
     canvas c0
 }
@@ -433,8 +441,8 @@ node n17 {
 	ip route 0.0.0.0/0 30.0.0.1
 	!
     }
-    iconcoords {336.0 552.0}
-    labelcoords {339.0 592.0}
+    iconcoords {336 528}
+    labelcoords {339 568}
     interface-peer {eth0 n16}
     canvas c0
 }
@@ -456,8 +464,8 @@ node n18 {
 	ip route 0.0.0.0/0 30.0.0.1
 	!
     }
-    iconcoords {456.0 552.0}
-    labelcoords {458.0 589.0}
+    iconcoords {480 552}
+    labelcoords {482 589}
     interface-peer {eth0 n16}
     canvas c0
 }
@@ -691,7 +699,7 @@ annotation a9 {
 }
 
 annotation a10 {
-    iconcoords {632.0 269.0 732.0 361.0}
+    iconcoords {726 272 826 364}
     type rectangle
     label {}
     labelcolor black
@@ -735,6 +743,7 @@ option show {
     link_labels no
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

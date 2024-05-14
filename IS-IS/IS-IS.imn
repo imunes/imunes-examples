@@ -1,6 +1,6 @@
 node n0 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R1
 	!
@@ -24,7 +24,7 @@ node n0 {
     interface-peer {eth1 n4}
     custom-configs {
         custom-config-id conf1 {
-            custom-command /usr/local/bin/quaggaboot.sh
+            custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
                  ip address 127.0.0.1/24
@@ -44,13 +44,13 @@ node n0 {
             }
         }
     }
-    custom-selected conf1
     custom-enabled true
+    custom-selected conf1
 }
 
 node n1 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R2
 	!
@@ -79,7 +79,7 @@ node n1 {
     interface-peer {eth2 n5}
     custom-configs {
         custom-config-id conf1 {
-            custom-command /usr/local/bin/quaggaboot.sh
+            custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
                  ip address 127.0.0.1/24
@@ -103,13 +103,13 @@ node n1 {
             }
         }
     }
-    custom-selected conf1
     custom-enabled true
+    custom-selected conf1
 }
 
 node n2 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R3
 	!
@@ -133,7 +133,7 @@ node n2 {
     interface-peer {eth1 n6}
     custom-configs {
         custom-config-id conf1 {
-            custom-command /usr/local/bin/quaggaboot.sh
+            custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
                  ip address 127.0.0.1/24
@@ -153,8 +153,8 @@ node n2 {
             }
         }
     }
-    custom-selected conf1
     custom-enabled true
+    custom-selected conf1
 }
 
 node n3 {

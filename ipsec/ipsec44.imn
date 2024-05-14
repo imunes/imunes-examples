@@ -267,6 +267,7 @@ option show {
     link_labels yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

@@ -1,8 +1,13 @@
 node n0 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router0
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth1
 	 ip address 10.0.1.2/24
@@ -15,11 +20,13 @@ node n0 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -32,9 +39,14 @@ node n0 {
 
 node n1 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router1
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth2
 	 ip address 10.0.4.2/24
@@ -51,11 +63,13 @@ node n1 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -69,9 +83,14 @@ node n1 {
 
 node n2 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router2
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth1
 	 ip address 10.0.3.2/24
@@ -84,11 +103,13 @@ node n2 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -101,9 +122,14 @@ node n2 {
 
 node n5 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router5
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth0
 	 ip address 10.0.4.1/24
@@ -116,11 +142,13 @@ node n5 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -133,9 +161,14 @@ node n5 {
 
 node n6 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router6
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth2
 	 ip address 10.0.3.1/24
@@ -152,11 +185,13 @@ node n6 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -170,9 +205,14 @@ node n6 {
 
 node n7 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname router7
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth1
 	 ip address 10.0.8.1/24
@@ -185,11 +225,13 @@ node n7 {
 	router rip
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
 	router ripng
 	 redistribute static
 	 redistribute connected
+	 redistribute ospf6
 	 network ::/0
 	!
     }
@@ -232,6 +274,11 @@ node n12 {
     network-config {
 	hostname server
 	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
+	!
 	interface eth0
 	 ip address 10.0.8.10/24
 	 ipv6 address a:8::10/64
@@ -252,6 +299,11 @@ node n10 {
     network-config {
 	hostname pc2
 	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
+	!
 	interface eth0
 	 ip address 10.0.0.20/24
 	 ipv6 address a:0::20/64
@@ -271,6 +323,11 @@ node n11 {
     type pc
     network-config {
 	hostname pc1
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
 	!
 	interface eth0
 	 ip address 10.0.0.21/24
@@ -341,5 +398,11 @@ option show {
     ipv6_addresses no
     node_labels yes
     link_labels no
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
 }
 

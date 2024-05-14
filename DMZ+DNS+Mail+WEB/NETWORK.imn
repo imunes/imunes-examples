@@ -44,7 +44,7 @@ node n1 {
 
 node n3 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R3
 	!
@@ -74,6 +74,8 @@ node n3 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
@@ -177,7 +179,7 @@ node n6 {
 
 node n7 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R7
 	!
@@ -199,6 +201,8 @@ node n7 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
@@ -212,7 +216,7 @@ node n7 {
 
 node n8 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R8
 	!
@@ -238,6 +242,8 @@ node n8 {
 	!
 	router rip
 	 redistribute static
+	 redistribute connected
+	 redistribute ospf
 	 network 0.0.0.0/0
 	!
     }
@@ -252,7 +258,7 @@ node n8 {
 
 node n9 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname R9
 	!
@@ -506,7 +512,7 @@ node n19 {
 
 node n20 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname FW
 	!
@@ -530,8 +536,8 @@ node n20 {
 	!
     }
     canvas c1
-    iconcoords {120.0 192.0}
-    labelcoords {150.0 171.0}
+    iconcoords {120 192}
+    labelcoords {150 171}
     interface-peer {eth0 n21}
     interface-peer {eth1 n24}
 }
@@ -757,7 +763,7 @@ node n31 {
 
 node n32 {
     type router
-    model quagga
+    model frr
     network-config {
 	hostname FWint
 	!

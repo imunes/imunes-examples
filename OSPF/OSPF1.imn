@@ -1,7 +1,7 @@
 node n0 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname router1
 	!
@@ -25,10 +25,11 @@ node n0 {
 	 network 0.0.0.0/0 area 0.0.0.0
 	!
 	router ospf6
-	 router-id 0.0.0.0
+	 ospf6 router-id 0.0.0.1
 	 redistribute static
 	 redistribute connected
 	 redistribute ripng
+	  area 0.0.0.0 range ::/0
 	!
     }
     canvas c0
@@ -41,7 +42,7 @@ node n0 {
 node n1 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname router2
 	!
@@ -69,10 +70,11 @@ node n1 {
 	 network 0.0.0.0/0 area 0.0.0.0
 	!
 	router ospf6
-	 router-id 0.0.0.1
+	 ospf6 router-id 0.0.0.2
 	 redistribute static
 	 redistribute connected
 	 redistribute ripng
+	  area 0.0.0.0 range ::/0
 	!
     }
     canvas c0
@@ -86,7 +88,7 @@ node n1 {
 node n2 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname router3
 	!
@@ -112,10 +114,11 @@ node n2 {
 	 network 0.0.0.0/0 area 0.0.0.0
 	!
 	router ospf6
-	 router-id 0.0.0.2
+	 ospf6 router-id 0.0.0.3
 	 redistribute static
 	 redistribute connected
 	 redistribute ripng
+	  area 0.0.0.0 range ::/0
 	!
     }
     canvas c0
@@ -128,7 +131,7 @@ node n2 {
 node n3 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname router6
 	!
@@ -154,10 +157,11 @@ node n3 {
 	 network 0.0.0.0/0 area 0.0.0.0
 	!
 	router ospf6
-	 router-id 0.0.0.3
+	 ospf6 router-id 0.0.0.4
 	 redistribute static
 	 redistribute connected
 	 redistribute ripng
+	  area 0.0.0.0 range ::/0
 	!
     }
     canvas c0
@@ -197,7 +201,7 @@ node n5 {
 node n6 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname router7
 	!
@@ -223,10 +227,11 @@ node n6 {
 	 network 0.0.0.0/0 area 0.0.0.0
 	!
 	router ospf6
-	 router-id 0.0.0.6
+	 ospf6 router-id 0.0.0.7
 	 redistribute static
 	 redistribute connected
 	 redistribute ripng
+	  area 0.0.0.0 range ::/0
 	!
     }
     canvas c0
@@ -293,7 +298,7 @@ node n8 {
 node n9 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname router4
 	!
@@ -317,10 +322,11 @@ node n9 {
 	 network 0.0.0.0/0 area 0.0.0.0
 	!
 	router ospf6
-	 router-id 0.0.0.9
+	 ospf6 router-id 0.0.0.10
 	 redistribute static
 	 redistribute connected
 	 redistribute ripng
+	  area 0.0.0.0 range ::/0
 	!
     }
     canvas c0
@@ -333,7 +339,7 @@ node n9 {
 node n10 {
     type router
     cpu {{min 0} {max 100} {weight 1}}
-    model quagga
+    model frr
     network-config {
 	hostname router5
 	!
@@ -357,10 +363,11 @@ node n10 {
 	 network 0.0.0.0/0 area 0.0.0.0
 	!
 	router ospf6
-	 router-id 0.0.0.10
+	 ospf6 router-id 0.0.0.11
 	 redistribute static
 	 redistribute connected
 	 redistribute ripng
+	  area 0.0.0.0 range ::/0
 	!
     }
     canvas c0
