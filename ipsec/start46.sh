@@ -14,6 +14,7 @@ if isOSlinux; then
     DIR="/etc"
 else
     DIR="/usr/local/etc"
+	kldload ipsec > /dev/null 2>&1
 fi
 
 hcp moon46_ipsec.conf $moon:${DIR}/ipsec.conf

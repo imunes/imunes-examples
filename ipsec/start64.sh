@@ -14,6 +14,7 @@ if isOSlinux; then
     DIR="/etc"
 else
     DIR="/usr/local/etc"
+	kldload ipsec > /dev/null 2>&1
 fi
 
 hcp moon64_ipsec.conf $moon:${DIR}/ipsec.conf
@@ -21,6 +22,9 @@ hcp sun64_ipsec.conf $sun:${DIR}/ipsec.conf
 
 hcp -r moon/* $moon:${DIR}/
 hcp -r sun/* $sun:${DIR}/
+
+himage $moon ifconfig eth1 inet6 -ifdisabled
+himage $sun ifconfig eth0 inet6 -ifdisabled
 
 himage -nt $moon ipsec start
 himage -nt $sun ipsec start
