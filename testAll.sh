@@ -13,10 +13,6 @@ if test "$1" = "seq"; then
     sequential=1
 fi
 
-if isOSlinux; then
-    sequential=1
-fi
-
 imunes -i
 
 tests="DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP BGP Traceroute services ipsec functional_tests/rj45_vlan"
@@ -37,6 +33,7 @@ for dir in $tests; do
 		sh "test${i}.sh" > TESTRESULTS_$i 2>&1
 	    else
 		sh "test${i}.sh" > TESTRESULTS_$i 2>&1 &
+		sleep 1
 		pids="$pids $!"
 	    fi
 	done
@@ -45,6 +42,7 @@ for dir in $tests; do
 	    sh test.sh > TESTRESULTS 2>&1
 	else
 	    sh test.sh > TESTRESULTS 2>&1 &
+	    sleep 1
 	    pids="$pids $!"
 	fi
     fi
