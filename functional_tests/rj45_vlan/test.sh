@@ -2,27 +2,27 @@
 
 . ../../common/procedures.sh
 
-if isOSlinux; then
-    echo "This example currently runs only on FreeBSD"
-    thereWereErrors 1
-    exit 0
-fi
-
 err=0
 
-test0=`printf "mkpeer eiface ether ether \n show .ether" | ngctl -f - | head -n1 | awk '{print $2}'`
-ngctl name $test0: test0
-ifconfig $test0 name test0
-ifconfig test0 up
-test1=`printf "mkpeer eiface ether ether \n show .ether" | ngctl -f - | head -n1 | awk '{print $2}'`
-ngctl name $test1: test1
-ifconfig $test1 name test1
-ifconfig test1 up
+if isOSlinux; then
+	ip link add name test0 type veth peer name test1
+	ip link set test0 up
+	ip link set test1 up
+else
+	test0=`printf "mkpeer eiface ether ether \n show .ether" | ngctl -f - | head -n1 | awk '{print $2}'`
+	ngctl name $test0: test0
+	ifconfig $test0 name test0
+	ifconfig test0 up
+	test1=`printf "mkpeer eiface ether ether \n show .ether" | ngctl -f - | head -n1 | awk '{print $2}'`
+	ngctl name $test1: test1
+	ifconfig $test1 name test1
+	ifconfig test1 up
 
-ngctl mkpeer test0: pipe ether upper
-ngctl name test0:ether testlink
-ngctl connect testlink: test1: lower ether
-ngctl msg testlink: setcfg {header_offset=14}
+	ngctl mkpeer test0: pipe ether upper
+	ngctl name test0:ether testlink
+	ngctl connect testlink: test1: lower ether
+	ngctl msg testlink: setcfg {header_offset=14}
+fi
 
 eid=`imunes -b extvlan.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
@@ -44,8 +44,12 @@ fi
 
 imunes -b -e $eid
 
-ngctl msg test0: shutdown
-ngctl msg test1: shutdown
-ngctl msg testlink: shutdown
+if isOSlinux; then
+	ip link del test0
+else
+	ngctl msg testlink: shutdown
+	ngctl msg test0: shutdown
+	ngctl msg test1: shutdown
+fi
 
 thereWereErrors $err

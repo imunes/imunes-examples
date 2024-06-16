@@ -45,7 +45,7 @@ node n1 {
 node n2 {
     type rj45
     network-config {
-	hostname test0.123
+	hostname test0
 	!
 	vlan
 	 enabled 1
@@ -61,7 +61,7 @@ node n2 {
 node n3 {
     type rj45
     network-config {
-	hostname test1.123
+	hostname test1
 	!
 	vlan
 	 enabled 1
@@ -94,6 +94,7 @@ option show {
     link_labels yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0

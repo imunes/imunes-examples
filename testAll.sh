@@ -19,10 +19,10 @@ fi
 
 imunes -i
 
-tests="DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP BGP Traceroute services ipsec"
+tests="DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP BGP Traceroute services ipsec functional_tests/rj45_vlan"
 
 if isOSfreebsd; then
-    tests="$tests functional_tests/rj45_vlan gif"
+    tests="$tests gif"
 fi
 
 echo "#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*"
