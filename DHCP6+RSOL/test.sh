@@ -32,6 +32,11 @@ for pc in $pcs; do
     fi
 done
 
+imunes -b -e $eid
+
+eid=`imunes -b DHCP6.imn | awk '/Experiment/{print $4; exit}'`
+startCheck "$eid"
+
 ./start_dhcpd6 $eid
 if [ $? -ne 0 ]; then
     echo "********** START_DHCP6 ERROR **********"
@@ -73,6 +78,9 @@ if [ $err -eq 0 ]; then
         sleep 2
 	if isOSfreebsd; then
 	    pre="/usr/local/sbin/"
+	    himage PC3@${eid} ifconfig eth0 inet6 -ifdisabled
+	    himage PC3@${eid} ifconfig eth0 inet6 accept_rtadv
+	    himage PC3@${eid} rtsol -D eth0
 	fi
 	himage PC3@${eid} ${pre}dhclient -6 -cf /dev/null eth0
         if [ $? -eq 0 ]; then
