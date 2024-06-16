@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
     echo "********** START_DNS ERROR **********"
     err=1
 else
-    sleep 20
+    sleep 60
     for h in $dns_servers $hosts; do 
 	dnsCheck $h@$eid zpmMail.zpm.fer.hr
 	if [ $? -eq 0 ]; then
