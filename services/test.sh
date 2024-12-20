@@ -7,6 +7,9 @@ err=0
 eid=`imunes -b services.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
+# wait for the services to start
+sleep 5
+
 # ftp
 himage FTP@$eid netstat -an | grep LISTEN | grep -q "21"
 if [ $? -ne 0 ]; then
