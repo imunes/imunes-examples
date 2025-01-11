@@ -23,8 +23,10 @@ hcp sun64_ipsec.conf $sun:${DIR}/ipsec.conf
 hcp -r moon/* $moon:${DIR}/
 hcp -r sun/* $sun:${DIR}/
 
-himage $moon ifconfig eth1 inet6 -ifdisabled
-himage $sun ifconfig eth0 inet6 -ifdisabled
+if isOSfreebsd; then
+	himage $moon ifconfig eth1 inet6 -ifdisabled
+	himage $sun ifconfig eth0 inet6 -ifdisabled
+fi
 
 himage -nt $moon ipsec start
 himage -nt $sun ipsec start
