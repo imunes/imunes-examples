@@ -1,0 +1,88 @@
+node n0 {
+    type pc
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 ip address 10.0.0.20/24
+	 ipv6 address fc00::20/64
+	 mac address 42:00:aa:00:00:00
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
+	!
+    }
+    auto_default_routes enabled
+    canvas c0
+    iconcoords {120 288}
+    labelcoords {120 319}
+    interface-peer {eth0 n1}
+}
+
+node n1 {
+    type router
+    model frr
+    network-config {
+	hostname router1
+	!
+	interface eth1
+	 ipv6 address fc00:1::1/64
+	 mac address 42:00:aa:00:00:02
+	 ip address 20.0.0.1/24
+	!
+	interface eth0
+	 ip address 10.0.0.1/24
+	 ipv6 address fc00::1/64
+	 mac address 42:00:aa:00:00:01
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/8
+	 ipv6 address ::1/128
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf6
+	 network ::/0
+	!
+    }
+    auto_default_routes enabled
+    canvas c0
+    iconcoords {648 288}
+    labelcoords {648 313}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 ""}
+}
+
+link l0 {
+    nodes {n0 n1}
+    ifaces {eth0 eth0}
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+

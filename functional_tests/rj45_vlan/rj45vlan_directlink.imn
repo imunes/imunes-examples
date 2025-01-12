@@ -45,7 +45,7 @@ node n1 {
 node n2 {
     type rj45
     network-config {
-	hostname test0
+	hostname rjvlan0
 	!
 	vlan
 	 enabled 1
@@ -61,7 +61,7 @@ node n2 {
 node n3 {
     type rj45
     network-config {
-	hostname test1
+	hostname rjvlan1
 	!
 	vlan
 	 enabled 1
@@ -75,11 +75,15 @@ node n3 {
 }
 
 link l0 {
+    direct 1
     nodes {n0 n2}
+    ifaces {eth0 0}
 }
 
 link l1 {
+    direct 1
     nodes {n1 n3}
+    ifaces {eth0 0}
 }
 
 canvas c0 {
