@@ -1,0 +1,1409 @@
+{
+    "nodes"       : {
+        "n1"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT1",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["10.1.3.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["10.1.1.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "192 72",
+            "labelcoords"         : "224 51",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.1.3.2/24 
+                             ip ospf cost 1 
+                            ! 
+                            interface eth1 
+                             ip address 10.1.1.1/24 
+                             ip ospf cost 3 
+                            ! 
+                            router ospf
+                             router-id 1.1.1.1 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.1.1.0/24 area 1.1.1.1 
+                             network 10.1.3.0/24 area 1.1.1.1 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n2"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT2",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:02",
+                    "ipv4_addrs" : ["10.1.2.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:03",
+                    "ipv4_addrs" : ["10.1.3.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "192 192",
+            "labelcoords"         : "222 219",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.1.2.1/24 
+                             ip ospf cost 3 
+                            ! 
+                            interface eth1 
+                             ip address 10.1.3.1/24 
+                             ip ospf cost 1 
+                             ip ospf priority 5 
+                            ! 
+                            router ospf
+                             router-id 2.2.2.2 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.1.3.0/24 area 1.1.1.1 
+                             network 10.1.2.0/24 area 1.1.1.1 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n3"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT3",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:04",
+                    "ipv4_addrs" : ["10.0.36.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:05",
+                    "ipv4_addrs" : ["10.1.4.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l20"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:06",
+                    "ipv4_addrs" : ["10.1.3.4/24"],
+                    "type"       : "phys",
+                    "link"       : "l21"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "432 192",
+            "labelcoords"         : "434 226",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0
+                             ip address 10.0.36.1/24 
+                             ip ospf cost 8 
+                            ! 
+                            interface eth1 
+                             ip address 10.1.4.1/24 
+                             ip ospf cost 2 
+                            ! 
+                            interface eth2 
+                             ip address 10.1.3.4/24 
+                             ip ospf cost 1 
+                            ! 
+                            router ospf
+                             router-id 3.3.3.3 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.1.3.0/24 area 1.1.1.1 
+                             network 10.1.4.0/24 area 1.1.1.1 
+                             network 10.0.36.0/24 area 0.0.0.0 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n4"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT4",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:07",
+                    "ipv4_addrs" : ["10.1.3.3/24"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:08",
+                    "ipv4_addrs" : ["10.0.45.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "432 120",
+            "labelcoords"         : "434 101",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.1.3.3/24 
+                             ip ospf cost 1 
+                            ! 
+                            interface eth1 
+                             ip address 10.0.45.1/24 
+                             ip ospf cost 8 
+                            ! 
+                            router ospf
+                             router-id 4.4.4.4 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.1.3.0/24 area 1.1.1.1 
+                             network 10.0.45.0/24 area 0.0.0.0 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n5"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT5",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:09",
+                    "ipv4_addrs" : ["10.0.45.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:0a",
+                    "ipv4_addrs" : ["10.0.56.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l7"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:0b",
+                    "ipv4_addrs" : ["10.0.57.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l22"
+                }
+            },
+            "croutes4"            : ["192.168.1.0/24 10.0.57.2"],
+            "canvas"              : "c0",
+            "iconcoords"          : "672 48",
+            "labelcoords"         : "716 43",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.0.45.2/24 
+                             ip ospf cost 8 
+                            ! 
+                            interface eth1 
+                             ip address 10.0.56.1/24 
+                             ip ospf cost 7 
+                            ! 
+                            interface eth2 
+                             ip address 10.0.57.1/24 
+                             ip ospf cost 6 
+                            ! 
+                            router ospf
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.0.56.0/24 area 0.0.0.0 
+                             network 10.0.57.0/24 area 0.0.0.0 
+                             network 10.0.45.0/24 area 0.0.0.0 
+                            ! 
+                            ip route 192.168.1.0/24 10.0.57.2"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n6"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT6",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0c",
+                    "ipv4_addrs" : ["10.0.36.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:0d",
+                    "ipv4_addrs" : ["10.0.56.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l7"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:0e",
+                    "ipv4_addrs" : ["10.0.60.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l8"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "600 264",
+            "labelcoords"         : "647 273",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.0.36.2/24 
+                             ip ospf cost 6 
+                            ! 
+                            interface eth1 
+                             ip address 10.0.56.2/24 
+                             ip ospf cost 6 
+                            ! 
+                            interface eth2 
+                             ip address 10.0.60.1/24 
+                             ip ospf cost 7 
+                            ! 
+                            router ospf
+                             router-id 6.6.6.6 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.0.36.0/24 area 0.0.0.0 
+                             network 10.0.56.0/24 area 0.0.0.0 
+                             network 10.0.60.0/24 area 0.0.0.0 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n7"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT7",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0f",
+                    "ipv4_addrs" : ["10.2.6.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l11"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:10",
+                    "ipv4_addrs" : ["10.0.57.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l22"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "816 384",
+            "labelcoords"         : "845 372",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.2.6.2/24 
+                             ip ospf cost 1 
+                            ! 
+                            interface eth1 
+                             ip address 10.0.57.2/24 
+                             ip ospf cost 6 
+                            ! 
+                            router ospf
+                             router-id 7.7.7.7 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.0.57.0/24 area 0.0.0.0 
+                             network 10.2.6.0/24 area 2.2.2.2 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n8"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT8",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:11",
+                    "ipv4_addrs" : ["10.2.6.3/24"],
+                    "type"       : "phys",
+                    "link"       : "l12"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:12",
+                    "ipv4_addrs" : ["10.2.7.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l13"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "768 552",
+            "labelcoords"         : "814 557",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.2.6.3/24 
+                             ip ospf cost 1 
+                            ! 
+                            interface eth1 
+                             ip address 10.2.7.1/24 
+                             ip ospf cost 4 
+                            ! 
+                            router ospf
+                             router-id 8.8.8.8 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.2.6.0/24 area 2.2.2.2 
+                             network 10.2.7.0/24 area 2.2.2.2 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n9"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT9",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:13",
+                    "ipv4_addrs" : ["10.3.9.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l15"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:14",
+                    "ipv4_addrs" : ["10.3.11.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l19"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "72 408",
+            "labelcoords"         : "60 439",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.3.9.1/24 
+                             ip ospf cost 1 
+                            ! 
+                            interface eth1 
+                             ip address 10.3.11.1/24 
+                             ip ospf cost 3 
+                            ! 
+                            router ospf
+                             router-id 9.9.9.9 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.3.11.0/24 area 3.3.3.3 
+                             network 10.3.9.0/24 area 3.3.3.3 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n10" : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT10",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:15",
+                    "ipv4_addrs" : ["10.0.60.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l8"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:16",
+                    "ipv4_addrs" : ["10.2.8.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l9"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:17",
+                    "ipv4_addrs" : ["10.2.6.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l10"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "600 384",
+            "labelcoords"         : "553 378",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.0.60.2/24 
+                             ip ospf cost 5 
+                            ! 
+                            interface eth1 
+                             ip address 10.2.8.1/24 
+                             ip ospf cost 3 
+                            ! 
+                            interface eth2 
+                             ip address 10.2.6.1/24 
+                             ip ospf cost 1 
+                             ip ospf priority 0 
+                            ! 
+                            router ospf
+                             router-id 10.10.10.10 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.0.60.0/24 area 0.0.0.0 
+                             network 10.2.6.0/24 area 2.2.2.2 
+                             network 10.2.8.0/24 area 2.2.2.2 
+                             area 2.2.2.2 virtual-link 11.11.11.11 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n11" : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT11",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:18",
+                    "ipv4_addrs" : ["10.2.8.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l14"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:19",
+                    "ipv4_addrs" : ["10.3.9.3/24"],
+                    "type"       : "phys",
+                    "link"       : "l17"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "360 408",
+            "labelcoords"         : "367 390",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.2.8.2/24 
+                             ip ospf cost 2 
+                            ! 
+                            interface eth1 
+                             ip address 10.3.9.3/24 
+                             ip ospf cost 1 
+                            ! 
+                            router ospf
+                             router-id 11.11.11.11 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.2.8.0/24 area 2.2.2.2 
+                             network 10.3.9.0/24 area 3.3.3.3 
+                             area 2.2.2.2 virtual-link 10.10.10.10 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n12" : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "RT12",
+            "router_config"       : "ospf 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:1a",
+                    "ipv4_addrs" : ["10.3.9.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l16"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:1b",
+                    "ipv4_addrs" : ["10.3.10.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l18"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "216 504",
+            "labelcoords"         : "265 513",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "generic" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            interface eth0 
+                             ip address 10.3.9.2/24 
+                             ip ospf cost 1 
+                            ! 
+                            interface eth1 
+                             ip address 10.3.10.1/24 
+                             ip ospf cost 2 
+                            ! 
+                            router ospf
+                             router-id 12.12.12.12 
+                             redistribute static 
+                             redistribute connected 
+                             redistribute rip 
+                             network 10.3.9.0/24 area 3.3.3.3 
+                             network 10.3.10.0/24 area 3.3.3.3 
+                            !"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG generic",
+            "auto_default_routes" : "disabled"
+        },
+        "n13" : {
+            "type"        : "lanswitch",
+            "name"        : "N3",
+            "canvas"      : "c0",
+            "iconcoords"  : "312 120",
+            "labelcoords" : "323 150",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l2"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e2",
+                    "link" : "l3"
+                },
+                "ifc2" : {
+                    "type" : "phys",
+                    "name" : "e3",
+                    "link" : "l21"
+                },
+                "ifc3" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l1"
+                }
+            }
+        },
+        "n14" : {
+            "type"        : "lanswitch",
+            "name"        : "N2",
+            "canvas"      : "c0",
+            "iconcoords"  : "48 192",
+            "labelcoords" : "76 175",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                }
+            }
+        },
+        "n15" : {
+            "type"        : "lanswitch",
+            "name"        : "N1",
+            "canvas"      : "c0",
+            "iconcoords"  : "48 72",
+            "labelcoords" : "82 57",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l4"
+                }
+            }
+        },
+        "n16" : {
+            "type"        : "lanswitch",
+            "name"        : "N4",
+            "canvas"      : "c0",
+            "iconcoords"  : "312 240",
+            "labelcoords" : "312 219",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l20"
+                }
+            }
+        },
+        "n17" : {
+            "type"        : "lanswitch",
+            "name"        : "N11",
+            "canvas"      : "c0",
+            "iconcoords"  : "72 336",
+            "labelcoords" : "68 320",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l19"
+                }
+            }
+        },
+        "n18" : {
+            "type"        : "lanswitch",
+            "name"        : "N9",
+            "canvas"      : "c0",
+            "iconcoords"  : "216 408",
+            "labelcoords" : "232 392",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l15"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l16"
+                },
+                "ifc2" : {
+                    "type" : "phys",
+                    "name" : "e2",
+                    "link" : "l17"
+                }
+            }
+        },
+        "n19" : {
+            "type"        : "lanswitch",
+            "name"        : "N10",
+            "canvas"      : "c0",
+            "iconcoords"  : "72 576",
+            "labelcoords" : "67 554",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l18"
+                }
+            }
+        },
+        "n20" : {
+            "type"        : "lanswitch",
+            "name"        : "N8",
+            "canvas"      : "c0",
+            "iconcoords"  : "528 456",
+            "labelcoords" : "525 489",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l9"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l14"
+                }
+            }
+        },
+        "n21" : {
+            "type"        : "lanswitch",
+            "name"        : "N6",
+            "canvas"      : "c0",
+            "iconcoords"  : "768 480",
+            "labelcoords" : "727 506",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l10"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l11"
+                },
+                "ifc2" : {
+                    "type" : "phys",
+                    "name" : "e2",
+                    "link" : "l12"
+                }
+            }
+        },
+        "n22" : {
+            "type"        : "lanswitch",
+            "name"        : "N7",
+            "canvas"      : "c0",
+            "iconcoords"  : "624 552",
+            "labelcoords" : "606 534",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l13"
+                }
+            }
+        }
+    },
+    "links"       : {
+        "l2"  : {
+            "peers"        : "n1 n13",
+            "peers_ifaces" : "ifc1 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l3"  : {
+            "peers"        : "n4 n13",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l4"  : {
+            "peers"        : "n1 n15",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l5"  : {
+            "peers"        : "n4 n5",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l6"  : {
+            "peers"        : "n3 n6",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l7"  : {
+            "peers"        : "n5 n6",
+            "peers_ifaces" : "ifc2 ifc2",
+            "bandwidth"    : "0"
+        },
+        "l8"  : {
+            "peers"        : "n6 n10",
+            "peers_ifaces" : "ifc3 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l9"  : {
+            "peers"        : "n10 n20",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l10" : {
+            "peers"        : "n10 n21",
+            "peers_ifaces" : "ifc3 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l11" : {
+            "peers"        : "n21 n7",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l12" : {
+            "peers"        : "n21 n8",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l13" : {
+            "peers"        : "n8 n22",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l14" : {
+            "peers"        : "n11 n20",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l15" : {
+            "peers"        : "n9 n18",
+            "peers_ifaces" : "ifc1 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l16" : {
+            "peers"        : "n18 n12",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l17" : {
+            "peers"        : "n11 n18",
+            "peers_ifaces" : "ifc2 ifc2",
+            "bandwidth"    : "0"
+        },
+        "l18" : {
+            "peers"        : "n12 n19",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l19" : {
+            "peers"        : "n9 n17",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l20" : {
+            "peers"        : "n3 n16",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l21" : {
+            "peers"        : "n3 n13",
+            "peers_ifaces" : "ifc3 ifc2",
+            "bandwidth"    : "0"
+        },
+        "l0"  : {
+            "peers"        : "n14 n2",
+            "peers_ifaces" : "ifc0 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l1"  : {
+            "peers"        : "n2 n13",
+            "peers_ifaces" : "ifc2 ifc3",
+            "bandwidth"    : "0"
+        },
+        "l22" : {
+            "peers"        : "n5 n7",
+            "peers_ifaces" : "ifc3 ifc2",
+            "bandwidth"    : "0"
+        }
+    },
+    "annotations" : {
+        "a0"  : {
+            "iconcoords" : "10 18 429 270",
+            "type"       : "rectangle",
+            "labelcolor" : "#040000",
+            "fontfamily" : "Arial",
+            "fontsize"   : "12",
+            "color"      : "#bebea0",
+            "canvas"     : "c0"
+        },
+        "a1"  : {
+            "iconcoords" : "21 294 329 608",
+            "type"       : "rectangle",
+            "labelcolor" : "black",
+            "fontfamily" : "Arial",
+            "fontsize"   : "12",
+            "color"      : "#bedebe",
+            "canvas"     : "c0"
+        },
+        "a2"  : {
+            "iconcoords" : "458 386 880 599",
+            "type"       : "rectangle",
+            "labelcolor" : "black",
+            "fontfamily" : "Arial",
+            "fontsize"   : "12",
+            "color"      : "#bed4d6",
+            "canvas"     : "c0"
+        },
+        "a3"  : {
+            "iconcoords" : "479 585",
+            "type"       : "text",
+            "label"      : "Area 2",
+            "labelcolor" : "black",
+            "fontfamily" : "Arial",
+            "fontsize"   : "12",
+            "canvas"     : "c0"
+        },
+        "a4"  : {
+            "iconcoords" : "264 576",
+            "type"       : "text",
+            "label"      : "Area 3",
+            "labelcolor" : "black",
+            "fontfamily" : "Arial",
+            "fontsize"   : "12",
+            "canvas"     : "c0"
+        },
+        "a6"  : {
+            "iconcoords" : "72 240",
+            "type"       : "text",
+            "label"      : "Area 1",
+            "labelcolor" : "black",
+            "fontfamily" : "Arial",
+            "fontsize"   : "12",
+            "canvas"     : "c0"
+        },
+        "a8"  : {
+            "iconcoords" : "248 77",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a9"  : {
+            "iconcoords" : "192 48",
+            "type"       : "text",
+            "label"      : "3",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a10" : {
+            "iconcoords" : "83 370",
+            "type"       : "text",
+            "label"      : "3",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a11" : {
+            "iconcoords" : "388 193",
+            "type"       : "text",
+            "label"      : "2",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a12" : {
+            "iconcoords" : "467 129",
+            "type"       : "text",
+            "label"      : "8",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a13" : {
+            "iconcoords" : "696 73",
+            "type"       : "text",
+            "label"      : "6",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a14" : {
+            "iconcoords" : "467 196",
+            "type"       : "text",
+            "label"      : "8",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a15" : {
+            "iconcoords" : "554 259",
+            "type"       : "text",
+            "label"      : "6",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a16" : {
+            "iconcoords" : "566 401",
+            "type"       : "text",
+            "label"      : "3",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a17" : {
+            "iconcoords" : "613 409",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a18" : {
+            "iconcoords" : "198 530",
+            "type"       : "text",
+            "label"      : "2",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a19" : {
+            "iconcoords" : "806 330",
+            "type"       : "text",
+            "label"      : "6",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a20" : {
+            "iconcoords" : "586 342",
+            "type"       : "text",
+            "label"      : "5",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a21" : {
+            "iconcoords" : "578 285",
+            "type"       : "text",
+            "label"      : "7",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a22" : {
+            "iconcoords" : "408 96",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a23" : {
+            "iconcoords" : "657 104",
+            "type"       : "text",
+            "label"      : "7",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a24" : {
+            "iconcoords" : "588 221",
+            "type"       : "text",
+            "label"      : "6",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a25" : {
+            "iconcoords" : "802 435",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a26" : {
+            "iconcoords" : "735 571",
+            "type"       : "text",
+            "label"      : "4",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a27" : {
+            "iconcoords" : "781 513",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a28" : {
+            "iconcoords" : "237 151",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a29" : {
+            "iconcoords" : "401 167",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a30" : {
+            "iconcoords" : "633 41",
+            "type"       : "text",
+            "label"      : "8",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a31" : {
+            "iconcoords" : "315 393",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a32" : {
+            "iconcoords" : "441 419",
+            "type"       : "text",
+            "label"      : "2",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a33" : {
+            "iconcoords" : "99 423",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a34" : {
+            "iconcoords" : "220 482",
+            "type"       : "text",
+            "label"      : "1",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        },
+        "a35" : {
+            "iconcoords" : "192 168",
+            "type"       : "text",
+            "label"      : "3",
+            "labelcolor" : "#fe0000",
+            "fontfamily" : "courier",
+            "fontsize"   : "10",
+            "effects"    : "bold",
+            "canvas"     : "c0"
+        }
+    },
+    "canvases"    : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "options"     : {
+        "show_interface_names" : "0",
+        "show_interface_ipv6"  : "0",
+        "show_grid"            : "0",
+        "version"              : "1"
+    }
+}
