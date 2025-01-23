@@ -17,8 +17,8 @@ if isOSlinux; then
     fi
 fi
 
-# BGP_custom-config.imn
-eid=`imunes -b BGP-Anycast.imn | awk '/Experiment/{print $4; exit}'`
+# BGP_custom-config.imn / BGP-Anycast_custom-config.imn
+eid=`imunes -b BGP-Anycast_custom-config.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 Wait 40
