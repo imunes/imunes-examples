@@ -15,7 +15,7 @@ fi
 
 imunes -i
 
-tests="DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP Traceroute services ipsec functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces"
+tests="BGP DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP Traceroute services ipsec functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces"
 
 if isOSfreebsd; then
     tests="$tests gif"
