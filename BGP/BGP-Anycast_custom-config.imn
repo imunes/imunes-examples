@@ -1,0 +1,677 @@
+{
+    "nodes"       : {
+        "n0"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "DC1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["10.10.10.1/30"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:0e",
+                    "ipv4_addrs" : ["8.8.8.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l7"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:0f",
+                    "ipv4_addrs" : ["9.1.1.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l8"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "240 408",
+            "labelcoords"         : "220 367",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            router bgp 10000
+                             no bgp ebgp-requires-policy
+                             no synchronization
+                             no auto-summary
+                             network 8.8.8.0 mask 255.255.255.0
+                             network 9.1.1.0 mask 255.255.255.0
+                             network 10.10.10.0 mask 255.255.255.252
+                             neighbor 10.10.10.2 remote-as 22222
+                            !"
+                    }
+                }
+            },
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_enabled"      : "true",
+            "auto_default_routes" : "disabled"
+        },
+        "n1"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "Backbone2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["10.10.10.2/30"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:02",
+                    "ipv4_addrs" : ["10.10.10.9/30"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:03",
+                    "ipv4_addrs" : ["10.10.10.6/30"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "240 240",
+            "labelcoords"         : "172 240",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            router bgp 22222
+                             no bgp ebgp-requires-policy
+                             no synchronization
+                             no auto-summary
+                             network 10.10.10.0 mask 255.255.255.252
+                             network 10.10.10.4 mask 255.255.255.252
+                             network 10.10.10.8 mask 255.255.255.252
+                             neighbor 10.10.10.1 remote-as 10000
+                             neighbor 10.10.10.5 remote-as 100
+                             neighbor 10.10.10.10 remote-as 11111
+                            !"
+                    }
+                }
+            },
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_enabled"      : "true",
+            "auto_default_routes" : "disabled"
+        },
+        "n2"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "Backbone1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:04",
+                    "ipv4_addrs" : ["10.10.10.10/30"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:05",
+                    "ipv4_addrs" : ["10.10.10.13/30"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:06",
+                    "ipv4_addrs" : ["10.10.10.17/30"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "600 240",
+            "labelcoords"         : "677 240",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            router bgp 11111
+                             no bgp ebgp-requires-policy
+                             no synchronization
+                             no auto-summary
+                             network 10.10.10.16 mask 255.255.255.252
+                             network 10.10.10.12 mask 255.255.255.252
+                             network 10.10.10.8 mask 255.255.255.252
+                             neighbor 10.10.10.14 remote-as 10000
+                             neighbor 10.10.10.9 remote-as 22222
+                             neighbor 10.10.10.18 remote-as 200
+                            !"
+                    }
+                }
+            },
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_enabled"      : "true",
+            "auto_default_routes" : "disabled"
+        },
+        "n3"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "DC2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:07",
+                    "ipv4_addrs" : ["10.10.10.14/30"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:12",
+                    "ipv4_addrs" : ["8.8.8.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l11"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:13",
+                    "ipv4_addrs" : ["9.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l12"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "600 384",
+            "labelcoords"         : "575 346",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            router bgp 10000
+                             no bgp ebgp-requires-policy
+                             no synchronization
+                             no auto-summary
+                             network 8.8.8.0 mask 255.255.255.0
+                             network 9.0.0.0 mask 255.255.255.0
+                             network 10.10.10.12 mask 255.255.255.252
+                             neighbor 10.10.10.13 remote-as 11111
+                            !"
+                    }
+                }
+            },
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_enabled"      : "true",
+            "auto_default_routes" : "disabled"
+        },
+        "n4"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "ISP1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:08",
+                    "ipv4_addrs" : ["10.10.10.5/30"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:09",
+                    "ipv4_addrs" : ["172.32.1.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "336 96",
+            "labelcoords"         : "388 92",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            router bgp 100
+                             no bgp ebgp-requires-policy
+                             no synchronization
+                             no auto-summary
+                             network 172.32.1.0 mask 255.255.255.0
+                             network 10.10.10.4 mask 255.255.255.252
+                             neighbor 10.10.10.6 remote-as 22222
+                            !"
+                    }
+                }
+            },
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_enabled"      : "true",
+            "auto_default_routes" : "disabled"
+        },
+        "n5"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "ISP2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0a",
+                    "ipv4_addrs" : ["10.10.10.18/30"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:0b",
+                    "ipv4_addrs" : ["172.16.1.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "504 96",
+            "labelcoords"         : "458 94",
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "
+                            router bgp 200
+                             no bgp ebgp-requires-policy
+                             no synchronization
+                             no auto-summary
+                             network 172.16.1.0 mask 255.255.255.0
+                             network 10.10.10.16 mask 255.255.255.252
+                             neighbor 10.10.10.17 remote-as 11111
+                            !"
+                    }
+                }
+            },
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_enabled"      : "true",
+            "auto_default_routes" : "disabled"
+        },
+        "n6"  : {
+            "type"                : "pc",
+            "name"                : "Client1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0c",
+                    "ipv4_addrs" : ["172.32.1.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 172.32.1.1"],
+            "canvas"              : "c0",
+            "iconcoords"          : "48 96",
+            "labelcoords"         : "48 132",
+            "auto_default_routes" : "disabled"
+        },
+        "n7"  : {
+            "type"                : "pc",
+            "name"                : "Client2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0d",
+                    "ipv4_addrs" : ["172.16.1.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 172.16.1.1"],
+            "canvas"              : "c0",
+            "iconcoords"          : "792 96",
+            "labelcoords"         : "792 132",
+            "auto_default_routes" : "disabled"
+        },
+        "n8"  : {
+            "type"                : "host",
+            "name"                : "WEB1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:10",
+                    "ipv4_addrs" : ["8.8.8.8/24"],
+                    "type"       : "phys",
+                    "link"       : "l9"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:11",
+                    "ipv4_addrs" : ["9.1.1.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l10"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 9.1.1.1"],
+            "canvas"              : "c0",
+            "iconcoords"          : "72 552",
+            "labelcoords"         : "72 593",
+            "auto_default_routes" : "disabled"
+        },
+        "n9"  : {
+            "type"                : "host",
+            "name"                : "WEB2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/24"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:14",
+                    "ipv4_addrs" : ["8.8.8.8/24"],
+                    "type"       : "phys",
+                    "link"       : "l13"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:15",
+                    "ipv4_addrs" : ["9.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l14"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 9.0.0.1"],
+            "canvas"              : "c0",
+            "iconcoords"          : "768 552",
+            "labelcoords"         : "768 593",
+            "auto_default_routes" : "disabled"
+        },
+        "n10" : {
+            "type"        : "lanswitch",
+            "name"        : "sw1",
+            "canvas"      : "c0",
+            "iconcoords"  : "72 408",
+            "labelcoords" : "75 387",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l7"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l9"
+                }
+            }
+        },
+        "n11" : {
+            "type"        : "lanswitch",
+            "name"        : "sw2",
+            "canvas"      : "c0",
+            "iconcoords"  : "240 552",
+            "labelcoords" : "240 578",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l8"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l10"
+                }
+            }
+        },
+        "n12" : {
+            "type"        : "lanswitch",
+            "name"        : "sw4",
+            "canvas"      : "c0",
+            "iconcoords"  : "600 552",
+            "labelcoords" : "596 576",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l12"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l14"
+                }
+            }
+        },
+        "n13" : {
+            "type"        : "lanswitch",
+            "name"        : "sw3",
+            "canvas"      : "c0",
+            "iconcoords"  : "768 384",
+            "labelcoords" : "770 363",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l11"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l13"
+                }
+            }
+        }
+    },
+    "links"       : {
+        "l0"  : {
+            "peers"        : "n0 n1",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l1"  : {
+            "peers"        : "n1 n2",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l2"  : {
+            "peers"        : "n1 n4",
+            "peers_ifaces" : "ifc3 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l3"  : {
+            "peers"        : "n2 n3",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l4"  : {
+            "peers"        : "n2 n5",
+            "peers_ifaces" : "ifc3 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l5"  : {
+            "peers"        : "n4 n6",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l6"  : {
+            "peers"        : "n5 n7",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l7"  : {
+            "peers"        : "n0 n10",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l8"  : {
+            "peers"        : "n0 n11",
+            "peers_ifaces" : "ifc3 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l9"  : {
+            "peers"        : "n10 n8",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l10" : {
+            "peers"        : "n11 n8",
+            "peers_ifaces" : "ifc1 ifc2",
+            "bandwidth"    : "0"
+        },
+        "l11" : {
+            "peers"        : "n3 n13",
+            "peers_ifaces" : "ifc2 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l12" : {
+            "peers"        : "n3 n12",
+            "peers_ifaces" : "ifc3 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l13" : {
+            "peers"        : "n13 n9",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l14" : {
+            "peers"        : "n12 n9",
+            "peers_ifaces" : "ifc1 ifc2",
+            "bandwidth"    : "0"
+        }
+    },
+    "annotations" : {
+        "a0" : {
+            "type"       : "rectangle",
+            "iconcoords" : "25 315 275 606",
+            "color"      : "#cccccc",
+            "width"      : "1",
+            "canvas"     : "c0"
+        },
+        "a1" : {
+            "type"       : "rectangle",
+            "iconcoords" : "545 310 818 602",
+            "color"      : "#cccccc",
+            "width"      : "1",
+            "canvas"     : "c0"
+        },
+        "a2" : {
+            "type"       : "text",
+            "iconcoords" : "56 334",
+            "label"      : "AS10000",
+            "labelcolor" : "#ff0000",
+            "font"       : "TkTextFont",
+            "canvas"     : "c0"
+        },
+        "a3" : {
+            "type"       : "text",
+            "iconcoords" : "728 331",
+            "label"      : "AS10000",
+            "labelcolor" : "#f80000",
+            "font"       : "TkTextFont",
+            "canvas"     : "c0"
+        },
+        "a4" : {
+            "type"       : "text",
+            "iconcoords" : "645 207",
+            "label"      : "AS11111",
+            "labelcolor" : "#ff0000",
+            "font"       : "TkTextFont",
+            "canvas"     : "c0"
+        },
+        "a5" : {
+            "type"       : "text",
+            "iconcoords" : "170 207",
+            "label"      : "AS22222",
+            "labelcolor" : "#ff0000",
+            "font"       : "TkTextFont",
+            "canvas"     : "c0"
+        },
+        "a6" : {
+            "type"       : "text",
+            "iconcoords" : "312 66",
+            "label"      : "AS100",
+            "labelcolor" : "#ff0000",
+            "font"       : "TkTextFont",
+            "canvas"     : "c0"
+        },
+        "a7" : {
+            "type"       : "text",
+            "iconcoords" : "481 67",
+            "label"      : "AS200",
+            "labelcolor" : "#ff0000",
+            "font"       : "TkTextFont",
+            "canvas"     : "c0"
+        },
+        "a8" : {
+            "type"        : "oval",
+            "iconcoords"  : "25 499 113 534",
+            "color"       : "#ffffbb",
+            "bordercolor" : "#042bff",
+            "width"       : "1",
+            "canvas"      : "c0"
+        },
+        "a9" : {
+            "type"        : "oval",
+            "iconcoords"  : "728 497 803 532",
+            "color"       : "#ffffbb",
+            "bordercolor" : "#042bff",
+            "width"       : "1",
+            "canvas"      : "c0"
+        }
+    },
+    "canvases"    : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "options"     : {
+        "show_interface_names" : "0",
+        "show_interface_ipv6"  : "0",
+        "version"              : "1"
+    }
+}
