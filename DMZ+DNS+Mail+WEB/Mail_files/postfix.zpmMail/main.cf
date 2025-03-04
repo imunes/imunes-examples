@@ -634,3 +634,4 @@ sample_directory = /usr/local/etc/postfix
 # readme_directory: The location of the Postfix README files.
 #
 readme_directory = no
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, defer_unauth_destination
