@@ -196,9 +196,13 @@ traceCheck () {
 
 # Usage: stopNode node
 stopNode () {
-#    himage $1 kill -9 -1 2> /dev/null
-#    himage $1 tcpdrop -a 2> /dev/null
-    for ifc in `himage $1 netstat -i | fgrep '<Link' | cut -d' ' -f1`; do
+    if isOSlinux; then
+		ifaces=$(himage -nt $1 ls /sys/class/net)
+    else
+		ifaces=$(himage -nt $1 ifconfig -l)
+    fi
+
+    for ifc in $ifaces; do
 	if [ "$ifc" != "lo0" ]; then
 	    echo ifconfig $ifc down
 	    himage $1 ifconfig $ifc down
@@ -209,9 +213,13 @@ stopNode () {
 
 # Usage: startNode node
 startNode () {
-#    himage $1 kill -9 -1 2> /dev/null
-#    himage $1 tcpdrop -a 2> /dev/null
-    for ifc in `himage $1 netstat -ai | fgrep '<Link' | cut -d' ' -f1 | tr -d '*'`; do
+    if isOSlinux; then
+		ifaces=$(himage -nt $1 ls /sys/class/net)
+    else
+		ifaces=$(himage -nt $1 ifconfig -l)
+    fi
+
+    for ifc in $ifaces; do
 	if [ "$ifc" != "lo0" ]; then
 	    echo ifconfig $ifc up
 	    himage $1 ifconfig $ifc up
