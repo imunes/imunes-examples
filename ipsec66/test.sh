@@ -3,12 +3,13 @@
 . ../common/procedures.sh
 err=0
 
-eid=`imunes -b ipsec64.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes -b ipsec66.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
-./start64.sh $eid
+sleep 3
+./start66.sh $eid
 if [ $? -eq 0 ]; then
-    netDump routerX@$eid eth0 ip
+    netDump routerX@$eid eth0 ip6
     if [ $? -eq 0 ]; then
 	ping6Check pc1@$eid bbbb::20 2
 	if [ $? -eq 0 ]; then
@@ -34,7 +35,7 @@ if [ $? -eq 0 ]; then
     fi
 else
     echo ""
-    echo "********** START64 ERROR **********"
+    echo "********** START66 ERROR **********"
     err=1
 fi
 
