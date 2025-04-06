@@ -15,7 +15,7 @@ fi
 
 imunes -i
 
-tests="BGP DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP Traceroute services ipsec functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces"
+tests="BGP DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP Traceroute services ipsec44 ipsec46 ipsec64 ipsec66 functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces"
 
 if isOSfreebsd; then
     tests="$tests gif"
@@ -27,24 +27,12 @@ echo -n "# "
 for dir in $tests; do
     echo -n "$dir "
     cd $dir
-    if test "$dir" = "ipsec"; then
-	for i in 44 46 64 66; do
-	    if [ $sequential -eq 1 ]; then
-		sh "test${i}.sh" > TESTRESULTS_$i 2>&1
-	    else
-		sh "test${i}.sh" > TESTRESULTS_$i 2>&1 &
-		sleep 1
-		pids="$pids $!"
-	    fi
-	done
+    if [ $sequential -eq 1 ]; then
+	sh test.sh > TESTRESULTS 2>&1
     else
-	if [ $sequential -eq 1 ]; then
-	    sh test.sh > TESTRESULTS 2>&1
-	else
-	    sh test.sh > TESTRESULTS 2>&1 &
-	    sleep 1
-	    pids="$pids $!"
-	fi
+	sh test.sh > TESTRESULTS 2>&1 &
+	sleep 1
+	pids="$pids $!"
     fi
     cd - > /dev/null
 done
