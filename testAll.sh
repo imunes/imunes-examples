@@ -8,59 +8,107 @@ fi
 
 . common/start_functions.sh
 
-sequential=0
+parallel_jobs=0
 if test "$1" = "seq"; then
-    sequential=1
+    parallel_jobs=1
+elif test "$1" = "-j"; then
+    parallel_jobs=$2
+    if ! [[ "$parallel_jobs" =~ ^[0-9]+$ ]] || test $parallel_jobs -eq 0; then
+	echo "Not able to run in parallel with '$parallel_jobs', try running:"
+	echo "\$ $0 seq"
+	echo "or"
+	echo "\$ $0 -j [number_of_jobs]"
+	echo ""
+	exit 1
+    fi
+else
+    parallel_jobs=$(($(nproc)/2))
 fi
 
 imunes -i
 
-tests="BGP DHCP DHCP6+RSOL DNS+Mail+WEB OSPF Ping RIP Traceroute services ipsec44 ipsec46 ipsec64 ipsec66 functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces"
+# put longer tests near the beginning
+tests=(DNS+Mail+WEB OSPF DHCP6+RSOL BGP RIP DHCP Ping Traceroute services ipsec44 ipsec46 ipsec64 ipsec66 functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces)
 
 if isOSfreebsd; then
-    tests="$tests gif"
+    tests+=('gif')
 fi
 
 echo "#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*"
-echo "# Running tests in:"
-echo -n "# "
-for dir in $tests; do
-    echo -n "$dir "
-    cd $dir
-    if [ $sequential -eq 1 ]; then
-	sh test.sh > TESTRESULTS 2>&1
-    else
+if test $parallel_jobs -eq 1; then
+    echo "# Sequential mode"
+else
+    echo "# Parallel mode - max $parallel_jobs tests running in background"
+    echo "# Please wait until everything has finished."
+fi
+test -z "$DETAILS" && echo -n "# "
+
+next_idx=0
+running_ctr=0
+done_running=""
+currently_running=""
+old_done_running=""
+old_currently_running=""
+while true; do
+    if test $next_idx -lt ${#tests[@]} && test $running_ctr -lt $parallel_jobs; then
+	dir=${tests[$next_idx]}
+	next_idx=$((next_idx+1))
+	test -z "$DETAILS" && echo -n "$dir "
+
+	if ! test -d "$dir"; then
+	    continue
+	fi
+
+	cd $dir
 	sh test.sh > TESTRESULTS 2>&1 &
-	sleep 1
-	pids="$pids $!"
+	curpid=$!
+	pidvar=pid_$curpid
+	eval $pidvar=$dir
+	pids="$pids $curpid"
+
+	cd - > /dev/null
+
+	sleep 3
     fi
-    cd - > /dev/null
+
+    running_ctr=0
+    new_pids=""
+    currently_running=""
+    for p in $pids; do
+	pvar=pid_$p
+	ps $p > /dev/null 2>&1
+	if test $? -eq 0; then
+	    running_ctr=$((running_ctr+1))
+	    new_pids="$new_pids $p"
+	    currently_running="$currently_running ${!pvar}"
+	else
+	    done_running="$done_running ${!pvar}"
+	fi
+    done
+
+    if test -n "$DETAILS"; then
+	if test "$done_running" != "$old_done_running" || test "$currently_running" != "$old_currently_running"; then
+	    if test -n "$done_running" && test -n "$currently_running"; then
+		echo -en "# DONE:$done_running | RUNNING:$currently_running\r"
+	    elif test -n "$done_running"; then
+		echo -en "# DONE:$done_running                                                                     \r"
+	    elif test -n "$currently_running"; then
+		echo -en "# RUNNING:$currently_running\r"
+	    fi
+
+	    old_done_running=$done_running
+	    old_currently_running=$currently_running
+	fi
+    fi
+
+    test -z "$new_pids" && test $next_idx -ge ${#tests[@]} && break
+    pids=$new_pids
+
+    sleep 1
 done
 
-if test ! -z "$pids" ; then
-    running=1;
-    echo ""
-    echo "Some tests are still running in the background."
-    echo "Please wait until everything has finished."
-    echo ""
-    echo -n "Running ."
-    while test $running -eq 1
-    do
-	running=0
-	for p in $pids
-	do
-	    ps $p > /dev/null 2>&1
-	    if test $? -eq 0; then
-		running=1
-		sleep 3
-		echo -n .
-		break
-	    fi
-	done
-    done
-    echo ""
-fi
-
+echo ""
+echo ""
 echo "Finished."
 
 grep "^There were errors." */TESTRESULTS* */*/TESTRESULTS* > /dev/null 2>&1
