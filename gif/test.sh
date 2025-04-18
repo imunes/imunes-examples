@@ -9,8 +9,12 @@ if isOSlinux; then
 fi
 
 err=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b gif.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b gif.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 ./start_gif.sh $eid
@@ -38,6 +42,6 @@ else
     err=1
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err

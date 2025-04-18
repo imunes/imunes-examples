@@ -1,9 +1,14 @@
 #!/bin/sh
 
 . ../common/procedures.sh
-err=0
 
-eid=`imunes -b ipsec64.imn | tail -1 | cut -d' ' -f4`
+err=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
+
+eid=`imunes$legacy -b ipsec64.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 sleep 3
@@ -39,6 +44,6 @@ else
     err=1
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err

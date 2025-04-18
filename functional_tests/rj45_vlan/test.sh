@@ -3,6 +3,10 @@
 . ../../common/procedures.sh
 
 err=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
 if isOSlinux; then
 	ip link del rjvlan0 > /dev/null 2>&1
@@ -30,7 +34,7 @@ else
 	ngctl msg rjvlanlink: setcfg {header_offset=14}
 fi
 
-eid=`imunes -b rj45vlan.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy -b rj45vlan.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
@@ -48,9 +52,9 @@ else
     err=1
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
-eid=`imunes -b rj45vlan_directlink.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy -b rj45vlan_directlink.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
@@ -68,7 +72,7 @@ else
     err=1
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 if isOSlinux; then
 	ip link del rjvlan0

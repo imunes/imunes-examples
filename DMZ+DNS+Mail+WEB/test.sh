@@ -8,8 +8,12 @@ dns_servers="aRootServer bRootServer cRootServer \
              dnsTel dnsZpm dnsMM"
 hosts="mm www pc zpmMail"
 err=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b NETWORK.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b NETWORK.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 echo "********"
@@ -23,7 +27,7 @@ echo "********"
 if [ $? -ne 0 ]; then
     echo "********** START_DNS ERROR **********"
     err=1
-    imunes -b -e $eid
+    imunes$legacy -b -e $eid
     thereWereErrors $err
     exit $err
 else
@@ -109,6 +113,6 @@ else
     fi
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err

@@ -3,8 +3,12 @@
 . ../../common/procedures.sh
 
 err=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b empty.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy -b empty.imn | tail -1 | cut -d' ' -f4`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
@@ -22,6 +26,6 @@ else
     err=1
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err

@@ -3,8 +3,12 @@
 . ../common/procedures.sh
 
 err=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b services.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b services.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 # wait for the services to start
@@ -31,7 +35,7 @@ if [ $? -ne 0 ]; then
     err=1
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 # tcpdump
 # testing after termination because that's when the file is saved in /tmp/$eid
