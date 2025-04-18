@@ -4,8 +4,12 @@
 
 err=0
 slow=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b RIP1.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b RIP1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 sleep 10
@@ -80,6 +84,6 @@ else
     err=1
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err

@@ -4,8 +4,12 @@
 
 err=0
 slow=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b IS-IS.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b IS-IS.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 Wait 40
@@ -32,7 +36,7 @@ do
 __END__
 done
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err
 

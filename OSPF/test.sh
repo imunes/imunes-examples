@@ -4,8 +4,12 @@
 
 err=0
 slow=1
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b OSPF1.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b OSPF1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 Wait 40
@@ -114,6 +118,6 @@ else
 fi
 
 readDump router2@$eid eth2
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err

@@ -4,8 +4,12 @@
 
 pcs="FIX PC1 PC2"
 err=0
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
-eid=`imunes -b DHCP.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b DHCP.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 ./start_dhcp $eid
@@ -49,7 +53,7 @@ if [ $err -eq 0 ]; then
     fi
 fi
 
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 thereWereErrors $err
 

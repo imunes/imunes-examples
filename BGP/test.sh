@@ -4,6 +4,10 @@
 
 err=0
 slow=1
+legacy=""
+if test -n "$LEGACY"; then
+    legacy=" -l"
+fi
 
 if isOSlinux; then
     # Reverse-Path Filtering should be disabled
@@ -18,7 +22,7 @@ if isOSlinux; then
 fi
 
 # BGP_custom-config.imn / BGP-Anycast_custom-config.imn
-eid=`imunes -b BGP-Anycast_custom-config.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy -b BGP-Anycast_custom-config.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 Wait 40
@@ -82,7 +86,7 @@ else
 fi
 
 readDump DC1@$eid eth1
-imunes -b -e $eid
+imunes$legacy -b -e $eid
 
 if isOSlinux; then
     echo "Restoring Reverse-Path Filter settings."
