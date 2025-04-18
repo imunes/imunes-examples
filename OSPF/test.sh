@@ -55,25 +55,39 @@ __END__
 	fi
 
 	if [ $slow -eq 1 ]; then
-	    # stopNode router7@$eid 
-            echo "Drop all packets between router2 and router7 (BER=1)"
-            vlink -BER 1 -e $eid router2:router7
+	    if isOSlinux; then
+		echo "Drop all packets between router2 and router7 (Loss=100%)"
+		vlink -loss 100% -e $eid router2:router7
+		waittime=40
+	    else
+		# This actually simulates interface down
+		echo "Drop all packets between router2 and router7 (BER=1)"
+		vlink -BER 1 -e $eid router2:router7
+		waittime=5
+	    fi
 	    if [ $? -eq 0 ]; then
-		Wait 5
+		Wait $waittime
 
 		echo ""
-		echo "########## router2@$eid routes after 5 seconds"
+		echo "########## router2@$eid routes after $waittime seconds"
 		himage -nt router2@$eid vtysh << __END__ 
 		show ip ospf route
 		show ipv6 ospf route
 		exit
 __END__
 
-		#startNode router7@$eid
-                echo "Restore link between router2 and router7 (BER=0)"
-                vlink -BER 0 -e $eid router2:router7
+		if isOSlinux; then
+		    echo "Restore link between router2 and router7 (Loss=0%)"
+		    vlink -loss 0% -e $eid router2:router7
+		    waittime=10
+		else
+		    # This actually simulates interface up
+		    echo "Restore link between router2 and router7 (BER=0)"
+		    vlink -BER 0 -e $eid router2:router7
+		    waittime=40
+		fi
 		if [ $? -eq 0 ]; then
-		    Wait 40
+		    Wait $waittime
                     n=1
                     pingStatus=1
                     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
