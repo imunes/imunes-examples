@@ -1,0 +1,103 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n0" : {
+            "type"        : "packgen",
+            "name"        : "packgen1",
+            "canvas"      : "c0",
+            "iconcoords"  : "216 192",
+            "labelcoords" : "216 225",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                }
+            },
+            "packgen"     : {
+                "packetrate" : "1",
+                "packets"    : {
+                    "10" : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                }
+            }
+        },
+        "n1" : {
+            "type"        : "packgen",
+            "name"        : "packgen2",
+            "canvas"      : "c0",
+            "iconcoords"  : "624 192",
+            "labelcoords" : "624 225",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                }
+            },
+            "packgen"     : {
+                "packets"    : {
+                    "10" : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                },
+                "packetrate" : "1"
+            }
+        },
+        "n2" : {
+            "type"        : "packgen",
+            "name"        : "packgen3",
+            "canvas"      : "c0",
+            "iconcoords"  : "216 360",
+            "labelcoords" : "216 393",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l1"
+                }
+            },
+            "packgen"     : {
+                "packetrate" : "1",
+                "packets"    : {
+                    "10" : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                }
+            }
+        },
+        "n3" : {
+            "type"        : "packgen",
+            "name"        : "packgen4",
+            "canvas"      : "c0",
+            "iconcoords"  : "624 360",
+            "labelcoords" : "624 393",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l1"
+                }
+            },
+            "packgen"     : {
+                "packetrate" : "1",
+                "packets"    : {
+                    "10" : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                }
+            }
+        }
+    },
+    "links"    : {
+        "l0" : {
+            "peers"        : "n0 n1",
+            "peers_ifaces" : "ifc0 ifc0"
+        },
+        "l1" : {
+            "peers"        : "n2 n3",
+            "peers_ifaces" : "ifc0 ifc0",
+            "direct"       : "1"
+        }
+    }
+}

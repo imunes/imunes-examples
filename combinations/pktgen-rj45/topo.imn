@@ -1,0 +1,82 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n3" : {
+            "type"        : "rj45",
+            "name"        : "rj45-1",
+            "canvas"      : "c0",
+            "iconcoords"  : "672 264",
+            "labelcoords" : "672 293",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "pgrj-n0",
+                    "link" : "l0"
+                },
+                "ifc1" : {
+                    "type" : "stolen",
+                    "name" : "pgrj-n1",
+                    "link" : "l1"
+                }
+            }
+        },
+        "n0" : {
+            "type"        : "packgen",
+            "name"        : "packgen1",
+            "canvas"      : "c0",
+            "iconcoords"  : "360 120",
+            "labelcoords" : "360 153",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                }
+            },
+            "packgen"     : {
+                "packetrate" : "1",
+                "packets"    : {
+                    "10" : "4200aa0000004200aa0000010800450000545c1440004001ca6c0a0000150a0000140800df600959000161e9156800000000d220070000000000101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637"
+                }
+            }
+        },
+        "n1" : {
+            "type"        : "packgen",
+            "name"        : "packgen2",
+            "canvas"      : "c0",
+            "iconcoords"  : "360 456",
+            "labelcoords" : "360 489",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l1"
+                }
+            },
+            "packgen"     : {
+                "packetrate" : "1",
+                "packets"    : {
+                    "10" : "4200aa0000004200aa0000010800450000545c1440004001ca6c0a0000150a0000140800df600959000161e9156800000000d220070000000000101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637"
+                }
+            }
+        }
+    },
+    "links"    : {
+        "l0" : {
+            "peers"        : "n0 n3",
+            "peers_ifaces" : "ifc0 ifc0"
+        },
+        "l1" : {
+            "peers"        : "n1 n3",
+            "peers_ifaces" : "ifc0 ifc1",
+            "direct"       : "1"
+        }
+    }
+}

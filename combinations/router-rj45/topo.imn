@@ -1,0 +1,106 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n0" : {
+            "type"                : "router",
+            "name"                : "router1",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.0.20/24"],
+                    "mac"        : "42:00:aa:00:00:00",
+                    "link"       : "l0"
+                },
+                "ifc2" : {
+                    "type"       : "phys",
+                    "name"       : "eth1",
+                    "ipv4_addrs" : ["10.0.1.20/24"],
+                    "mac"        : "42:00:aa:00:00:01",
+                    "link"       : "l1"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "120 264",
+            "labelcoords"         : "120 295",
+            "model"               : "frr",
+            "router_config"       : "rip 1 ripng 1 ospf 0 ospf6 0 bgp 0"
+        },
+        "n3" : {
+            "type"        : "rj45",
+            "name"        : "rj45-1",
+            "canvas"      : "c0",
+            "iconcoords"  : "672 264",
+            "labelcoords" : "672 293",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "rorj-n1",
+                    "link" : "l2"
+                },
+                "ifc1" : {
+                    "type" : "stolen",
+                    "name" : "rorj-n5",
+                    "link" : "l1"
+                }
+            }
+        },
+        "n1" : {
+            "type"        : "pseudo",
+            "mirror"      : "n2",
+            "canvas"      : "c0",
+            "iconcoords"  : "336 120",
+            "labelcoords" : "336 120",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "link" : "l0"
+                }
+            }
+        },
+        "n2" : {
+            "type"        : "pseudo",
+            "mirror"      : "n1",
+            "canvas"      : "c0",
+            "iconcoords"  : "456 120",
+            "labelcoords" : "456 120",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "link" : "l2"
+                }
+            }
+        }
+    },
+    "links"    : {
+        "l0" : {
+            "peers"        : "n1 n0",
+            "peers_ifaces" : "ifc0 ifc1",
+            "mirror"       : "l2"
+        },
+        "l1" : {
+            "peers"        : "n0 n3",
+            "peers_ifaces" : "ifc2 ifc1",
+            "direct"       : "1"
+        },
+        "l2" : {
+            "peers"        : "n2 n3",
+            "peers_ifaces" : "ifc0 ifc0",
+            "mirror"       : "l0"
+        }
+    }
+}

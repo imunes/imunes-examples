@@ -1,0 +1,79 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n0" : {
+            "type"        : "rj45",
+            "name"        : "rj45-1",
+            "canvas"      : "c0",
+            "iconcoords"  : "168 168",
+            "labelcoords" : "168 197",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "rjrj-n0",
+                    "link" : "l0"
+                }
+            }
+        },
+        "n1" : {
+            "type"        : "rj45",
+            "name"        : "rj45-2",
+            "canvas"      : "c0",
+            "iconcoords"  : "672 168",
+            "labelcoords" : "672 197",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "rjrj-n1",
+                    "link" : "l0"
+                }
+            }
+        },
+        "n2" : {
+            "type"        : "rj45",
+            "name"        : "rj45-3",
+            "canvas"      : "c0",
+            "iconcoords"  : "168 360",
+            "labelcoords" : "168 389",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "rjrj-n4",
+                    "link" : "l1"
+                }
+            }
+        },
+        "n3" : {
+            "type"        : "rj45",
+            "name"        : "rj45-4",
+            "canvas"      : "c0",
+            "iconcoords"  : "672 360",
+            "labelcoords" : "672 389",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "rjrj-n5",
+                    "link" : "l1"
+                }
+            }
+        }
+    },
+    "links"    : {
+        "l0" : {
+            "peers"        : "n0 n1",
+            "peers_ifaces" : "ifc0 ifc0"
+        },
+        "l1" : {
+            "peers"        : "n2 n3",
+            "peers_ifaces" : "ifc0 ifc0",
+            "direct"       : "1"
+        }
+    }
+}

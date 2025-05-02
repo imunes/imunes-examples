@@ -1,0 +1,205 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n0" : {
+            "type"                : "pc",
+            "name"                : "pc1",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.0.20/24"],
+                    "mac"        : "42:00:aa:00:00:00",
+                    "link"       : "l2"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "72 264",
+            "labelcoords"         : "72 295"
+        },
+        "n2" : {
+            "type"        : "packgen",
+            "name"        : "packgen1",
+            "canvas"      : "c0",
+            "iconcoords"  : "696 264",
+            "labelcoords" : "696 297",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                }
+            },
+            "packgen"     : {
+                "packetrate" : "1",
+                "packets"    : {
+                    "10" : "4200aa0000004200aa0000010800450000545c1440004001ca6c0a0000150a0000140800df600959000161e9156800000000d220070000000000101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637"
+                }
+            }
+        },
+        "n1" : {
+            "type"                : "pc",
+            "name"                : "pc2",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.0.20/24"],
+                    "mac"        : "42:00:aa:00:00:00",
+                    "link"       : "l3"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "72 408",
+            "labelcoords"         : "72 439"
+        },
+        "n5" : {
+            "type"        : "packgen",
+            "name"        : "packgen2",
+            "canvas"      : "c0",
+            "iconcoords"  : "696 408",
+            "labelcoords" : "696 441",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l1"
+                }
+            },
+            "packgen"     : {
+                "packetrate" : "1",
+                "packets"    : {
+                    "10" : "4200aa0000004200aa0000010800450000545c1440004001ca6c0a0000150a0000140800df600959000161e9156800000000d220070000000000101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637"
+                }
+            }
+        },
+        "n3" : {
+            "type"        : "stpswitch",
+            "name"        : "stpswitch1",
+            "bridge"      : "protocol rstp priority 32768 hold_count 6 max_age 20 forwarding_delay 15 hello_time 2 max_addresses 100 address_timeout 240",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"              : "phys",
+                    "name"              : "eth0",
+                    "link"              : "l0",
+                    "mac"               : "42:00:ff:00:00:01",
+                    "stp_discover"      : "1",
+                    "stp_learn"         : "1",
+                    "stp_enabled"       : "1",
+                    "stp_autoedge"      : "1",
+                    "stp_autoptp"       : "1",
+                    "stp_priority"      : "128",
+                    "stp_path_cost"     : "0",
+                    "stp_max_addresses" : "0"
+                },
+                "ifc2" : {
+                    "type"              : "phys",
+                    "name"              : "eth1",
+                    "link"              : "l2",
+                    "mac"               : "42:00:ff:00:00:03",
+                    "stp_discover"      : "1",
+                    "stp_learn"         : "1",
+                    "stp_enabled"       : "1",
+                    "stp_autoedge"      : "1",
+                    "stp_autoptp"       : "1",
+                    "stp_priority"      : "128",
+                    "stp_path_cost"     : "0",
+                    "stp_max_addresses" : "0"
+                }
+            },
+            "canvas"      : "c0",
+            "iconcoords"  : "360 264",
+            "labelcoords" : "360 287"
+        },
+        "n4" : {
+            "type"        : "stpswitch",
+            "name"        : "stpswitch2",
+            "bridge"      : "protocol rstp priority 32768 hold_count 6 max_age 20 forwarding_delay 15 hello_time 2 max_addresses 100 address_timeout 240",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"              : "phys",
+                    "name"              : "eth0",
+                    "link"              : "l1",
+                    "mac"               : "42:00:ff:00:00:02",
+                    "stp_discover"      : "1",
+                    "stp_learn"         : "1",
+                    "stp_enabled"       : "1",
+                    "stp_autoedge"      : "1",
+                    "stp_autoptp"       : "1",
+                    "stp_priority"      : "128",
+                    "stp_path_cost"     : "0",
+                    "stp_max_addresses" : "0"
+                },
+                "ifc2" : {
+                    "type"              : "phys",
+                    "name"              : "eth1",
+                    "link"              : "l3",
+                    "mac"               : "42:00:ff:00:00:04",
+                    "stp_discover"      : "1",
+                    "stp_learn"         : "1",
+                    "stp_enabled"       : "1",
+                    "stp_autoedge"      : "1",
+                    "stp_autoptp"       : "1",
+                    "stp_priority"      : "128",
+                    "stp_path_cost"     : "0",
+                    "stp_max_addresses" : "0"
+                }
+            },
+            "canvas"      : "c0",
+            "iconcoords"  : "360 408",
+            "labelcoords" : "360 431"
+        }
+    },
+    "links"    : {
+        "l0" : {
+            "peers"        : "n3 n2",
+            "peers_ifaces" : "ifc1 ifc0"
+        },
+        "l1" : {
+            "peers"        : "n4 n5",
+            "peers_ifaces" : "ifc1 ifc0",
+            "direct"       : "1"
+        },
+        "l2" : {
+            "peers"        : "n0 n3",
+            "peers_ifaces" : "ifc1 ifc2"
+        },
+        "l3" : {
+            "peers"        : "n1 n4",
+            "peers_ifaces" : "ifc1 ifc2"
+        }
+    }
+}

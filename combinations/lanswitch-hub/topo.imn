@@ -1,0 +1,176 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n0" : {
+            "type"        : "lanswitch",
+            "name"        : "switch1",
+            "canvas"      : "c0",
+            "iconcoords"  : "312 120",
+            "labelcoords" : "312 143",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l0"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l2"
+                }
+            }
+        },
+        "n1" : {
+            "type"        : "hub",
+            "name"        : "hub1",
+            "canvas"      : "c0",
+            "iconcoords"  : "600 120",
+            "labelcoords" : "600 143",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l0"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l3"
+                }
+            }
+        },
+        "n2" : {
+            "type"        : "lanswitch",
+            "name"        : "switch2",
+            "canvas"      : "c0",
+            "iconcoords"  : "312 312",
+            "labelcoords" : "312 335",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l1"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l4"
+                }
+            }
+        },
+        "n3" : {
+            "type"        : "hub",
+            "name"        : "hub2",
+            "canvas"      : "c0",
+            "iconcoords"  : "600 312",
+            "labelcoords" : "600 335",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l1"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l5"
+                }
+            }
+        },
+        "n4" : {
+            "type"                : "pc",
+            "name"                : "pc1",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "link"       : "l2",
+                    "ipv4_addrs" : ["10.0.0.20/24"],
+                    "mac"        : "42:00:aa:00:00:00"
+                },
+                "ifc2" : {
+                    "type"       : "phys",
+                    "name"       : "eth1",
+                    "link"       : "l4",
+                    "ipv4_addrs" : ["10.0.1.20/24"],
+                    "mac"        : "42:00:aa:00:00:02"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "96 216",
+            "labelcoords"         : "96 247"
+        },
+        "n5" : {
+            "type"                : "pc",
+            "name"                : "pc2",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "link"       : "l3",
+                    "ipv4_addrs" : ["10.0.0.21/24"],
+                    "mac"        : "42:00:aa:00:00:01"
+                },
+                "ifc2" : {
+                    "type"       : "phys",
+                    "name"       : "eth1",
+                    "link"       : "l5",
+                    "ipv4_addrs" : ["10.0.1.21/24"],
+                    "mac"        : "42:00:aa:00:00:03"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "816 216",
+            "labelcoords"         : "816 247"
+        }
+    },
+    "links"    : {
+        "l0" : {
+            "peers"        : "n0 n1",
+            "peers_ifaces" : "ifc0 ifc0",
+            "direct"       : "0"
+        },
+        "l1" : {
+            "peers"        : "n2 n3",
+            "peers_ifaces" : "ifc0 ifc0",
+            "direct"       : "1"
+        },
+        "l2" : {
+            "peers"        : "n4 n0",
+            "peers_ifaces" : "ifc1 ifc1"
+        },
+        "l3" : {
+            "peers"        : "n1 n5",
+            "peers_ifaces" : "ifc1 ifc1"
+        },
+        "l4" : {
+            "peers"        : "n4 n2",
+            "peers_ifaces" : "ifc2 ifc1"
+        },
+        "l5" : {
+            "peers"        : "n3 n5",
+            "peers_ifaces" : "ifc1 ifc2"
+        }
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n3" : {
+            "type"        : "rj45",
+            "name"        : "rj45-1",
+            "canvas"      : "c0",
+            "iconcoords"  : "672 192",
+            "labelcoords" : "672 221",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "exrj-n4",
+                    "link" : "l0"
+                }
+            }
+        },
+        "n0" : {
+            "type"        : "ext",
+            "name"        : "ext1",
+            "canvas"      : "c0",
+            "iconcoords"  : "192 192",
+            "labelcoords" : "192 229",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type"       : "phys",
+                    "name"       : "ext0",
+                    "link"       : "l0",
+                    "ipv4_addrs" : ["17.1.1.1/24"],
+                    "mac"        : "42:00:aa:f2:fa:00"
+                }
+            }
+        },
+        "n1" : {
+            "type"        : "rj45",
+            "name"        : "rj45-2",
+            "canvas"      : "c0",
+            "iconcoords"  : "672 336",
+            "labelcoords" : "672 365",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type" : "stolen",
+                    "name" : "exrj-n5",
+                    "link" : "l1"
+                }
+            }
+        },
+        "n2" : {
+            "type"        : "ext",
+            "name"        : "ext2",
+            "canvas"      : "c0",
+            "iconcoords"  : "192 336",
+            "labelcoords" : "192 373",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type"       : "phys",
+                    "name"       : "ext0",
+                    "link"       : "l1",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["17.2.1.1/24"]
+                }
+            }
+        }
+    },
+    "links"    : {
+        "l0" : {
+            "peers"        : "n0 n3",
+            "peers_ifaces" : "ifc0 ifc0"
+        },
+        "l1" : {
+            "peers"        : "n2 n1",
+            "peers_ifaces" : "ifc0 ifc0",
+            "direct"       : "1"
+        }
+    }
+}

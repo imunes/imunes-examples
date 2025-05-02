@@ -1,0 +1,100 @@
+{
+    "options"  : {
+        "version" : "1"
+    },
+    "canvases" : {
+        "c0" : {
+            "name" : "Canvas0"
+        }
+    },
+    "nodes"    : {
+        "n4" : {
+            "type"        : "ext",
+            "name"        : "ext3",
+            "canvas"      : "c0",
+            "iconcoords"  : "120 360",
+            "labelcoords" : "120 397",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type"       : "phys",
+                    "name"       : "ext0",
+                    "link"       : "l2",
+                    "mac"        : "42:00:ff:8c:c8:00",
+                    "ipv4_addrs" : ["17.1.1.21/24"]
+                }
+            }
+        },
+        "n5" : {
+            "type"        : "ext",
+            "name"        : "ext4",
+            "canvas"      : "c0",
+            "iconcoords"  : "120 504",
+            "labelcoords" : "120 541",
+            "ifaces"      : {
+                "ifc0" : {
+                    "type"       : "phys",
+                    "name"       : "ext0",
+                    "link"       : "l3",
+                    "mac"        : "42:00:ff:7e:f0:00",
+                    "ipv4_addrs" : ["17.2.1.21/24"]
+                }
+            }
+        },
+        "n6" : {
+            "type"                : "pc",
+            "name"                : "pc1",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "link"       : "l2",
+                    "ipv4_addrs" : ["17.1.1.20/24"],
+                    "mac"        : "42:00:ff:00:00:02"
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "504 360",
+            "labelcoords"         : "504 391"
+        },
+        "n7" : {
+            "type"                : "pc",
+            "name"                : "pc2",
+            "auto_default_routes" : "enabled",
+            "ifaces"              : {
+                "ifc0" : {
+                    "type"       : "lo",
+                    "name"       : "lo0",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type"       : "phys",
+                    "name"       : "eth0",
+                    "link"       : "l3",
+                    "mac"        : "42:00:ff:00:00:03",
+                    "ipv4_addrs" : ["17.2.1.20/24"]
+                }
+            },
+            "canvas"              : "c0",
+            "iconcoords"          : "504 504",
+            "labelcoords"         : "504 535"
+        }
+    },
+    "links"    : {
+        "l2" : {
+            "peers"        : "n4 n6",
+            "peers_ifaces" : "ifc0 ifc1"
+        },
+        "l3" : {
+            "peers"        : "n5 n7",
+            "peers_ifaces" : "ifc0 ifc1"
+        }
+    }
+}
