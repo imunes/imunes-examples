@@ -72,7 +72,9 @@ while true; do
 
 	cd - > /dev/null
 
-	sleep 3
+	if test -z "$SKIP_SLEEP"; then
+	    sleep 3
+	fi
     fi
 
     running_ctr=0
