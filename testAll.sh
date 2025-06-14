@@ -117,12 +117,10 @@ echo ""
 echo ""
 echo "Finished."
 
-grep "^There were errors." */TESTRESULTS* */*/TESTRESULTS* > /dev/null 2>&1
-if test $? -eq 0
-then
+if find . -type f -name 'TESTRESULTS*' -exec grep -q "^There were errors." {} +; then
     echo ""
     echo "Please look at the logs:"
-    grep "^There were errors." */TESTRESULTS* */*/TESTRESULTS*
+    find . -type f -name 'TESTRESULTS*' -exec grep "^There were errors." {} +
     exit 1
 else
     echo "OK."
