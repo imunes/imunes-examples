@@ -2,6 +2,11 @@
 
 . ../../common/procedures.sh
 
+if isOSlinux; then
+    echo "Test not supported on Linux."
+    exit 0
+fi
+
 err=0
 legacy=""
 if test -n "$LEGACY"; then
