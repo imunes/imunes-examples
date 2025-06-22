@@ -8,6 +8,9 @@ fi
 
 . common/start_functions.sh
 
+# remove all old results
+find . -type f -name 'TESTRESULTS*' -exec rm {} +
+
 parallel_jobs=0
 if test "$1" = "seq"; then
     parallel_jobs=1
