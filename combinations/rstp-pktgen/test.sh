@@ -32,7 +32,7 @@ fi
 if [ $? -eq 0 ]; then
     netDump pc1@$eid eth0 icmp
     if [ $? -eq 0 ]; then
-	sleep 2
+	sleep 3
 	num=$(readDump pc1@$eid eth0 | wc -l)
 	if [ $? -eq 0 ]; then
 	    num=$((num-3))
@@ -63,7 +63,7 @@ fi
 if [ $? -ne 0 ]; then
     netDump pc2@$eid eth0 icmp
     if [ $? -eq 0 ]; then
-	sleep 2
+	sleep 3
 	num=$(readDump pc2@$eid eth0 | wc -l)
 	if [ $? -eq 0 ]; then
 	    num=$((num-3))
