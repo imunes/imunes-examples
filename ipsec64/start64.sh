@@ -10,35 +10,53 @@ else
     sun="sun"
 fi
 
+himage -nt $moon killall -q charon
+himage -nt $sun killall -q charon
+
 if isOSlinux; then
-    DIR="/etc"
+    DIR="/etc/swanctl/"
+    himage -nt $moon /usr/lib/ipsec/charon &
+    himage -nt $sun /usr/lib/ipsec/charon &
 else
-    DIR="/usr/local/etc"
-	kldload ipsec > /dev/null 2>&1
+    DIR="/usr/local/etc/swanctl/"
+    kldload ipsec > /dev/null 2>&1
+    himage -nt $moon /usr/local/libexec/ipsec/charon &
+	himage -nt $moon ifconfig eth1 inet6 -ifdisabled
+    himage -nt $sun /usr/local/libexec/ipsec/charon &
+	himage -nt $sun ifconfig eth0 inet6 -ifdisabled
 fi
 
-hcp moon64_ipsec.conf $moon:${DIR}/ipsec.conf
-hcp sun64_ipsec.conf $sun:${DIR}/ipsec.conf
+started=0
+steps=50
+for i in `seq 1 $steps`
+do
+    himage $moon swanctl --stats > /dev/null 2>&1
+    er1=$?
+    himage $sun swanctl --stats > /dev/null 2>&1
+    er2=$?
+    [ $er1 -eq 0 -a $er2 -eq 0 ] && started=1 && break
+    sleep 0.1
+done
+
+test $started -eq 0 && exit 1
+
+hcp moon64_swanctl.conf ${moon}:${DIR}/swanctl.conf
+hcp sun64_swanctl.conf ${sun}:${DIR}/swanctl.conf
 
 hcp -r moon/* $moon:${DIR}/
 hcp -r sun/* $sun:${DIR}/
 
-if isOSfreebsd; then
-	himage $moon ifconfig eth1 inet6 -ifdisabled
-	himage $sun ifconfig eth0 inet6 -ifdisabled
-fi
-
-himage -nt $moon ipsec start
-himage -nt $sun ipsec start
+himage -nt $moon swanctl --load-all
+himage -nt $sun swanctl --load-all
 
 steps=50
 for i in `seq 1 $steps`
 do
-    himage $moon ipsec statusall 2>&1 | grep ^[[:space:]]*net64-net64: >/dev/null
+    himage $moon swanctl --list-conns 2>&1 | grep ^[[:space:]]*net64-net64: >/dev/null
     er1=$?
-    himage $sun ipsec statusall 2>&1 | grep ^[[:space:]]*net64-net64: >/dev/null
+    himage $sun swanctl --list-conns 2>&1 | grep ^[[:space:]]*net64-net64: >/dev/null
     er2=$?
-    [ $er1 -eq 0 -a $er2 -eq 0 ] && himage $moon ipsec up net64-net64 && exit 0
+    [ $er1 -eq 0 -a $er2 -eq 0 ] && exit 0
     sleep 0.1
 done
 
