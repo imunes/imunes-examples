@@ -15,12 +15,12 @@ certs:
 	@sh make_certificates.sh
 
 copy_certs:
-	@cp moonCert.pem ${IPSEC_DIR}/moon/ipsec.d/certs
-	@cp moonKey.pem  ${IPSEC_DIR}/moon/ipsec.d/private
-	@cp sunCert.pem ${IPSEC_DIR}/sun/ipsec.d/certs
-	@cp sunKey.pem  ${IPSEC_DIR}/sun/ipsec.d/private
-	@cp strongswanCert.pem ${IPSEC_DIR}/moon/ipsec.d/cacerts
-	@cp strongswanCert.pem ${IPSEC_DIR}/sun/ipsec.d/cacerts
+	@cp moonCert.pem ${IPSEC_DIR}/moon/x509
+	@cp moonKey.pem  ${IPSEC_DIR}/moon/private
+	@cp sunCert.pem ${IPSEC_DIR}/sun/x509
+	@cp sunKey.pem  ${IPSEC_DIR}/sun/private
+	@cp strongswanCert.pem ${IPSEC_DIR}/moon/x509ca
+	@cp strongswanCert.pem ${IPSEC_DIR}/sun/x509ca
 
 clean:
 	@rm -fr *.pem index.* serial* newcerts .rand
