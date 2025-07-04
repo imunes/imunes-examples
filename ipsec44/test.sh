@@ -1,6 +1,7 @@
 #!/bin/sh
 
 . ../common/procedures.sh
+
 err=0
 legacy=""
 if test -n "$LEGACY"; then
@@ -21,7 +22,7 @@ if [ $? -eq 0 ]; then
 	    esps=`readDump routerX@$eid eth0`
 	    if [ $? -eq 0 ]; then
 		echo "$esps"
-		echo $esps | grep -q "ESP"
+		echo $esps | grep -qw "ESP"
 		if [ $? -ne 0 ]; then
 		    echo ""
 		    echo "********* NO ESP ERROR ***********"
