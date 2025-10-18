@@ -17,7 +17,7 @@ node n0 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router rip
@@ -64,7 +64,7 @@ node n1 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router rip
@@ -107,7 +107,7 @@ node n2 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 10.0.1.1
@@ -151,7 +151,7 @@ node n3 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 10.0.4.1
@@ -222,7 +222,7 @@ node n6 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 10.0.4.1
@@ -260,7 +260,7 @@ node n7 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 10.0.3.1
@@ -288,7 +288,7 @@ node n8 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 10.0.4.1
@@ -322,7 +322,7 @@ node n9 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router rip
@@ -364,7 +364,7 @@ node n10 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router rip

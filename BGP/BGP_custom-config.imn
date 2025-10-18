@@ -19,7 +19,7 @@ node n0 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
     }
@@ -34,7 +34,7 @@ node n0 {
             custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
-                 ip address 127.0.0.1/24
+                 ip address 127.0.0.1/8
                  ipv6 address ::1/128
                 !
                 interface eth0
@@ -87,7 +87,7 @@ node n1 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
     }
@@ -103,7 +103,7 @@ node n1 {
             custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
-                 ip address 127.0.0.1/24
+                 ip address 127.0.0.1/8
                  ipv6 address ::1/128
                 !
                 interface eth0
@@ -153,7 +153,7 @@ node n2 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
     }
@@ -167,7 +167,7 @@ node n2 {
             custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
-                 ip address 127.0.0.1/24
+                 ip address 127.0.0.1/8
                  ipv6 address ::1/128
                 !
                 interface eth0
@@ -207,7 +207,7 @@ node n3 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
     }
@@ -221,7 +221,7 @@ node n3 {
             custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
-                 ip address 127.0.0.1/24
+                 ip address 127.0.0.1/8
                  ipv6 address ::1/128
                 !
                 interface eth0
@@ -256,7 +256,7 @@ node n4 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 192.168.100.1
@@ -281,7 +281,7 @@ node n5 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	!
@@ -307,7 +307,7 @@ node n6 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 0.0.0.0/0 192.168.200.1
