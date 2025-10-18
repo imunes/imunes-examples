@@ -17,7 +17,7 @@ node n1 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -79,7 +79,7 @@ node n2 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -146,7 +146,7 @@ node n3 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -213,7 +213,7 @@ node n4 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -279,7 +279,7 @@ node n5 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	ip route 192.168.1.0/24 10.0.57.2
@@ -353,7 +353,7 @@ node n6 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -420,7 +420,7 @@ node n7 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -481,7 +481,7 @@ node n8 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -542,7 +542,7 @@ node n9 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -609,7 +609,7 @@ node n10 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -678,7 +678,7 @@ node n11 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf
@@ -740,7 +740,7 @@ node n12 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	 ipv6 address ::1/128
 	!
 	router ospf

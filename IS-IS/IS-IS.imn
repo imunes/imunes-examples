@@ -14,7 +14,7 @@ node n0 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
     }
     canvas c0
@@ -27,7 +27,7 @@ node n0 {
             custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
-                 ip address 127.0.0.1/24
+                 ip address 127.0.0.1/8
                 !
                 interface eth0
                  ip address 172.16.12.1/24
@@ -68,7 +68,7 @@ node n1 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
     }
     canvas c0
@@ -82,7 +82,7 @@ node n1 {
             custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
-                 ip address 127.0.0.1/24
+                 ip address 127.0.0.1/8
                 !
                 interface eth0
                  ip address 172.16.23.1/24
@@ -123,7 +123,7 @@ node n2 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
     }
     canvas c0
@@ -136,7 +136,7 @@ node n2 {
             custom-command /usr/local/bin/frrboot.sh
             config {
                 interface lo0
-                 ip address 127.0.0.1/24
+                 ip address 127.0.0.1/8
                 !
                 interface eth0
                  ip address 172.16.23.2/24
@@ -220,7 +220,7 @@ node n7 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 172.16.1.1
 	!
@@ -242,7 +242,7 @@ node n8 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 172.16.2.2
 	!
@@ -264,7 +264,7 @@ node n9 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 172.16.3.3
 	!

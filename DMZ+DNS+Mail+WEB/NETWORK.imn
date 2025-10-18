@@ -9,7 +9,7 @@ node n0 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 1.0.0.1
 	!
@@ -31,7 +31,7 @@ node n1 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 2.0.0.1
 	!
@@ -70,7 +70,7 @@ node n3 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	router rip
 	 redistribute static
@@ -100,7 +100,7 @@ node n2 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 4.0.0.1 
 	!
@@ -122,7 +122,7 @@ node n4 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 5.0.0.1
 	!
@@ -144,7 +144,7 @@ node n5 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 7.0.0.1
 	!
@@ -166,7 +166,7 @@ node n6 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 8.0.0.1
 	!
@@ -197,7 +197,7 @@ node n7 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	router rip
 	 redistribute static
@@ -238,7 +238,7 @@ node n8 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	router rip
 	 redistribute static
@@ -284,7 +284,7 @@ node n9 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	!
 	router rip
@@ -315,7 +315,7 @@ node n11 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 20.0.0.1
 	!
@@ -337,7 +337,7 @@ node n12 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 20.0.0.1
 	!
@@ -359,7 +359,7 @@ node n13 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 20.0.0.1
 	!
@@ -381,7 +381,7 @@ node n14 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 3.0.0.1
 	!
@@ -403,7 +403,7 @@ node n15 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 6.0.0.1
 	!
@@ -425,7 +425,7 @@ node n17 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 30.0.0.1
 	!
@@ -447,7 +447,7 @@ node n18 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 30.0.0.1
 	!
@@ -499,7 +499,7 @@ node n19 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 30.0.0.1
 	!
@@ -526,7 +526,7 @@ node n20 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	router rip
 	 redistribute static
@@ -611,7 +611,7 @@ node n25 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 15.16.17.1
 	ip route 192.168.1.0/24 15.16.17.2
@@ -635,7 +635,7 @@ node n26 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 15.16.17.1
 	ip route 192.168.1.0/24 15.16.17.2
@@ -659,7 +659,7 @@ node n27 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 192.168.1.1
 	!
@@ -682,7 +682,7 @@ node n28 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 192.168.1.1
 	!
@@ -704,7 +704,7 @@ node n29 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 192.168.1.1
 	!
@@ -726,7 +726,7 @@ node n30 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 192.168.1.1
 	!
@@ -748,7 +748,7 @@ node n31 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 15.16.17.1
 	ip route 192.168.1.0/24 15.16.17.2
@@ -777,7 +777,7 @@ node n32 {
 	!
 	interface lo0
 	 type lo
-	 ip address 127.0.0.1/24
+	 ip address 127.0.0.1/8
 	!
 	ip route 0.0.0.0/0 15.16.17.1
 	!
