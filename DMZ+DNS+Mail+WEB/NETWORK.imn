@@ -1,5 +1,5 @@
 {
-    "nodes"       : {
+    "nodes"   : {
         "n0"  : {
             "type"                : "host",
             "name"                : "aRootServer",
@@ -18,9 +18,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 1.0.0.1"],
-            "iconcoords"          : "96 48",
-            "labelcoords"         : "103 90",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n1"  : {
@@ -41,9 +38,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 2.0.0.1"],
-            "iconcoords"          : "648 48",
-            "labelcoords"         : "647 85",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n3"  : {
@@ -93,9 +87,6 @@
                     "link"       : "l4"
                 }
             },
-            "iconcoords"          : "360 48",
-            "labelcoords"         : "361 22",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n2"  : {
@@ -116,9 +107,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 4.0.0.1"],
-            "iconcoords"          : "216 144",
-            "labelcoords"         : "218 186",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n4"  : {
@@ -139,9 +127,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 5.0.0.1"],
-            "iconcoords"          : "360 192",
-            "labelcoords"         : "361 229",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n5"  : {
@@ -162,9 +147,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 7.0.0.1"],
-            "iconcoords"          : "360 288",
-            "labelcoords"         : "359 327",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n6"  : {
@@ -185,9 +167,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 8.0.0.1"],
-            "iconcoords"          : "720 408",
-            "labelcoords"         : "733 448",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n7"  : {
@@ -223,9 +202,6 @@
                     "link"       : "l5"
                 }
             },
-            "iconcoords"          : "504 120",
-            "labelcoords"         : "511 96",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n8"  : {
@@ -268,9 +244,6 @@
                     "link"       : "l7"
                 }
             },
-            "iconcoords"          : "504 240",
-            "labelcoords"         : "532 221",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n9"  : {
@@ -310,7 +283,7 @@
                     "mac"        : "42:00:aa:00:00:1f",
                     "ipv4_addrs" : ["10.0.1.1/24"],
                     "type"       : "phys",
-                    "link"       : "l21"
+                    "link"       : "l20"
                 },
                 "ifc5" : {
                     "name"       : "eth4",
@@ -320,9 +293,6 @@
                     "link"       : "l7"
                 }
             },
-            "iconcoords"          : "528 360",
-            "labelcoords"         : "553 340",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n11" : {
@@ -343,9 +313,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 20.0.0.1"],
-            "iconcoords"          : "144 288",
-            "labelcoords"         : "191 272",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n12" : {
@@ -366,9 +333,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 20.0.0.1"],
-            "iconcoords"          : "96 384",
-            "labelcoords"         : "127 410",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n13" : {
@@ -389,9 +353,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 20.0.0.1"],
-            "iconcoords"          : "120 480",
-            "labelcoords"         : "118 517",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n14" : {
@@ -412,9 +373,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 3.0.0.1"],
-            "iconcoords"          : "672 288",
-            "labelcoords"         : "682 326",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n15" : {
@@ -435,9 +393,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 6.0.0.1"],
-            "iconcoords"          : "672 168",
-            "labelcoords"         : "676 208",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n17" : {
@@ -458,9 +413,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 30.0.0.1"],
-            "iconcoords"          : "312 552",
-            "labelcoords"         : "315 592",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n18" : {
@@ -481,17 +433,12 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 30.0.0.1"],
-            "iconcoords"          : "432 552",
-            "labelcoords"         : "434 589",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n10" : {
-            "type"        : "lanswitch",
-            "name"        : "sw1",
-            "iconcoords"  : "288 384",
-            "labelcoords" : "294 362",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw1",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e0",
@@ -512,15 +459,12 @@
                     "name" : "e3",
                     "link" : "l12"
                 }
-            },
-            "canvas"      : "c0"
+            }
         },
         "n16" : {
-            "type"        : "lanswitch",
-            "name"        : "sw2",
-            "iconcoords"  : "432 432",
-            "labelcoords" : "393 423",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw2",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e0",
@@ -541,8 +485,7 @@
                     "name" : "e3",
                     "link" : "l18"
                 }
-            },
-            "canvas"      : "c0"
+            }
         },
         "n19" : {
             "type"                : "host",
@@ -562,9 +505,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 30.0.0.1"],
-            "iconcoords"          : "552 528",
-            "labelcoords"         : "556 568",
-            "canvas"              : "c0",
             "auto_default_routes" : "disabled"
         },
         "n20" : {
@@ -593,48 +533,12 @@
                     "link"       : "l22"
                 }
             },
-            "canvas"              : "c1",
-            "iconcoords"          : "120 192",
-            "labelcoords"         : "150 171",
             "auto_default_routes" : "disabled"
         },
-        "n21" : {
-            "name"        : "n9",
-            "type"        : "pseudo",
-            "canvas"      : "c1",
-            "iconcoords"  : "72 96",
-            "labelcoords" : "72 96",
-            "ifaces"      : {
-                "ifc0" : {
-                    "type" : "phys",
-                    "name" : "0",
-                    "link" : "l20"
-                }
-            },
-            "mirror"      : "n22"
-        },
-        "n22" : {
-            "name"        : "n20",
-            "type"        : "pseudo",
-            "canvas"      : "c0",
-            "iconcoords"  : "696 552",
-            "labelcoords" : "696 552",
-            "ifaces"      : {
-                "ifc0" : {
-                    "type" : "phys",
-                    "name" : "0",
-                    "link" : "l21"
-                }
-            },
-            "mirror"      : "n21"
-        },
         "n23" : {
-            "type"        : "lanswitch",
-            "name"        : "sw4",
-            "canvas"      : "c1",
-            "iconcoords"  : "624 192",
-            "labelcoords" : "602 215",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw4",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e1",
@@ -663,12 +567,9 @@
             }
         },
         "n24" : {
-            "type"        : "lanswitch",
-            "name"        : "sw3",
-            "canvas"      : "c1",
-            "iconcoords"  : "288 192",
-            "labelcoords" : "262 213",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw3",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e0",
@@ -714,9 +615,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 15.16.17.1","192.168.1.0/24 15.16.17.2"],
-            "canvas"              : "c1",
-            "iconcoords"          : "408 384",
-            "labelcoords"         : "408 425",
             "services"            : ["ssh","ftp","telnet"],
             "auto_default_routes" : "disabled"
         },
@@ -738,9 +636,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 15.16.17.1","192.168.1.0/24 15.16.17.2"],
-            "canvas"              : "c1",
-            "iconcoords"          : "240 360",
-            "labelcoords"         : "240 401",
             "services"            : ["ssh","ftp","telnet"],
             "auto_default_routes" : "disabled"
         },
@@ -762,9 +657,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 192.168.1.1"],
-            "canvas"              : "c1",
-            "iconcoords"          : "576 384",
-            "labelcoords"         : "576 425",
             "services"            : ["ssh","ftp","telnet"],
             "auto_default_routes" : "disabled"
         },
@@ -786,9 +678,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 192.168.1.1"],
-            "canvas"              : "c1",
-            "iconcoords"          : "744 336",
-            "labelcoords"         : "744 372",
             "auto_default_routes" : "disabled"
         },
         "n29" : {
@@ -809,9 +698,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 192.168.1.1"],
-            "canvas"              : "c1",
-            "iconcoords"          : "792 192",
-            "labelcoords"         : "792 228",
             "auto_default_routes" : "disabled"
         },
         "n30" : {
@@ -832,9 +718,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 192.168.1.1"],
-            "canvas"              : "c1",
-            "iconcoords"          : "696 96",
-            "labelcoords"         : "696 132",
             "auto_default_routes" : "disabled"
         },
         "n31" : {
@@ -855,9 +738,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 15.16.17.1","192.168.1.0/24 15.16.17.2"],
-            "canvas"              : "c1",
-            "iconcoords"          : "288 96",
-            "labelcoords"         : "288 137",
             "services"            : ["ssh","ftp","telnet"],
             "auto_default_routes" : "disabled"
         },
@@ -887,14 +767,11 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 15.16.17.1"],
-            "canvas"              : "c1",
-            "iconcoords"          : "456 192",
-            "labelcoords"         : "431 163",
             "services"            : ["ssh"],
             "auto_default_routes" : "disabled"
         }
     },
-    "links"       : {
+    "links"   : {
         "l0"  : {
             "peers"        : "n0 n3",
             "peers_ifaces" : "ifc1 ifc1",
@@ -994,14 +871,8 @@
             "bandwidth"    : "100000000"
         },
         "l20" : {
-            "mirror"       : "l21",
-            "peers"        : "n21 n20",
-            "peers_ifaces" : "ifc0 ifc1"
-        },
-        "l21" : {
-            "mirror"       : "l20",
-            "peers"        : "n22 n9",
-            "peers_ifaces" : "ifc0 ifc4"
+            "peers"        : "n20 n9",
+            "peers_ifaces" : "ifc1 ifc4"
         },
         "l22" : {
             "peers"        : "n20 n24",
@@ -1054,179 +925,485 @@
             "bandwidth"    : "0"
         }
     },
-    "annotations" : {
-        "a0"  : {
-            "iconcoords" : "43 14 151 116",
-            "type"       : "rectangle",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "12",
-            "color"      : "#e4e9ec",
-            "canvas"     : "c0"
-        },
-        "a1"  : {
-            "iconcoords" : "77 443 160 534",
-            "type"       : "rectangle",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "12",
-            "color"      : "#dfb961",
-            "canvas"     : "c0"
-        },
-        "a2"  : {
-            "iconcoords" : "41 248 266 553",
-            "type"       : "rectangle",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "12",
-            "color"      : "#fffee9",
-            "canvas"     : "c0"
-        },
-        "a4"  : {
-            "iconcoords" : "55 264",
-            "type"       : "text",
-            "label"      : "ZZT",
-            "labelcolor" : "#008000",
-            "fontfamily" : "Arial",
-            "fontsize"   : "16",
-            "effects"    : "bold",
-            "canvas"     : "c0"
-        },
-        "a6"  : {
-            "iconcoords" : "283 435 612 608",
-            "type"       : "rectangle",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "12",
-            "color"      : "#fffee9",
-            "canvas"     : "c0"
-        },
-        "a7"  : {
-            "iconcoords" : "307 458",
-            "type"       : "text",
-            "label"      : "ZPM",
-            "labelcolor" : "#007300",
-            "fontfamily" : "Arial",
-            "fontsize"   : "14",
-            "effects"    : "bold",
-            "canvas"     : "c0"
-        },
-        "a9"  : {
-            "iconcoords" : "605 8 693 103",
-            "type"       : "rectangle",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "12",
-            "color"      : "#e4e9ec",
-            "canvas"     : "c0"
-        },
-        "a10" : {
-            "iconcoords" : "632 269 732 361",
-            "type"       : "rectangle",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "12",
-            "color"      : "#e4e9ec",
-            "canvas"     : "c0"
-        },
-        "a11" : {
-            "iconcoords" : "58 345",
-            "type"       : "text",
-            "label"      : "www.tel.fer.hr",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "14",
-            "effects"    : "bold",
-            "canvas"     : "c0"
-        },
-        "a14" : {
-            "iconcoords" : "511 475",
-            "type"       : "text",
-            "label"      : "www.zpm.fer.hr",
-            "labelcolor" : "black",
-            "fontfamily" : "Arial",
-            "fontsize"   : "14",
-            "effects"    : "bold",
-            "canvas"     : "c0"
-        },
-        "a3"  : {
-            "type"        : "rectangle",
-            "iconcoords"  : "120 57 456 446",
-            "color"       : "#ffffff",
-            "bordercolor" : "#2c80cc",
-            "width"       : "3",
-            "canvas"      : "c1"
-        },
-        "a5"  : {
-            "type"       : "text",
-            "iconcoords" : "184 95",
-            "label"      : "DMZ",
-            "labelcolor" : "#3000e3",
-            "font"       : "-family {DejaVu Sans} -size 14 -weight normal -slant roman -underline 0 -overstrike 0",
-            "canvas"     : "c1"
-        },
-        "a8"  : {
-            "type"        : "rectangle",
-            "iconcoords"  : "468 55 844 446",
-            "color"       : "#ffffff",
-            "bordercolor" : "#f0eb19",
-            "width"       : "3",
-            "canvas"      : "c1"
-        },
-        "a12" : {
-            "type"       : "text",
-            "iconcoords" : "516 81",
-            "label"      : "LAN",
-            "labelcolor" : "#0000c8",
-            "font"       : "-family {DejaVu Sans} -size 14 -weight normal -slant roman -underline 0 -overstrike 0",
-            "canvas"     : "c1"
-        },
-        "a13" : {
-            "type"       : "text",
-            "iconcoords" : "394 243",
-            "label"      : "+ NAT",
-            "labelcolor" : "#fe0000",
-            "font"       : "-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0",
-            "canvas"     : "c1"
-        },
-        "a15" : {
-            "type"       : "text",
-            "iconcoords" : "167 421",
-            "label"      : "mm.com",
-            "labelcolor" : "#007300",
-            "fontfamily" : "Arial",
-            "fontsize"   : "14",
-            "canvas"     : "c1"
-        },
-        "a16" : {
-            "type"       : "text",
-            "iconcoords" : "50 224",
-            "label"      : "Firewall",
-            "labelcolor" : "#fe0000",
-            "font"       : "-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0",
-            "canvas"     : "c1"
-        },
-        "a17" : {
-            "type"       : "text",
-            "iconcoords" : "392 220",
-            "label"      : "Firewall",
-            "labelcolor" : "#fe0000",
-            "font"       : "-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0",
-            "canvas"     : "c1"
-        }
+    "options" : {
+        "version" : "2"
     },
-    "canvases"    : {
-        "c1" : {
-            "name" : "mm.com"
+    "gui"     : {
+        "options"     : {
+            "show_interface_names" : "0",
+            "show_interface_ipv6"  : "0",
+            "show_link_labels"     : "0"
         },
-        "c0" : {
-            "name" : "Internet"
+        "canvases"    : {
+            "c1" : {
+                "name" : "mm.com"
+            },
+            "c0" : {
+                "name" : "Internet"
+            }
+        },
+        "annotations" : {
+            "a0"  : {
+                "iconcoords" : "43 14 151 116",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#e4e9ec",
+                "canvas"     : "c0"
+            },
+            "a1"  : {
+                "iconcoords" : "77 443 160 534",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#dfb961",
+                "canvas"     : "c0"
+            },
+            "a2"  : {
+                "iconcoords" : "41 248 266 553",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#fffee9",
+                "canvas"     : "c0"
+            },
+            "a4"  : {
+                "iconcoords" : "55 264",
+                "type"       : "text",
+                "label"      : "ZZT",
+                "labelcolor" : "#008000",
+                "fontfamily" : "Arial",
+                "fontsize"   : "16",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            },
+            "a6"  : {
+                "iconcoords" : "283 435 612 608",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#fffee9",
+                "canvas"     : "c0"
+            },
+            "a7"  : {
+                "iconcoords" : "307 458",
+                "type"       : "text",
+                "label"      : "ZPM",
+                "labelcolor" : "#007300",
+                "fontfamily" : "Arial",
+                "fontsize"   : "14",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            },
+            "a9"  : {
+                "iconcoords" : "605 8 693 103",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#e4e9ec",
+                "canvas"     : "c0"
+            },
+            "a10" : {
+                "iconcoords" : "632 269 732 361",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#e4e9ec",
+                "canvas"     : "c0"
+            },
+            "a11" : {
+                "iconcoords" : "58 345",
+                "type"       : "text",
+                "label"      : "www.tel.fer.hr",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "14",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            },
+            "a14" : {
+                "iconcoords" : "511 475",
+                "type"       : "text",
+                "label"      : "www.zpm.fer.hr",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "14",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            },
+            "a3"  : {
+                "type"        : "rectangle",
+                "iconcoords"  : "120 57 456 446",
+                "color"       : "#ffffff",
+                "bordercolor" : "#2c80cc",
+                "width"       : "3",
+                "canvas"      : "c1"
+            },
+            "a5"  : {
+                "type"       : "text",
+                "iconcoords" : "184 95",
+                "label"      : "DMZ",
+                "labelcolor" : "#3000e3",
+                "font"       : "-family {DejaVu Sans} -size 14 -weight normal -slant roman -underline 0 -overstrike 0",
+                "canvas"     : "c1"
+            },
+            "a8"  : {
+                "type"        : "rectangle",
+                "iconcoords"  : "468 55 844 446",
+                "color"       : "#ffffff",
+                "bordercolor" : "#f0eb19",
+                "width"       : "3",
+                "canvas"      : "c1"
+            },
+            "a12" : {
+                "type"       : "text",
+                "iconcoords" : "516 81",
+                "label"      : "LAN",
+                "labelcolor" : "#0000c8",
+                "font"       : "-family {DejaVu Sans} -size 14 -weight normal -slant roman -underline 0 -overstrike 0",
+                "canvas"     : "c1"
+            },
+            "a13" : {
+                "type"       : "text",
+                "iconcoords" : "394 243",
+                "label"      : "+ NAT",
+                "labelcolor" : "#fe0000",
+                "font"       : "-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0",
+                "canvas"     : "c1"
+            },
+            "a15" : {
+                "type"       : "text",
+                "iconcoords" : "167 421",
+                "label"      : "mm.com",
+                "labelcolor" : "#007300",
+                "fontfamily" : "Arial",
+                "fontsize"   : "14",
+                "canvas"     : "c1"
+            },
+            "a16" : {
+                "type"       : "text",
+                "iconcoords" : "50 224",
+                "label"      : "Firewall",
+                "labelcolor" : "#fe0000",
+                "font"       : "-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0",
+                "canvas"     : "c1"
+            },
+            "a17" : {
+                "type"       : "text",
+                "iconcoords" : "392 220",
+                "label"      : "Firewall",
+                "labelcolor" : "#fe0000",
+                "font"       : "-family {DejaVu Sans} -size 12 -weight normal -slant roman -underline 0 -overstrike 0",
+                "canvas"     : "c1"
+            }
+        },
+        "links"       : {
+            "l0"           : {
+                "peers" : "n0 n3"
+            },
+            "l1"           : {
+                "peers" : "n1 n3"
+            },
+            "l2"           : {
+                "peers" : "n2 n3"
+            },
+            "l3"           : {
+                "peers" : "n3 n4"
+            },
+            "l4"           : {
+                "peers" : "n3 n7"
+            },
+            "l5"           : {
+                "peers" : "n7 n8"
+            },
+            "l6"           : {
+                "peers" : "n8 n5"
+            },
+            "l7"           : {
+                "peers" : "n8 n9"
+            },
+            "l8"           : {
+                "peers" : "n9 n6"
+            },
+            "l13"          : {
+                "peers" : "n8 n14"
+            },
+            "l14"          : {
+                "peers" : "n7 n15"
+            },
+            "l9"           : {
+                "peers" : "n10 n9"
+            },
+            "l10"          : {
+                "peers" : "n11 n10"
+            },
+            "l11"          : {
+                "peers" : "n12 n10"
+            },
+            "l12"          : {
+                "peers" : "n13 n10"
+            },
+            "l15"          : {
+                "peers" : "n9 n16"
+            },
+            "l16"          : {
+                "peers" : "n17 n16"
+            },
+            "l17"          : {
+                "peers" : "n16 n18"
+            },
+            "l18"          : {
+                "peers" : "n16 n19"
+            },
+            "l20.n20.ifc1" : {
+                "peers"  : "n20.ifc1 n20",
+                "mirror" : "l20.n9.ifc4"
+            },
+            "l20.n9.ifc4"  : {
+                "peers"  : "n9.ifc4 n9",
+                "mirror" : "l20.n20.ifc1"
+            },
+            "l20"          : {
+                "peers" : "n20 n9"
+            },
+            "l22"          : {
+                "peers" : "n20 n24"
+            },
+            "l23"          : {
+                "peers" : "n25 n24"
+            },
+            "l24"          : {
+                "peers" : "n26 n24"
+            },
+            "l25"          : {
+                "peers" : "n27 n23"
+            },
+            "l26"          : {
+                "peers" : "n28 n23"
+            },
+            "l27"          : {
+                "peers" : "n29 n23"
+            },
+            "l28"          : {
+                "peers" : "n30 n23"
+            },
+            "l29"          : {
+                "peers" : "n31 n24"
+            },
+            "l19"          : {
+                "peers" : "n24 n32"
+            },
+            "l30"          : {
+                "peers" : "n32 n23"
+            }
+        },
+        "nodes"       : {
+            "n20.ifc1" : {
+                "mirror"      : "n9.ifc4",
+                "link"        : "l20.n20.ifc1",
+                "iconcoords"  : "72 96",
+                "labelcoords" : "72 96",
+                "canvas"      : "c1"
+            },
+            "n9.ifc4"  : {
+                "mirror"      : "n20.ifc1",
+                "link"        : "l20.n9.ifc4",
+                "iconcoords"  : "696 552",
+                "labelcoords" : "696 552",
+                "canvas"      : "c0"
+            },
+            "n0"       : {
+                "label"       : "aRootServer",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 48",
+                "labelcoords" : "103 90"
+            },
+            "n1"       : {
+                "label"       : "bRootServer",
+                "canvas"      : "c0",
+                "iconcoords"  : "648 48",
+                "labelcoords" : "647 85"
+            },
+            "n3"       : {
+                "label"       : "R3",
+                "canvas"      : "c0",
+                "iconcoords"  : "360 48",
+                "labelcoords" : "361 22"
+            },
+            "n2"       : {
+                "label"       : "hr2",
+                "canvas"      : "c0",
+                "iconcoords"  : "216 144",
+                "labelcoords" : "218 186"
+            },
+            "n4"       : {
+                "label"       : "dnsCom",
+                "canvas"      : "c0",
+                "iconcoords"  : "360 192",
+                "labelcoords" : "361 229"
+            },
+            "n5"       : {
+                "label"       : "dnsHr",
+                "canvas"      : "c0",
+                "iconcoords"  : "360 288",
+                "labelcoords" : "359 327"
+            },
+            "n6"       : {
+                "label"       : "dnsFer",
+                "canvas"      : "c0",
+                "iconcoords"  : "720 408",
+                "labelcoords" : "733 448"
+            },
+            "n7"       : {
+                "label"       : "R7",
+                "canvas"      : "c0",
+                "iconcoords"  : "504 120",
+                "labelcoords" : "511 96"
+            },
+            "n8"       : {
+                "label"       : "R8",
+                "canvas"      : "c0",
+                "iconcoords"  : "504 240",
+                "labelcoords" : "532 221"
+            },
+            "n9"       : {
+                "label"       : "R9",
+                "canvas"      : "c0",
+                "iconcoords"  : "528 360",
+                "labelcoords" : "553 340"
+            },
+            "n11"      : {
+                "label"       : "dnsTel",
+                "canvas"      : "c0",
+                "iconcoords"  : "144 288",
+                "labelcoords" : "191 272"
+            },
+            "n12"      : {
+                "label"       : "www",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 384",
+                "labelcoords" : "127 410"
+            },
+            "n13"      : {
+                "label"       : "mm",
+                "canvas"      : "c0",
+                "iconcoords"  : "120 480",
+                "labelcoords" : "118 517"
+            },
+            "n14"      : {
+                "label"       : "cRootServer",
+                "canvas"      : "c0",
+                "iconcoords"  : "672 288",
+                "labelcoords" : "682 326"
+            },
+            "n15"      : {
+                "label"       : "dnsOrg",
+                "canvas"      : "c0",
+                "iconcoords"  : "672 168",
+                "labelcoords" : "676 208"
+            },
+            "n17"      : {
+                "label"       : "dnsZpm",
+                "canvas"      : "c0",
+                "iconcoords"  : "312 552",
+                "labelcoords" : "315 592"
+            },
+            "n18"      : {
+                "label"       : "pc",
+                "canvas"      : "c0",
+                "iconcoords"  : "432 552",
+                "labelcoords" : "434 589"
+            },
+            "n10"      : {
+                "label"       : "sw1",
+                "canvas"      : "c0",
+                "iconcoords"  : "288 384",
+                "labelcoords" : "294 362"
+            },
+            "n16"      : {
+                "label"       : "sw2",
+                "canvas"      : "c0",
+                "iconcoords"  : "432 432",
+                "labelcoords" : "393 423"
+            },
+            "n19"      : {
+                "label"       : "zpmMail",
+                "canvas"      : "c0",
+                "iconcoords"  : "552 528",
+                "labelcoords" : "556 568"
+            },
+            "n20"      : {
+                "label"       : "FW",
+                "canvas"      : "c1",
+                "iconcoords"  : "120 192",
+                "labelcoords" : "150 171"
+            },
+            "n23"      : {
+                "label"       : "sw4",
+                "canvas"      : "c1",
+                "iconcoords"  : "624 192",
+                "labelcoords" : "602 215"
+            },
+            "n24"      : {
+                "label"       : "sw3",
+                "canvas"      : "c1",
+                "iconcoords"  : "288 192",
+                "labelcoords" : "262 213"
+            },
+            "n25"      : {
+                "label"       : "smtpMM",
+                "canvas"      : "c1",
+                "iconcoords"  : "408 384",
+                "labelcoords" : "408 425"
+            },
+            "n26"      : {
+                "label"       : "wwwMM",
+                "canvas"      : "c1",
+                "iconcoords"  : "240 360",
+                "labelcoords" : "240 401"
+            },
+            "n27"      : {
+                "label"       : "LAN-SMTP",
+                "canvas"      : "c1",
+                "iconcoords"  : "576 384",
+                "labelcoords" : "576 425"
+            },
+            "n28"      : {
+                "label"       : "pc1",
+                "canvas"      : "c1",
+                "iconcoords"  : "744 336",
+                "labelcoords" : "744 372"
+            },
+            "n29"      : {
+                "label"       : "pc2",
+                "canvas"      : "c1",
+                "iconcoords"  : "792 192",
+                "labelcoords" : "792 228"
+            },
+            "n30"      : {
+                "label"       : "pc3",
+                "canvas"      : "c1",
+                "iconcoords"  : "696 96",
+                "labelcoords" : "696 132"
+            },
+            "n31"      : {
+                "label"       : "dnsMM",
+                "canvas"      : "c1",
+                "iconcoords"  : "288 96",
+                "labelcoords" : "288 137"
+            },
+            "n32"      : {
+                "label"       : "FWint",
+                "canvas"      : "c1",
+                "iconcoords"  : "456 192",
+                "labelcoords" : "431 163"
+            }
         }
-    },
-    "options"     : {
-        "show_interface_names" : "0",
-        "show_interface_ipv6"  : "0",
-        "show_link_labels"     : "0",
-        "version"              : "1"
     }
 }

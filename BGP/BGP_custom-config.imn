@@ -1,435 +1,421 @@
-node n0 {
-    type router
-    cpu {{min 0} {max 100} {weight 1}}
-    model frr
-    network-config {
-	hostname c3640
-	!
-	interface eth2
-	 ip address 192.168.200.1/24
-	 mac address 42:00:aa:00:00:02
-	!
-	interface eth1
-	 ip address 172.16.101.1/24
-	 mac address 42:00:aa:00:00:01
-	!
-	interface eth0
-	 ip address 172.16.102.2/24
-	 mac address 42:00:aa:00:00:00
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {384 216}
-    labelcoords {334 214}
-    interface-peer {eth0 n1}
-    interface-peer {eth1 n3}
-    interface-peer {eth2 n6}
-    custom-configs {
-        custom-config-id conf1 {
-            custom-command /usr/local/bin/frrboot.sh
-            config {
-                interface lo0
-                 ip address 127.0.0.1/8
-                 ipv6 address ::1/128
-                !
-                interface eth0
-                 ip address 172.16.102.2/24
-                !
-                interface eth1
-                 ip address 172.16.101.1/24
-                !
-                interface eth2
-                 ip address 192.168.200.1/24
-                !
-                router bgp 65003
-                 no bgp ebgp-requires-policy
-                 bgp router-id 192.168.200.1
-                 network 192.168.200.0/24
-                 neighbor 172.16.101.2 remote-as 65004
-                 neighbor 172.16.102.1 remote-as 65002
-                 neighbor 172.16.101.2 weight 200
-                 neighbor 172.16.102.1 weight 100
-                !
+{
+    "nodes"   : {
+        "n0" : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "c3640",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["172.16.102.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["172.16.101.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:02",
+                    "ipv4_addrs" : ["192.168.200.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                }
+            },
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "interface lo0\n ip address 127.0.0.1/8\n ipv6 address ::1/128\n!\ninterface eth0\n ip address 172.16.102.2/24\n!\ninterface eth1\n ip address 172.16.101.1/24\n!\ninterface eth2\n ip address 192.168.200.1/24\n!\nrouter bgp 65003\n no bgp ebgp-requires-policy\n bgp router-id 192.168.200.1\n network 192.168.200.0/24\n neighbor 172.16.101.2 remote-as 65004\n neighbor 172.16.102.1 remote-as 65002\n neighbor 172.16.101.2 weight 200\n neighbor 172.16.102.1 weight 100\n!"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "auto_default_routes" : "disabled"
+        },
+        "n1" : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "streamer",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:03",
+                    "ipv4_addrs" : ["172.16.102.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:04",
+                    "ipv4_addrs" : ["172.16.100.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:05",
+                    "ipv4_addrs" : ["10.1.2.8/24"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                },
+                "ifc4" : {
+                    "name"       : "eth3",
+                    "mac"        : "42:00:aa:00:00:06",
+                    "ipv4_addrs" : ["172.16.103.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                }
+            },
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "interface lo0\n ip address 127.0.0.1/8\n ipv6 address ::1/128\n!\ninterface eth0\n ip address 172.16.102.1/24\n!\ninterface eth1\n ip address 172.16.100.1/24\n!\ninterface eth2\n ip address 10.1.2.8/24\n!\ninterface eth3\n ip address 172.16.103.1/24\n!\nrouter bgp 65002\n no bgp ebgp-requires-policy\n bgp router-id 10.1.2.8\n network 172.16.100.0/24\n network 172.16.102.0/24\n network 172.16.103.0/24\n neighbor 10.1.2.4 remote-as 65001\n ! neighbor 10.1.2.4 route-map AMALFI in\n neighbor 172.16.102.2 remote-as 65003\n neighbor 172.16.103.2 remote-as 65004\n!"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "auto_default_routes" : "disabled"
+        },
+        "n2" : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "amalfi",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:07",
+                    "ipv4_addrs" : ["10.1.2.4/24"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:08",
+                    "ipv4_addrs" : ["192.168.100.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                }
+            },
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "interface lo0\n ip address 127.0.0.1/8\n ipv6 address ::1/128\n!\ninterface eth0\n ip address 10.1.2.4/24\n!\ninterface eth1\n ip address 192.168.100.1/24\n!\nrouter bgp 65001\n no bgp ebgp-requires-policy\n bgp router-id 10.1.2.4\n network 192.168.100.0/24\n network 10.1.2.0/24\n neighbor 10.1.2.8 remote-as 65002\n!"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "auto_default_routes" : "disabled"
+        },
+        "n3" : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "sat",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:09",
+                    "ipv4_addrs" : ["172.16.103.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:0a",
+                    "ipv4_addrs" : ["172.16.101.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                }
+            },
+            "custom_configs"      : {
+                "NODE_CONFIG" : {
+                    "conf1" : {
+                        "custom_command" : "/usr/local/bin/frrboot.sh",
+                        "custom_config"  : "interface lo0\n ip address 127.0.0.1/8\n ipv6 address ::1/128\n!\ninterface eth0\n ip address 172.16.103.2/24\n!\ninterface eth1\n ip address 172.16.101.2/24\n!\nrouter bgp 65004\n no bgp ebgp-requires-policy\n bgp router-id 172.16.103.2\n network 172.16.101.0/24\n neighbor 172.16.103.1 remote-as 65002\n neighbor 172.16.101.1 remote-as 65003\n!"
+                    }
+                }
+            },
+            "custom_enabled"      : "true",
+            "custom_selected"     : "NODE_CONFIG conf1",
+            "auto_default_routes" : "disabled"
+        },
+        "n4" : {
+            "type"                : "pc",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "pc1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0b",
+                    "ipv4_addrs" : ["192.168.100.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 192.168.100.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n5" : {
+            "type"                : "pc",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "pc2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0c",
+                    "ipv4_addrs" : ["172.16.100.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 172.16.100.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n6" : {
+            "type"                : "pc",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "pc3",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0d",
+                    "ipv4_addrs" : ["192.168.200.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 192.168.200.1"],
+            "auto_default_routes" : "disabled"
+        }
+    },
+    "links"   : {
+        "l0" : {
+            "peers"        : "n0 n1",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l1" : {
+            "peers"        : "n1 n5",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l2" : {
+            "peers"        : "n1 n2",
+            "peers_ifaces" : "ifc3 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l3" : {
+            "peers"        : "n2 n4",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l4" : {
+            "peers"        : "n1 n3",
+            "peers_ifaces" : "ifc4 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l5" : {
+            "peers"        : "n0 n3",
+            "peers_ifaces" : "ifc2 ifc2",
+            "bandwidth"    : "0"
+        },
+        "l6" : {
+            "peers"        : "n6 n0",
+            "peers_ifaces" : "ifc1 ifc3",
+            "bandwidth"    : "0"
+        }
+    },
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "options"     : {
+            "show_interface_names" : "0",
+            "show_interface_ipv6"  : "0"
+        },
+        "canvases"    : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "annotations" : {
+            "a1" : {
+                "iconcoords" : "528 288",
+                "type"       : "text",
+                "label"      : "AS 65004",
+                "labelcolor" : "#0000a6",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "canvas"     : "c0"
+            },
+            "a2" : {
+                "iconcoords" : "216 360",
+                "type"       : "text",
+                "label"      : "AS 65002",
+                "labelcolor" : "#0000a6",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "canvas"     : "c0"
+            },
+            "a3" : {
+                "iconcoords" : "312 288",
+                "type"       : "text",
+                "label"      : "AS 65002",
+                "labelcolor" : "#0000a6",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "canvas"     : "c0"
+            },
+            "a4" : {
+                "iconcoords" : "216 504",
+                "type"       : "text",
+                "label"      : "AS 65001",
+                "labelcolor" : "#0000a6",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "canvas"     : "c0"
+            },
+            "a5" : {
+                "iconcoords" : "504 408",
+                "type"       : "text",
+                "label"      : "AS 65002",
+                "labelcolor" : "#0000a6",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "canvas"     : "c0"
+            },
+            "a7" : {
+                "iconcoords" : "432 144",
+                "type"       : "text",
+                "label"      : "AS 65003",
+                "labelcolor" : "#0000a6",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "canvas"     : "c0"
+            }
+        },
+        "links"       : {
+            "l0" : {
+                "peers" : "n0 n1"
+            },
+            "l1" : {
+                "peers" : "n1 n5"
+            },
+            "l2" : {
+                "peers" : "n1 n2"
+            },
+            "l3" : {
+                "peers" : "n2 n4"
+            },
+            "l4" : {
+                "peers" : "n1 n3"
+            },
+            "l5" : {
+                "peers" : "n0 n3"
+            },
+            "l6" : {
+                "peers" : "n6 n0"
+            }
+        },
+        "nodes"       : {
+            "n0" : {
+                "label"       : "c3640",
+                "canvas"      : "c0",
+                "iconcoords"  : "384 216",
+                "labelcoords" : "334 214"
+            },
+            "n1" : {
+                "label"       : "streamer",
+                "canvas"      : "c0",
+                "iconcoords"  : "384 384",
+                "labelcoords" : "418 433"
+            },
+            "n2" : {
+                "label"       : "amalfi",
+                "canvas"      : "c0",
+                "iconcoords"  : "384 528",
+                "labelcoords" : "427 543"
+            },
+            "n3" : {
+                "label"       : "sat",
+                "canvas"      : "c0",
+                "iconcoords"  : "672 384",
+                "labelcoords" : "685 360"
+            },
+            "n4" : {
+                "label"       : "pc1",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 528",
+                "labelcoords" : "99 494"
+            },
+            "n5" : {
+                "label"       : "pc2",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 384",
+                "labelcoords" : "97 351"
+            },
+            "n6" : {
+                "label"       : "pc3",
+                "canvas"      : "c0",
+                "iconcoords"  : "384 48",
+                "labelcoords" : "423 38"
             }
         }
     }
-    custom-enabled true
-    custom-selected conf1
 }
-
-node n1 {
-    type router
-    cpu {{min 0} {max 100} {weight 1}}
-    model frr
-    network-config {
-	hostname streamer
-	!
-	interface eth3
-	 ip address 172.16.103.1/24
-	 mac address 42:00:aa:00:00:06
-	!
-	interface eth2
-	 ip address 10.1.2.8/24
-	 mac address 42:00:aa:00:00:05
-	!
-	interface eth1
-	 ip address 172.16.100.1/24
-	 mac address 42:00:aa:00:00:04
-	!
-	interface eth0
-	 ip address 172.16.102.1/24
-	 mac address 42:00:aa:00:00:03
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {384 384}
-    labelcoords {418 433}
-    interface-peer {eth0 n0}
-    interface-peer {eth1 n5}
-    interface-peer {eth2 n2}
-    interface-peer {eth3 n3}
-    custom-configs {
-        custom-config-id conf1 {
-            custom-command /usr/local/bin/frrboot.sh
-            config {
-                interface lo0
-                 ip address 127.0.0.1/8
-                 ipv6 address ::1/128
-                !
-                interface eth0
-                 ip address 172.16.102.1/24
-                !
-                interface eth1
-                 ip address 172.16.100.1/24
-                !
-                interface eth2
-                 ip address 10.1.2.8/24
-                !
-                interface eth3
-                 ip address 172.16.103.1/24
-                !
-                router bgp 65002
-                 no bgp ebgp-requires-policy
-                 bgp router-id 10.1.2.8
-                 network 172.16.100.0/24
-                 network 172.16.102.0/24
-                 network 172.16.103.0/24
-                 neighbor 10.1.2.4 remote-as 65001
-                 ! neighbor 10.1.2.4 route-map AMALFI in
-                 neighbor 172.16.102.2 remote-as 65003
-                 neighbor 172.16.103.2 remote-as 65004
-                !
-            }
-        }
-    }
-    custom-enabled true
-    custom-selected conf1
-}
-
-node n2 {
-    type router
-    cpu {{min 0} {max 100} {weight 1}}
-    model frr
-    network-config {
-	hostname amalfi
-	!
-	interface eth1
-	 ip address 192.168.100.1/24
-	 mac address 42:00:aa:00:00:08
-	!
-	interface eth0
-	 ip address 10.1.2.4/24
-	 mac address 42:00:aa:00:00:07
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {384 528}
-    labelcoords {427 543}
-    interface-peer {eth0 n1}
-    interface-peer {eth1 n4}
-    custom-configs {
-        custom-config-id conf1 {
-            custom-command /usr/local/bin/frrboot.sh
-            config {
-                interface lo0
-                 ip address 127.0.0.1/8
-                 ipv6 address ::1/128
-                !
-                interface eth0
-                 ip address 10.1.2.4/24
-                !
-                interface eth1
-                 ip address 192.168.100.1/24
-                !
-                router bgp 65001
-                 no bgp ebgp-requires-policy
-                 bgp router-id 10.1.2.4
-                 network 192.168.100.0/24
-                 network 10.1.2.0/24
-                 neighbor 10.1.2.8 remote-as 65002
-                !
-            }
-        }
-    }
-    custom-enabled true
-    custom-selected conf1
-}
-
-node n3 {
-    type router
-    cpu {{min 0} {max 100} {weight 1}}
-    model frr
-    network-config {
-	hostname sat
-	!
-	interface eth1
-	 ip address 172.16.101.2/24
-	 mac address 42:00:aa:00:00:0a
-	!
-	interface eth0
-	 ip address 172.16.103.2/24
-	 mac address 42:00:aa:00:00:09
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {672 384}
-    labelcoords {685 360}
-    interface-peer {eth0 n1}
-    interface-peer {eth1 n0}
-    custom-configs {
-        custom-config-id conf1 {
-            custom-command /usr/local/bin/frrboot.sh
-            config {
-                interface lo0
-                 ip address 127.0.0.1/8
-                 ipv6 address ::1/128
-                !
-                interface eth0
-                 ip address 172.16.103.2/24
-                !
-                interface eth1
-                 ip address 172.16.101.2/24
-                !
-                router bgp 65004
-                 no bgp ebgp-requires-policy
-                 bgp router-id 172.16.103.2
-                 network 172.16.101.0/24
-                 neighbor 172.16.103.1 remote-as 65002
-                 neighbor 172.16.101.1 remote-as 65003
-                !
-            }
-        }
-    }
-    custom-enabled true
-    custom-selected conf1
-}
-
-node n4 {
-    type pc
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname pc1
-	!
-	interface eth0
-	 ip address 192.168.100.2/24
-	 mac address 42:00:aa:00:00:0b
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 192.168.100.1
-	!
-	!
-    }
-    canvas c0
-    iconcoords {96 528}
-    labelcoords {99 494}
-    interface-peer {eth0 n2}
-}
-
-node n5 {
-    type pc
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname pc2
-	!
-	interface eth0
-	 ip address 172.16.100.2/24
-	 mac address 42:00:aa:00:00:0c
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	!
-	!
-	ip route 0.0.0.0/0 172.16.100.1
-	!
-    }
-    canvas c0
-    iconcoords {96 384}
-    labelcoords {97 351}
-    interface-peer {eth0 n1}
-}
-
-node n6 {
-    type pc
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname pc3
-	!
-	interface eth0
-	 ip address 192.168.200.2/24
-	 mac address 42:00:aa:00:00:0d
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 192.168.200.1
-	!
-	!
-    }
-    canvas c0
-    iconcoords {384 48}
-    labelcoords {423 38}
-    interface-peer {eth0 n0}
-}
-
-link l0 {
-    nodes {n0 n1}
-    bandwidth 0
-}
-
-link l1 {
-    nodes {n1 n5}
-    bandwidth 0
-}
-
-link l2 {
-    nodes {n1 n2}
-    bandwidth 0
-}
-
-link l3 {
-    nodes {n2 n4}
-    bandwidth 0
-}
-
-link l4 {
-    nodes {n1 n3}
-    bandwidth 0
-}
-
-link l5 {
-    nodes {n0 n3}
-    bandwidth 0
-}
-
-link l6 {
-    nodes {n6 n0}
-    bandwidth 0
-}
-
-annotation a1 {
-    iconcoords {528.0 288.0}
-    type text
-    label {AS 65004}
-    labelcolor #0000a6
-    fontfamily {Arial}
-    fontsize {12}
-    canvas c0
-}
-
-annotation a2 {
-    iconcoords {216.0 360.0}
-    type text
-    label {AS 65002}
-    labelcolor #0000a6
-    fontfamily {Arial}
-    fontsize {12}
-    canvas c0
-}
-
-annotation a3 {
-    iconcoords {312.0 288.0}
-    type text
-    label {AS 65002}
-    labelcolor #0000a6
-    fontfamily {Arial}
-    fontsize {12}
-    canvas c0
-}
-
-annotation a4 {
-    iconcoords {216.0 504.0}
-    type text
-    label {AS 65001}
-    labelcolor #0000a6
-    fontfamily {Arial}
-    fontsize {12}
-    canvas c0
-}
-
-annotation a5 {
-    iconcoords {504.0 408.0}
-    type text
-    label {AS 65002}
-    labelcolor #0000a6
-    fontfamily {Arial}
-    fontsize {12}
-    canvas c0
-}
-
-annotation a7 {
-    iconcoords {432.0 144.0}
-    type text
-    label {AS 65003}
-    labelcolor #0000a6
-    fontfamily {Arial}
-    fontsize {12}
-    canvas c0
-}
-
-canvas c0 {
-    name {Canvas0}
-}
-
-option show {
-    interface_names no
-    ip_addresses yes
-    ipv6_addresses no
-    node_labels yes
-    link_labels yes
-    background_images no
-    annotations yes
-    hostsAutoAssign no
-    grid yes
-    iconSize normal
-    zoom 1.0
-}
-

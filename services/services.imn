@@ -1,172 +1,236 @@
-node n0 {
-    type pc
-    network-config {
-	hostname PC
-	!
-	interface eth0
-	 ip address 10.0.0.20/24
-	 ipv6 address fc00:1::20/64
-	 mac address 42:00:aa:00:00:00
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
+{
+    "nodes"   : {
+        "n0" : {
+            "type"                : "pc",
+            "name"                : "PC",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["10.0.0.20/24"],
+                    "ipv6_addrs" : ["fc00:1::20/64"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n2" : {
+            "type"                : "host",
+            "name"                : "SSH",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["10.0.0.10/24"],
+                    "ipv6_addrs" : ["fc00:1::10/64"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                }
+            },
+            "services"            : ["ssh"],
+            "auto_default_routes" : "disabled"
+        },
+        "n1" : {
+            "type"   : "lanswitch",
+            "name"   : "switch1",
+            "ifaces" : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l1"
+                },
+                "ifc2" : {
+                    "type" : "phys",
+                    "name" : "e2",
+                    "link" : "l2"
+                },
+                "ifc3" : {
+                    "type" : "phys",
+                    "name" : "e3",
+                    "link" : "l3"
+                },
+                "ifc4" : {
+                    "type" : "phys",
+                    "name" : "e4",
+                    "link" : "l4"
+                }
+            }
+        },
+        "n3" : {
+            "type"                : "host",
+            "name"                : "TCPDUMP",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:02",
+                    "ipv4_addrs" : ["10.0.0.11/24"],
+                    "ipv6_addrs" : ["fc00:1::11/64"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                }
+            },
+            "services"            : ["tcpdump"],
+            "auto_default_routes" : "disabled"
+        },
+        "n4" : {
+            "type"                : "host",
+            "name"                : "FTP",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:03",
+                    "ipv4_addrs" : ["10.0.0.12/24"],
+                    "ipv6_addrs" : ["fc00:1::12/64"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                }
+            },
+            "services"            : ["ftp"],
+            "auto_default_routes" : "disabled"
+        },
+        "n5" : {
+            "type"                : "host",
+            "name"                : "TELNET",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:04",
+                    "ipv4_addrs" : ["10.0.0.13/24"],
+                    "ipv6_addrs" : ["fc00:1::13/64"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                }
+            },
+            "services"            : ["telnet"],
+            "auto_default_routes" : "disabled"
+        }
+    },
+    "links"   : {
+        "l0" : {
+            "peers"        : "n0 n1",
+            "peers_ifaces" : "ifc1 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l1" : {
+            "peers"        : "n1 n2",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l2" : {
+            "peers"        : "n1 n3",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l3" : {
+            "peers"        : "n1 n4",
+            "peers_ifaces" : "ifc3 ifc1",
+            "bandwidth"    : "0"
+        },
+        "l4" : {
+            "peers"        : "n1 n5",
+            "peers_ifaces" : "ifc4 ifc1",
+            "bandwidth"    : "0"
+        }
+    },
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "canvases" : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "links"    : {
+            "l0" : {
+                "peers" : "n0 n1"
+            },
+            "l1" : {
+                "peers" : "n1 n2"
+            },
+            "l2" : {
+                "peers" : "n1 n3"
+            },
+            "l3" : {
+                "peers" : "n1 n4"
+            },
+            "l4" : {
+                "peers" : "n1 n5"
+            }
+        },
+        "nodes"    : {
+            "n0" : {
+                "label"       : "PC",
+                "canvas"      : "c0",
+                "iconcoords"  : "120 312",
+                "labelcoords" : "120 348"
+            },
+            "n2" : {
+                "label"       : "SSH",
+                "canvas"      : "c0",
+                "iconcoords"  : "600 168",
+                "labelcoords" : "600 209"
+            },
+            "n1" : {
+                "label"       : "switch1",
+                "canvas"      : "c0",
+                "iconcoords"  : "336 312",
+                "labelcoords" : "336 340"
+            },
+            "n3" : {
+                "label"       : "TCPDUMP",
+                "canvas"      : "c0",
+                "iconcoords"  : "600 264",
+                "labelcoords" : "600 305"
+            },
+            "n4" : {
+                "label"       : "FTP",
+                "canvas"      : "c0",
+                "iconcoords"  : "600 360",
+                "labelcoords" : "600 401"
+            },
+            "n5" : {
+                "label"       : "TELNET",
+                "canvas"      : "c0",
+                "iconcoords"  : "600 456",
+                "labelcoords" : "600 497"
+            }
+        }
     }
-    canvas c0
-    iconcoords {120.0 312.0}
-    labelcoords {120.0 348.0}
-    interface-peer {eth0 n1}
 }
-
-node n2 {
-    type host
-    network-config {
-	hostname SSH
-	!
-	interface eth0
-	 ip address 10.0.0.10/24
-	 ipv6 address fc00:1::10/64
-	 mac address 42:00:aa:00:00:01
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {600.0 168.0}
-    labelcoords {600.0 209.0}
-    services {ssh}
-    interface-peer {eth0 n1}
-}
-
-node n1 {
-    type lanswitch
-    network-config {
-	hostname switch1
-	!
-    }
-    canvas c0
-    iconcoords {336.0 312.0}
-    labelcoords {336.0 340.0}
-    interface-peer {e0 n0}
-    interface-peer {e1 n2}
-    interface-peer {e2 n3}
-    interface-peer {e3 n4}
-    interface-peer {e4 n5}
-}
-
-node n3 {
-    type host
-    network-config {
-	hostname TCPDUMP
-	!
-	interface eth0
-	 ip address 10.0.0.11/24
-	 ipv6 address fc00:1::11/64
-	 mac address 42:00:aa:00:00:02
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {600.0 264.0}
-    labelcoords {600.0 305.0}
-    interface-peer {eth0 n1}
-    services {tcpdump}
-}
-
-node n4 {
-    type host
-    network-config {
-	hostname FTP
-	!
-	interface eth0
-	 ip address 10.0.0.12/24
-	 ipv6 address fc00:1::12/64
-	 mac address 42:00:aa:00:00:03
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {600.0 360.0}
-    labelcoords {600.0 401.0}
-    interface-peer {eth0 n1}
-    services {ftp}
-}
-
-node n5 {
-    type host
-    network-config {
-	hostname TELNET
-	!
-	interface eth0
-	 ip address 10.0.0.13/24
-	 ipv6 address fc00:1::13/64
-	 mac address 42:00:aa:00:00:04
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {600.0 456.0}
-    labelcoords {600.0 497.0}
-    interface-peer {eth0 n1}
-    services {telnet}
-}
-
-link l0 {
-    nodes {n0 n1}
-    bandwidth 0
-}
-
-link l1 {
-    nodes {n1 n2}
-    bandwidth 0
-}
-
-link l2 {
-    nodes {n1 n3}
-    bandwidth 0
-}
-
-link l3 {
-    nodes {n1 n4}
-    bandwidth 0
-}
-
-link l4 {
-    nodes {n1 n5}
-    bandwidth 0
-}
-
-canvas c0 {
-    name {Canvas0}
-}
-
-option show {
-    interface_names yes
-    ip_addresses yes
-    ipv6_addresses yes
-    node_labels yes
-    link_labels yes
-    background_images no
-    annotations yes
-    grid yes
-    iconSize normal
-    zoom 1.0
-}
-

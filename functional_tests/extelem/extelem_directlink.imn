@@ -1,90 +1,112 @@
-node n0 {
-    type pc
-    network-config {
-	hostname pc1
-	!
-	interface eth0
-	 ip address 10.0.0.20/24
-	 ipv6 address fc00::20/64
-	 mac address 42:00:aa:00:00:00
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
+{
+    "nodes"   : {
+        "n0" : {
+            "type"                : "pc",
+            "name"                : "pc1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["10.0.0.20/24"],
+                    "ipv6_addrs" : ["fc00::20/64"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                }
+            },
+            "auto_default_routes" : "enabled"
+        },
+        "n1" : {
+            "type"                : "pc",
+            "name"                : "pc2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["10.0.0.21/24"],
+                    "ipv6_addrs" : ["fc00::21/64"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                }
+            },
+            "auto_default_routes" : "enabled"
+        },
+        "n2" : {
+            "type"   : "rj45",
+            "name"   : "xel1",
+            "ifaces" : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "extelem0",
+                    "link" : "l0"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "extelem1",
+                    "link" : "l1"
+                }
+            }
+        }
+    },
+    "links"   : {
+        "l0" : {
+            "peers"        : "n0 n2",
+            "peers_ifaces" : "ifc1 ifc0",
+            "direct"       : "1"
+        },
+        "l1" : {
+            "peers"        : "n2 n1",
+            "peers_ifaces" : "ifc1 ifc1",
+            "direct"       : "1"
+        }
+    },
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "canvases" : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "links"    : {
+            "l0" : {
+                "peers" : "n0 n2"
+            },
+            "l1" : {
+                "peers" : "n2 n1"
+            }
+        },
+        "nodes"    : {
+            "n0" : {
+                "label"       : "pc1",
+                "canvas"      : "c0",
+                "iconcoords"  : "144 96",
+                "labelcoords" : "144 127"
+            },
+            "n1" : {
+                "label"       : "pc2",
+                "canvas"      : "c0",
+                "iconcoords"  : "144 456",
+                "labelcoords" : "144 487"
+            },
+            "n2" : {
+                "label"       : "xel1",
+                "canvas"      : "c0",
+                "iconcoords"  : "528 264",
+                "labelcoords" : "528 289"
+            }
+        }
     }
-    auto_default_routes enabled
-    canvas c0
-    iconcoords {144 96}
-    labelcoords {144 127}
-    interface-peer {eth0 n2}
 }
-
-node n1 {
-    type pc
-    network-config {
-	hostname pc2
-	!
-	interface eth0
-	 mac address 42:00:aa:00:00:01
-	 ip address 10.0.0.21/24
-	 ipv6 address fc00::21/64
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    auto_default_routes enabled
-    canvas c0
-    iconcoords {144 456}
-    labelcoords {144 487}
-    interface-peer {eth0 n2}
-}
-
-node n2 {
-    type extelem
-    external-ifcs {{x0 extelem0} {x1 extelem1}}
-    network-config {
-	hostname xel1
-	!
-    }
-    canvas c0
-    iconcoords {528 264}
-    labelcoords {528 289}
-    interface-peer {x0 n0}
-    interface-peer {x1 n1}
-}
-
-link l0 {
-    nodes {n0 n2}
-    ifaces {eth0 x0}
-    direct 1
-}
-
-link l1 {
-    nodes {n2 n1}
-    ifaces {x1 eth0}
-    direct 1
-}
-
-canvas c0 {
-    name {Canvas0}
-}
-
-option show {
-    interface_names yes
-    ip_addresses yes
-    ipv6_addresses yes
-    node_labels yes
-    link_labels yes
-    background_images no
-    annotations yes
-    hostsAutoAssign no
-    grid yes
-    iconSize normal
-    zoom 1.0
-}
-

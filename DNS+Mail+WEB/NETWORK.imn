@@ -1,751 +1,914 @@
-node n0 {
-    type host
-    network-config {
-	hostname aRootServer
-	!
-	interface eth0
-	 ip address 1.0.0.2/24
-	 mac address 42:00:aa:00:00:00
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 1.0.0.1
-	!
+{
+    "nodes"   : {
+        "n0"  : {
+            "type"                : "host",
+            "name"                : "aRootServer",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["1.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 1.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n1"  : {
+            "type"                : "host",
+            "name"                : "bRootServer",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["2.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 2.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n3"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "R3",
+            "router_config"       : "rip 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:02",
+                    "ipv4_addrs" : ["1.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:03",
+                    "ipv4_addrs" : ["2.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:04",
+                    "ipv4_addrs" : ["4.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                },
+                "ifc4" : {
+                    "name"       : "eth3",
+                    "mac"        : "42:00:aa:00:00:05",
+                    "ipv4_addrs" : ["5.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                },
+                "ifc5" : {
+                    "name"       : "eth4",
+                    "mac"        : "42:00:aa:00:00:06",
+                    "ipv4_addrs" : ["10.0.4.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n2"  : {
+            "type"                : "host",
+            "name"                : "hr2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:07",
+                    "ipv4_addrs" : ["4.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l2"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 4.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n4"  : {
+            "type"                : "host",
+            "name"                : "dnsCom",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:08",
+                    "ipv4_addrs" : ["5.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l3"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 5.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n5"  : {
+            "type"                : "host",
+            "name"                : "dnsHr",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:09",
+                    "ipv4_addrs" : ["7.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 7.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n6"  : {
+            "type"                : "host",
+            "name"                : "dnsFer",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0a",
+                    "ipv4_addrs" : ["8.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l8"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 8.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n7"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "R7",
+            "router_config"       : "rip 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0d",
+                    "ipv4_addrs" : ["6.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l14"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:0b",
+                    "ipv4_addrs" : ["10.0.4.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l4"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:0c",
+                    "ipv4_addrs" : ["10.0.5.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n8"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "R8",
+            "router_config"       : "rip 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:0f",
+                    "ipv4_addrs" : ["7.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:11",
+                    "ipv4_addrs" : ["3.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l13"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:0e",
+                    "ipv4_addrs" : ["10.0.5.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l5"
+                },
+                "ifc4" : {
+                    "name"       : "eth3",
+                    "mac"        : "42:00:aa:00:00:10",
+                    "ipv4_addrs" : ["10.0.7.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l7"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n9"  : {
+            "type"                : "router",
+            "model"               : "frr",
+            "name"                : "R9",
+            "router_config"       : "rip 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:13",
+                    "ipv4_addrs" : ["8.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l8"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "mac"        : "42:00:aa:00:00:14",
+                    "ipv4_addrs" : ["20.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l9"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "mac"        : "42:00:aa:00:00:15",
+                    "ipv4_addrs" : ["30.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l15"
+                },
+                "ifc4" : {
+                    "name"       : "eth4",
+                    "mac"        : "42:00:aa:00:00:12",
+                    "ipv4_addrs" : ["10.0.7.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l7"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n11" : {
+            "type"                : "host",
+            "name"                : "dnsTel",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:16",
+                    "ipv4_addrs" : ["20.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l10"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 20.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n12" : {
+            "type"                : "host",
+            "name"                : "www",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:17",
+                    "ipv4_addrs" : ["20.0.0.3/24"],
+                    "type"       : "phys",
+                    "link"       : "l11"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 20.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n13" : {
+            "type"                : "pc",
+            "name"                : "mm",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:18",
+                    "ipv4_addrs" : ["20.0.0.4/24"],
+                    "type"       : "phys",
+                    "link"       : "l12"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 20.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n14" : {
+            "type"                : "host",
+            "name"                : "cRootServer",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:19",
+                    "ipv4_addrs" : ["3.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l13"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 3.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n15" : {
+            "type"                : "host",
+            "name"                : "dnsOrg",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:1a",
+                    "ipv4_addrs" : ["6.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l14"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 6.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n17" : {
+            "type"                : "host",
+            "name"                : "dnsZpm",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:1b",
+                    "ipv4_addrs" : ["30.0.0.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l16"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 30.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n18" : {
+            "type"                : "pc",
+            "name"                : "pc",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:1c",
+                    "ipv4_addrs" : ["30.0.0.3/24"],
+                    "type"       : "phys",
+                    "link"       : "l17"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 30.0.0.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n10" : {
+            "type"   : "lanswitch",
+            "name"   : "sw1",
+            "ifaces" : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l9"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l10"
+                },
+                "ifc2" : {
+                    "type" : "phys",
+                    "name" : "e2",
+                    "link" : "l11"
+                },
+                "ifc3" : {
+                    "type" : "phys",
+                    "name" : "e3",
+                    "link" : "l12"
+                }
+            }
+        },
+        "n16" : {
+            "type"   : "lanswitch",
+            "name"   : "sw2",
+            "ifaces" : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l15"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l16"
+                },
+                "ifc2" : {
+                    "type" : "phys",
+                    "name" : "e2",
+                    "link" : "l17"
+                },
+                "ifc3" : {
+                    "type" : "phys",
+                    "name" : "e3",
+                    "link" : "l18"
+                }
+            }
+        },
+        "n19" : {
+            "type"                : "host",
+            "name"                : "zpmMail",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:1d",
+                    "ipv4_addrs" : ["30.0.0.4/24"],
+                    "type"       : "phys",
+                    "link"       : "l18"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 30.0.0.1"],
+            "auto_default_routes" : "disabled"
+        }
+    },
+    "links"   : {
+        "l0"  : {
+            "peers"        : "n0 n3",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l1"  : {
+            "peers"        : "n1 n3",
+            "peers_ifaces" : "ifc1 ifc2",
+            "bandwidth"    : "100000000"
+        },
+        "l2"  : {
+            "peers"        : "n2 n3",
+            "peers_ifaces" : "ifc1 ifc3",
+            "bandwidth"    : "100000000"
+        },
+        "l3"  : {
+            "peers"        : "n3 n4",
+            "peers_ifaces" : "ifc4 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l4"  : {
+            "peers"        : "n3 n7",
+            "peers_ifaces" : "ifc5 ifc2",
+            "bandwidth"    : "2048000",
+            "delay"        : "2500"
+        },
+        "l5"  : {
+            "peers"        : "n7 n8",
+            "peers_ifaces" : "ifc3 ifc3",
+            "bandwidth"    : "2048000",
+            "delay"        : "2500"
+        },
+        "l6"  : {
+            "peers"        : "n8 n5",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l7"  : {
+            "peers"        : "n8 n9",
+            "peers_ifaces" : "ifc4 ifc4",
+            "bandwidth"    : "2048000",
+            "delay"        : "2500"
+        },
+        "l8"  : {
+            "peers"        : "n9 n6",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l13" : {
+            "peers"        : "n8 n14",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l14" : {
+            "peers"        : "n7 n15",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l9"  : {
+            "peers"        : "n10 n9",
+            "peers_ifaces" : "ifc0 ifc2",
+            "bandwidth"    : "100000000"
+        },
+        "l10" : {
+            "peers"        : "n11 n10",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l11" : {
+            "peers"        : "n12 n10",
+            "peers_ifaces" : "ifc1 ifc2",
+            "bandwidth"    : "100000000"
+        },
+        "l12" : {
+            "peers"        : "n13 n10",
+            "peers_ifaces" : "ifc1 ifc3",
+            "bandwidth"    : "100000000"
+        },
+        "l15" : {
+            "peers"        : "n9 n16",
+            "peers_ifaces" : "ifc3 ifc0",
+            "bandwidth"    : "100000000"
+        },
+        "l16" : {
+            "peers"        : "n17 n16",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l17" : {
+            "peers"        : "n16 n18",
+            "peers_ifaces" : "ifc2 ifc1",
+            "bandwidth"    : "100000000"
+        },
+        "l18" : {
+            "peers"        : "n16 n19",
+            "peers_ifaces" : "ifc3 ifc1",
+            "bandwidth"    : "100000000"
+        }
+    },
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "options"     : {
+            "show_interface_names" : "0",
+            "show_interface_ipv6"  : "0",
+            "show_link_labels"     : "0"
+        },
+        "canvases"    : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "annotations" : {
+            "a0"  : {
+                "iconcoords" : "43 14 151 116",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#e4e9ec",
+                "canvas"     : "c0"
+            },
+            "a1"  : {
+                "iconcoords" : "77 443 160 534",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#dfb961",
+                "canvas"     : "c0"
+            },
+            "a2"  : {
+                "iconcoords" : "41 248 266 553",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#fffee9",
+                "canvas"     : "c0"
+            },
+            "a4"  : {
+                "iconcoords" : "55 264",
+                "type"       : "text",
+                "label"      : "ZZT",
+                "labelcolor" : "#008000",
+                "fontfamily" : "Arial",
+                "fontsize"   : "16",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            },
+            "a6"  : {
+                "iconcoords" : "305 434 634 607",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#fffee9",
+                "canvas"     : "c0"
+            },
+            "a7"  : {
+                "iconcoords" : "329 457",
+                "type"       : "text",
+                "label"      : "ZPM",
+                "labelcolor" : "#007300",
+                "fontfamily" : "Arial",
+                "fontsize"   : "14",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            },
+            "a9"  : {
+                "iconcoords" : "605 8 693 103",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#e4e9ec",
+                "canvas"     : "c0"
+            },
+            "a10" : {
+                "iconcoords" : "726 272 826 364",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#e4e9ec",
+                "canvas"     : "c0"
+            },
+            "a11" : {
+                "iconcoords" : "58 345",
+                "type"       : "text",
+                "label"      : "www.tel.fer.hr",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "14",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            },
+            "a14" : {
+                "iconcoords" : "533 474",
+                "type"       : "text",
+                "label"      : "www.zpm.fer.hr",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "14",
+                "effects"    : "bold",
+                "canvas"     : "c0"
+            }
+        },
+        "links"       : {
+            "l0"  : {
+                "peers" : "n0 n3"
+            },
+            "l1"  : {
+                "peers" : "n1 n3"
+            },
+            "l2"  : {
+                "peers" : "n2 n3"
+            },
+            "l3"  : {
+                "peers" : "n3 n4"
+            },
+            "l4"  : {
+                "peers" : "n3 n7"
+            },
+            "l5"  : {
+                "peers" : "n7 n8"
+            },
+            "l6"  : {
+                "peers" : "n8 n5"
+            },
+            "l7"  : {
+                "peers" : "n8 n9"
+            },
+            "l8"  : {
+                "peers" : "n9 n6"
+            },
+            "l13" : {
+                "peers" : "n8 n14"
+            },
+            "l14" : {
+                "peers" : "n7 n15"
+            },
+            "l9"  : {
+                "peers" : "n10 n9"
+            },
+            "l10" : {
+                "peers" : "n11 n10"
+            },
+            "l11" : {
+                "peers" : "n12 n10"
+            },
+            "l12" : {
+                "peers" : "n13 n10"
+            },
+            "l15" : {
+                "peers" : "n9 n16"
+            },
+            "l16" : {
+                "peers" : "n17 n16"
+            },
+            "l17" : {
+                "peers" : "n16 n18"
+            },
+            "l18" : {
+                "peers" : "n16 n19"
+            }
+        },
+        "nodes"       : {
+            "n0"  : {
+                "label"       : "aRootServer",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 48",
+                "labelcoords" : "103 90"
+            },
+            "n1"  : {
+                "label"       : "bRootServer",
+                "canvas"      : "c0",
+                "iconcoords"  : "648 48",
+                "labelcoords" : "647 85"
+            },
+            "n3"  : {
+                "label"       : "R3",
+                "canvas"      : "c0",
+                "iconcoords"  : "360 48",
+                "labelcoords" : "361 22"
+            },
+            "n2"  : {
+                "label"       : "hr2",
+                "canvas"      : "c0",
+                "iconcoords"  : "168 168",
+                "labelcoords" : "170 210"
+            },
+            "n4"  : {
+                "label"       : "dnsCom",
+                "canvas"      : "c0",
+                "iconcoords"  : "360 192",
+                "labelcoords" : "361 229"
+            },
+            "n5"  : {
+                "label"       : "dnsHr",
+                "canvas"      : "c0",
+                "iconcoords"  : "360 288",
+                "labelcoords" : "359 327"
+            },
+            "n6"  : {
+                "label"       : "dnsFer",
+                "canvas"      : "c0",
+                "iconcoords"  : "816 432",
+                "labelcoords" : "829 472"
+            },
+            "n7"  : {
+                "label"       : "R7",
+                "canvas"      : "c0",
+                "iconcoords"  : "576 144",
+                "labelcoords" : "583 120"
+            },
+            "n8"  : {
+                "label"       : "R8",
+                "canvas"      : "c0",
+                "iconcoords"  : "552 240",
+                "labelcoords" : "592 231"
+            },
+            "n9"  : {
+                "label"       : "R9",
+                "canvas"      : "c0",
+                "iconcoords"  : "528 360",
+                "labelcoords" : "566 355"
+            },
+            "n11" : {
+                "label"       : "dnsTel",
+                "canvas"      : "c0",
+                "iconcoords"  : "144 288",
+                "labelcoords" : "191 272"
+            },
+            "n12" : {
+                "label"       : "www",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 384",
+                "labelcoords" : "127 410"
+            },
+            "n13" : {
+                "label"       : "mm",
+                "canvas"      : "c0",
+                "iconcoords"  : "120 480",
+                "labelcoords" : "118 517"
+            },
+            "n14" : {
+                "label"       : "cRootServer",
+                "canvas"      : "c0",
+                "iconcoords"  : "768 312",
+                "labelcoords" : "778 350"
+            },
+            "n15" : {
+                "label"       : "dnsOrg",
+                "canvas"      : "c0",
+                "iconcoords"  : "792 192",
+                "labelcoords" : "796 232"
+            },
+            "n17" : {
+                "label"       : "dnsZpm",
+                "canvas"      : "c0",
+                "iconcoords"  : "336 528",
+                "labelcoords" : "339 568"
+            },
+            "n18" : {
+                "label"       : "pc",
+                "canvas"      : "c0",
+                "iconcoords"  : "480 552",
+                "labelcoords" : "482 589"
+            },
+            "n10" : {
+                "label"       : "sw1",
+                "canvas"      : "c0",
+                "iconcoords"  : "288 384",
+                "labelcoords" : "294 362"
+            },
+            "n16" : {
+                "label"       : "sw2",
+                "canvas"      : "c0",
+                "iconcoords"  : "456 432",
+                "labelcoords" : "417 423"
+            },
+            "n19" : {
+                "label"       : "zpmMail",
+                "canvas"      : "c0",
+                "iconcoords"  : "576 528",
+                "labelcoords" : "580 568"
+            }
+        }
     }
-    iconcoords {96.0 48.0}
-    labelcoords {103.0 90.0}
-    interface-peer {eth0 n3}
-    canvas c0
 }
-
-node n1 {
-    type host
-    network-config {
-	hostname bRootServer
-	!
-	interface eth0
-	 ip address 2.0.0.2/24
-	 mac address 42:00:aa:00:00:01
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 2.0.0.1
-	!
-    }
-    iconcoords {648.0 48.0}
-    labelcoords {647.0 85.0}
-    interface-peer {eth0 n3}
-    canvas c0
-}
-
-node n3 {
-    type router
-    model frr
-    network-config {
-	hostname R3
-	!
-	interface eth4
-	 ip address 10.0.4.1/24
-	 mac address 42:00:aa:00:00:06
-	!
-	interface eth3
-	 ip address 5.0.0.1/24
-	 mac address 42:00:aa:00:00:05
-	!
-	interface eth2
-	 ip address 4.0.0.1/24
-	 mac address 42:00:aa:00:00:04
-	!
-	interface eth1
-	 ip address 2.0.0.1/24
-	 mac address 42:00:aa:00:00:03
-	!
-	interface eth0
-	 ip address 1.0.0.1/24
-	 mac address 42:00:aa:00:00:02
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	router rip
-	 redistribute static
-	 redistribute connected
-	 redistribute ospf
-	 network 0.0.0.0/0
-	!
-    }
-    iconcoords {360.0 48.0}
-    labelcoords {361.0 22.0}
-    interface-peer {eth0 n0}
-    interface-peer {eth1 n1}
-    interface-peer {eth2 n2}
-    interface-peer {eth3 n4}
-    interface-peer {eth4 n7}
-    canvas c0
-}
-
-node n2 {
-    type host
-    network-config {
-	hostname hr2
-	!
-	interface eth0
-	 ip address 4.0.0.2/24
-	 mac address 42:00:aa:00:00:07
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 4.0.0.1 
-	!
-    }
-    iconcoords {168 168}
-    labelcoords {170 210}
-    interface-peer {eth0 n3}
-    canvas c0
-}
-
-node n4 {
-    type host
-    network-config {
-	hostname dnsCom
-	!
-	interface eth0
-	 ip address 5.0.0.2/24
-	 mac address 42:00:aa:00:00:08
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 5.0.0.1
-	!
-    }
-    iconcoords {360.0 192.0}
-    labelcoords {361.0 229.0}
-    interface-peer {eth0 n3}
-    canvas c0
-}
-
-node n5 {
-    type host
-    network-config {
-	hostname dnsHr
-	!
-	interface eth0
-	 ip address 7.0.0.2/24
-	 mac address 42:00:aa:00:00:09
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 7.0.0.1
-	!
-    }
-    iconcoords {360.0 288.0}
-    labelcoords {359.0 327.0}
-    interface-peer {eth0 n8}
-    canvas c0
-}
-
-node n6 {
-    type host
-    network-config {
-	hostname dnsFer
-	!
-	interface eth0
-	 ip address 8.0.0.2/24
-	 mac address 42:00:aa:00:00:0a
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 8.0.0.1
-	!
-    }
-    iconcoords {816 432}
-    labelcoords {829 472}
-    interface-peer {eth0 n9}
-    canvas c0
-}
-
-node n7 {
-    type router
-    model frr
-    network-config {
-	hostname R7
-	!
-	interface eth0
-	 ip address 6.0.0.1/24
-	 mac address 42:00:aa:00:00:0d
-	!
-	interface eth2
-	 ip address 10.0.5.1/24
-	 mac address 42:00:aa:00:00:0c
-	!
-	interface eth1
-	 ip address 10.0.4.2/24
-	 mac address 42:00:aa:00:00:0b
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	router rip
-	 redistribute static
-	 redistribute connected
-	 redistribute ospf
-	 network 0.0.0.0/0
-	!
-    }
-    iconcoords {576 144}
-    labelcoords {583 120}
-    interface-peer {eth1 n3}
-    interface-peer {eth2 n8}
-    interface-peer {eth0 n15}
-    canvas c0
-}
-
-node n8 {
-    type router
-    model frr
-    network-config {
-	hostname R8
-	!
-	interface eth1
-	 ip address 3.0.0.1/24
-	 mac address 42:00:aa:00:00:11
-	!
-	interface eth3
-	 ip address 10.0.7.1/24
-	 mac address 42:00:aa:00:00:10
-	!
-	interface eth0
-	 ip address 7.0.0.1/24
-	 mac address 42:00:aa:00:00:0f
-	!
-	interface eth2
-	 ip address 10.0.5.2/24
-	 mac address 42:00:aa:00:00:0e
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	router rip
-	 redistribute static
-	 redistribute connected
-	 redistribute ospf
-	 network 0.0.0.0/0
-	!
-    }
-    iconcoords {552 240}
-    labelcoords {592 231}
-    interface-peer {eth2 n7}
-    interface-peer {eth0 n5}
-    interface-peer {eth3 n9}
-    interface-peer {eth1 n14}
-    canvas c0
-}
-
-node n9 {
-    type router
-    model frr
-    network-config {
-	hostname R9
-	!
-	interface eth2
-	 ip address 30.0.0.1/24
-	 mac address 42:00:aa:00:00:15
-	!
-	interface eth1
-	 ip address 20.0.0.1/24
-	 mac address 42:00:aa:00:00:14
-	!
-	interface eth0
-	 ip address 8.0.0.1/24
-	 mac address 42:00:aa:00:00:13
-	!
-	interface eth4
-	 ip address 10.0.7.2/24
-	 mac address 42:00:aa:00:00:12
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	!
-	router rip
-	 redistribute static
-	 redistribute connected
-	 redistribute ospf
-	 network 0.0.0.0/0
-	!
-    }
-    iconcoords {528 360}
-    labelcoords {566 355}
-    interface-peer {eth4 n8}
-    interface-peer {eth0 n6}
-    interface-peer {eth1 n10}
-    interface-peer {eth2 n16}
-    canvas c0
-}
-
-node n11 {
-    type host
-    network-config {
-	hostname dnsTel
-	!
-	interface eth0
-	 ip address 20.0.0.2/24
-	 mac address 42:00:aa:00:00:16
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 20.0.0.1
-	!
-    }
-    iconcoords {144.0 288.0}
-    labelcoords {191.0 272.0}
-    interface-peer {eth0 n10}
-    canvas c0
-}
-
-node n12 {
-    type host
-    network-config {
-	hostname www
-	!
-	interface eth0
-	 ip address 20.0.0.3/24
-	 mac address 42:00:aa:00:00:17
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 20.0.0.1
-	!
-    }
-    iconcoords {96.0 384.0}
-    labelcoords {127.0 410.0}
-    interface-peer {eth0 n10}
-    canvas c0
-}
-
-node n13 {
-    type pc
-    network-config {
-	hostname mm
-	!
-	interface eth0
-	 ip address 20.0.0.4/24
-	 mac address 42:00:aa:00:00:18
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 20.0.0.1
-	!
-    }
-    iconcoords {120.0 480.0}
-    labelcoords {118.0 517.0}
-    interface-peer {eth0 n10}
-    canvas c0
-}
-
-node n14 {
-    type host
-    network-config {
-	hostname cRootServer
-	!
-	interface eth0
-	 ip address 3.0.0.2/24
-	 mac address 42:00:aa:00:00:19
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 3.0.0.1
-	!
-    }
-    iconcoords {768 312}
-    labelcoords {778 350}
-    interface-peer {eth0 n8}
-    canvas c0
-}
-
-node n15 {
-    type host
-    network-config {
-	hostname dnsOrg
-	!
-	interface eth0
-	 ip address 6.0.0.2/24
-	 mac address 42:00:aa:00:00:1a
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 6.0.0.1
-	!
-    }
-    iconcoords {792 192}
-    labelcoords {796 232}
-    interface-peer {eth0 n7}
-    canvas c0
-}
-
-node n17 {
-    type host
-    network-config {
-	hostname dnsZpm
-	!
-	interface eth0
-	 ip address 30.0.0.2/24
-	 mac address 42:00:aa:00:00:1b
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 30.0.0.1
-	!
-    }
-    iconcoords {336 528}
-    labelcoords {339 568}
-    interface-peer {eth0 n16}
-    canvas c0
-}
-
-node n18 {
-    type pc
-    network-config {
-	hostname pc
-	!
-	interface eth0
-	 ip address 30.0.0.3/24
-	 mac address 42:00:aa:00:00:1c
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 30.0.0.1
-	!
-    }
-    iconcoords {480 552}
-    labelcoords {482 589}
-    interface-peer {eth0 n16}
-    canvas c0
-}
-
-node n10 {
-    type lanswitch
-    network-config {
-	hostname sw1
-	!
-    }
-    iconcoords {288.0 384.0}
-    labelcoords {294.0 362.0}
-    interface-peer {e0 n9}
-    interface-peer {e1 n11}
-    interface-peer {e2 n12}
-    interface-peer {e3 n13}
-    canvas c0
-}
-
-node n16 {
-    type lanswitch
-    network-config {
-	hostname sw2
-	!
-    }
-    iconcoords {456.0 432.0}
-    labelcoords {417.0 423.0}
-    interface-peer {e0 n9}
-    interface-peer {e1 n17}
-    interface-peer {e2 n18}
-    interface-peer {e3 n19}
-    canvas c0
-}
-
-node n19 {
-    type host
-    network-config {
-	hostname zpmMail
-	!
-	interface eth0
-	 ip address 30.0.0.4/24
-	 mac address 42:00:aa:00:00:1d
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	ip route 0.0.0.0/0 30.0.0.1
-	!
-    }
-    iconcoords {576.0 528.0}
-    labelcoords {580.0 568.0}
-    interface-peer {eth0 n16}
-    canvas c0
-}
-
-link l0 {
-    nodes {n0 n3}
-    bandwidth 100000000
-}
-
-link l1 {
-    nodes {n1 n3}
-    bandwidth 100000000
-}
-
-link l2 {
-    nodes {n2 n3}
-    bandwidth 100000000
-}
-
-link l3 {
-    nodes {n3 n4}
-    bandwidth 100000000
-}
-
-link l4 {
-    nodes {n3 n7}
-    bandwidth 2048000
-    delay 2500
-}
-
-link l5 {
-    nodes {n7 n8}
-    bandwidth 2048000
-    delay 2500
-}
-
-link l6 {
-    nodes {n8 n5}
-    bandwidth 100000000
-}
-
-link l7 {
-    nodes {n8 n9}
-    bandwidth 2048000
-    delay 2500
-}
-
-link l8 {
-    nodes {n9 n6}
-    bandwidth 100000000
-}
-
-link l13 {
-    nodes {n8 n14}
-    bandwidth 100000000
-}
-
-link l14 {
-    nodes {n7 n15}
-    bandwidth 100000000
-}
-
-link l9 {
-    nodes {n10 n9}
-    bandwidth 100000000
-}
-
-link l10 {
-    nodes {n11 n10}
-    bandwidth 100000000
-}
-
-link l11 {
-    nodes {n12 n10}
-    bandwidth 100000000
-}
-
-link l12 {
-    nodes {n13 n10}
-    bandwidth 100000000
-}
-
-link l15 {
-    nodes {n9 n16}
-    bandwidth 100000000
-}
-
-link l16 {
-    nodes {n17 n16}
-    bandwidth 100000000
-}
-
-link l17 {
-    nodes {n16 n18}
-    bandwidth 100000000
-}
-
-link l18 {
-    nodes {n16 n19}
-    bandwidth 100000000
-}
-
-annotation a0 {
-    iconcoords {43.0 14.0 151.0 116.0}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #e4e9ec
-    canvas c0
-}
-
-annotation a1 {
-    iconcoords {77.0 443.0 160.0 534.0}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #dfb961
-    canvas c0
-}
-
-annotation a2 {
-    iconcoords {41.0 248.0 266.0 553.0}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #fffee9
-    canvas c0
-}
-
-annotation a4 {
-    iconcoords {55.0 264.0}
-    type text
-    label {ZZT}
-    labelcolor #008000
-    fontfamily {Arial}
-    fontsize {16}
-    effects {bold}
-    canvas c0
-}
-
-annotation a6 {
-    iconcoords {305.0 434.0 634.0 607.0}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #fffee9
-    canvas c0
-}
-
-annotation a7 {
-    iconcoords {329.0 457.0}
-    type text
-    label {ZPM}
-    labelcolor #007300
-    fontfamily {Arial}
-    fontsize {14}
-    effects {bold}
-    canvas c0
-}
-
-annotation a9 {
-    iconcoords {605.0 8.0 693.0 103.0}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #e4e9ec
-    canvas c0
-}
-
-annotation a10 {
-    iconcoords {726 272 826 364}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #e4e9ec
-    canvas c0
-}
-
-annotation a11 {
-    iconcoords {58.0 345.0}
-    type text
-    label {www.tel.fer.hr}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {14}
-    effects {bold}
-    canvas c0
-}
-
-annotation a14 {
-    iconcoords {533.0 474.0}
-    type text
-    label {www.zpm.fer.hr}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {14}
-    effects {bold}
-    canvas c0
-}
-
-canvas c0 {
-    name {Canvas0}
-}
-
-option show {
-    interface_names no
-    ip_addresses yes
-    ipv6_addresses no
-    node_labels yes
-    link_labels no
-    background_images no
-    annotations yes
-    hostsAutoAssign no
-    grid yes
-    iconSize normal
-    zoom 1.0
-}
-

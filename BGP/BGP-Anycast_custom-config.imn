@@ -1,5 +1,5 @@
 {
-    "nodes"       : {
+    "nodes"   : {
         "n0"  : {
             "type"                : "router",
             "model"               : "frr",
@@ -32,23 +32,11 @@
                     "link"       : "l8"
                 }
             },
-            "canvas"              : "c0",
-            "iconcoords"          : "240 408",
-            "labelcoords"         : "220 367",
             "custom_configs"      : {
                 "NODE_CONFIG" : {
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "
-                            router bgp 10000
-                             no bgp ebgp-requires-policy
-                             no synchronization
-                             no auto-summary
-                             network 8.8.8.0 mask 255.255.255.0
-                             network 9.1.1.0 mask 255.255.255.0
-                             network 10.10.10.0 mask 255.255.255.252
-                             neighbor 10.10.10.2 remote-as 22222
-                            !"
+                        "custom_config"  : "\n                            router bgp 10000\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 8.8.8.0 mask 255.255.255.0\n                             network 9.1.1.0 mask 255.255.255.0\n                             network 10.10.10.0 mask 255.255.255.252\n                             neighbor 10.10.10.2 remote-as 22222\n                            !"
                     }
                 }
             },
@@ -88,25 +76,11 @@
                     "link"       : "l2"
                 }
             },
-            "canvas"              : "c0",
-            "iconcoords"          : "240 240",
-            "labelcoords"         : "172 240",
             "custom_configs"      : {
                 "NODE_CONFIG" : {
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "
-                            router bgp 22222
-                             no bgp ebgp-requires-policy
-                             no synchronization
-                             no auto-summary
-                             network 10.10.10.0 mask 255.255.255.252
-                             network 10.10.10.4 mask 255.255.255.252
-                             network 10.10.10.8 mask 255.255.255.252
-                             neighbor 10.10.10.1 remote-as 10000
-                             neighbor 10.10.10.5 remote-as 100
-                             neighbor 10.10.10.10 remote-as 11111
-                            !"
+                        "custom_config"  : "\n                            router bgp 22222\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 10.10.10.0 mask 255.255.255.252\n                             network 10.10.10.4 mask 255.255.255.252\n                             network 10.10.10.8 mask 255.255.255.252\n                             neighbor 10.10.10.1 remote-as 10000\n                             neighbor 10.10.10.5 remote-as 100\n                             neighbor 10.10.10.10 remote-as 11111\n                            !"
                     }
                 }
             },
@@ -146,25 +120,11 @@
                     "link"       : "l4"
                 }
             },
-            "canvas"              : "c0",
-            "iconcoords"          : "600 240",
-            "labelcoords"         : "677 240",
             "custom_configs"      : {
                 "NODE_CONFIG" : {
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "
-                            router bgp 11111
-                             no bgp ebgp-requires-policy
-                             no synchronization
-                             no auto-summary
-                             network 10.10.10.16 mask 255.255.255.252
-                             network 10.10.10.12 mask 255.255.255.252
-                             network 10.10.10.8 mask 255.255.255.252
-                             neighbor 10.10.10.14 remote-as 10000
-                             neighbor 10.10.10.9 remote-as 22222
-                             neighbor 10.10.10.18 remote-as 200
-                            !"
+                        "custom_config"  : "\n                            router bgp 11111\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 10.10.10.16 mask 255.255.255.252\n                             network 10.10.10.12 mask 255.255.255.252\n                             network 10.10.10.8 mask 255.255.255.252\n                             neighbor 10.10.10.14 remote-as 10000\n                             neighbor 10.10.10.9 remote-as 22222\n                             neighbor 10.10.10.18 remote-as 200\n                            !"
                     }
                 }
             },
@@ -204,23 +164,11 @@
                     "link"       : "l12"
                 }
             },
-            "canvas"              : "c0",
-            "iconcoords"          : "600 384",
-            "labelcoords"         : "575 346",
             "custom_configs"      : {
                 "NODE_CONFIG" : {
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "
-                            router bgp 10000
-                             no bgp ebgp-requires-policy
-                             no synchronization
-                             no auto-summary
-                             network 8.8.8.0 mask 255.255.255.0
-                             network 9.0.0.0 mask 255.255.255.0
-                             network 10.10.10.12 mask 255.255.255.252
-                             neighbor 10.10.10.13 remote-as 11111
-                            !"
+                        "custom_config"  : "\n                            router bgp 10000\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 8.8.8.0 mask 255.255.255.0\n                             network 9.0.0.0 mask 255.255.255.0\n                             network 10.10.10.12 mask 255.255.255.252\n                             neighbor 10.10.10.13 remote-as 11111\n                            !"
                     }
                 }
             },
@@ -253,22 +201,11 @@
                     "link"       : "l5"
                 }
             },
-            "canvas"              : "c0",
-            "iconcoords"          : "336 96",
-            "labelcoords"         : "388 92",
             "custom_configs"      : {
                 "NODE_CONFIG" : {
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "
-                            router bgp 100
-                             no bgp ebgp-requires-policy
-                             no synchronization
-                             no auto-summary
-                             network 172.32.1.0 mask 255.255.255.0
-                             network 10.10.10.4 mask 255.255.255.252
-                             neighbor 10.10.10.6 remote-as 22222
-                            !"
+                        "custom_config"  : "\n                            router bgp 100\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 172.32.1.0 mask 255.255.255.0\n                             network 10.10.10.4 mask 255.255.255.252\n                             neighbor 10.10.10.6 remote-as 22222\n                            !"
                     }
                 }
             },
@@ -301,22 +238,11 @@
                     "link"       : "l6"
                 }
             },
-            "canvas"              : "c0",
-            "iconcoords"          : "504 96",
-            "labelcoords"         : "458 94",
             "custom_configs"      : {
                 "NODE_CONFIG" : {
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "
-                            router bgp 200
-                             no bgp ebgp-requires-policy
-                             no synchronization
-                             no auto-summary
-                             network 172.16.1.0 mask 255.255.255.0
-                             network 10.10.10.16 mask 255.255.255.252
-                             neighbor 10.10.10.17 remote-as 11111
-                            !"
+                        "custom_config"  : "\n                            router bgp 200\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 172.16.1.0 mask 255.255.255.0\n                             network 10.10.10.16 mask 255.255.255.252\n                             neighbor 10.10.10.17 remote-as 11111\n                            !"
                     }
                 }
             },
@@ -342,9 +268,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 172.32.1.1"],
-            "canvas"              : "c0",
-            "iconcoords"          : "48 96",
-            "labelcoords"         : "48 132",
             "auto_default_routes" : "disabled"
         },
         "n7"  : {
@@ -365,9 +288,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 172.16.1.1"],
-            "canvas"              : "c0",
-            "iconcoords"          : "792 96",
-            "labelcoords"         : "792 132",
             "auto_default_routes" : "disabled"
         },
         "n8"  : {
@@ -395,9 +315,6 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 9.1.1.1"],
-            "canvas"              : "c0",
-            "iconcoords"          : "72 552",
-            "labelcoords"         : "72 593",
             "auto_default_routes" : "disabled"
         },
         "n9"  : {
@@ -425,18 +342,12 @@
                 }
             },
             "croutes4"            : ["0.0.0.0/0 9.0.0.1"],
-            "canvas"              : "c0",
-            "iconcoords"          : "768 552",
-            "labelcoords"         : "768 593",
             "auto_default_routes" : "disabled"
         },
         "n10" : {
-            "type"        : "lanswitch",
-            "name"        : "sw1",
-            "canvas"      : "c0",
-            "iconcoords"  : "72 408",
-            "labelcoords" : "75 387",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw1",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e0",
@@ -450,12 +361,9 @@
             }
         },
         "n11" : {
-            "type"        : "lanswitch",
-            "name"        : "sw2",
-            "canvas"      : "c0",
-            "iconcoords"  : "240 552",
-            "labelcoords" : "240 578",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw2",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e0",
@@ -469,12 +377,9 @@
             }
         },
         "n12" : {
-            "type"        : "lanswitch",
-            "name"        : "sw4",
-            "canvas"      : "c0",
-            "iconcoords"  : "600 552",
-            "labelcoords" : "596 576",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw4",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e0",
@@ -488,12 +393,9 @@
             }
         },
         "n13" : {
-            "type"        : "lanswitch",
-            "name"        : "sw3",
-            "canvas"      : "c0",
-            "iconcoords"  : "768 384",
-            "labelcoords" : "770 363",
-            "ifaces"      : {
+            "type"   : "lanswitch",
+            "name"   : "sw3",
+            "ifaces" : {
                 "ifc0" : {
                     "type" : "phys",
                     "name" : "e0",
@@ -507,7 +409,7 @@
             }
         }
     },
-    "links"       : {
+    "links"   : {
         "l0"  : {
             "peers"        : "n0 n1",
             "peers_ifaces" : "ifc1 ifc1",
@@ -584,94 +486,231 @@
             "bandwidth"    : "0"
         }
     },
-    "annotations" : {
-        "a0" : {
-            "type"       : "rectangle",
-            "iconcoords" : "25 315 275 606",
-            "color"      : "#cccccc",
-            "width"      : "1",
-            "canvas"     : "c0"
-        },
-        "a1" : {
-            "type"       : "rectangle",
-            "iconcoords" : "545 310 818 602",
-            "color"      : "#cccccc",
-            "width"      : "1",
-            "canvas"     : "c0"
-        },
-        "a2" : {
-            "type"       : "text",
-            "iconcoords" : "56 334",
-            "label"      : "AS10000",
-            "labelcolor" : "#ff0000",
-            "font"       : "TkTextFont",
-            "canvas"     : "c0"
-        },
-        "a3" : {
-            "type"       : "text",
-            "iconcoords" : "728 331",
-            "label"      : "AS10000",
-            "labelcolor" : "#f80000",
-            "font"       : "TkTextFont",
-            "canvas"     : "c0"
-        },
-        "a4" : {
-            "type"       : "text",
-            "iconcoords" : "645 207",
-            "label"      : "AS11111",
-            "labelcolor" : "#ff0000",
-            "font"       : "TkTextFont",
-            "canvas"     : "c0"
-        },
-        "a5" : {
-            "type"       : "text",
-            "iconcoords" : "170 207",
-            "label"      : "AS22222",
-            "labelcolor" : "#ff0000",
-            "font"       : "TkTextFont",
-            "canvas"     : "c0"
-        },
-        "a6" : {
-            "type"       : "text",
-            "iconcoords" : "312 66",
-            "label"      : "AS100",
-            "labelcolor" : "#ff0000",
-            "font"       : "TkTextFont",
-            "canvas"     : "c0"
-        },
-        "a7" : {
-            "type"       : "text",
-            "iconcoords" : "481 67",
-            "label"      : "AS200",
-            "labelcolor" : "#ff0000",
-            "font"       : "TkTextFont",
-            "canvas"     : "c0"
-        },
-        "a8" : {
-            "type"        : "oval",
-            "iconcoords"  : "25 499 113 534",
-            "color"       : "#ffffbb",
-            "bordercolor" : "#042bff",
-            "width"       : "1",
-            "canvas"      : "c0"
-        },
-        "a9" : {
-            "type"        : "oval",
-            "iconcoords"  : "728 497 803 532",
-            "color"       : "#ffffbb",
-            "bordercolor" : "#042bff",
-            "width"       : "1",
-            "canvas"      : "c0"
-        }
+    "options" : {
+        "version" : "2"
     },
-    "canvases"    : {
-        "c0" : {
-            "name" : "Canvas0"
+    "gui"     : {
+        "options"     : {
+            "show_interface_names" : "0",
+            "show_interface_ipv6"  : "0"
+        },
+        "canvases"    : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "annotations" : {
+            "a0" : {
+                "type"       : "rectangle",
+                "iconcoords" : "25 315 275 606",
+                "color"      : "#cccccc",
+                "width"      : "1",
+                "canvas"     : "c0"
+            },
+            "a1" : {
+                "type"       : "rectangle",
+                "iconcoords" : "545 310 818 602",
+                "color"      : "#cccccc",
+                "width"      : "1",
+                "canvas"     : "c0"
+            },
+            "a2" : {
+                "type"       : "text",
+                "iconcoords" : "56 334",
+                "label"      : "AS10000",
+                "labelcolor" : "#ff0000",
+                "font"       : "TkTextFont",
+                "canvas"     : "c0"
+            },
+            "a3" : {
+                "type"       : "text",
+                "iconcoords" : "728 331",
+                "label"      : "AS10000",
+                "labelcolor" : "#f80000",
+                "font"       : "TkTextFont",
+                "canvas"     : "c0"
+            },
+            "a4" : {
+                "type"       : "text",
+                "iconcoords" : "645 207",
+                "label"      : "AS11111",
+                "labelcolor" : "#ff0000",
+                "font"       : "TkTextFont",
+                "canvas"     : "c0"
+            },
+            "a5" : {
+                "type"       : "text",
+                "iconcoords" : "170 207",
+                "label"      : "AS22222",
+                "labelcolor" : "#ff0000",
+                "font"       : "TkTextFont",
+                "canvas"     : "c0"
+            },
+            "a6" : {
+                "type"       : "text",
+                "iconcoords" : "312 66",
+                "label"      : "AS100",
+                "labelcolor" : "#ff0000",
+                "font"       : "TkTextFont",
+                "canvas"     : "c0"
+            },
+            "a7" : {
+                "type"       : "text",
+                "iconcoords" : "481 67",
+                "label"      : "AS200",
+                "labelcolor" : "#ff0000",
+                "font"       : "TkTextFont",
+                "canvas"     : "c0"
+            },
+            "a8" : {
+                "type"        : "oval",
+                "iconcoords"  : "25 499 113 534",
+                "color"       : "#ffffbb",
+                "bordercolor" : "#042bff",
+                "width"       : "1",
+                "canvas"      : "c0"
+            },
+            "a9" : {
+                "type"        : "oval",
+                "iconcoords"  : "728 497 803 532",
+                "color"       : "#ffffbb",
+                "bordercolor" : "#042bff",
+                "width"       : "1",
+                "canvas"      : "c0"
+            }
+        },
+        "links"       : {
+            "l0"  : {
+                "peers" : "n0 n1"
+            },
+            "l1"  : {
+                "peers" : "n1 n2"
+            },
+            "l2"  : {
+                "peers" : "n1 n4"
+            },
+            "l3"  : {
+                "peers" : "n2 n3"
+            },
+            "l4"  : {
+                "peers" : "n2 n5"
+            },
+            "l5"  : {
+                "peers" : "n4 n6"
+            },
+            "l6"  : {
+                "peers" : "n5 n7"
+            },
+            "l7"  : {
+                "peers" : "n0 n10"
+            },
+            "l8"  : {
+                "peers" : "n0 n11"
+            },
+            "l9"  : {
+                "peers" : "n10 n8"
+            },
+            "l10" : {
+                "peers" : "n11 n8"
+            },
+            "l11" : {
+                "peers" : "n3 n13"
+            },
+            "l12" : {
+                "peers" : "n3 n12"
+            },
+            "l13" : {
+                "peers" : "n13 n9"
+            },
+            "l14" : {
+                "peers" : "n12 n9"
+            }
+        },
+        "nodes"       : {
+            "n0"  : {
+                "label"       : "DC1",
+                "canvas"      : "c0",
+                "iconcoords"  : "240 408",
+                "labelcoords" : "220 367"
+            },
+            "n1"  : {
+                "label"       : "Backbone2",
+                "canvas"      : "c0",
+                "iconcoords"  : "240 240",
+                "labelcoords" : "172 240"
+            },
+            "n2"  : {
+                "label"       : "Backbone1",
+                "canvas"      : "c0",
+                "iconcoords"  : "600 240",
+                "labelcoords" : "677 240"
+            },
+            "n3"  : {
+                "label"       : "DC2",
+                "canvas"      : "c0",
+                "iconcoords"  : "600 384",
+                "labelcoords" : "575 346"
+            },
+            "n4"  : {
+                "label"       : "ISP1",
+                "canvas"      : "c0",
+                "iconcoords"  : "336 96",
+                "labelcoords" : "388 92"
+            },
+            "n5"  : {
+                "label"       : "ISP2",
+                "canvas"      : "c0",
+                "iconcoords"  : "504 96",
+                "labelcoords" : "458 94"
+            },
+            "n6"  : {
+                "label"       : "Client1",
+                "canvas"      : "c0",
+                "iconcoords"  : "48 96",
+                "labelcoords" : "48 132"
+            },
+            "n7"  : {
+                "label"       : "Client2",
+                "canvas"      : "c0",
+                "iconcoords"  : "792 96",
+                "labelcoords" : "792 132"
+            },
+            "n8"  : {
+                "label"       : "WEB1",
+                "canvas"      : "c0",
+                "iconcoords"  : "72 552",
+                "labelcoords" : "72 593"
+            },
+            "n9"  : {
+                "label"       : "WEB2",
+                "canvas"      : "c0",
+                "iconcoords"  : "768 552",
+                "labelcoords" : "768 593"
+            },
+            "n10" : {
+                "label"       : "sw1",
+                "canvas"      : "c0",
+                "iconcoords"  : "72 408",
+                "labelcoords" : "75 387"
+            },
+            "n11" : {
+                "label"       : "sw2",
+                "canvas"      : "c0",
+                "iconcoords"  : "240 552",
+                "labelcoords" : "240 578"
+            },
+            "n12" : {
+                "label"       : "sw4",
+                "canvas"      : "c0",
+                "iconcoords"  : "600 552",
+                "labelcoords" : "596 576"
+            },
+            "n13" : {
+                "label"       : "sw3",
+                "canvas"      : "c0",
+                "iconcoords"  : "768 384",
+                "labelcoords" : "770 363"
+            }
         }
-    },
-    "options"     : {
-        "show_interface_names" : "0",
-        "show_interface_ipv6"  : "0",
-        "version"              : "1"
     }
 }

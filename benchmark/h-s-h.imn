@@ -1,84 +1,115 @@
-node n0 {
-    type host
-    network-config {
-	hostname host1
-	!
-	interface eth0
-	 ip address 10.0.0.10/24
-	 ipv6 address fc00::10/64
-	 mac address 42:00:aa:00:00:00
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
+{
+    "nodes"   : {
+        "n0" : {
+            "type"                : "host",
+            "name"                : "host1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["10.0.0.10/24"],
+                    "ipv6_addrs" : ["fc00::10/64"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n1" : {
+            "type"                : "host",
+            "name"                : "host2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["10.0.0.11/24"],
+                    "ipv6_addrs" : ["fc00::11/64"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n2" : {
+            "type"   : "lanswitch",
+            "name"   : "switch2",
+            "ifaces" : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e1",
+                    "link" : "l1"
+                }
+            }
+        }
+    },
+    "links"   : {
+        "l0" : {
+            "peers"        : "n0 n2",
+            "peers_ifaces" : "ifc1 ifc0",
+            "bandwidth"    : "0"
+        },
+        "l1" : {
+            "peers"        : "n2 n1",
+            "peers_ifaces" : "ifc1 ifc1",
+            "bandwidth"    : "0"
+        }
+    },
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "options"  : {
+            "show_interface_ipv6" : "0"
+        },
+        "canvases" : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "links"    : {
+            "l0" : {
+                "peers" : "n0 n2"
+            },
+            "l1" : {
+                "peers" : "n2 n1"
+            }
+        },
+        "nodes"    : {
+            "n0" : {
+                "label"       : "host1",
+                "canvas"      : "c0",
+                "iconcoords"  : "120 216",
+                "labelcoords" : "120 257"
+            },
+            "n1" : {
+                "label"       : "host2",
+                "canvas"      : "c0",
+                "iconcoords"  : "792 216",
+                "labelcoords" : "792 257"
+            },
+            "n2" : {
+                "label"       : "switch2",
+                "canvas"      : "c0",
+                "iconcoords"  : "456 216",
+                "labelcoords" : "456 244"
+            }
+        }
     }
-    canvas c0
-    iconcoords {120.0 216.0}
-    labelcoords {120.0 257.0}
-    interface-peer {eth0 n2}
 }
-
-node n1 {
-    type host
-    network-config {
-	hostname host2
-	!
-	interface eth0
-	 ip address 10.0.0.11/24
-	 ipv6 address fc00::11/64
-	 mac address 42:00:aa:00:00:01
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {792.0 216.0}
-    labelcoords {792.0 257.0}
-    interface-peer {eth0 n2}
-}
-
-node n2 {
-    type lanswitch
-    network-config {
-	hostname switch2
-	!
-    }
-    canvas c0
-    iconcoords {456.0 216.0}
-    labelcoords {456.0 244.0}
-    interface-peer {e0 n0}
-    interface-peer {e1 n1}
-}
-
-link l0 {
-    nodes {n0 n2}
-    bandwidth 0
-}
-
-link l1 {
-    nodes {n2 n1}
-    bandwidth 0
-}
-
-canvas c0 {
-    name {Canvas0}
-}
-
-option show {
-    interface_names yes
-    ip_addresses yes
-    ipv6_addresses no
-    node_labels yes
-    link_labels yes
-    background_images no
-    annotations yes
-    grid yes
-    iconSize normal
-    zoom 1.0
-}
-

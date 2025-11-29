@@ -1,326 +1,422 @@
-node n0 {
-    type pc
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname FIX
-	!
-	interface eth0
-	 mac address 42:00:aa:11:11:11
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
+{
+    "nodes"   : {
+        "n0"  : {
+            "type"                : "pc",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "FIX",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name" : "eth0",
+                    "mac"  : "42:00:aa:11:11:11",
+                    "type" : "phys",
+                    "link" : "l2"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n1"  : {
+            "type"                : "pc",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "PC1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "eth0",
+                    "link" : "l3"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n2"  : {
+            "type"                : "pc",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "PC2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "eth0",
+                    "link" : "l4"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n3"  : {
+            "type"                : "pc",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "PC3",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "eth0",
+                    "link" : "l5"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n4"  : {
+            "type"                : "host",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "DHCPserver",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.0.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 10.0.0.7"],
+            "auto_default_routes" : "disabled"
+        },
+        "n6"  : {
+            "type"   : "lanswitch",
+            "name"   : "SW",
+            "ifaces" : {
+                "ifc0" : {
+                    "type" : "phys",
+                    "name" : "e0",
+                    "link" : "l0"
+                },
+                "ifc1" : {
+                    "type" : "phys",
+                    "name" : "e2",
+                    "link" : "l2"
+                },
+                "ifc2" : {
+                    "type" : "phys",
+                    "name" : "e3",
+                    "link" : "l3"
+                },
+                "ifc3" : {
+                    "type" : "phys",
+                    "name" : "e4",
+                    "link" : "l4"
+                },
+                "ifc4" : {
+                    "type" : "phys",
+                    "name" : "e5",
+                    "link" : "l5"
+                },
+                "ifc5" : {
+                    "type" : "phys",
+                    "name" : "e6",
+                    "link" : "l6"
+                }
+            }
+        },
+        "n7"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "R1",
+            "router_config"       : "rip 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.0.7/24"],
+                    "type"       : "phys",
+                    "link"       : "l6"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "ipv4_addrs" : ["10.0.1.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l7"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n8"  : {
+            "type"                : "router",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "model"               : "frr",
+            "name"                : "R2",
+            "router_config"       : "rip 1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.2.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l8"
+                },
+                "ifc2" : {
+                    "name"       : "eth1",
+                    "ipv4_addrs" : ["10.0.3.1/24"],
+                    "type"       : "phys",
+                    "link"       : "l9"
+                },
+                "ifc3" : {
+                    "name"       : "eth2",
+                    "ipv4_addrs" : ["10.0.1.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l7"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n9"  : {
+            "type"                : "host",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "S1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.2.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l8"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 10.0.2.1"],
+            "auto_default_routes" : "disabled"
+        },
+        "n10" : {
+            "type"                : "host",
+            "cpu"                 : "{min 0} {max 100} {weight 1}",
+            "name"                : "S2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "ipv4_addrs" : ["10.0.3.2/24"],
+                    "type"       : "phys",
+                    "link"       : "l9"
+                }
+            },
+            "croutes4"            : ["0.0.0.0/0 10.0.3.1"],
+            "auto_default_routes" : "disabled"
+        }
+    },
+    "links"   : {
+        "l0" : {
+            "peers"        : "n4 n6",
+            "peers_ifaces" : "ifc1 ifc0"
+        },
+        "l2" : {
+            "peers"        : "n6 n0",
+            "peers_ifaces" : "ifc1 ifc1"
+        },
+        "l3" : {
+            "peers"        : "n6 n1",
+            "peers_ifaces" : "ifc2 ifc1"
+        },
+        "l4" : {
+            "peers"        : "n6 n2",
+            "peers_ifaces" : "ifc3 ifc1"
+        },
+        "l5" : {
+            "peers"        : "n6 n3",
+            "peers_ifaces" : "ifc4 ifc1"
+        },
+        "l6" : {
+            "peers"        : "n6 n7",
+            "peers_ifaces" : "ifc5 ifc1"
+        },
+        "l7" : {
+            "peers"        : "n7 n8",
+            "peers_ifaces" : "ifc2 ifc3",
+            "bandwidth"    : "2048000",
+            "delay"        : "2500"
+        },
+        "l8" : {
+            "peers"        : "n8 n9",
+            "peers_ifaces" : "ifc1 ifc1"
+        },
+        "l9" : {
+            "peers"        : "n8 n10",
+            "peers_ifaces" : "ifc2 ifc1"
+        }
+    },
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "options"     : {
+            "show_interface_names" : "0"
+        },
+        "canvases"    : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "annotations" : {
+            "a0" : {
+                "iconcoords" : "129 15 300 117",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#fff3a8",
+                "width"      : "1",
+                "canvas"     : "c0"
+            },
+            "a1" : {
+                "iconcoords" : "50 233 507 454",
+                "type"       : "rectangle",
+                "labelcolor" : "black",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "color"      : "#e19e6b",
+                "width"      : "1",
+                "canvas"     : "c0"
+            },
+            "a2" : {
+                "iconcoords" : "72 432",
+                "type"       : "text",
+                "label"      : "DHCP clients",
+                "labelcolor" : "#0038d9",
+                "fontfamily" : "Arial",
+                "fontsize"   : "12",
+                "canvas"     : "c0"
+            },
+            "a3" : {
+                "type"       : "text",
+                "iconcoords" : "397 442",
+                "canvas"     : "c0"
+            }
+        },
+        "links"       : {
+            "l0" : {
+                "peers" : "n4 n6"
+            },
+            "l2" : {
+                "peers" : "n6 n0"
+            },
+            "l3" : {
+                "peers" : "n6 n1"
+            },
+            "l4" : {
+                "peers" : "n6 n2"
+            },
+            "l5" : {
+                "peers" : "n6 n3"
+            },
+            "l6" : {
+                "peers" : "n6 n7"
+            },
+            "l7" : {
+                "peers" : "n7 n8"
+            },
+            "l8" : {
+                "peers" : "n8 n9"
+            },
+            "l9" : {
+                "peers" : "n8 n10"
+            }
+        },
+        "nodes"       : {
+            "n0"  : {
+                "label"       : "FIX",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 312",
+                "labelcoords" : "137 324"
+            },
+            "n1"  : {
+                "label"       : "PC1",
+                "canvas"      : "c0",
+                "iconcoords"  : "216 384",
+                "labelcoords" : "180 387"
+            },
+            "n2"  : {
+                "label"       : "PC2",
+                "canvas"      : "c0",
+                "iconcoords"  : "360 384",
+                "labelcoords" : "403 387"
+            },
+            "n3"  : {
+                "label"       : "PC3",
+                "canvas"      : "c0",
+                "iconcoords"  : "432 288",
+                "labelcoords" : "470 297"
+            },
+            "n4"  : {
+                "label"       : "DHCPserver",
+                "canvas"      : "c0",
+                "iconcoords"  : "240 72",
+                "labelcoords" : "179 72"
+            },
+            "n6"  : {
+                "label"       : "SW",
+                "canvas"      : "c0",
+                "iconcoords"  : "264 192",
+                "labelcoords" : "209 181"
+            },
+            "n7"  : {
+                "label"       : "R1",
+                "canvas"      : "c0",
+                "iconcoords"  : "432 120",
+                "labelcoords" : "451 92"
+            },
+            "n8"  : {
+                "label"       : "R2",
+                "canvas"      : "c0",
+                "iconcoords"  : "744 264",
+                "labelcoords" : "794 264"
+            },
+            "n9"  : {
+                "label"       : "S1",
+                "canvas"      : "c0",
+                "iconcoords"  : "744 72",
+                "labelcoords" : "703 73"
+            },
+            "n10" : {
+                "label"       : "S2",
+                "canvas"      : "c0",
+                "iconcoords"  : "744 408",
+                "labelcoords" : "696 413"
+            }
+        }
     }
-    iconcoords {96.0 312.0}
-    labelcoords {137.0 324.0}
-    interface-peer {eth0 n6}
-    canvas c0
 }
-
-node n1 {
-    type pc
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname PC1
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    iconcoords {216.0 384.0}
-    labelcoords {180.0 387.0}
-    interface-peer {eth0 n6}
-    canvas c0
-}
-
-node n2 {
-    type pc
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname PC2
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    iconcoords {360.0 384.0}
-    labelcoords {403.0 387.0}
-    interface-peer {eth0 n6}
-    canvas c0
-}
-
-node n3 {
-    type pc
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname PC3
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    iconcoords {432.0 288.0}
-    labelcoords {470.0 297.0}
-    interface-peer {eth0 n6}
-    canvas c0
-}
-
-node n4 {
-    type host
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname DHCPserver
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	interface eth0
-	 ip address 10.0.0.1/24
-	!
-	ip route 0.0.0.0/0 10.0.0.7
-	!
-    }
-    iconcoords {240.0 72.0}
-    labelcoords {179.0 72.0}
-    interface-peer {eth0 n6}
-    canvas c0
-}
-
-node n6 {
-    type lanswitch
-    network-config {
-	hostname SW
-	!
-    }
-    iconcoords {264.0 192.0}
-    labelcoords {209.0 181.0}
-    interface-peer {e0 n4}
-    interface-peer {e2 n0}
-    interface-peer {e3 n1}
-    interface-peer {e4 n2}
-    interface-peer {e5 n3}
-    interface-peer {e6 n7}
-    canvas c0
-}
-
-node n7 {
-    type router
-    cpu {{min 0} {max 100} {weight 1}}
-    model frr
-    network-config {
-	hostname R1
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	interface eth1
-	 ip address 10.0.1.1/24
-	!
-	interface eth0
-	 ip address 10.0.0.7/24
-	!
-	router rip
-	 redistribute static
-	 redistribute connected
-	 redistribute ospf
-	 network 0.0.0.0/0
-	!
-    }
-    iconcoords {432.0 120.0}
-    labelcoords {451.0 92.0}
-    interface-peer {eth0 n6}
-    interface-peer {eth1 n8}
-    canvas c0
-}
-
-node n8 {
-    type router
-    cpu {{min 0} {max 100} {weight 1}}
-    model frr
-    network-config {
-	hostname R2
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	interface eth1
-	 ip address 10.0.3.1/24
-	!
-	interface eth0
-	 ip address 10.0.2.1/24
-	!
-	interface eth2
-	 ip address 10.0.1.2/24
-	!
-	router rip
-	 redistribute static
-	 redistribute connected
-	 redistribute ospf
-	 network 0.0.0.0/0
-	!
-    }
-    iconcoords {744.0 264.0}
-    labelcoords {794.0 264.0}
-    interface-peer {eth2 n7}
-    interface-peer {eth0 n9}
-    interface-peer {eth1 n10}
-    canvas c0
-}
-
-node n9 {
-    type host
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname S1
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	interface eth0
-	 ip address 10.0.2.2/24
-	!
-	ip route 0.0.0.0/0 10.0.2.1
-	!
-    }
-    iconcoords {744.0 72.0}
-    labelcoords {703.0 73.0}
-    interface-peer {eth0 n8}
-    canvas c0
-}
-
-node n10 {
-    type host
-    cpu {{min 0} {max 100} {weight 1}}
-    network-config {
-	hostname S2
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-	interface eth0
-	 ip address 10.0.3.2/24
-	!
-	ip route 0.0.0.0/0 10.0.3.1
-	!
-    }
-    iconcoords {744.0 408.0}
-    labelcoords {696.0 413.0}
-    interface-peer {eth0 n8}
-    canvas c0
-}
-
-link l0 {
-    nodes {n4 n6}
-}
-
-link l2 {
-    nodes {n6 n0}
-}
-
-link l3 {
-    nodes {n6 n1}
-}
-
-link l4 {
-    nodes {n6 n2}
-}
-
-link l5 {
-    nodes {n6 n3}
-}
-
-link l6 {
-    nodes {n6 n7}
-}
-
-link l7 {
-    nodes {n7 n8}
-    bandwidth 2048000
-    delay 2500
-}
-
-link l8 {
-    nodes {n8 n9}
-}
-
-link l9 {
-    nodes {n8 n10}
-}
-
-annotation a0 {
-    iconcoords {129.0 15.0 300.0 117.0}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #fff3a8
-    width 1
-    canvas c0
-}
-
-annotation a1 {
-    iconcoords {50.0 233.0 507.0 454.0}
-    type rectangle
-    label {}
-    labelcolor black
-    fontfamily {Arial}
-    fontsize {12}
-    color #e19e6b
-    width 1
-    canvas c0
-}
-
-annotation a2 {
-    iconcoords {72.0 432.0}
-    type text
-    label {DHCP clients}
-    labelcolor #0038d9
-    fontfamily {Arial}
-    fontsize {12}
-    canvas c0
-}
-
-annotation a3 {
-    type text
-    iconcoords {397.0 442.0}
-    label {}
-    canvas c0
-}
-
-canvas c0 {
-    name {Canvas0}
-}
-
-option show {
-    interface_names no
-    ip_addresses yes
-    ipv6_addresses yes
-    node_labels yes
-    link_labels yes
-    background_images no
-    annotations yes
-    hostsAutoAssign no
-    grid yes
-    iconSize normal
-    zoom 1.0
-}
-

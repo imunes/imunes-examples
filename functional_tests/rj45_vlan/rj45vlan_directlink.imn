@@ -1,106 +1,131 @@
-node n0 {
-    type pc
-    network-config {
-	hostname pc1
-	!
-	interface eth0
-	 ip address 10.0.0.20/24
-	 ipv6 address fc00:2::20/64
-	 mac address 42:00:aa:00:00:00
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
+{
+    "nodes"   : {
+        "n0" : {
+            "type"                : "pc",
+            "name"                : "pc1",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:00",
+                    "ipv4_addrs" : ["10.0.0.20/24"],
+                    "ipv6_addrs" : ["fc00:2::20/64"],
+                    "type"       : "phys",
+                    "link"       : "l0"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n1" : {
+            "type"                : "pc",
+            "name"                : "pc2",
+            "ifaces"              : {
+                "ifc0" : {
+                    "name"       : "lo0",
+                    "type"       : "lo",
+                    "ipv4_addrs" : ["127.0.0.1/8"],
+                    "ipv6_addrs" : ["::1/128"]
+                },
+                "ifc1" : {
+                    "name"       : "eth0",
+                    "mac"        : "42:00:aa:00:00:01",
+                    "ipv4_addrs" : ["10.0.0.21/24"],
+                    "ipv6_addrs" : ["fc00:3::20/64"],
+                    "type"       : "phys",
+                    "link"       : "l1"
+                }
+            },
+            "auto_default_routes" : "disabled"
+        },
+        "n2" : {
+            "type"   : "rj45",
+            "name"   : "rjvlan0",
+            "ifaces" : {
+                "ifc0" : {
+                    "type"     : "stolen",
+                    "name"     : "rjvlan0",
+                    "link"     : "l0",
+                    "vlan_dev" : "rjvlan0",
+                    "vlan_tag" : "123"
+                }
+            }
+        },
+        "n3" : {
+            "type"   : "rj45",
+            "name"   : "rjvlan1",
+            "ifaces" : {
+                "ifc0" : {
+                    "type"     : "stolen",
+                    "name"     : "rjvlan1",
+                    "link"     : "l1",
+                    "vlan_dev" : "rjvlan1",
+                    "vlan_tag" : "123"
+                }
+            }
+        }
+    },
+    "links"   : {
+        "l0" : {
+            "direct"       : "1",
+            "peers"        : "n0 n2",
+            "peers_ifaces" : "ifc1 ifc0"
+        },
+        "l1" : {
+            "direct"       : "1",
+            "peers"        : "n1 n3",
+            "peers_ifaces" : "ifc1 ifc0"
+        }
+    },
+    "options" : {
+        "version" : "2"
+    },
+    "gui"     : {
+        "options"  : {
+            "show_interface_ipv6" : "0"
+        },
+        "canvases" : {
+            "c0" : {
+                "name" : "Canvas0"
+            }
+        },
+        "links"    : {
+            "l0" : {
+                "peers" : "n0 n2"
+            },
+            "l1" : {
+                "peers" : "n1 n3"
+            }
+        },
+        "nodes"    : {
+            "n0" : {
+                "label"       : "pc1",
+                "canvas"      : "c0",
+                "iconcoords"  : "96 240",
+                "labelcoords" : "96 276"
+            },
+            "n1" : {
+                "label"       : "pc2",
+                "canvas"      : "c0",
+                "iconcoords"  : "792 240",
+                "labelcoords" : "792 276"
+            },
+            "n2" : {
+                "label"       : "rjvlan0",
+                "canvas"      : "c0",
+                "iconcoords"  : "336 264",
+                "labelcoords" : "336 298"
+            },
+            "n3" : {
+                "label"       : "rjvlan1",
+                "canvas"      : "c0",
+                "iconcoords"  : "576 264",
+                "labelcoords" : "576 298"
+            }
+        }
     }
-    canvas c0
-    iconcoords {96.0 240.0}
-    labelcoords {96.0 276.0}
-    interface-peer {eth0 n2}
 }
-
-node n1 {
-    type pc
-    network-config {
-	hostname pc2
-	!
-	interface eth0
-	 ipv6 address fc00:3::20/64
-	 mac address 42:00:aa:00:00:01
-	 ip address 10.0.0.21/24
-	!
-	interface lo0
-	 type lo
-	 ip address 127.0.0.1/8
-	 ipv6 address ::1/128
-	!
-    }
-    canvas c0
-    iconcoords {792.0 240.0}
-    labelcoords {792.0 276.0}
-    interface-peer {eth0 n3}
-}
-
-node n2 {
-    type rj45
-    network-config {
-	hostname rjvlan0
-	!
-	vlan
-	 enabled 1
-	 tag 123
-	!
-    }
-    canvas c0
-    iconcoords {336.0 264.0}
-    labelcoords {336.0 298.0}
-    interface-peer {0 n0}
-}
-
-node n3 {
-    type rj45
-    network-config {
-	hostname rjvlan1
-	!
-	vlan
-	 enabled 1
-	 tag 123
-	!
-    }
-    canvas c0
-    iconcoords {576.0 264.0}
-    labelcoords {576.0 298.0}
-    interface-peer {0 n1}
-}
-
-link l0 {
-    direct 1
-    nodes {n0 n2}
-    ifaces {eth0 0}
-}
-
-link l1 {
-    direct 1
-    nodes {n1 n3}
-    ifaces {eth0 0}
-}
-
-canvas c0 {
-    name {Canvas0}
-}
-
-option show {
-    interface_names yes
-    ip_addresses yes
-    ipv6_addresses no
-    node_labels yes
-    link_labels yes
-    background_images no
-    annotations yes
-    hostsAutoAssign no
-    grid yes
-    iconSize normal
-    zoom 1.0
-}
-
