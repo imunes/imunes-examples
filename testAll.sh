@@ -26,6 +26,9 @@ elif test "$1" = "-j"; then
     fi
 else
     parallel_jobs=$(($(nproc)/2))
+	if test "$parallel_jobs" -eq 0; then
+		parallel_jobs=1
+	fi
 fi
 
 imunes -i
