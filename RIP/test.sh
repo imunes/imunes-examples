@@ -5,11 +5,16 @@
 err=0
 slow=0
 legacy=""
-if test -n "$LEGACY"; then
+if test "$LEGACY" = "1"; then
     legacy=" -l"
 fi
 
-eid=`imunes$legacy -b RIP1.imn | awk '/Experiment/{print $4; exit}'`
+debug=""
+if test "$DEBUG" = "1"; then
+    debug=" -d"
+fi
+
+eid=`imunes$legacy$debug -b RIP1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 sleep 10
@@ -84,6 +89,10 @@ else
     err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
+
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
 
 thereWereErrors $err

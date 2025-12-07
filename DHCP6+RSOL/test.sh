@@ -5,11 +5,16 @@
 pcs="FIX PC1 PC2"
 err=0
 legacy=""
-if test -n "$LEGACY"; then
+if test "$LEGACY" = "1"; then
     legacy=" -l"
 fi
 
-eid=`imunes$legacy -b DHCP6.imn | awk '/Experiment/{print $4; exit}'`
+debug=""
+if test "$DEBUG" = "1"; then
+    debug=" -d"
+fi
+
+eid=`imunes$legacy$debug -b DHCP6.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 ./start_stateless $eid
@@ -36,9 +41,13 @@ for pc in $pcs; do
     fi
 done
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
 
-eid=`imunes$legacy -b DHCP6.imn | awk '/Experiment/{print $4; exit}'`
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
+
+eid=`imunes$legacy$debug -b DHCP6.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 ./start_dhcpd6 $eid
@@ -100,6 +109,10 @@ if [ $err -eq 0 ]; then
     fi
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
+
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
 
 thereWereErrors $err

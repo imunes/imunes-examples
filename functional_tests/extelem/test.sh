@@ -4,8 +4,13 @@
 
 err=0
 legacy=""
-if test -n "$LEGACY"; then
+if test "$LEGACY" = "1"; then
     legacy=" -l"
+fi
+
+debug=""
+if test "$DEBUG" = "1"; then
+    debug=" -d"
 fi
 
 if isOSlinux; then
@@ -34,7 +39,7 @@ else
 	ngctl msg extlink: setcfg {header_offset=14}
 fi
 
-eid=`imunes$legacy -b extelem.imn | tail -1 | cut -d' ' -f4`
+eid=`imunes$legacy$debug -b extelem.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
@@ -52,9 +57,13 @@ else
     err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
 
-eid=`imunes$legacy -b extelem_directlink.imn | tail -1 | cut -d' ' -f4`
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
+
+eid=`imunes$legacy$debug -b extelem_directlink.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
@@ -72,7 +81,11 @@ else
     err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
+
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
 
 if isOSlinux; then
 	ip link del extelem0

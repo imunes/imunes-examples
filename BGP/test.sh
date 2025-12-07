@@ -5,8 +5,13 @@
 err=0
 slow=1
 legacy=""
-if test -n "$LEGACY"; then
+if test "$LEGACY" = "1"; then
     legacy=" -l"
+fi
+
+debug=""
+if test "$DEBUG" = "1"; then
+    debug=" -d"
 fi
 
 if isOSlinux; then
@@ -22,7 +27,7 @@ if isOSlinux; then
 fi
 
 # BGP_custom-config.imn / BGP-Anycast_custom-config.imn
-eid=`imunes$legacy -b BGP-Anycast_custom-config.imn | awk '/Experiment/{print $4; exit}'`
+eid=`imunes$legacy$debug -b BGP-Anycast_custom-config.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 Wait 40
@@ -107,7 +112,11 @@ else
     err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
+
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
 
 if isOSlinux; then
     echo "Restoring Reverse-Path Filter settings."

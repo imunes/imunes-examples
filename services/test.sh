@@ -4,11 +4,16 @@
 
 err=0
 legacy=""
-if test -n "$LEGACY"; then
+if test "$LEGACY" = "1"; then
     legacy=" -l"
 fi
 
-eid=`imunes$legacy -b services.imn | awk '/Experiment/{print $4; exit}'`
+debug=""
+if test "$DEBUG" = "1"; then
+    debug=" -d"
+fi
+
+eid=`imunes$legacy$debug -b services.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 # wait for the services to start
@@ -35,7 +40,11 @@ if [ $? -ne 0 ]; then
     err=1
 fi
 
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
+
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
 
 # tcpdump
 # testing after termination because that's when the file is saved in /tmp/$eid

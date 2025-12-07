@@ -5,11 +5,16 @@
 err=0
 slow=1
 legacy=""
-if test -n "$LEGACY"; then
+if test "$LEGACY" = "1"; then
     legacy=" -l"
 fi
 
-eid=`imunes$legacy -b OSPF1.imn | awk '/Experiment/{print $4; exit}'`
+debug=""
+if test "$DEBUG" = "1"; then
+    debug=" -d"
+fi
+
+eid=`imunes$legacy$debug -b OSPF1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 Wait 40
@@ -132,6 +137,10 @@ else
 fi
 
 readDump router2@$eid eth2
-imunes$legacy -b -e $eid
+imunes$legacy$debug -b -e $eid
+
+if test "$DEBUG" = "1"; then
+	mv /var/log/imunes/$eid.log .
+fi
 
 thereWereErrors $err
