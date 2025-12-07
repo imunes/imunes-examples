@@ -26,7 +26,7 @@ eid=`imunes$legacy -b BGP-Anycast_custom-config.imn | awk '/Experiment/{print $4
 startCheck "$eid"
 
 Wait 40
-netDump DC1@$eid eth1
+netDump DC2@$eid eth0 icmp
 if [ $? -eq 0 ]; then
     n=1
     pingStatus=1
@@ -37,6 +37,7 @@ if [ $? -eq 0 ]; then
         n=`expr $n + 1`
     done
     if [ $pingStatus -eq 0 ]; then
+	readDump DC2@$eid eth0
 	echo "########## Backbone1@$eid routes"
 	himage -nt Backbone1@$eid vtysh << __END__
 	show ip route
@@ -45,18 +46,17 @@ __END__
 	if [ $slow -eq 1 ]; then
 	    stopNode DC2@$eid 
 	    if [ $? -eq 0 ]; then
-		Wait 20
+		Wait 180
 
 		echo ""
-		echo "########## Backbone1@$eid routes after 45 seconds"
+		echo "########## Backbone1@$eid routes after 180 seconds"
 		himage -nt Backbone1@$eid vtysh << __END__ 
 		show ip route
 		exit
 __END__
 
-		startNode DC2@$eid
+		netDump DC1@$eid eth0 icmp
 		if [ $? -eq 0 ]; then
-		    Wait 30
                     n=1
                     pingStatus=1
                     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
@@ -67,7 +67,29 @@ __END__
                     done
                     if [ $pingStatus -eq 0 ]; then
 			Wait 4
-			readDump DC1@$eid eth1
+			readDump DC1@$eid eth0
+		    else
+			err=1
+		    fi
+		else
+		    err=1
+		fi
+
+		startNode DC2@$eid
+		if [ $? -eq 0 ]; then
+		    Wait 3
+                    n=1
+                    pingStatus=1
+					netDump DC2@$eid eth0 icmp
+                    while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+                        echo "Ping test2 $n / 20 ..."
+                        pingCheck Client2@$eid 8.8.8.8 2
+                        pingStatus=$?
+                        n=`expr $n + 1`
+                    done
+                    if [ $pingStatus -eq 0 ]; then
+			Wait 4
+			readDump DC2@$eid eth0
 		    else
 			err=1
 		    fi
@@ -85,7 +107,6 @@ else
     err=1
 fi
 
-readDump DC1@$eid eth1
 imunes$legacy -b -e $eid
 
 if isOSlinux; then

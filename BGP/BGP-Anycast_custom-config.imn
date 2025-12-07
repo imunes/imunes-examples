@@ -37,12 +37,17 @@
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
                         "custom_config"  : "\n                            router bgp 10000\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 8.8.8.0 mask 255.255.255.0\n                             network 9.1.1.0 mask 255.255.255.0\n                             network 10.10.10.0 mask 255.255.255.252\n                             neighbor 10.10.10.2 remote-as 22222\n                            !"
+                    },
+                    "conf2" : {
+                        "custom_command" : "/bin/sh",
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 10000\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 8.8.8.0 mask 255.255.255.0\n network 9.1.1.0 mask 255.255.255.0\n network 10.10.10.0 mask 255.255.255.252\n neighbor 10.10.10.2 remote-as 22222\n!\n__EOF__"
                     }
                 }
             },
-            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_selected"     : "NODE_CONFIG conf2",
             "custom_enabled"      : "true",
-            "auto_default_routes" : "disabled"
+            "auto_default_routes" : "disabled",
+            "router_config"       : "bgp 1"
         },
         "n1"  : {
             "type"                : "router",
@@ -81,12 +86,17 @@
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
                         "custom_config"  : "\n                            router bgp 22222\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 10.10.10.0 mask 255.255.255.252\n                             network 10.10.10.4 mask 255.255.255.252\n                             network 10.10.10.8 mask 255.255.255.252\n                             neighbor 10.10.10.1 remote-as 10000\n                             neighbor 10.10.10.5 remote-as 100\n                             neighbor 10.10.10.10 remote-as 11111\n                            !"
+                    },
+                    "conf2" : {
+                        "custom_command" : "/bin/sh",
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 22222\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 10.10.10.0 mask 255.255.255.252\n network 10.10.10.4 mask 255.255.255.252\n network 10.10.10.8 mask 255.255.255.252\n neighbor 10.10.10.1 remote-as 10000\n neighbor 10.10.10.5 remote-as 100\n neighbor 10.10.10.10 remote-as 11111\n!\n__EOF__"
                     }
                 }
             },
-            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_selected"     : "NODE_CONFIG conf2",
             "custom_enabled"      : "true",
-            "auto_default_routes" : "disabled"
+            "auto_default_routes" : "disabled",
+            "router_config"       : "bgp 1"
         },
         "n2"  : {
             "type"                : "router",
@@ -125,12 +135,17 @@
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
                         "custom_config"  : "\n                            router bgp 11111\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 10.10.10.16 mask 255.255.255.252\n                             network 10.10.10.12 mask 255.255.255.252\n                             network 10.10.10.8 mask 255.255.255.252\n                             neighbor 10.10.10.14 remote-as 10000\n                             neighbor 10.10.10.9 remote-as 22222\n                             neighbor 10.10.10.18 remote-as 200\n                            !"
+                    },
+                    "conf2" : {
+                        "custom_command" : "/bin/sh",
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 11111\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 10.10.10.16 mask 255.255.255.252\n network 10.10.10.12 mask 255.255.255.252\n network 10.10.10.8 mask 255.255.255.252\n neighbor 10.10.10.14 remote-as 10000\n neighbor 10.10.10.9 remote-as 22222\n neighbor 10.10.10.18 remote-as 200\n!\n__EOF__"
                     }
                 }
             },
-            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_selected"     : "NODE_CONFIG conf2",
             "custom_enabled"      : "true",
-            "auto_default_routes" : "disabled"
+            "auto_default_routes" : "disabled",
+            "router_config"       : "bgp 1"
         },
         "n3"  : {
             "type"                : "router",
@@ -168,13 +183,18 @@
                 "NODE_CONFIG" : {
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "\n                            router bgp 10000\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 8.8.8.0 mask 255.255.255.0\n                             network 9.0.0.0 mask 255.255.255.0\n                             network 10.10.10.12 mask 255.255.255.252\n                             neighbor 10.10.10.13 remote-as 11111\n                            !"
+                        "custom_config"  : "\n                            router bgp 10000\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 8.8.8.0 mask 255.255.255.0\n                             network 9.1.1.0 mask 255.255.255.0\n                             network 10.10.10.0 mask 255.255.255.252\n                             neighbor 10.10.10.2 remote-as 22222\n                            !"
+                    },
+                    "conf2" : {
+                        "custom_command" : "/bin/sh",
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 10000\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 8.8.8.0 mask 255.255.255.0\n network 9.0.0.0 mask 255.255.255.0\n network 10.10.10.12 mask 255.255.255.252\n neighbor 10.10.10.13 remote-as 11111\n!\n__EOF__"
                     }
                 }
             },
-            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_selected"     : "NODE_CONFIG conf2",
             "custom_enabled"      : "true",
-            "auto_default_routes" : "disabled"
+            "auto_default_routes" : "disabled",
+            "router_config"       : "bgp 1"
         },
         "n4"  : {
             "type"                : "router",
@@ -206,12 +226,17 @@
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
                         "custom_config"  : "\n                            router bgp 100\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 172.32.1.0 mask 255.255.255.0\n                             network 10.10.10.4 mask 255.255.255.252\n                             neighbor 10.10.10.6 remote-as 22222\n                            !"
+                    },
+                    "conf2" : {
+                        "custom_command" : "/bin/sh",
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 100\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 172.32.1.0 mask 255.255.255.0\n network 10.10.10.4 mask 255.255.255.252\n neighbor 10.10.10.6 remote-as 22222\n!\n__EOF__"
                     }
                 }
             },
-            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_selected"     : "NODE_CONFIG conf2",
             "custom_enabled"      : "true",
-            "auto_default_routes" : "disabled"
+            "auto_default_routes" : "disabled",
+            "router_config"       : "bgp 1"
         },
         "n5"  : {
             "type"                : "router",
@@ -243,12 +268,17 @@
                     "conf1" : {
                         "custom_command" : "/usr/local/bin/frrboot.sh",
                         "custom_config"  : "\n                            router bgp 200\n                             no bgp ebgp-requires-policy\n                             no synchronization\n                             no auto-summary\n                             network 172.16.1.0 mask 255.255.255.0\n                             network 10.10.10.16 mask 255.255.255.252\n                             neighbor 10.10.10.17 remote-as 11111\n                            !"
+                    },
+                    "conf2" : {
+                        "custom_command" : "/bin/sh",
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 200\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 172.16.1.0 mask 255.255.255.0\n network 10.10.10.16 mask 255.255.255.252\n neighbor 10.10.10.17 remote-as 11111\n!\n__EOF__"
                     }
                 }
             },
-            "custom_selected"     : "NODE_CONFIG conf1",
+            "custom_selected"     : "NODE_CONFIG conf2",
             "custom_enabled"      : "true",
-            "auto_default_routes" : "disabled"
+            "auto_default_routes" : "disabled",
+            "router_config"       : "bgp 1"
         },
         "n6"  : {
             "type"                : "pc",

@@ -35,7 +35,7 @@ imunes -i
 
 if test -z "$TESTS"; then
     # put longer tests near the beginning
-    tests=(DNS+Mail+WEB OSPF DHCP6+RSOL BGP RIP DHCP Ping Traceroute services ipsec44 ipsec46 ipsec64 ipsec66 functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces)
+    tests=(BGP DNS+Mail+WEB OSPF DHCP6+RSOL RIP DHCP Ping Traceroute services ipsec44 ipsec46 ipsec64 ipsec66 functional_tests/rj45 functional_tests/rj45_vlan functional_tests/extelem functional_tests/empty_ifaces)
 
     if isOSfreebsd; then
 	tests+=('gif')
