@@ -1,7 +1,7 @@
 ; Tu cu ubaciti SOA
 ;
 $TTL 60000
-@ IN SOA dnsHr.hr. root.dnsHr.hr (
+@ IN SOA dnsHr.hr. root.dnsHr.hr. (
         2002102801 ; serial
         28 ; refresh
         14 ; retry
