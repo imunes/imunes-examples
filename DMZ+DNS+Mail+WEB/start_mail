@@ -45,7 +45,12 @@ do
     himage $h postfix start
     # Start POP3 
     if isOSlinux; then
-        hcp Mail_files/dovecot/10-auth.conf $h:/etc/dovecot/conf.d/10-auth.conf 
+        himage zpmMail@$eid dovecot --version | grep -q 2.3.19
+        if test $? -eq 0; then
+            hcp Mail_files/dovecot/10-auth.conf $h:/etc/dovecot/conf.d/10-auth.conf
+         else  # probably newer version
+            hcp Mail_files/dovecot/10-auth.conf.new $h:/etc/dovecot/conf.d/10-auth.conf
+        fi
         himage $h nohup dovecot
     else
         himage $h /usr/local/bin/akpop3d -d -f /var/run/akpop3d.pid 
