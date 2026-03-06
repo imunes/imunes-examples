@@ -1,398 +1,439 @@
 {
-    "nodes"   : {
-        "n0" : {
-            "type"                : "router",
-            "model"               : "frr",
-            "name"                : "R1",
-            "ifaces"              : {
-                "ifc0" : {
-                    "name"       : "lo0",
-                    "type"       : "lo",
-                    "ipv4_addrs" : ["127.0.0.1/8"]
-                },
-                "ifc1" : {
-                    "name"       : "eth0",
-                    "mac"        : "42:00:aa:00:00:02",
-                    "ipv4_addrs" : ["172.16.12.1/24"],
-                    "type"       : "phys",
-                    "link"       : "l1"
-                },
-                "ifc2" : {
-                    "name"       : "eth1",
-                    "mac"        : "42:00:aa:00:00:04",
-                    "ipv4_addrs" : ["172.16.1.1/24"],
-                    "type"       : "phys",
-                    "link"       : "l3"
-                }
-            },
-            "custom_configs"      : {
-                "NODE_CONFIG" : {
-                    "conf1" : {
-                        "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "interface lo0\n ip address 127.0.0.1/8\n!\ninterface eth0\n ip address 172.16.12.1/24\n     ip router isis 1\n!\ninterface eth1\n ip address 172.16.1.1/24\n     ip router isis 1\n isis passive\n!\n    router isis 1\n     net 49.0001.1720.1600.1001.00\n    !"
-                    }
-                }
-            },
-            "custom_enabled"      : "true",
-            "custom_selected"     : "NODE_CONFIG conf1",
-            "auto_default_routes" : "disabled"
+  "nodes": {
+    "n0": {
+      "type": "router",
+      "model": "frr",
+      "name": "R1",
+      "ifaces": {
+        "ifc0": {
+          "name": "lo0",
+          "type": "lo",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ]
         },
-        "n1" : {
-            "type"                : "router",
-            "model"               : "frr",
-            "name"                : "R2",
-            "ifaces"              : {
-                "ifc0" : {
-                    "name"       : "lo0",
-                    "type"       : "lo",
-                    "ipv4_addrs" : ["127.0.0.1/8"]
-                },
-                "ifc1" : {
-                    "name"       : "eth0",
-                    "mac"        : "42:00:aa:00:00:00",
-                    "ipv4_addrs" : ["172.16.23.1/24"],
-                    "type"       : "phys",
-                    "link"       : "l0"
-                },
-                "ifc2" : {
-                    "name"       : "eth1",
-                    "mac"        : "42:00:aa:00:00:03",
-                    "ipv4_addrs" : ["172.16.12.2/24"],
-                    "type"       : "phys",
-                    "link"       : "l2"
-                },
-                "ifc3" : {
-                    "name"       : "eth2",
-                    "mac"        : "42:00:aa:00:00:05",
-                    "ipv4_addrs" : ["172.16.2.2/24"],
-                    "type"       : "phys",
-                    "link"       : "l4"
-                }
-            },
-            "custom_configs"      : {
-                "NODE_CONFIG" : {
-                    "conf1" : {
-                        "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "interface lo0\n ip address 127.0.0.1/8\n!\ninterface eth0\n ip address 172.16.23.1/24\n     ip router isis 1\n!\ninterface eth1\n ip address 172.16.12.2/24\n     ip router isis 1\n!\ninterface eth2\n ip address 172.16.2.2/24\n     ip router isis 1\n isis passive\n!\n    router isis 1\n     net 49.0001.1720.1600.2002.00\n    !"
-                    }
-                }
-            },
-            "custom_enabled"      : "true",
-            "custom_selected"     : "NODE_CONFIG conf1",
-            "auto_default_routes" : "disabled"
+        "ifc1": {
+          "name": "eth0",
+          "mac": "42:00:aa:00:00:02",
+          "ipv4_addrs": [
+            "172.16.12.1/24"
+          ],
+          "type": "phys",
+          "link": "l1"
         },
-        "n2" : {
-            "type"                : "router",
-            "model"               : "frr",
-            "name"                : "R3",
-            "ifaces"              : {
-                "ifc0" : {
-                    "name"       : "lo0",
-                    "type"       : "lo",
-                    "ipv4_addrs" : ["127.0.0.1/8"]
-                },
-                "ifc1" : {
-                    "name"       : "eth0",
-                    "mac"        : "42:00:aa:00:00:01",
-                    "ipv4_addrs" : ["172.16.23.2/24"],
-                    "type"       : "phys",
-                    "link"       : "l0"
-                },
-                "ifc2" : {
-                    "name"       : "eth1",
-                    "mac"        : "42:00:aa:00:00:06",
-                    "ipv4_addrs" : ["172.16.3.3/24"],
-                    "type"       : "phys",
-                    "link"       : "l5"
-                }
-            },
-            "custom_configs"      : {
-                "NODE_CONFIG" : {
-                    "conf1" : {
-                        "custom_command" : "/usr/local/bin/frrboot.sh",
-                        "custom_config"  : "interface lo0\n ip address 127.0.0.1/8\n!\ninterface eth0\n ip address 172.16.23.2/24\n     ip router isis 1\n!\ninterface eth1\n ip address 172.16.3.3/24\n     ip router isis 1\n isis passive\n!\n    router isis 1\n     net 49.0001.1234.1600.2231.00\n    !"
-                    }
-                }
-            },
-            "custom_enabled"      : "true",
-            "custom_selected"     : "NODE_CONFIG conf1",
-            "auto_default_routes" : "disabled"
-        },
-        "n3" : {
-            "type"   : "lanswitch",
-            "name"   : "sw1",
-            "ifaces" : {
-                "ifc0" : {
-                    "type" : "phys",
-                    "name" : "e0",
-                    "link" : "l1"
-                },
-                "ifc1" : {
-                    "type" : "phys",
-                    "name" : "e1",
-                    "link" : "l2"
-                }
-            }
-        },
-        "n4" : {
-            "type"   : "lanswitch",
-            "name"   : "sw2",
-            "ifaces" : {
-                "ifc0" : {
-                    "type" : "phys",
-                    "name" : "e0",
-                    "link" : "l3"
-                },
-                "ifc1" : {
-                    "type" : "phys",
-                    "name" : "e1",
-                    "link" : "l6"
-                }
-            }
-        },
-        "n5" : {
-            "type"   : "lanswitch",
-            "name"   : "sw3",
-            "ifaces" : {
-                "ifc0" : {
-                    "type" : "phys",
-                    "name" : "e0",
-                    "link" : "l4"
-                },
-                "ifc1" : {
-                    "type" : "phys",
-                    "name" : "e1",
-                    "link" : "l7"
-                }
-            }
-        },
-        "n6" : {
-            "type"   : "lanswitch",
-            "name"   : "sw4",
-            "ifaces" : {
-                "ifc0" : {
-                    "type" : "phys",
-                    "name" : "e0",
-                    "link" : "l5"
-                },
-                "ifc1" : {
-                    "type" : "phys",
-                    "name" : "e1",
-                    "link" : "l8"
-                }
-            }
-        },
-        "n7" : {
-            "type"                : "pc",
-            "name"                : "pc1",
-            "ifaces"              : {
-                "ifc0" : {
-                    "name"       : "lo0",
-                    "type"       : "lo",
-                    "ipv4_addrs" : ["127.0.0.1/8"]
-                },
-                "ifc1" : {
-                    "name"       : "eth0",
-                    "mac"        : "42:00:aa:00:00:07",
-                    "ipv4_addrs" : ["172.16.1.20/24"],
-                    "type"       : "phys",
-                    "link"       : "l6"
-                }
-            },
-            "croutes4"            : ["0.0.0.0/0 172.16.1.1"],
-            "auto_default_routes" : "disabled"
-        },
-        "n8" : {
-            "type"                : "pc",
-            "name"                : "pc2",
-            "ifaces"              : {
-                "ifc0" : {
-                    "name"       : "lo0",
-                    "type"       : "lo",
-                    "ipv4_addrs" : ["127.0.0.1/8"]
-                },
-                "ifc1" : {
-                    "name"       : "eth0",
-                    "mac"        : "42:00:aa:00:00:08",
-                    "ipv4_addrs" : ["172.16.2.20/24"],
-                    "type"       : "phys",
-                    "link"       : "l7"
-                }
-            },
-            "croutes4"            : ["0.0.0.0/0 172.16.2.2"],
-            "auto_default_routes" : "disabled"
-        },
-        "n9" : {
-            "type"                : "pc",
-            "name"                : "pc3",
-            "ifaces"              : {
-                "ifc0" : {
-                    "name"       : "lo0",
-                    "type"       : "lo",
-                    "ipv4_addrs" : ["127.0.0.1/8"]
-                },
-                "ifc1" : {
-                    "name"       : "eth0",
-                    "mac"        : "42:00:aa:00:00:09",
-                    "ipv4_addrs" : ["172.16.3.20/24"],
-                    "type"       : "phys",
-                    "link"       : "l8"
-                }
-            },
-            "croutes4"            : ["0.0.0.0/0 172.16.3.3"],
-            "auto_default_routes" : "disabled"
+        "ifc2": {
+          "name": "eth1",
+          "mac": "42:00:aa:00:00:04",
+          "ipv4_addrs": [
+            "172.16.1.1/24"
+          ],
+          "type": "phys",
+          "link": "l3"
         }
-    },
-    "links"   : {
-        "l0" : {
-            "peers"        : "n1 n2",
-            "peers_ifaces" : "ifc1 ifc1",
-            "bandwidth"    : "0"
-        },
-        "l1" : {
-            "peers"        : "n0 n3",
-            "peers_ifaces" : "ifc1 ifc0",
-            "bandwidth"    : "0"
-        },
-        "l2" : {
-            "peers"        : "n3 n1",
-            "peers_ifaces" : "ifc1 ifc2",
-            "bandwidth"    : "0"
-        },
-        "l3" : {
-            "peers"        : "n4 n0",
-            "peers_ifaces" : "ifc0 ifc2",
-            "bandwidth"    : "0"
-        },
-        "l4" : {
-            "peers"        : "n5 n1",
-            "peers_ifaces" : "ifc0 ifc3",
-            "bandwidth"    : "0"
-        },
-        "l5" : {
-            "peers"        : "n6 n2",
-            "peers_ifaces" : "ifc0 ifc2",
-            "bandwidth"    : "0"
-        },
-        "l6" : {
-            "peers"        : "n7 n4",
-            "peers_ifaces" : "ifc1 ifc1",
-            "bandwidth"    : "0"
-        },
-        "l7" : {
-            "peers"        : "n8 n5",
-            "peers_ifaces" : "ifc1 ifc1",
-            "bandwidth"    : "0"
-        },
-        "l8" : {
-            "peers"        : "n9 n6",
-            "peers_ifaces" : "ifc1 ifc1",
-            "bandwidth"    : "0"
+      },
+      "custom_configs": {
+        "NODE_CONFIG": {
+          "conf1": {
+            "custom_command": "/bin/sh",
+            "custom_config": "vtysh << __EOF__\nconf term\ninterface eth0\n  ip router isis 1\n!\ninterface eth1\n  ip router isis 1\n  isis passive\n!\nrouter isis 1\n  net 49.0001.1720.1600.1001.00\n!\n__EOF__"
+          }
         }
+      },
+      "custom_enabled": "true",
+      "custom_selected": "NODE_CONFIG conf1",
+      "auto_default_routes": "disabled",
+      "router_config": "isis 1"
     },
-    "options" : {
-        "version" : "2"
-    },
-    "gui"     : {
-        "options"  : {
-            "show_interface_ipv6" : "0",
-            "show_link_labels"    : "0"
+    "n1": {
+      "type": "router",
+      "model": "frr",
+      "name": "R2",
+      "ifaces": {
+        "ifc0": {
+          "name": "lo0",
+          "type": "lo",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ]
         },
-        "canvases" : {
-            "c0" : {
-                "name" : "Canvas0"
-            }
+        "ifc1": {
+          "name": "eth0",
+          "mac": "42:00:aa:00:00:00",
+          "ipv4_addrs": [
+            "172.16.23.1/24"
+          ],
+          "type": "phys",
+          "link": "l0"
         },
-        "links"    : {
-            "l0" : {
-                "peers" : "n1 n2"
-            },
-            "l1" : {
-                "peers" : "n0 n3"
-            },
-            "l2" : {
-                "peers" : "n3 n1"
-            },
-            "l3" : {
-                "peers" : "n4 n0"
-            },
-            "l4" : {
-                "peers" : "n5 n1"
-            },
-            "l5" : {
-                "peers" : "n6 n2"
-            },
-            "l6" : {
-                "peers" : "n7 n4"
-            },
-            "l7" : {
-                "peers" : "n8 n5"
-            },
-            "l8" : {
-                "peers" : "n9 n6"
-            }
+        "ifc2": {
+          "name": "eth1",
+          "mac": "42:00:aa:00:00:03",
+          "ipv4_addrs": [
+            "172.16.12.2/24"
+          ],
+          "type": "phys",
+          "link": "l2"
         },
-        "nodes"    : {
-            "n0" : {
-                "label"       : "R1",
-                "canvas"      : "c0",
-                "iconcoords"  : "96 312",
-                "labelcoords" : "56 316"
-            },
-            "n1" : {
-                "label"       : "R2",
-                "canvas"      : "c0",
-                "iconcoords"  : "336 312",
-                "labelcoords" : "294 313"
-            },
-            "n2" : {
-                "label"       : "R3",
-                "canvas"      : "c0",
-                "iconcoords"  : "720 312",
-                "labelcoords" : "764 312"
-            },
-            "n3" : {
-                "label"       : "sw1",
-                "canvas"      : "c0",
-                "iconcoords"  : "216 432",
-                "labelcoords" : "263 432"
-            },
-            "n4" : {
-                "label"       : "sw2",
-                "canvas"      : "c0",
-                "iconcoords"  : "96 192",
-                "labelcoords" : "143 193"
-            },
-            "n5" : {
-                "label"       : "sw3",
-                "canvas"      : "c0",
-                "iconcoords"  : "336 192",
-                "labelcoords" : "381 192"
-            },
-            "n6" : {
-                "label"       : "sw4",
-                "canvas"      : "c0",
-                "iconcoords"  : "720 192",
-                "labelcoords" : "769 191"
-            },
-            "n7" : {
-                "label"       : "pc1",
-                "canvas"      : "c0",
-                "iconcoords"  : "96 72",
-                "labelcoords" : "137 66"
-            },
-            "n8" : {
-                "label"       : "pc2",
-                "canvas"      : "c0",
-                "iconcoords"  : "336 72",
-                "labelcoords" : "378 70"
-            },
-            "n9" : {
-                "label"       : "pc3",
-                "canvas"      : "c0",
-                "iconcoords"  : "720 72",
-                "labelcoords" : "762 72"
-            }
+        "ifc3": {
+          "name": "eth2",
+          "mac": "42:00:aa:00:00:05",
+          "ipv4_addrs": [
+            "172.16.2.2/24"
+          ],
+          "type": "phys",
+          "link": "l4"
         }
+      },
+      "custom_configs": {
+        "NODE_CONFIG": {
+          "conf1": {
+            "custom_command": "/bin/sh",
+            "custom_config": "vtysh << __EOF__\nconf term\ninterface eth0\n  ip router isis 1\n!\ninterface eth1\n  ip router isis 1\n!\ninterface eth2\n  ip router isis 1\n  isis passive\n!\nrouter isis 1\n  net 49.0001.1720.1600.2002.00\n!\n__EOF__"
+          }
+        }
+      },
+      "custom_enabled": "true",
+      "custom_selected": "NODE_CONFIG conf1",
+      "auto_default_routes": "disabled",
+      "router_config": "isis 1"
+    },
+    "n2": {
+      "type": "router",
+      "model": "frr",
+      "name": "R3",
+      "ifaces": {
+        "ifc0": {
+          "name": "lo0",
+          "type": "lo",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ]
+        },
+        "ifc1": {
+          "name": "eth0",
+          "mac": "42:00:aa:00:00:01",
+          "ipv4_addrs": [
+            "172.16.23.2/24"
+          ],
+          "type": "phys",
+          "link": "l0"
+        },
+        "ifc2": {
+          "name": "eth1",
+          "mac": "42:00:aa:00:00:06",
+          "ipv4_addrs": [
+            "172.16.3.3/24"
+          ],
+          "type": "phys",
+          "link": "l5"
+        }
+      },
+      "custom_configs": {
+        "NODE_CONFIG": {
+          "conf1": {
+            "custom_command": "/bin/sh",
+            "custom_config": "vtysh << __EOF__\nconf term\ninterface eth0\n  ip router isis 1\n!\ninterface eth1\n  ip router isis 1\n  isis passive\n!\nrouter isis 1\n  net 49.0001.1234.1600.2231.00\n!\n__EOF__"
+          }
+        }
+      },
+      "custom_enabled": "true",
+      "custom_selected": "NODE_CONFIG conf1",
+      "auto_default_routes": "disabled",
+      "router_config": "isis 1"
+    },
+    "n3": {
+      "type": "lanswitch",
+      "name": "sw1",
+      "ifaces": {
+        "ifc0": {
+          "type": "phys",
+          "name": "e0",
+          "link": "l1"
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "e1",
+          "link": "l2"
+        }
+      }
+    },
+    "n4": {
+      "type": "lanswitch",
+      "name": "sw2",
+      "ifaces": {
+        "ifc0": {
+          "type": "phys",
+          "name": "e0",
+          "link": "l3"
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "e1",
+          "link": "l6"
+        }
+      }
+    },
+    "n5": {
+      "type": "lanswitch",
+      "name": "sw3",
+      "ifaces": {
+        "ifc0": {
+          "type": "phys",
+          "name": "e0",
+          "link": "l4"
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "e1",
+          "link": "l7"
+        }
+      }
+    },
+    "n6": {
+      "type": "lanswitch",
+      "name": "sw4",
+      "ifaces": {
+        "ifc0": {
+          "type": "phys",
+          "name": "e0",
+          "link": "l5"
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "e1",
+          "link": "l8"
+        }
+      }
+    },
+    "n7": {
+      "type": "pc",
+      "name": "pc1",
+      "ifaces": {
+        "ifc0": {
+          "name": "lo0",
+          "type": "lo",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ]
+        },
+        "ifc1": {
+          "name": "eth0",
+          "mac": "42:00:aa:00:00:07",
+          "ipv4_addrs": [
+            "172.16.1.20/24"
+          ],
+          "type": "phys",
+          "link": "l6"
+        }
+      },
+      "croutes4": [
+        "0.0.0.0/0 172.16.1.1"
+      ],
+      "auto_default_routes": "disabled"
+    },
+    "n8": {
+      "type": "pc",
+      "name": "pc2",
+      "ifaces": {
+        "ifc0": {
+          "name": "lo0",
+          "type": "lo",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ]
+        },
+        "ifc1": {
+          "name": "eth0",
+          "mac": "42:00:aa:00:00:08",
+          "ipv4_addrs": [
+            "172.16.2.20/24"
+          ],
+          "type": "phys",
+          "link": "l7"
+        }
+      },
+      "croutes4": [
+        "0.0.0.0/0 172.16.2.2"
+      ],
+      "auto_default_routes": "disabled"
+    },
+    "n9": {
+      "type": "pc",
+      "name": "pc3",
+      "ifaces": {
+        "ifc0": {
+          "name": "lo0",
+          "type": "lo",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ]
+        },
+        "ifc1": {
+          "name": "eth0",
+          "mac": "42:00:aa:00:00:09",
+          "ipv4_addrs": [
+            "172.16.3.20/24"
+          ],
+          "type": "phys",
+          "link": "l8"
+        }
+      },
+      "croutes4": [
+        "0.0.0.0/0 172.16.3.3"
+      ],
+      "auto_default_routes": "disabled"
     }
+  },
+  "links": {
+    "l0": {
+      "peers": "n1 n2",
+      "peers_ifaces": "ifc1 ifc1",
+      "bandwidth": "0"
+    },
+    "l1": {
+      "peers": "n0 n3",
+      "peers_ifaces": "ifc1 ifc0",
+      "bandwidth": "0"
+    },
+    "l2": {
+      "peers": "n3 n1",
+      "peers_ifaces": "ifc1 ifc2",
+      "bandwidth": "0"
+    },
+    "l3": {
+      "peers": "n4 n0",
+      "peers_ifaces": "ifc0 ifc2",
+      "bandwidth": "0"
+    },
+    "l4": {
+      "peers": "n5 n1",
+      "peers_ifaces": "ifc0 ifc3",
+      "bandwidth": "0"
+    },
+    "l5": {
+      "peers": "n6 n2",
+      "peers_ifaces": "ifc0 ifc2",
+      "bandwidth": "0"
+    },
+    "l6": {
+      "peers": "n7 n4",
+      "peers_ifaces": "ifc1 ifc1",
+      "bandwidth": "0"
+    },
+    "l7": {
+      "peers": "n8 n5",
+      "peers_ifaces": "ifc1 ifc1",
+      "bandwidth": "0"
+    },
+    "l8": {
+      "peers": "n9 n6",
+      "peers_ifaces": "ifc1 ifc1",
+      "bandwidth": "0"
+    }
+  },
+  "options": {
+    "version": "2"
+  },
+  "gui": {
+    "options": {
+      "show_interface_ipv6": "0",
+      "show_link_labels": "0"
+    },
+    "canvases": {
+      "c0": {
+        "name": "Canvas0"
+      }
+    },
+    "links": {
+      "l0": {
+        "peers": "n1 n2"
+      },
+      "l1": {
+        "peers": "n0 n3"
+      },
+      "l2": {
+        "peers": "n3 n1"
+      },
+      "l3": {
+        "peers": "n4 n0"
+      },
+      "l4": {
+        "peers": "n5 n1"
+      },
+      "l5": {
+        "peers": "n6 n2"
+      },
+      "l6": {
+        "peers": "n7 n4"
+      },
+      "l7": {
+        "peers": "n8 n5"
+      },
+      "l8": {
+        "peers": "n9 n6"
+      }
+    },
+    "nodes": {
+      "n0": {
+        "label": "R1",
+        "canvas": "c0",
+        "iconcoords": "96 312",
+        "labelcoords": "56 316"
+      },
+      "n1": {
+        "label": "R2",
+        "canvas": "c0",
+        "iconcoords": "336 312",
+        "labelcoords": "294 313"
+      },
+      "n2": {
+        "label": "R3",
+        "canvas": "c0",
+        "iconcoords": "720 312",
+        "labelcoords": "764 312"
+      },
+      "n3": {
+        "label": "sw1",
+        "canvas": "c0",
+        "iconcoords": "216 432",
+        "labelcoords": "263 432"
+      },
+      "n4": {
+        "label": "sw2",
+        "canvas": "c0",
+        "iconcoords": "96 192",
+        "labelcoords": "143 193"
+      },
+      "n5": {
+        "label": "sw3",
+        "canvas": "c0",
+        "iconcoords": "336 192",
+        "labelcoords": "381 192"
+      },
+      "n6": {
+        "label": "sw4",
+        "canvas": "c0",
+        "iconcoords": "720 192",
+        "labelcoords": "769 191"
+      },
+      "n7": {
+        "label": "pc1",
+        "canvas": "c0",
+        "iconcoords": "96 72",
+        "labelcoords": "137 66"
+      },
+      "n8": {
+        "label": "pc2",
+        "canvas": "c0",
+        "iconcoords": "336 72",
+        "labelcoords": "378 70"
+      },
+      "n9": {
+        "label": "pc3",
+        "canvas": "c0",
+        "iconcoords": "720 72",
+        "labelcoords": "762 72"
+      }
+    }
+  }
 }
