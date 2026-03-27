@@ -10,7 +10,7 @@ fi
 
 debug=""
 if test "$DEBUG" = "1"; then
-    debug=" -d"
+    debug=" -dd DEBUG.log"
 fi
 
 eid=`imunes$legacy$debug -b ipsec64.imn | awk '/Experiment/{print $4; exit}'`

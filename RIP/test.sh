@@ -11,7 +11,7 @@ fi
 
 debug=""
 if test "$DEBUG" = "1"; then
-    debug=" -d"
+    debug=" -dd DEBUG.log"
 fi
 
 eid=`imunes$legacy$debug -b RIP1.imn | awk '/Experiment/{print $4; exit}'`
