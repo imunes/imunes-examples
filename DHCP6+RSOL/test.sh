@@ -24,6 +24,7 @@ if [ $? -ne 0 ]; then
     err=1
 fi
 
+Wait 10
 for pc in $pcs; do
     n=1
     pingStatus=1
@@ -57,8 +58,8 @@ if [ $? -ne 0 ]; then
     err=1
 fi
 
+Wait 10
 if [ $err -eq 0 ]; then
-    sleep 5
     for pc in $pcs; do
 	ip_addr=`getNodeIP6 $pc@$eid eth0`
 	echo $ip_addr | grep -q "fc00:3::"
