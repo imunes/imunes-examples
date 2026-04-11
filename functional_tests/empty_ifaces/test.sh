@@ -27,7 +27,7 @@ if [ $? -eq 0 ]; then
         n=`expr $n + 1`
     done
     if [ $pingStatus -eq 0 ]; then
-	sleep 2
+	Wait 4
 	readDump pc1@$eid eth0
 	err=$?
     else

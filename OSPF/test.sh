@@ -35,7 +35,7 @@ if [ $? -eq 0 ]; then
 	show ipv6 ospf route
 	exit
 __END__
-	sleep 2
+	Wait 2
 	if [ $? -eq 0 ]; then
             n=1
             pingStatus=1
@@ -46,7 +46,7 @@ __END__
                 n=`expr $n + 1`
             done
             if [ $pingStatus -eq 0 ]; then
-		sleep 2
+		Wait 4
 		echo ""
 		readDump router2@$eid eth2
 		if [ $? -ne 0 ]; then
@@ -102,7 +102,7 @@ __END__
                         n=`expr $n + 1`
                     done
                     if [ $pingStatus -eq 0 ]; then
-			sleep 4
+			Wait 4
 			readDump router2@$eid eth2
 		    else
 			err=1
@@ -117,7 +117,7 @@ __END__
                         n=`expr $n + 1`
                     done
                     if [ $pingStatus -eq 0 ]; then
-			sleep 4
+			Wait 4
 			readDump router2@$eid eth2
 		    else
 			err=1

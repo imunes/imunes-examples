@@ -41,7 +41,7 @@ if [ $? -ne 0 ]; then
     exit $err
 else
     echo Wait 30 sec ...
-    sleep 30
+    Wait 30
     for h in $dns_servers $hosts; do 
 	dnsCheck $h@$eid zpmMail.zpm.fer.hr
 	if [ $? -eq 0 ]; then
@@ -80,7 +80,7 @@ else
 	err=2
     else
         echo Wait 5 sec before reading e-mail...
-	sleep 5
+	Wait 5
 	getMail pc@$eid 30.0.0.4
 	if [ $? -ne 0 ]; then
 	    err=2
@@ -90,7 +90,7 @@ else
 	        err=2
             else
                 echo Wait 5 sec before reading e-mail...
-	        sleep 5
+	        Wait 5
 	        getMail wwwMM@$eid 15.16.17.25
 	        if [ $? -ne 0 ]; then
 	            err=2
@@ -105,7 +105,7 @@ if [ $? -ne 0 ]; then
     echo "********** START_HTTP ERROR **********"
     err=3
 else
-    sleep 1
+    Wait 1
     webCheck mm@$eid http://www.tel.fer.hr
     if [ $? -ne 0 ]; then
 	err=3

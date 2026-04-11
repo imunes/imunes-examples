@@ -19,12 +19,12 @@ startCheck "$eid"
 ./start_nat.sh $eid > /dev/null
 
 if [ $? -eq 0 ]; then
-    sleep 4
+    Wait 4
     netDump nat@$eid eth1
     if [ $? -eq 0 ]; then
 	pingCheck moon@$eid 10.0.1.2 1
 	if [ $? -eq 0 ]; then
-	    sleep 2
+	    Wait 4
 	    pings=`readDump nat@$eid eth1`
 	    if [ $? -eq 0 ]; then
 		echo "$pings"
@@ -35,12 +35,12 @@ if [ $? -eq 0 ]; then
 		if [ "$natsrc" = "10.0.3.2" ]; then
 		    ./start_ipsec.sh $eid
 		    if [ $? -eq 0 ]; then
-			sleep 2
+			Wait 4
 			netDump nat@$eid eth1 ip
 			if [ $? -eq 0 ]; then
 			    ping6Check pc1@$eid bbbb::20 2
 			    if [ $? -eq 0 ]; then
-				sleep 2
+				Wait 4
 				esps=`readDump nat@$eid eth1`
 				if [ $? -eq 0 ]; then
 				    echo "$esps"

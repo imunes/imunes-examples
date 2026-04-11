@@ -17,7 +17,7 @@ eid=`imunes$legacy$debug -b services.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
 # wait for the services to start
-sleep 5
+Wait 10
 
 # ftp
 himage FTP@$eid netstat -an | grep LISTEN | grep -q "21"

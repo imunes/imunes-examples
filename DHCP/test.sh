@@ -43,10 +43,10 @@ done
 if [ $err -eq 0 ]; then
     netDump PC3@$eid eth0 'port 67 and not arp or port 68 and not arp'
     if [ $? -eq 0 ]; then
-        sleep 2
+        Wait 4
         himage PC3@$eid dhclient eth0
         if [ $? -eq 0 ]; then
-            sleep 2
+            Wait 4
             readDump PC3@$eid eth0
             err=$?
         else

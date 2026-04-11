@@ -16,14 +16,14 @@ fi
 eid=`imunes$legacy$debug -b ipsec46.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
-sleep 3
+Wait 3
 ./start46.sh $eid
 if [ $? -eq 0 ]; then
     netDump routerX@$eid eth0 ip6
     if [ $? -eq 0 ]; then
 	pingCheck pc1@$eid 10.0.1.20 2
 	if [ $? -eq 0 ]; then
-	    sleep 2
+	    Wait 4
 	    esps=`readDump routerX@$eid eth0`
 	    if [ $? -eq 0 ]; then
 		echo "$esps"

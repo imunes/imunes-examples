@@ -33,7 +33,7 @@ for pc in $pcs; do
 	ping6Check $pc@$eid fc00:2::10
         pingStatus=$?
         n=`expr $n + 1`
-	sleep 1
+	Wait 1
     done
 
     if [ $pingStatus -ne 0 ]; then
@@ -76,7 +76,7 @@ if [ $err -eq 0 ]; then
 	    ping6Check $pc@$eid fc00:3::1
 	    pingStatus=$?
 	    n=`expr $n + 1`
-	    sleep 1
+	    Wait 1
 	done
 
 	if [ $pingStatus -ne 0 ]; then
@@ -87,9 +87,10 @@ if [ $err -eq 0 ]; then
 fi
 
 if [ $err -eq 0 ]; then
+	Wait 4
     netDump PC3@$eid eth0 'port 546 and not arp or port 547 and not arp'
     if [ $? -eq 0 ]; then
-        sleep 2
+        Wait 2
 	if isOSfreebsd; then
 	    pre="/usr/local/sbin/"
 	    himage PC3@${eid} ifconfig eth0 inet6 -ifdisabled
@@ -98,7 +99,7 @@ if [ $err -eq 0 ]; then
 	fi
 	himage PC3@${eid} ${pre}dhclient -6 -cf /dev/null eth0
         if [ $? -eq 0 ]; then
-            sleep 2
+            Wait 4
             readDump PC3@$eid eth0
             err=$?
         else
