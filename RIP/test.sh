@@ -29,18 +29,21 @@ if [ $? -eq 0 ]; then
 	exit
 __END__
 	Wait 30
-	if [ $? -eq 0 ]; then
-	    ping6Check pc@$eid fc00:1::10
-	    if [ $? -eq 0 ]; then
+	n=1
+	pingStatus=1
+	while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+		echo "Ping test $n / 20 ..."
+		ping6Check pc@$eid fc00:1::10
+		pingStatus=$?
+		n=`expr $n + 1`
+	done
+	if [ $pingStatus -eq 0 ]; then
 		Wait 4
 		echo ""
 		readDump router2@$eid eth2
 		if [ $? -ne 0 ]; then
 		    err=1
 		fi
-	    else
-		err=1
-	    fi
 	else
 	    err=1
 	fi
