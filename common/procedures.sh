@@ -291,15 +291,15 @@ webCheck () {
 # Usage: sleep n
 # - countdown every 5 sec
 Wait () {
-    n=$1
-    echo -n "Wait $n sec.."
-    while test $n -gt 5
+    _n=$1
+    echo -n "Wait $_n sec.."
+    while test $_n -gt 5
     do
         sleep 5
-        n=$((n - 5))
-        echo -n "$n.."
+        _n=$((_n - 5))
+        echo -n "$_n.."
     done
-    sleep $n
+    sleep $_n
     echo ""
 }
 
