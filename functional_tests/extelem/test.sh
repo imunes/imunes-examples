@@ -44,6 +44,7 @@ startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
 if [ $? -eq 0 ]; then
+    Wait 2
     n=1
     pingStatus=1
     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
@@ -74,6 +75,7 @@ startCheck "$eid"
 
 netDump pc1@$eid eth0 icmp
 if [ $? -eq 0 ]; then
+    Wait 2
     n=1
     pingStatus=1
     while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
