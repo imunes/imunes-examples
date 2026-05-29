@@ -155,7 +155,7 @@ myhostname = zpmMail.zpm.fer.hr
 #
 #mydestination = $myhostname, localhost.$mydomain, localhost
 
-mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain, /etc/postfix/local-host-names
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain, /etc/postfix/local-host-names, zpm.fer.hr
 
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,
 #	mail.$mydomain, www.$mydomain, ftp.$mydomain
@@ -201,7 +201,7 @@ mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain, /etc/pos
 # 
 #local_recipient_maps = unix:passwd.byname $alias_maps
 #local_recipient_maps = proxy:unix:passwd.byname $alias_maps
-#local_recipient_maps =
+local_recipient_maps =
 
 # The unknown_local_recipient_reject_code specifies the SMTP server
 # response code when a recipient domain matches $mydestination or
@@ -258,6 +258,10 @@ unknown_local_recipient_reject_code = 550
 #mynetworks = 168.100.189.0/28, 127.0.0.0/8
 #mynetworks = $config_directory/mynetworks
 #mynetworks = hash:/usr/local/etc/postfix/network_table
+# NOTE: mynetworks = 0.0.0.0/0 is required for IMUNES emulation environment.
+# This allows all nodes in the simulation to relay mail.
+# NEVER use this configuration in production or on internet-facing systems.
+mynetworks = 0.0.0.0/0
 
 # The relay_domains parameter restricts what destinations this system will
 # relay mail to.  See the smtpd_recipient_restrictions description in
@@ -309,6 +313,7 @@ unknown_local_recipient_reject_code = 550
 #relayhost = [mailserver.isp.tld]
 #relayhost = uucphost
 #relayhost = [an.ip.add.ress]
+relayhost = 
 
 # REJECTING UNKNOWN RELAY USERS
 #
