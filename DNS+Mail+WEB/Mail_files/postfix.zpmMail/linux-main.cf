@@ -258,6 +258,9 @@ unknown_local_recipient_reject_code = 550
 #mynetworks = 168.100.189.0/28, 127.0.0.0/8
 #mynetworks = $config_directory/mynetworks
 #mynetworks = hash:/usr/local/etc/postfix/network_table
+# NOTE: mynetworks = 0.0.0.0/0 is required for IMUNES emulation environment.
+# This allows all nodes in the simulation to relay mail.
+# NEVER use this configuration in production or on internet-facing systems.
 mynetworks = 0.0.0.0/0
 
 # The relay_domains parameter restricts what destinations this system will
