@@ -1,0 +1,190 @@
+{
+  "options": {
+    "version": "2",
+    "IPv6autoAssign": "1"
+  },
+  "gui": {
+    "canvases": {
+      "c0": {
+        "name": "Canvas0"
+      }
+    },
+    "nodes": {
+      "n0": {
+        "label": "pc-4",
+        "canvas": "c0",
+        "iconcoords": "144 168",
+        "labelcoords": "144 199"
+      },
+      "n1": {
+        "label": "pc-6",
+        "canvas": "c0",
+        "iconcoords": "720 168",
+        "labelcoords": "720 199"
+      },
+      "n2": {
+        "label": "host",
+        "canvas": "c0",
+        "iconcoords": "432 456",
+        "labelcoords": "432 492"
+      },
+      "n3": {
+        "label": "switch1",
+        "canvas": "c0",
+        "iconcoords": "432 168",
+        "labelcoords": "432 191"
+      }
+    },
+    "links": {
+      "l0": {
+        "peers": "n0 n3"
+      },
+      "l1": {
+        "peers": "n3 n1"
+      },
+      "l2": {
+        "peers": "n3 n2"
+      }
+    }
+  },
+  "nodes": {
+    "n0": {
+      "type": "pc",
+      "name": "pc-4",
+      "auto_default_routes": "enabled",
+      "ifaces": {
+        "ifc0": {
+          "type": "lo",
+          "name": "lo0",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ],
+          "ipv6_addrs": [
+            "::1/128"
+          ]
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "eth0",
+          "link": "l0",
+          "ipv4_addrs": [
+            "10.0.0.20/24"
+          ],
+          "mac": "42:00:aa:00:00:00",
+          "ipv6_addrs": [
+            "fc00::20/64"
+          ]
+        }
+      }
+    },
+    "n1": {
+      "type": "pc",
+      "name": "pc-6",
+      "auto_default_routes": "enabled",
+      "ifaces": {
+        "ifc0": {
+          "type": "lo",
+          "name": "lo0",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ],
+          "ipv6_addrs": [
+            "::1/128"
+          ]
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "eth0",
+          "link": "l1",
+          "ipv6_addrs": [
+            "fc00::21/64"
+          ],
+          "mac": "42:00:aa:00:00:01",
+          "ipv4_addrs": [
+            "10.0.0.21/24"
+          ]
+        }
+      }
+    },
+    "n2": {
+      "type": "host",
+      "name": "host",
+      "auto_default_routes": "enabled",
+      "ifaces": {
+        "ifc0": {
+          "type": "lo",
+          "name": "lo0",
+          "ipv4_addrs": [
+            "127.0.0.1/8"
+          ],
+          "ipv6_addrs": [
+            "::1/128"
+          ]
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "eth0",
+          "link": "l2",
+          "mac": "42:00:aa:00:00:02"
+        },
+        "ifc2": {
+          "type": "vlan",
+          "name": "vlan0",
+          "ipv4_addrs": [
+            "10.0.0.10/24"
+          ],
+          "vlan_dev": "eth0",
+          "vlan_tag": "4"
+        },
+        "ifc3": {
+          "type": "vlan",
+          "name": "vlan1",
+          "vlan_dev": "eth0",
+          "vlan_tag": "6",
+          "ipv6_addrs": [
+            "fc00::10/64"
+          ]
+        }
+      }
+    },
+    "n3": {
+      "type": "lanswitch",
+      "name": "switch1",
+      "ifaces": {
+        "ifc0": {
+          "type": "phys",
+          "name": "e0",
+          "link": "l0",
+          "vlan_tag": "4"
+        },
+        "ifc1": {
+          "type": "phys",
+          "name": "e1",
+          "link": "l1",
+          "vlan_tag": "6"
+        },
+        "ifc2": {
+          "type": "phys",
+          "name": "e2",
+          "link": "l2",
+          "vlan_type": "trunk"
+        }
+      },
+      "vlan_filtering": "1"
+    }
+  },
+  "links": {
+    "l0": {
+      "peers": "n0 n3",
+      "peers_ifaces": "ifc1 ifc0"
+    },
+    "l1": {
+      "peers": "n3 n1",
+      "peers_ifaces": "ifc1 ifc1"
+    },
+    "l2": {
+      "peers": "n3 n2",
+      "peers_ifaces": "ifc2 ifc1"
+    }
+  }
+}
