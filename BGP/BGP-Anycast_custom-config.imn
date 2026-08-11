@@ -138,7 +138,7 @@
                     },
                     "conf2" : {
                         "custom_command" : "/bin/sh",
-                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 11111\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 10.10.10.16 mask 255.255.255.252\n network 10.10.10.12 mask 255.255.255.252\n network 10.10.10.8 mask 255.255.255.252\n neighbor 10.10.10.14 remote-as 10000\n neighbor 10.10.10.9 remote-as 22222\n neighbor 10.10.10.18 remote-as 200\n!\n__EOF__"
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 11111\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 10.10.10.16 mask 255.255.255.252\n network 10.10.10.12 mask 255.255.255.252\n network 10.10.10.8 mask 255.255.255.252\n neighbor 10.10.10.14 remote-as 10000\n neighbor 10.10.10.14 timers 10 30\n neighbor 10.10.10.9 remote-as 22222\n neighbor 10.10.10.18 remote-as 200\n!\n__EOF__"
                     }
                 }
             },
@@ -187,7 +187,7 @@
                     },
                     "conf2" : {
                         "custom_command" : "/bin/sh",
-                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 10000\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 8.8.8.0 mask 255.255.255.0\n network 9.0.0.0 mask 255.255.255.0\n network 10.10.10.12 mask 255.255.255.252\n neighbor 10.10.10.13 remote-as 11111\n!\n__EOF__"
+                        "custom_config"  : "vtysh << __EOF__\nconf term\nrouter bgp 10000\n no bgp ebgp-requires-policy\n no synchronization\n no auto-summary\n network 8.8.8.0 mask 255.255.255.0\n network 9.0.0.0 mask 255.255.255.0\n network 10.10.10.12 mask 255.255.255.252\n neighbor 10.10.10.13 remote-as 11111\n neighbor 10.10.10.13 timers 10 30\n!\n__EOF__"
                     }
                 }
             },

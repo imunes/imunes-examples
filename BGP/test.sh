@@ -51,10 +51,10 @@ __END__
 	if [ $slow -eq 1 ]; then
 	    stopNode DC2@$eid 
 	    if [ $? -eq 0 ]; then
-		Wait 180
+		Wait 30
 
 		echo ""
-		echo "########## Backbone1@$eid routes after 180 seconds"
+		echo "########## Backbone1@$eid routes after 30 seconds"
 		himage -nt Backbone1@$eid vtysh << __END__ 
 		show ip route
 		exit
