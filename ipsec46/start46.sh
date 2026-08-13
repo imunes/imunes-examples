@@ -15,22 +15,22 @@ himage -nt $sun killall -q charon
 
 if isOSlinux; then
     DIR="/etc/swanctl/"
-    himage -nt $moon /usr/lib/ipsec/charon &
-    himage -nt $sun /usr/lib/ipsec/charon &
+    himage -nt -b $moon /usr/lib/ipsec/charon &
+    himage -nt -b $sun /usr/lib/ipsec/charon &
 else
     DIR="/usr/local/etc/swanctl/"
     kldload ipsec > /dev/null 2>&1
-    himage -nt $moon /usr/local/libexec/ipsec/charon &
-    himage -nt $sun /usr/local/libexec/ipsec/charon &
+    himage -b $moon /usr/local/libexec/ipsec/charon &
+    himage -b $sun /usr/local/libexec/ipsec/charon &
 fi
 
 started=0
 steps=50
 for i in `seq 1 $steps`
 do
-    himage $moon swanctl --stats > /dev/null 2>&1
+    himage -nt $moon swanctl --stats > /dev/null 2>&1
     er1=$?
-    himage $sun swanctl --stats > /dev/null 2>&1
+    himage -nt $sun swanctl --stats > /dev/null 2>&1
     er2=$?
     [ $er1 -eq 0 -a $er2 -eq 0 ] && started=1 && break
     sleep 0.1
@@ -50,9 +50,9 @@ himage -nt $sun swanctl --load-all
 steps=50
 for i in `seq 1 $steps`
 do
-    himage $moon swanctl --list-conns 2>&1 | grep ^[[:space:]]*net46-net46: >/dev/null
+    himage -nt $moon swanctl --list-conns 2>&1 | grep ^[[:space:]]*net46-net46: >/dev/null
     er1=$?
-    himage $sun swanctl --list-conns 2>&1 | grep ^[[:space:]]*net46-net46: >/dev/null
+    himage -nt $sun swanctl --list-conns 2>&1 | grep ^[[:space:]]*net46-net46: >/dev/null
     er2=$?
     [ $er1 -eq 0 -a $er2 -eq 0 ] && exit 0
     sleep 0.1

@@ -93,11 +93,11 @@ if [ $err -eq 0 ]; then
         Wait 2
 	if isOSfreebsd; then
 	    pre="/usr/local/sbin/"
-	    himage PC3@${eid} ifconfig eth0 inet6 -ifdisabled
-	    himage PC3@${eid} ifconfig eth0 inet6 accept_rtadv
-	    himage PC3@${eid} rtsol -D eth0
+	    himage -nt PC3@${eid} ifconfig eth0 inet6 -ifdisabled
+	    himage -nt PC3@${eid} ifconfig eth0 inet6 accept_rtadv
+	    himage -nt PC3@${eid} rtsol -D eth0
 	fi
-	himage PC3@${eid} ${pre}dhclient -6 -cf /dev/null eth0
+	himage -nt PC3@${eid} ${pre}dhclient -6 -cf /dev/null eth0
         if [ $? -eq 0 ]; then
             Wait 4
             readDump PC3@$eid eth0

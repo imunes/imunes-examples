@@ -45,7 +45,7 @@ if [ $? -ne 0 ]; then
     echo "********** START_MAIL ERROR **********"
     err=2
 else
-    himage www@$eid grep imunes /etc/passwd > /dev/null 2>&1
+    himage -nt www@$eid grep imunes /etc/passwd > /dev/null 2>&1
     if [ $? -eq 1 ]; then
         echo "User imunes should be created in virtual nodes."
         err=2

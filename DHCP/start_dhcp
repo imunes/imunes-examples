@@ -23,16 +23,16 @@ fi
 echo "Configuring server:"
 
 # Stop dhcpd on DHCP server
-himage ${dhcp_server}@${eid} killall -9 dhcpd > /dev/null 2>&1
+himage -nt ${dhcp_server}@${eid} killall -9 dhcpd > /dev/null 2>&1
 # and start it ...
 
 hcp DHCPserver.dhcpd.conf ${dhcp_server}@${eid}:/tmp
-himage ${dhcp_server}@${eid} mkdir -p /var/db/
-himage ${dhcp_server}@${eid} touch /var/db/imunes-dhcpd.leases
+himage -nt ${dhcp_server}@${eid} mkdir -p /var/db/
+himage -nt ${dhcp_server}@${eid} touch /var/db/imunes-dhcpd.leases
 if isOSlinux; then
-    himage -b ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf &
+    himage -nt -b ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf &
 else
-    himage ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf >/dev/null 2>&1 &
+    himage -b ${dhcp_server}@${eid} dhcpd -d -cf /tmp/DHCPserver.dhcpd.conf >/dev/null 2>&1 &
 fi
 
 echo
@@ -41,9 +41,9 @@ for i in $hosts
 do
     isNodeRunning $i $eid
     if isOSlinux; then
-	himage ${i}@${eid} dhclient -v -1 eth0
+	himage -nt ${i}@${eid} dhclient -v -1 eth0
     else
 	himage ${i}@${eid} dhclient eth0
     fi
-    himage ${i}@${eid} ifconfig eth0 | grep "inet "
+    himage -nt ${i}@${eid} ifconfig eth0 | grep "inet "
 done

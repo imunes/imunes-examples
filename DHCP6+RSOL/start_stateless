@@ -26,8 +26,8 @@ fi
 
 echo "Configuring server:"
 hcp $comm.conf ${router}@${eid}:/etc
-himage ${router}@${eid} killall $comm
-himage -b ${router}@${eid} $comm eth1
+himage -nt ${router}@${eid} killall $comm
+himage -nt -b ${router}@${eid} $comm eth1
 
 sleep 1
 echo "Configuring clients:"
@@ -38,6 +38,6 @@ for pc in $pcs; do
 	    himage ${pc}@${eid} ifconfig eth0 inet6 accept_rtadv
 	    himage ${pc}@${eid} rtsol -D eth0
 	else
-	    himage ${pc}@${eid} rdisc6 eth0
+	    himage -nt ${pc}@${eid} rdisc6 eth0
 	fi
 done

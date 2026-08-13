@@ -53,10 +53,10 @@ ping6Check () {
     echo ""
     echo "########## $1 pinging $2"
     if test -z "$3"; then
-	himage $1 ping6 -n -c1 $2
+	himage -nt $1 ping6 -n -c1 $2
 	ert=$?
     else
-	himage $1 ping6 -n -c $3 $2
+	himage -nt $1 ping6 -n -c $3 $2
 	ert=$?
     fi
 
@@ -74,10 +74,10 @@ pingCheck () {
     echo ""
     echo "########## $1 pinging $2"
     if test -z "$3"; then
-	himage $1 ping -W 2 -c1 $2
+	himage -nt $1 ping -W 2 -c1 $2
 	ert=$?
     else
-	himage $1 ping -W 2 -c $3 $2
+	himage -nt $1 ping -W 2 -c $3 $2
 	ert=$?
     fi
 
@@ -93,9 +93,9 @@ pingCheck () {
 # Usage: getNodeIP node interface
 getNodeIP () {
     if isOSfreebsd; then
-	ip_addr=`himage $1 ifconfig $2 | awk '/inet /{print $2}'`
+	ip_addr=`himage -nt $1 ifconfig $2 | awk '/inet /{print $2}'`
     else
-	ip_addr=`himage $1 ip addr show $2 | awk '/inet /{print $2}'`
+	ip_addr=`himage -nt $1 ip addr show $2 | awk '/inet /{print $2}'`
     fi
 
     if test -z "$ip_addr"; then
@@ -111,9 +111,9 @@ getNodeIP () {
 # Usage: getNodeIP6 node interface
 getNodeIP6 () {
     if isOSfreebsd; then
-	ip_addr=`himage $1 ifconfig $2 | awk '/inet6 /{print $2}' | grep -v $2`
+	ip_addr=`himage -nt $1 ifconfig $2 | awk '/inet6 /{print $2}' | grep -v $2`
     else
-	ip_addr=`himage $1 ip -6 addr show $2 | awk '/inet6 .*global/{print $2}'`
+	ip_addr=`himage -nt $1 ip -6 addr show $2 | awk '/inet6 .*global/{print $2}'`
     fi
 
     if test -z "$ip_addr"; then
@@ -139,14 +139,14 @@ netDump () {
 	i=$(($i+1))
     done
     if isOSlinux; then
-        himage $1 nohup sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
+        himage -nt -b $1 nohup sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
     else
-        himage $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
+        himage -b $1 sh -c "tcpdump -w /root/tcplog_$2 -ni $2 $args 2> tcplog_err_$2 &"
     fi
     sleep 1
-    himage $1 cat tcplog_err_$2 | grep -q "error\|failed"
+    himage -nt $1 cat tcplog_err_$2 | grep -q "error\|failed"
     if [ $? -eq 0 ]; then
-	himage $1 cat tcplog_err_$2 2> /dev/null
+	himage -nt $1 cat tcplog_err_$2 2> /dev/null
 	echo ""
 	echo "********** TCPDUMP ERROR **********"
 	return 1
@@ -169,9 +169,9 @@ readDump () {
     echo ""
     echo "########## Reading tcpdump from $1 $2"
     if [ "`pgrep tcpdump`" != "" ]; then
-	himage $1 pkill -f "tcpdump.*$2"
+	himage -nt $1 pkill -f "tcpdump.*$2"
     fi
-    himage $1 tcpdump -nr /root/tcplog_$2
+    himage -nt $1 tcpdump -nr /root/tcplog_$2
     if [ $? -ne 0 ]; then
 	echo ""
 	echo "********* READDUMP ERROR ***********"
@@ -184,7 +184,7 @@ readDump () {
 traceCheck () {
     echo ""
     echo "########## Traceroute check $1 $2"
-    strVal=`himage $1 traceroute $2 | grep -v traceroute | grep "$2"`
+    strVal=`himage -nt $1 traceroute $2 | grep -v traceroute | grep "$2"`
     if test -z "$strVal"; then
 	echo "********** TRACEROUTE ERROR **********"
 	return 1
@@ -205,7 +205,7 @@ stopNode () {
     for ifc in $ifaces; do
 	if [ "$ifc" != "lo0" ]; then
 	    echo ifconfig $ifc down
-	    himage $1 ifconfig $ifc down
+	    himage -nt $1 ifconfig $ifc down
 	fi
     done
     echo "Stopped node $1."
@@ -222,7 +222,7 @@ startNode () {
     for ifc in $ifaces; do
 	if [ "$ifc" != "lo0" ]; then
 	    echo ifconfig $ifc up
-	    himage $1 ifconfig $ifc up
+	    himage -nt $1 ifconfig $ifc up
 	fi
     done
     echo "Started node $1."
@@ -232,7 +232,7 @@ startNode () {
 dnsCheck () {
     echo ""
     echo "########## HOST LOOKUP $1 $2"
-    himage $1 host $2
+    himage -nt $1 host $2
     if [ $? -ne 0 ]; then
 	echo "********** LOOKUP ERROR **********"
 	return 1
@@ -257,7 +257,7 @@ sendMail () {
 getMail () {
     echo ""
     echo "########## Reading mail on $1 $2"
-    #mes=`himage $1 mailtool -index INBOX $2`
+    #mes=`himage -nt $1 mailtool -index INBOX $2`
     if isOSlinux; then
         mes=`himage -nt $1 nc $2 110 < getMail | wc -l | sed 's/ //g'`
     else
@@ -279,7 +279,7 @@ webCheck () {
     if isOSlinux; then
         fetch=curl
     fi
-    himage $1 $fetch -o - $2
+    himage -nt $1 $fetch -o - $2
     if [ $? -ne 0 ]; then
 	echo "********** WEB (FETCH) ERROR **********"
 	return 1
