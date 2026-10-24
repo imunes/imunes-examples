@@ -25,8 +25,15 @@ if [ $? -ne 0 ]; then
 fi
 
 for pc in $pcs; do
-    pingCheck $pc@$eid 10.0.2.2
-    err=$?
+	n=1
+	pingStatus=1
+	while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+		echo "Ping test $n / 20 ..."
+		pingCheck $pc@$eid 10.0.2.2
+		pingStatus=$?
+		n=`expr $n + 1`
+	done
+    err=$pingStatus
     if [ $err -ne 0 ]; then
         break
     fi

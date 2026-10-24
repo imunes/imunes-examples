@@ -17,11 +17,17 @@ fi
 eid=`imunes$legacy$debug -b RIP1.imn | awk '/Experiment/{print $4; exit}'`
 startCheck "$eid"
 
-Wait 10
 netDump router2@$eid eth2
 if [ $? -eq 0 ]; then
-    pingCheck pc@$eid 10.0.4.10
-    if [ $? -eq 0 ]; then
+    n=1
+    pingStatus=1
+    while [ $n -le 20 ] && [ $pingStatus -ne 0 ]; do
+        echo "Ping test $n / 20 ..."
+		pingCheck pc@$eid 10.0.4.10
+        pingStatus=$?
+        n=`expr $n + 1`
+    done
+    if [ $pingStatus -eq 0 ]; then
 	echo "########## router2@$eid routes"
 	himage -nt router2@$eid vtysh << __END__
 	show ip rip
